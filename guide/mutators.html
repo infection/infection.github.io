@@ -257,6 +257,10 @@
             <a href="/2018/07/01/whats-new-in-0.9.0/" class="sidebar-link">What's new in Infection 0.9.0</a>
         </li>
     
+        <li>
+            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
+        </li>
+    
     
 </ul>
 
@@ -528,6 +532,11 @@
 <td style="text-align:center"><code>!==</code></td>
 <td style="text-align:center"><code>!=</code></td>
 </tr>
+<tr>
+<td style="text-align:center">Coalesce</td>
+<td style="text-align:center"><code>$a ?? $b</code></td>
+<td style="text-align:center"><code>$b</code></td>
+</tr>
 </tbody>
 </table>
 <h3 id="Conditional-Boundaries"><a href="#Conditional-Boundaries" class="headerlink" title="Conditional Boundaries"></a>Conditional Boundaries</h3><table>
@@ -694,6 +703,27 @@
 </tr>
 </tbody>
 </table>
+<h3 id="Removal-Mutators"><a href="#Removal-Mutators" class="headerlink" title="Removal Mutators"></a>Removal Mutators</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Original</th>
+<th style="text-align:center">Mutated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">FunctionCallRemoval</td>
+<td style="text-align:center">foo_bar($a)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">MethodCallRemoval</td>
+<td style="text-align:center">$this-&gt;method($var)</td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
 <h3 id="Loop"><a href="#Loop" class="headerlink" title="Loop"></a>Loop</h3><table>
 <thead>
 <tr>
@@ -857,6 +887,11 @@
 <td style="text-align:center">PregQuote</td>
 <td style="text-align:center"><code>$a = preg_quote(&#39;text&#39;);</code></td>
 <td style="text-align:center"><code>$a = &#39;text&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">PregMatchMatches</td>
+<td style="text-align:center"><code>preg_match(&#39;/pattern/&#39;, $value, $matches);</code></td>
+<td style="text-align:center"><code>(int) $matches = array();</code></td>
 </tr>
 </tbody>
 </table>

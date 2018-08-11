@@ -257,6 +257,10 @@
             <a href="/2018/07/01/whats-new-in-0.9.0/" class="sidebar-link">What's new in Infection 0.9.0</a>
         </li>
     
+        <li>
+            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
+        </li>
+    
     
 </ul>
 
@@ -271,17 +275,24 @@
     
       <h1>Installation</h1>
     
-    <h3 id="Compatibility-Note"><a href="#Compatibility-Note" class="headerlink" title="Compatibility Note"></a>Compatibility Note</h3><p>Infection requires PHP 7+, Xdebug or phpdbg enabled.</p>
+    <h3 id="Compatibility-Note"><a href="#Compatibility-Note" class="headerlink" title="Compatibility Note"></a>Compatibility Note</h3><p>Infection requires PHP 7.1+, Xdebug or phpdbg enabled.</p>
 <h2 id="Phar"><a href="#Phar" class="headerlink" title="Phar"></a>Phar</h2><p>Phar distribution is the best and recommended way of installing Infection on your computer.</p>
-<p>Download the latest <code>infection.phar</code> and <code>infection.phar.pubkey</code>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/infection/infection/releases/download/0.9.0/infection.phar</span><br><span class="line">wget https://github.com/infection/infection/releases/download/0.9.0/infection.phar.pubkey</span><br><span class="line"></span><br><span class="line">chmod +x infection.phar</span><br></pre></td></tr></table></figure>
+<p>Download the latest <code>infection.phar</code> and <code>infection.phar.asc</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/infection/infection/releases/download/0.8.0/infection.phar</span><br><span class="line">wget https://github.com/infection/infection/releases/download/0.8.0/infection.phar.asc</span><br><span class="line"></span><br><span class="line">chmod +x infection.phar</span><br></pre></td></tr></table></figure>
+<p>The PHAR is signed with an <code>GPG</code> private key. In order to verify whether the PHAR file was signed by Infection team, execute the following:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys 493B4AA0</span><br><span class="line">gpg --with-fingerprint --verify infection.phar.asc infection.phar</span><br></pre></td></tr></table></figure>
+<p>You should see something like:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gpg: Signature made Sun Aug  5 21:46:42 2018 +03</span><br><span class="line">gpg:                using RSA key XYZ</span><br><span class="line">gpg: Good signature from <span class="string">"Infection PHP &lt;maks.rafalko@gmail.com&gt;"</span> [ultimate]</span><br><span class="line">Primary key fingerprint: C6D7 6C32 9EBA DE2F B9C4  58CF C509 5986 493B 4AA0</span><br></pre></td></tr></table></figure>
+<p>Make sure fingerprint is equal to <code>C6D7 6C32 9EBA DE2F B9C4  58CF C509 5986 493B 4AA0</code>.</p>
 <p>Additionally, it can be copied to <code>/usr/local/bin</code> to make it available globally in the terminal:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv infection.phar /usr/<span class="built_in">local</span>/bin/infection</span><br><span class="line">mv infection.phar.pubkey /usr/<span class="built_in">local</span>/bin/infection.pubkey</span><br><span class="line"></span><br><span class="line"><span class="comment"># and then run just like</span></span><br><span class="line"></span><br><span class="line">infection</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv infection.phar /usr/<span class="built_in">local</span>/bin/infection</span><br><span class="line"></span><br><span class="line"><span class="comment"># and then run just like</span></span><br><span class="line"></span><br><span class="line">infection</span><br></pre></td></tr></table></figure>
 <h3 id="Updating-the-Phar-file"><a href="#Updating-the-Phar-file" class="headerlink" title="Updating the Phar file"></a>Updating the Phar file</h3><p>Nice advantage of Phar distribution is that it has a command to update itself</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./infection.phar self-update</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>Read more about self-update command <a href="/guide/usage.html#Updating-Phar-distribution">here</a></p>
 </blockquote>
+<h2 id="Phive"><a href="#Phive" class="headerlink" title="Phive"></a>Phive</h2><p>Infection can also be installed by <a href="https://phar.io/" target="_blank" rel="external">Phive</a> - The PHAR Installation and Verification Environment.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phive install infection</span><br></pre></td></tr></table></figure>
 <h2 id="Composer"><a href="#Composer" class="headerlink" title="Composer"></a>Composer</h2><p>You can install it globally as any other general purpose tool:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">composer global require infection/infection</span><br></pre></td></tr></table></figure>
 <p>Do not forget to include it to <code>~/.bash_profile</code> (or <code>~/.bashrc</code>)!</p>
@@ -294,9 +305,10 @@
 <p>Runnable infection command will be available at <code>bin/infection</code>. Assuming that you have installed Infection to <code>~/infection</code>, you can run mutation testing for you project in such way:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cd /path/to/project/root</span></span><br><span class="line"></span><br><span class="line">~/infection/bin/infection</span><br></pre></td></tr></table></figure>
 <h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><p>Infection can be installed through Homebrew</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install infection</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew tap infection/homebrew-infection</span><br><span class="line">brew install infection</span><br></pre></td></tr></table></figure>
 <p>Homebrew automatically links the executable in the <code>/usr/local/bin</code> directory so that it is available globally.<br>You can then run Infection from project root:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection</span><br></pre></td></tr></table></figure>
+<p>Tap repository: <a href="https://github.com/infection/homebrew-infection/" target="_blank" rel="external">https://github.com/infection/homebrew-infection/</a></p>
 
     
       <div class="guide-links">

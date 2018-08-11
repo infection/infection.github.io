@@ -257,6 +257,10 @@
             <a href="/2018/07/01/whats-new-in-0.9.0/" class="sidebar-link">What's new in Infection 0.9.0</a>
         </li>
     
+        <li>
+            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
+        </li>
+    
     
 </ul>
 
@@ -275,7 +279,7 @@
 <p>The following configuration file will use the <code>@default</code> profile, but turn off the <code>@function_signature</code> profile.<br>On top of that, it does not apply the <code>TrueValue</code> mutator on any classes that match the provided ignore patterns. In particular, <code>TrueValue</code> mutator does not mutate the code inside <code>Full\NameSpaced\Class</code> class and inside <code>create()</code> method of all <code>SourceClass</code> classes.</p>
 <p>These ignores can also be added to profiles, to ensure infection is as flexible as you need it. </p>
 <p>All profiles are prepended by an <code>@</code> and in snake case, while all mutators are in PascalCase. </p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"source"</span>: &#123;</span><br><span class="line">        <span class="attr">"directories"</span>: [</span><br><span class="line">            <span class="string">"src"</span></span><br><span class="line">        ],</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"timeout"</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"text"</span>: <span class="string">"infection-log.txt"</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="string">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"@default"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"@function_signature"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"TrueValue"</span>: &#123;</span><br><span class="line">            <span class="attr">"ignore"</span>: [</span><br><span class="line">                <span class="string">"NameSpace\\*\\SourceClass::method"</span>,</span><br><span class="line">                <span class="string">"Full\\NameSpaced\\Class"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"source"</span>: &#123;</span><br><span class="line">        <span class="attr">"directories"</span>: [</span><br><span class="line">            <span class="string">"src"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"timeout"</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"text"</span>: <span class="string">"infection-log.txt"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"@default"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"@function_signature"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"TrueValue"</span>: &#123;</span><br><span class="line">            <span class="attr">"ignore"</span>: [</span><br><span class="line">                <span class="string">"NameSpace\\*\\SourceClass::method"</span>,</span><br><span class="line">                <span class="string">"Full\\NameSpaced\\Class"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="The-Profiles"><a href="#The-Profiles" class="headerlink" title="The Profiles"></a>The Profiles</h2><p>Currently, infection supports the following profiles:</p>
 <h3 id="arithmetic"><a href="#arithmetic" class="headerlink" title="@arithmetic"></a><code>@arithmetic</code></h3><p>Containes the following mutators:</p>
 <ul>
@@ -364,6 +368,12 @@
 <h3 id="regex"><a href="#regex" class="headerlink" title="@regex"></a><code>@regex</code></h3><p>Containes the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Regex">PregQuote</a></li>
+<li><a href="/guide/mutators.html#Regex">PregMatchMatches</a></li>
+</ul>
+<h3 id="removal"><a href="#removal" class="headerlink" title="@removal"></a><code>@removal</code></h3><p>Containes the following mutators:</p>
+<ul>
+<li><a href="/guide/mutators.html#Removal">FunctionCallRemoval</a></li>
+<li><a href="/guide/mutators.html#Removal">MethodCallRemoval</a></li>
 </ul>
 <h3 id="return-value"><a href="#return-value" class="headerlink" title="@return_value"></a><code>@return_value</code></h3><p>Containes the following mutators:</p>
 <ul>

@@ -257,6 +257,10 @@
             <a href="/2018/07/01/whats-new-in-0.9.0/" class="sidebar-link">What's new in Infection 0.9.0</a>
         </li>
     
+        <li>
+            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
+        </li>
+    
     
 </ul>
 
@@ -277,7 +281,7 @@
 <h3 id="Configuration-settings"><a href="#Configuration-settings" class="headerlink" title="Configuration settings"></a>Configuration settings</h3><ul>
 <li><code>source</code> section:<ul>
 <li><code>directories</code> - array, contains all folders with source code you want to mutate. Can be <code>.</code>, but make sure to exclude <code>vendor</code> in this case.</li>
-<li><code>excludes</code> - array, contains all folders or files you want to exclude withing your source folders. You can use glob pattern (<code>*Bundle/**/*/Tests</code>) for them as well as everything that accepts Symfony Finder’s <a href="http://api.symfony.com/4.0/Symfony/Component/Finder/Finder.html#method_notPath" target="_blank" rel="external">notPath()</a> method - path or regular expression. In order to skip all files containing <code>.interface.php</code> in the name, you would write it as <code>&quot;excludes&quot;: [&quot;/\\.interface\\.php/&quot;]</code><br>Infection automatically excludes <code>vendor</code>, <code>test</code>, <code>tests</code> folders if the source folder is <code>.</code> (current dir). Make sure to not mutate your test suite. </li>
+<li><code>excludes</code> - array, contains all folders or files you want to exclude withing your source folders. You can use glob pattern (<code>*Bundle/**/*/Tests</code>) for them as well as everything that accepts Symfony Finder’s <a href="http://api.symfony.com/4.0/Symfony/Component/Finder/Finder.html#method_notPath" target="_blank" rel="external">notPath()</a> method - path or regular expression. In order to skip all files containing <code>.interface.php</code> in the name, you would write it as <code>&quot;excludes&quot;: [&quot;/\\.interface\\.php/&quot;]</code><br>Infection automatically excludes <code>vendor</code>, <code>test</code>, <code>tests</code> folders if the source folder is <code>.</code> (current dir). Make sure to not mutate your test suite.<br>Paths under <code>excludes</code> key are relative to the <code>source.directories</code> folders. </li>
 </ul>
 </li>
 <li><code>timeout</code> - the allowed timeout configured for Infection. Make sure to set it to higher value than your tests are executed in seconds to avoid false-positives.</li>
@@ -322,8 +326,7 @@
 <blockquote>
 <p><a href="./command-line-options.html#coverage">Read more</a> what types of coverage Infection requires and how to do it.</p>
 </blockquote>
-<h2 id="Updating-Phar-distribution"><a href="#Updating-Phar-distribution" class="headerlink" title="Updating Phar distribution"></a>Updating Phar distribution</h2><p>The phar is signed with an <code>openssl</code> private key. You will need the pubkey file to be stored beside the phar file at all times in order to use it. If you rename <code>infection.phar</code> to <code>infection</code>, for example, then also rename the key from <code>infection.phar.pubkey</code> to <code>infection.pubkey</code>.</p>
-<p>To update your current phar, just run:</p>
+<h2 id="Updating-Phar-distribution"><a href="#Updating-Phar-distribution" class="headerlink" title="Updating Phar distribution"></a>Updating Phar distribution</h2><p>To update your current phar, just run:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./infection.phar self-update</span><br></pre></td></tr></table></figure>
 <p class="tip">Note: Using a phar means that fixes may take longer to reach your version, but there’s more assurance of having a stable development version. The public key is downloaded only once. It is re-used by self-update to verify future phar releases.</p>
 
