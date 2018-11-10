@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><meta name="generator" content="Hexo 3.8.0">
         <title>Using with CI — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
@@ -17,20 +17,10 @@
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
-        <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
-        <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
         <link rel="icon" href="/images/logo.png" type="image/png">
 
         <meta name="msapplication-TileColor" content="#4fc08d">
@@ -39,8 +29,8 @@
         <meta name="msapplication-config" content="browserconfig.xml">
         <link rel="manifest" href="/manifest.json">
 
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP' rel='stylesheet' type='text/css'>
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
 
         <!-- main page styles -->
         <link rel="stylesheet" href="/css/page.css">
@@ -60,7 +50,7 @@
           ga('send', 'pageview');
         </script>
     </head>
-    <body class="docs">        <div id="mobile-bar" >
+    <body class="docs">        <div id="mobile-bar">
             <a class="menu-button"></a>
             <a class="logo" href="/"></a>
         </div>
@@ -250,7 +240,11 @@
     <li><h3>Posts</h3></li>
     
         <li>
-            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
+            <a href="/2018/11/12/whats-new-in-0.11.0/" class="sidebar-link">What's new in Infection 0.11.0</a>
+        </li>
+    
+        <li>
+            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
         </li>
     
         <li>
@@ -258,7 +252,7 @@
         </li>
     
         <li>
-            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
+            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
         </li>
     
     
@@ -295,7 +289,7 @@
 <p>Example:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./infection.phar --min-msi=48 --min-covered-msi=70 --threads=4</span><br></pre></td></tr></table></figure>
 <h2 id="Using-with-Travis"><a href="#Using-with-Travis" class="headerlink" title="Using with Travis"></a>Using with Travis</h2><p>The simplest <code>.travis.yml</code> config to integrate Infection with Travis is:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">before_script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">wget</span> <span class="attr">https://github.com/infection/infection/releases/download/0.8.0/infection.phar</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">wget</span> <span class="attr">https://github.com/infection/infection/releases/download/0.8.0/infection.phar.asc</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">gpg</span> <span class="bullet">--keyserver</span> <span class="string">hkps.pool.sks-keyservers.net</span> <span class="bullet">--recv-keys</span> <span class="number">493</span><span class="string">B4AA0</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">gpg</span> <span class="bullet">--with-fingerprint</span> <span class="bullet">--verify</span> <span class="string">infection.phar.asc</span> <span class="string">infection.phar</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">chmod</span> <span class="string">+x</span> <span class="string">infection.phar</span></span><br><span class="line"></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">./infection.phar</span> <span class="bullet">--min-msi=48</span> <span class="bullet">--threads=4</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">before_script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">wget</span> <span class="attr">https://github.com/infection/infection/releases/download/0.11.0/infection.phar</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">wget</span> <span class="attr">https://github.com/infection/infection/releases/download/0.11.0/infection.phar.asc</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">gpg</span> <span class="bullet">--keyserver</span> <span class="string">hkps.pool.sks-keyservers.net</span> <span class="bullet">--recv-keys</span> <span class="number">493</span><span class="string">B4AA0</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">gpg</span> <span class="bullet">--with-fingerprint</span> <span class="bullet">--verify</span> <span class="string">infection.phar.asc</span> <span class="string">infection.phar</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">chmod</span> <span class="string">+x</span> <span class="string">infection.phar</span></span><br><span class="line"></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">./infection.phar</span> <span class="bullet">--min-msi=48</span> <span class="bullet">--threads=4</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><a href="./mutation-badge.html">Read more</a> about how to add a Mutation Badge to your Github Project</p>
 </blockquote>
@@ -329,7 +323,7 @@
         <script src="/js/common.js"></script>
 
         <!-- search -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
         <link rel="stylesheet" href="/css/search.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
         <script>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><meta name="generator" content="Hexo 3.8.0">
         <title>Usage — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
@@ -17,20 +17,10 @@
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
-        <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
-        <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
         <link rel="icon" href="/images/logo.png" type="image/png">
 
         <meta name="msapplication-TileColor" content="#4fc08d">
@@ -39,8 +29,8 @@
         <meta name="msapplication-config" content="browserconfig.xml">
         <link rel="manifest" href="/manifest.json">
 
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP' rel='stylesheet' type='text/css'>
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
 
         <!-- main page styles -->
         <link rel="stylesheet" href="/css/page.css">
@@ -60,7 +50,7 @@
           ga('send', 'pageview');
         </script>
     </head>
-    <body class="docs">        <div id="mobile-bar" >
+    <body class="docs">        <div id="mobile-bar">
             <a class="menu-button"></a>
             <a class="logo" href="/"></a>
         </div>
@@ -250,7 +240,11 @@
     <li><h3>Posts</h3></li>
     
         <li>
-            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
+            <a href="/2018/11/12/whats-new-in-0.11.0/" class="sidebar-link">What's new in Infection 0.11.0</a>
+        </li>
+    
+        <li>
+            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
         </li>
     
         <li>
@@ -258,7 +252,7 @@
         </li>
     
         <li>
-            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
+            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
         </li>
     
     
@@ -276,12 +270,12 @@
       <h1>Usage</h1>
     
     <h2 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h2><p>The first time you run Infection for your project, it will ask you several questions to create a config file <code>infection.json.dist</code>, with the following structure:</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"source"</span>: &#123;</span><br><span class="line">        <span class="attr">"directories"</span>: [</span><br><span class="line">            <span class="string">"src"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"excludes"</span>: [</span><br><span class="line">            <span class="string">"Config"</span>,</span><br><span class="line">            <span class="string">"Folder/with/File.php"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"timeout"</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"text"</span>: <span class="string">"infection.log"</span>,</span><br><span class="line">        <span class="attr">"summary"</span>: <span class="string">"summary.log"</span>,</span><br><span class="line">        <span class="attr">"debug"</span>: <span class="string">"debug.log"</span>,</span><br><span class="line">        <span class="attr">"perMutator"</span>: <span class="string">"per-mutator.md"</span>,</span><br><span class="line">        <span class="attr">"badge"</span>: &#123;</span><br><span class="line">            <span class="attr">"branch"</span>: <span class="string">"master"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"tmpDir"</span>: <span class="string">"/opt/tmp-folder"</span>,</span><br><span class="line">    <span class="attr">"phpUnit"</span>: &#123;</span><br><span class="line">        <span class="attr">"configDir"</span>: <span class="string">"app"</span>,</span><br><span class="line">        <span class="attr">"customPath"</span>: <span class="string">"\/path\/to\/phpunit-6.1.phar"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="string">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"@default"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"@function_signature"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"TrueValue"</span>: &#123;</span><br><span class="line">            <span class="attr">"ignore"</span>: [</span><br><span class="line">            <span class="string">"NameSpace\\*\\Class::method"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"testFramework"</span>:<span class="string">"phpsec"</span>,</span><br><span class="line">    <span class="attr">"bootstrap"</span>:<span class="string">"./tests/bootstrap.php"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>You can commit it to the VCS and, if necessary, override it locally by creating <code>infection.json</code> which should be ingored (e.g. in <code>.gitignore</code>).</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"source"</span>: &#123;</span><br><span class="line">        <span class="attr">"directories"</span>: [</span><br><span class="line">            <span class="string">"src"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"excludes"</span>: [</span><br><span class="line">            <span class="string">"Config"</span>,</span><br><span class="line">            <span class="string">"Folder/with/File.php"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"timeout"</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"text"</span>: <span class="string">"infection.log"</span>,</span><br><span class="line">        <span class="attr">"summary"</span>: <span class="string">"summary.log"</span>,</span><br><span class="line">        <span class="attr">"debug"</span>: <span class="string">"debug.log"</span>,</span><br><span class="line">        <span class="attr">"perMutator"</span>: <span class="string">"per-mutator.md"</span>,</span><br><span class="line">        <span class="attr">"badge"</span>: &#123;</span><br><span class="line">            <span class="attr">"branch"</span>: <span class="string">"master"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"tmpDir"</span>: <span class="string">"/opt/tmp-folder"</span>,</span><br><span class="line">    <span class="attr">"phpUnit"</span>: &#123;</span><br><span class="line">        <span class="attr">"configDir"</span>: <span class="string">"app"</span>,</span><br><span class="line">        <span class="attr">"customPath"</span>: <span class="string">"\/path\/to\/phpunit-6.1.phar"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="string">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"@default"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"@function_signature"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"TrueValue"</span>: &#123;</span><br><span class="line">            <span class="attr">"ignore"</span>: [</span><br><span class="line">                <span class="string">"NameSpace\\*\\Class::method"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"testFramework"</span>:<span class="string">"phpunit"</span>,</span><br><span class="line">    <span class="attr">"bootstrap"</span>:<span class="string">"./tests/bootstrap.php"</span>,</span><br><span class="line">    <span class="attr">"initialTestsPhpOptions"</span>: <span class="string">"-d zend_extension=xdebug.so"</span>,</span><br><span class="line">    <span class="attr">"testFrameworkOptions"</span>: <span class="string">"-vvv"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>You can commit it to the VCS and, if necessary, override it locally by creating <code>infection.json</code> which should be ignored (e.g. in <code>.gitignore</code>).</p>
 <h3 id="Configuration-settings"><a href="#Configuration-settings" class="headerlink" title="Configuration settings"></a>Configuration settings</h3><ul>
 <li><code>source</code> section:<ul>
 <li><code>directories</code> - array, contains all folders with source code you want to mutate. Can be <code>.</code>, but make sure to exclude <code>vendor</code> in this case.</li>
-<li><code>excludes</code> - array, contains all folders or files you want to exclude withing your source folders. You can use glob pattern (<code>*Bundle/**/*/Tests</code>) for them as well as everything that accepts Symfony Finder’s <a href="http://api.symfony.com/4.0/Symfony/Component/Finder/Finder.html#method_notPath" target="_blank" rel="external">notPath()</a> method - path or regular expression. In order to skip all files containing <code>.interface.php</code> in the name, you would write it as <code>&quot;excludes&quot;: [&quot;/\\.interface\\.php/&quot;]</code><br>Infection automatically excludes <code>vendor</code>, <code>test</code>, <code>tests</code> folders if the source folder is <code>.</code> (current dir). Make sure to not mutate your test suite.<br>Paths under <code>excludes</code> key are relative to the <code>source.directories</code> folders. </li>
+<li><code>excludes</code> - array, contains all folders or files you want to exclude within your source folders. You can use glob pattern (<code>*Bundle/**/*/Tests</code>) for them as well as everything that accepts Symfony Finder’s <a href="http://api.symfony.com/4.0/Symfony/Component/Finder/Finder.html#method_notPath" target="_blank" rel="noopener">notPath()</a> method - path or regular expression. In order to skip all files containing <code>.interface.php</code> in the name, you would write it as <code>&quot;excludes&quot;: [&quot;/\\.interface\\.php/&quot;]</code><br>Infection automatically excludes <code>vendor</code>, <code>test</code>, <code>tests</code> folders if the source folder is <code>.</code> (current dir). Make sure to not mutate your test suite.<br>Paths under <code>excludes</code> key are relative to the <code>source.directories</code> folders. </li>
 </ul>
 </li>
 <li><code>timeout</code> - the allowed timeout configured for Infection. Make sure to set it to higher value than your tests are executed in seconds to avoid false-positives.</li>
@@ -301,6 +295,8 @@
 <li><code>mutators</code>: optional key, it contains the settings for different mutations and profiles, read more about it <a href="/guide/profiles.html">here</a></li>
 <li><code>testFramework</code>: optional key, it sets the framework to use for testing. Defaults to <code>phpunit</code>. This gets overridden by the <code>--test-framework</code> command line argument.</li>
 <li><code>bootstrap</code>: optional key, use to specify a file to include as part of the startup to pre-configure the infection environment. Useful for adding custom autoloaders not included in composer.</li>
+<li><code>initialTestsPhpOptions</code>: optional key, specify additional php options for the initial test (IE: Enabling X-Debug). <code>--initial-tests-php-options</code> will override this option.</li>
+<li><code>testFrameworkOptions</code>: optional key, specify additional options to pass to the test framework (IE: Enabling Verbose Mode). <code>--test-framework-options</code> will override this option.</li>
 </ul>
 <h4 id="How-to-use-custom-autoloader-or-bootstrap-file"><a href="#How-to-use-custom-autoloader-or-bootstrap-file" class="headerlink" title="How to use custom autoloader or bootstrap file"></a>How to use custom autoloader or bootstrap file</h4><p>If you have a custom autoloader or bootstrap file for your application, you should tell Infection about it.</p>
 <p>For example you have</p>
@@ -326,6 +322,11 @@
 <blockquote>
 <p><a href="./command-line-options.html#coverage">Read more</a> what types of coverage Infection requires and how to do it.</p>
 </blockquote>
+<h2 id="Using-with-PHPUnit"><a href="#Using-with-PHPUnit" class="headerlink" title="Using with PHPUnit"></a>Using with PHPUnit</h2><h3 id="codeCoverageIgnore-support"><a href="#codeCoverageIgnore-support" class="headerlink" title="@codeCoverageIgnore support"></a><code>@codeCoverageIgnore</code> support</h3><p>Infection supports <code>@codeCoverageIgnore</code> annotation on class and method level.</p>
+<p>The following class will not be mutated, because it does not produce any code coverage.</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@codeCoverageIgnore</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Calculator</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(float $a, float $b)</span>: <span class="title">float</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> $a + $b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In this example, method <code>generate()</code> will be skipped from mutation logic, but <code>getDependencies()</code> will be mutated as usual method.</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductFixture</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@codeCoverageIgnore</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">generate</span><span class="params">()</span>: <span class="title">void</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// generate logic</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getDependencies</span><span class="params">()</span>: <span class="title">array</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [CategoryFixture::class];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Updating-Phar-distribution"><a href="#Updating-Phar-distribution" class="headerlink" title="Updating Phar distribution"></a>Updating Phar distribution</h2><p>To update your current phar, just run:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./infection.phar self-update</span><br></pre></td></tr></table></figure>
 <p class="tip">Note: Using a phar means that fixes may take longer to reach your version, but there’s more assurance of having a stable development version. The public key is downloaded only once. It is re-used by self-update to verify future phar releases.</p>
@@ -365,7 +366,7 @@
         <script src="/js/common.js"></script>
 
         <!-- search -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
         <link rel="stylesheet" href="/css/search.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
         <script>

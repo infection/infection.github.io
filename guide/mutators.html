@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><meta name="generator" content="Hexo 3.8.0">
         <title>Mutators — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
@@ -17,20 +17,10 @@
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
-        <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
-        <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
         <link rel="icon" href="/images/logo.png" type="image/png">
 
         <meta name="msapplication-TileColor" content="#4fc08d">
@@ -39,8 +29,8 @@
         <meta name="msapplication-config" content="browserconfig.xml">
         <link rel="manifest" href="/manifest.json">
 
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP' rel='stylesheet' type='text/css'>
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
 
         <!-- main page styles -->
         <link rel="stylesheet" href="/css/page.css">
@@ -60,7 +50,7 @@
           ga('send', 'pageview');
         </script>
     </head>
-    <body class="docs">        <div id="mobile-bar" >
+    <body class="docs">        <div id="mobile-bar">
             <a class="menu-button"></a>
             <a class="logo" href="/"></a>
         </div>
@@ -250,7 +240,11 @@
     <li><h3>Posts</h3></li>
     
         <li>
-            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
+            <a href="/2018/11/12/whats-new-in-0.11.0/" class="sidebar-link">What's new in Infection 0.11.0</a>
+        </li>
+    
+        <li>
+            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
         </li>
     
         <li>
@@ -258,7 +252,7 @@
         </li>
     
         <li>
-            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
+            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
         </li>
     
     
@@ -275,7 +269,7 @@
     
       <h1>Mutators</h1>
     
-    <p>Infection supports a set of Mutators which are based on AST and <a href="https://github.com/nikic/PHP-Parser" target="_blank" rel="external">PHP-Parser</a> project.</p>
+    <p>Infection supports a set of Mutators which are based on AST and <a href="https://github.com/nikic/PHP-Parser" target="_blank" rel="noopener">PHP-Parser</a> project.</p>
 <blockquote>
 <p><a href="./command-line-options.html#--mutators">Read more</a> about how to execute only particular set of mutators using <code>Name</code> column</p>
 </blockquote>
@@ -301,6 +295,108 @@
 </tbody>
 </table>
 <p>To verify that the visibility of a method is necessary. If the visibility of a method can be reduced from <code>public</code> to <code>protected</code> or <code>private</code>, this may be an indication that the publicly accessible part of API of a class is larger than what’s strictly necessary. This mutator will drive the source code towards classes with smaller publicly accessible APIs and thus better encapsulation.</p>
+<h3 id="Unwrap-Function"><a href="#Unwrap-Function" class="headerlink" title="Unwrap Function"></a>Unwrap Function</h3><p>The Unwrap* mutator family will unwrap function parameters.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Original</th>
+<th style="text-align:center">Mutated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">UnwrapArrayChunk</td>
+<td style="text-align:center"><code>$a = array_chunk([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], 2);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayCombine</td>
+<td style="text-align:center"><code>$a = array_combine([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayDiff</td>
+<td style="text-align:center"><code>$a = array_diff([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayFilter</td>
+<td style="text-align:center"><code>$a = array_filter([&#39;A&#39;, 1, &#39;C&#39;], &#39;is_int&#39;);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, 1, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayFlip</td>
+<td style="text-align:center"><code>$a = array_flip([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayIntersect</td>
+<td style="text-align:center"><code>$a = array_intersect([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayKeys</td>
+<td style="text-align:center"><code>$a = array_keys([&#39;foo&#39; =&gt; &#39;bar&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayMap</td>
+<td style="text-align:center"><code>$a = array_map(&#39;strtolower&#39;, [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayMerge</td>
+<td style="text-align:center"><code>$a = array_merge([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayReduce</td>
+<td style="text-align:center"><code>$a = array_reduce([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], $callback, [&#39;D&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;D&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayReplace</td>
+<td style="text-align:center"><code>$a = array_replace([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayReplaceRecursive</td>
+<td style="text-align:center"><code>$a = array_replace_recursive([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayReverse</td>
+<td style="text-align:center"><code>$a = array_reverse([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayUnique</td>
+<td style="text-align:center"><code>$a = array_unique([&#39;foo&#39;, &#39;bar&#39;, &#39;bar&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39;, &#39;bar&#39;, &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayValues</td>
+<td style="text-align:center"><code>$a = array_values([&#39;foo&#39; =&gt; &#39;bar&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapStrRepeat</td>
+<td style="text-align:center"><code>$a = str_repeat(&#39;A&#39;, 3);</code></td>
+<td style="text-align:center"><code>$a = &#39;A&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapStrToLower</td>
+<td style="text-align:center"><code>$a = strtolower(&#39;Hello!&#39;);</code></td>
+<td style="text-align:center"><code>$a = &#39;Hello!&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapStrToUpper</td>
+<td style="text-align:center"><code>$a = strtoupper(&#39;Hello, world!&#39;);</code></td>
+<td style="text-align:center"><code>$a = &#39;Hello, world!&#39;;</code></td>
+</tr>
+</tbody>
+</table>
 <h3 id="Binary-Arithmetic"><a href="#Binary-Arithmetic" class="headerlink" title="Binary Arithmetic"></a>Binary Arithmetic</h3><table>
 <thead>
 <tr>
@@ -467,6 +563,48 @@
 </tr>
 </tbody>
 </table>
+<h3 id="Round-Family"><a href="#Round-Family" class="headerlink" title="Round Family"></a>Round Family</h3><p>The Round Family mutator will make sure that there’s enough tests to cover the rounding possibilities. </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Original</th>
+<th style="text-align:center">Mutated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">RoundingFamily</td>
+<td style="text-align:center"><code>round()</code></td>
+<td style="text-align:center"><code>floor()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">RoundingFamily</td>
+<td style="text-align:center"><code>round()</code></td>
+<td style="text-align:center"><code>ceil()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">RoundingFamily</td>
+<td style="text-align:center"><code>ceil()</code></td>
+<td style="text-align:center"><code>floor()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">RoundingFamily</td>
+<td style="text-align:center"><code>ceil()</code></td>
+<td style="text-align:center"><code>round()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">RoundingFamily</td>
+<td style="text-align:center"><code>floor()</code></td>
+<td style="text-align:center"><code>round()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">RoundingFamily</td>
+<td style="text-align:center"><code>floor()</code></td>
+<td style="text-align:center"><code>ceil()</code></td>
+</tr>
+</tbody>
+</table>
 <h3 id="Boolean-Substitution"><a href="#Boolean-Substitution" class="headerlink" title="Boolean Substitution"></a>Boolean Substitution</h3><p>This temporarily encompasses logical mutators.</p>
 <table>
 <thead>
@@ -523,16 +661,6 @@
 <td style="text-align:center"><code>yield $a &gt; $b;</code></td>
 </tr>
 <tr>
-<td style="text-align:center">IdenticalEqual</td>
-<td style="text-align:center"><code>===</code></td>
-<td style="text-align:center"><code>==</code></td>
-</tr>
-<tr>
-<td style="text-align:center">NotIdenticalNotEqual</td>
-<td style="text-align:center"><code>!==</code></td>
-<td style="text-align:center"><code>!=</code></td>
-</tr>
-<tr>
 <td style="text-align:center">Coalesce</td>
 <td style="text-align:center"><code>$a ?? $b</code></td>
 <td style="text-align:center"><code>$b</code></td>
@@ -570,6 +698,40 @@
 </tr>
 </tbody>
 </table>
+<h3 id="Equal-or-Identical-Checks"><a href="#Equal-or-Identical-Checks" class="headerlink" title="Equal or Identical Checks"></a>Equal or Identical Checks</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Original</th>
+<th style="text-align:center">Mutated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">EqualIdentical</td>
+<td style="text-align:center"><code>==</code></td>
+<td style="text-align:center"><code>===</code></td>
+</tr>
+<tr>
+<td style="text-align:center">NotEqualNotIdentical</td>
+<td style="text-align:center"><code>!=</code></td>
+<td style="text-align:center"><code>!==</code></td>
+</tr>
+<tr>
+<td style="text-align:center">IdenticalEqual</td>
+<td style="text-align:center"><code>===</code></td>
+<td style="text-align:center"><code>==</code></td>
+</tr>
+<tr>
+<td style="text-align:center">NotIdenticalNotEqual</td>
+<td style="text-align:center"><code>!==</code></td>
+<td style="text-align:center"><code>!=</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>These mutators are disabled by default, you can use the <code>@equal</code> or <code>@identical</code> profiles to enable the ones you prefer.</p>
+</blockquote>
 <h3 id="Negated-Conditionals"><a href="#Negated-Conditionals" class="headerlink" title="Negated Conditionals"></a>Negated Conditionals</h3><table>
 <thead>
 <tr>
@@ -924,7 +1086,7 @@
         <script src="/js/common.js"></script>
 
         <!-- search -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
         <link rel="stylesheet" href="/css/search.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
         <script>

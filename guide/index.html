@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><meta name="generator" content="Hexo 3.8.0">
         <title>Introduction — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
@@ -17,20 +17,10 @@
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
-        <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
-        <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
         <link rel="icon" href="/images/logo.png" type="image/png">
 
         <meta name="msapplication-TileColor" content="#4fc08d">
@@ -39,8 +29,8 @@
         <meta name="msapplication-config" content="browserconfig.xml">
         <link rel="manifest" href="/manifest.json">
 
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP' rel='stylesheet' type='text/css'>
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
 
         <!-- main page styles -->
         <link rel="stylesheet" href="/css/page.css">
@@ -60,7 +50,7 @@
           ga('send', 'pageview');
         </script>
     </head>
-    <body class="docs">        <div id="mobile-bar" >
+    <body class="docs">        <div id="mobile-bar">
             <a class="menu-button"></a>
             <a class="logo" href="/"></a>
         </div>
@@ -250,7 +240,11 @@
     <li><h3>Posts</h3></li>
     
         <li>
-            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
+            <a href="/2018/11/12/whats-new-in-0.11.0/" class="sidebar-link">What's new in Infection 0.11.0</a>
+        </li>
+    
+        <li>
+            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
         </li>
     
         <li>
@@ -258,7 +252,7 @@
         </li>
     
         <li>
-            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
+            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
         </li>
     
     
@@ -289,9 +283,11 @@
 <p>Infection currently supports <code>PHPUnit</code> and <code>PhpSpec</code> test frameworks, requires PHP 7.1+ and Xdebug/phpdbg installed.</p>
 <p>In a nutshell, it </p>
 <ul>
-<li>runs the test suit</li>
+<li>runs the test suite to see if all tests pass</li>
 <li>mutates the source code with a set of predefined mutators (mutation operators)</li>
-<li>collects the results of killed, escaped mutants and timeouts</li>
+<li>for each Mutant (modified code with one change) it runs the tests that cover changed line</li>
+<li>analyzes whether the tests start to fail</li>
+<li>collects the results of killed, escaped Mutants, errors and timeouts</li>
 </ul>
 <p>Given you have a <code>Form</code> class with <code>hasErrors()</code> method,</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Form.php</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hasErrors</span><span class="params">()</span>: <span class="title">bool</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> count(<span class="keyword">$this</span>-&gt;errors) &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -302,6 +298,7 @@
 <figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">public function hasErrors(): bool</span><br><span class="line">&#123;</span><br><span class="line"><span class="deletion">-    return count($this-&gt;errors) &gt; 0;</span></span><br><span class="line"><span class="addition">+    return count($this-&gt;errors) &lt; 0;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Integer 0-1, 1-0 mutator:</p>
 <figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">public function hasErrors(): bool</span><br><span class="line">&#123;</span><br><span class="line"><span class="deletion">-    return count($this-&gt;errors) &gt; 0;</span></span><br><span class="line"><span class="addition">+    return count($this-&gt;errors) &gt; 1;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>and so on.</p>
 <h2 id="Metrics-Mutation-Score-Indicator-MSI"><a href="#Metrics-Mutation-Score-Indicator-MSI" class="headerlink" title="Metrics. Mutation Score Indicator (MSI)"></a>Metrics. Mutation Score Indicator (MSI)</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Metrics:</span><br><span class="line">    Mutation Score Indicator (MSI): 47%</span><br><span class="line">    Mutation Code Coverage: 67%</span><br><span class="line">    Covered Code MSI: 70%</span><br></pre></td></tr></table></figure>
 <p>This example results reported a number of metric scores:</p>
 <h3 id="Mutation-Score-Indicator-MSI"><a href="#Mutation-Score-Indicator-MSI" class="headerlink" title="Mutation Score Indicator (MSI)"></a>Mutation Score Indicator (MSI)</h3><p>MSI is 47%. This means that 47% of all generated mutations were detected (i.e. kills, timeouts or fatal errors). The MSI is the primary Mutation Testing metric. Given the code coverage of 65%, there is a 18% difference so Code Coverage was a terrible quality measurement in this example.</p>
@@ -343,7 +340,7 @@
         <script src="/js/common.js"></script>
 
         <!-- search -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
         <link rel="stylesheet" href="/css/search.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
         <script>

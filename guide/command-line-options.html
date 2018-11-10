@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><meta name="generator" content="Hexo 3.8.0">
         <title>Command Line Options — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
@@ -17,20 +17,10 @@
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
-        <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
-        <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
         <link rel="icon" href="/images/logo.png" type="image/png">
 
         <meta name="msapplication-TileColor" content="#4fc08d">
@@ -39,8 +29,8 @@
         <meta name="msapplication-config" content="browserconfig.xml">
         <link rel="manifest" href="/manifest.json">
 
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP' rel='stylesheet' type='text/css'>
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
 
         <!-- main page styles -->
         <link rel="stylesheet" href="/css/page.css">
@@ -60,7 +50,7 @@
           ga('send', 'pageview');
         </script>
     </head>
-    <body class="docs">        <div id="mobile-bar" >
+    <body class="docs">        <div id="mobile-bar">
             <a class="menu-button"></a>
             <a class="logo" href="/"></a>
         </div>
@@ -250,7 +240,11 @@
     <li><h3>Posts</h3></li>
     
         <li>
-            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
+            <a href="/2018/11/12/whats-new-in-0.11.0/" class="sidebar-link">What's new in Infection 0.11.0</a>
+        </li>
+    
+        <li>
+            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
         </li>
     
         <li>
@@ -258,7 +252,7 @@
         </li>
     
         <li>
-            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
+            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
         </li>
     
     
@@ -297,7 +291,7 @@
 <p>This in no way restricts the initial Infection check on the overall test suite which is still executed in full to ensure all tests are passing correctly before proceeding.</p>
 <h3 id="threads-or-j"><a href="#threads-or-j" class="headerlink" title="--threads or -j"></a><code>--threads</code> or <code>-j</code></h3><p>If you want to run tests for mutated code in parallel, set this to something &gt; 1. It will <strong>dramatically speed up</strong> mutation process. Please note that if your tests somehow depends on each other or use database, this option can lead to failing tests which give many false-positives results.</p>
 <p>On most platforms where GNU coreutils are available, which includes all variants of Linux, there is <code>nproc</code> command that returns the number of processors available. It can be used as such to let Infection run at the full speed:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection -j$(nproc)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># on Linux</span></span><br><span class="line">infection -j$(nproc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># on OSX</span></span><br><span class="line">infection -j$(sysctl -n hw.ncpu)</span><br></pre></td></tr></table></figure>
 <h3 id="test-framework"><a href="#test-framework" class="headerlink" title="--test-framework"></a><code>--test-framework</code></h3><p>This is a name of the Test framework to use. Currently Infection supports <code>PHPUnit</code> and <code>PhpSpec</code>.</p>
 <blockquote>
 <p>Feel free to request a new test framework to be supported out of the box in Github’s issues.</p>
@@ -305,9 +299,9 @@
 <h3 id="test-framework-options"><a href="#test-framework-options" class="headerlink" title="--test-framework-options"></a><code>--test-framework-options</code></h3><p>This options allows to pass additional options to the test framework. Example for <code>PHPUnit</code>:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --<span class="built_in">test</span>-framework-options=<span class="string">"--verbose --filter=just/unit/tests"</span></span><br></pre></td></tr></table></figure>
 <p>This will execute the phpunit as:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phpunit [...infection options] --verbose --filter=just/unit/tets</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phpunit [...infection options] --verbose --filter=just/unit/tests</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Please note that <code>--filter</code> options for PHPUnit is a special one, because we can add it to executable command only for <em>initial</em> test run. For each mutation process, it can’t be used because we already have filtered out list of executed tests which should not be overridden by this option.</p>
+<p>Please note that if you choose to use <code>--filter</code> and <code>--testsuite</code> for PHPUnit, these options will only be applied to the <em>initial</em> test run. Each mutation has a custom <code>phpunit.xml</code> file generated for it which defines a single testsuite containing the tests which should be executed for that mutation. Applying <code>--filter</code> or <code>--testsuite</code> would not make sense in this context as the tests have already been filtered down. </p>
 </blockquote>
 <h3 id="coverage"><a href="#coverage" class="headerlink" title="--coverage"></a><code>--coverage</code></h3><p>Path to the existing coverage reports.</p>
 <p>When you use Continuous Integration for your project, probably you are already generating code coverage metrics and run PHPUnit with <code>XDebug</code>/<code>phpdbg</code> enabled. Then, you run Infection for mutation testing, which in its turn, generates Code Coverage again for internal needs. This dramatically increases the build time because running your tests with debugger <em>twice</em> requires too much time.</p>
@@ -379,7 +373,7 @@
         <script src="/js/common.js"></script>
 
         <!-- search -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
         <link rel="stylesheet" href="/css/search.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
         <script>

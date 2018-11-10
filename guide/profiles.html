@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><meta name="generator" content="Hexo 3.8.0">
         <title>Profiles — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
@@ -17,20 +17,10 @@
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
-        <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
-        <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
         <link rel="icon" href="/images/logo.png" type="image/png">
 
         <meta name="msapplication-TileColor" content="#4fc08d">
@@ -39,8 +29,8 @@
         <meta name="msapplication-config" content="browserconfig.xml">
         <link rel="manifest" href="/manifest.json">
 
-        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
-        <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP' rel='stylesheet' type='text/css'>
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
 
         <!-- main page styles -->
         <link rel="stylesheet" href="/css/page.css">
@@ -60,7 +50,7 @@
           ga('send', 'pageview');
         </script>
     </head>
-    <body class="docs">        <div id="mobile-bar" >
+    <body class="docs">        <div id="mobile-bar">
             <a class="menu-button"></a>
             <a class="logo" href="/"></a>
         </div>
@@ -250,7 +240,11 @@
     <li><h3>Posts</h3></li>
     
         <li>
-            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
+            <a href="/2018/11/12/whats-new-in-0.11.0/" class="sidebar-link">What's new in Infection 0.11.0</a>
+        </li>
+    
+        <li>
+            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
         </li>
     
         <li>
@@ -258,7 +252,7 @@
         </li>
     
         <li>
-            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
+            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
         </li>
     
     
@@ -277,11 +271,11 @@
     
     <p>Infection supports the use of mutator profiles for the command line and configuration file.</p>
 <p>The following configuration file will use the <code>@default</code> profile, but turn off the <code>@function_signature</code> profile.<br>On top of that, it does not apply the <code>TrueValue</code> mutator on any classes that match the provided ignore patterns. In particular, <code>TrueValue</code> mutator does not mutate the code inside <code>Full\NameSpaced\Class</code> class and inside <code>create()</code> method of all <code>SourceClass</code> classes.</p>
-<p>These ignores can also be added to profiles, to ensure infection is as flexible as you need it. </p>
-<p>All profiles are prepended by an <code>@</code> and in snake case, while all mutators are in PascalCase. </p>
+<p>These ignores can also be added to profiles, to ensure infection is as flexible as you need it.</p>
+<p>All profiles are prepended by an <code>@</code> and in snake case, while all mutators are in PascalCase.</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"source"</span>: &#123;</span><br><span class="line">        <span class="attr">"directories"</span>: [</span><br><span class="line">            <span class="string">"src"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"timeout"</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"text"</span>: <span class="string">"infection.log"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"@default"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"@function_signature"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"TrueValue"</span>: &#123;</span><br><span class="line">            <span class="attr">"ignore"</span>: [</span><br><span class="line">                <span class="string">"NameSpace\\*\\SourceClass::method"</span>,</span><br><span class="line">                <span class="string">"Full\\NameSpaced\\Class"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="The-Profiles"><a href="#The-Profiles" class="headerlink" title="The Profiles"></a>The Profiles</h2><p>Currently, infection supports the following profiles:</p>
-<h3 id="arithmetic"><a href="#arithmetic" class="headerlink" title="@arithmetic"></a><code>@arithmetic</code></h3><p>Containes the following mutators:</p>
+<h3 id="arithmetic"><a href="#arithmetic" class="headerlink" title="@arithmetic"></a><code>@arithmetic</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Binary-Arithmetic">Assignment</a></li>
 <li><a href="/guide/mutators.html#Binary-Arithmetic">AssignmentEqual</a></li>
@@ -305,8 +299,9 @@
 <li><a href="/guide/mutators.html#Binary-Arithmetic">PowEqual</a></li>
 <li><a href="/guide/mutators.html#Binary-Arithmetic">ShiftLeft</a></li>
 <li><a href="/guide/mutators.html#Binary-Arithmetic">ShiftRight</a></li>
+<li><a href="/guide/mutators.html#RoundingFamily">RoundingFamily</a></li>
 </ul>
-<h3 id="boolean"><a href="#boolean" class="headerlink" title="@boolean"></a><code>@boolean</code></h3><p>Containes the following mutators:</p>
+<h3 id="boolean"><a href="#boolean" class="headerlink" title="@boolean"></a><code>@boolean</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Boolean-Substitution">ArrayItem</a></li>
 <li><a href="/guide/mutators.html#Boolean-Substitution">FalseValue</a></li>
@@ -320,7 +315,7 @@
 <li><a href="/guide/mutators.html#Boolean-Substitution">TrueValue</a></li>
 <li><a href="/guide/mutators.html#Boolean-Substitution">Yield_</a></li>
 </ul>
-<h3 id="cast"><a href="#cast" class="headerlink" title="@cast"></a><code>@cast</code></h3><p>Containes the following mutators:</p>
+<h3 id="cast"><a href="#cast" class="headerlink" title="@cast"></a><code>@cast</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Type-Casting">CastArray</a></li>
 <li><a href="/guide/mutators.html#Type-Casting">CastBool</a></li>
@@ -329,14 +324,14 @@
 <li><a href="/guide/mutators.html#Type-Casting">CastObject</a></li>
 <li><a href="/guide/mutators.html#Type-Casting">CastString</a></li>
 </ul>
-<h3 id="conditional-boundary"><a href="#conditional-boundary" class="headerlink" title="@conditional_boundary"></a><code>@conditional_boundary</code></h3><p>Containes the following mutators:</p>
+<h3 id="conditional-boundary"><a href="#conditional-boundary" class="headerlink" title="@conditional_boundary"></a><code>@conditional_boundary</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Conditional-Boundaries">GreaterThan</a></li>
 <li><a href="/guide/mutators.html#Conditional-Boundaries">GreaterThanOrEqualTo</a></li>
 <li><a href="/guide/mutators.html#Conditional-Boundaries">LessThan</a></li>
 <li><a href="/guide/mutators.html#Conditional-Boundaries">LessThanOrEqualTo</a></li>
 </ul>
-<h3 id="conditional-negotiation"><a href="#conditional-negotiation" class="headerlink" title="@conditional_negotiation"></a><code>@conditional_negotiation</code></h3><p>Containes the following mutators:</p>
+<h3 id="conditional-negotiation"><a href="#conditional-negotiation" class="headerlink" title="@conditional_negotiation"></a><code>@conditional_negotiation</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Negated-Conditionals">Equal</a></li>
 <li><a href="/guide/mutators.html#Negated-Conditionals">GreaterThanNegotiation</a></li>
@@ -347,35 +342,45 @@
 <li><a href="/guide/mutators.html#Negated-Conditionals">NotEqual</a></li>
 <li><a href="/guide/mutators.html#Negated-Conditionals">NotIdentical</a></li>
 </ul>
-<h3 id="function-signature"><a href="#function-signature" class="headerlink" title="@function_signature"></a><code>@function_signature</code></h3><p>Containes the following mutators:</p>
+<h3 id="equal"><a href="#equal" class="headerlink" title="@equal"></a><code>@equal</code></h3><p>Contains the following mutators:</p>
+<ul>
+<li><a href="/guilde/mutators.html#Equal-or-Identical-Checks">IdenticalEqual</a></li>
+<li><a href="/guilde/mutators.html#Equal-or-Identical-Checks">NotIdenticalNotEqual</a></li>
+</ul>
+<h3 id="function-signature"><a href="#function-signature" class="headerlink" title="@function_signature"></a><code>@function_signature</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Function-Signature">PublicVisibility</a></li>
 <li><a href="/guide/mutators.html#Function-Signature">ProtectedVisibility</a></li>
 </ul>
-<h3 id="number"><a href="#number" class="headerlink" title="@number"></a><code>@number</code></h3><p>Containes the following mutators:</p>
+<h3 id="identical"><a href="#identical" class="headerlink" title="@identical"></a><code>@identical</code></h3><p>Contains the following mutators:</p>
+<ul>
+<li><a href="/guilde/mutators.html#Equal-or-Identical-Checks">EqualIdentical</a></li>
+<li><a href="/guilde/mutators.html#Equal-or-Identical-Checks">NotEqualNotIdentical</a></li>
+</ul>
+<h3 id="number"><a href="#number" class="headerlink" title="@number"></a><code>@number</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Literal-Numbers">DecrementInteger</a></li>
 <li><a href="/guide/mutators.html#Literal-Numbers">IncrementInteger</a></li>
 <li><a href="/guide/mutators.html#Literal-Numbers">OneZeroInteger</a></li>
 <li><a href="/guide/mutators.html#Literal-Numbers">OneZeroFloat</a></li>
 </ul>
-<h3 id="operator"><a href="#operator" class="headerlink" title="@operator"></a><code>@operator</code></h3><p>Containes the following mutators:</p>
+<h3 id="operator"><a href="#operator" class="headerlink" title="@operator"></a><code>@operator</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Loop">Break_</a></li>
 <li><a href="/guide/mutators.html#Loop">Continue_</a></li>
 <li><a href="/guide/mutators.html#Exceptions">Throw_</a></li>
 </ul>
-<h3 id="regex"><a href="#regex" class="headerlink" title="@regex"></a><code>@regex</code></h3><p>Containes the following mutators:</p>
+<h3 id="regex"><a href="#regex" class="headerlink" title="@regex"></a><code>@regex</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Regex">PregQuote</a></li>
 <li><a href="/guide/mutators.html#Regex">PregMatchMatches</a></li>
 </ul>
-<h3 id="removal"><a href="#removal" class="headerlink" title="@removal"></a><code>@removal</code></h3><p>Containes the following mutators:</p>
+<h3 id="removal"><a href="#removal" class="headerlink" title="@removal"></a><code>@removal</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Removal">FunctionCallRemoval</a></li>
 <li><a href="/guide/mutators.html#Removal">MethodCallRemoval</a></li>
 </ul>
-<h3 id="return-value"><a href="#return-value" class="headerlink" title="@return_value"></a><code>@return_value</code></h3><p>Containes the following mutators:</p>
+<h3 id="return-value"><a href="#return-value" class="headerlink" title="@return_value"></a><code>@return_value</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Return-Values">FloatNegation</a></li>
 <li><a href="/guide/mutators.html#Return-Values">FunctionCall</a></li>
@@ -383,16 +388,37 @@
 <li><a href="/guide/mutators.html#Return-Values">NewObject</a></li>
 <li><a href="/guide/mutators.html#Return-Values">This</a></li>
 </ul>
-<h3 id="sort"><a href="#sort" class="headerlink" title="@sort"></a><code>@sort</code></h3><p>Containes the following mutators:</p>
+<h3 id="sort"><a href="#sort" class="headerlink" title="@sort"></a><code>@sort</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Sorting">Spaceship</a></li>
 </ul>
-<h3 id="zero-iteration"><a href="#zero-iteration" class="headerlink" title="@zero_iteration"></a><code>@zero_iteration</code></h3><p>Containes the following mutators:</p>
+<h3 id="unwrap"><a href="#unwrap" class="headerlink" title="@unwrap"></a><code>@unwrap</code></h3><p>Contains the following mutators:</p>
+<ul>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayChunk</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayCombine</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayDiff</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayFilter</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayFlip</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayIntersect</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayKeys</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayMap</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayMerge</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayReduce</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayReplace</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayReplaceRecursive</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayReverse</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayUnique</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapArrayValues</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapStrRepeat</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapStrToLower</a></li>
+<li><a href="/guide/mutators.html#Unwrap-Function">UnwrapStrToUpper</a></li>
+</ul>
+<h3 id="zero-iteration"><a href="#zero-iteration" class="headerlink" title="@zero_iteration"></a><code>@zero_iteration</code></h3><p>Contains the following mutators:</p>
 <ul>
 <li><a href="/guide/mutators.html#Loop">Foreach_</a></li>
 <li><a href="/guide/mutators.html#Loop">For_</a></li>
 </ul>
-<h3 id="default"><a href="#default" class="headerlink" title="@default"></a><code>@default</code></h3><p>This is the default profile, which currently contains <strong>all</strong> mutators, and is used if no mutator or profile is chosen.</p>
+<h3 id="default"><a href="#default" class="headerlink" title="@default"></a><code>@default</code></h3><p>This is the default profile, which currently contains <strong>most</strong> mutators, and is used if no mutator or profile is chosen.</p>
 <blockquote>
 <p>Feel free to request a new profile to be added in Github’s issues.</p>
 </blockquote>
@@ -425,7 +451,7 @@
         <script src="/js/common.js"></script>
 
         <!-- search -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
         <link rel="stylesheet" href="/css/search.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
         <script>
