@@ -152,7 +152,7 @@
 <div class="content with-sidebar blog post">
     <h1>What's new in Infection 0.8.0</h1>
     <h4>Feb 28, 2018</h4>
-    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.8.0" target="_blank" rel="external">https://github.com/infection/infection/releases/tag/0.8.0</a></p>
+    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.8.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.8.0</a></p>
 <h2 id="BC-Breaks"><a href="#BC-Breaks" class="headerlink" title="BC Breaks"></a>BC Breaks</h2><p>Before upgrading, make sure you know about backward incompatible changes.</p>
 <ol>
 <li><p><code>exclude</code> setting has been removed from the config file <code>infection.json</code>. Instead, please use <code>excludes</code>. This was done to make Infection’s config file compatible with Humbug’s one.</p>
@@ -177,7 +177,7 @@
 <h3 id="Integer-Decrement-and-Increment-Mutators"><a href="#Integer-Decrement-and-Increment-Mutators" class="headerlink" title="Integer Decrement and Increment Mutators"></a>Integer Decrement and Increment Mutators</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">$users = [new User('Ivan', 17), new User('Ann', 23)];</span><br><span class="line"></span><br><span class="line">// Decrement Mutator</span><br><span class="line"><span class="deletion">- $adults = array_filter($users, function (User $user) &#123; return $user-&gt;getAge() &gt;= 21 &#125;);</span></span><br><span class="line"><span class="addition">+ $adults = array_filter($users, function (User $user) &#123; return $user-&gt;getAge() &gt;= 20 &#125;);</span></span><br><span class="line"></span><br><span class="line">// Increment Mutator</span><br><span class="line"><span class="deletion">- $adults = array_filter($users, function (User $user) &#123; return $user-&gt;getAge() &gt;= 21 &#125;);</span></span><br><span class="line"><span class="addition">+ $adults = array_filter($users, function (User $user) &#123; return $user-&gt;getAge() &gt;= 22 &#125;);</span></span><br></pre></td></tr></table></figure>
 <h1 id="Other-updates"><a href="#Other-updates" class="headerlink" title="Other updates"></a>Other updates</h1><p>Besides that, we’ve improved mutation testing for Traits, improved Public/Protected Visibility mutators a little bit: they don’t mutate abstract methods anymore.</p>
 <p>There was some work to improve Infection Performance. Now, all generated mutants are reused, which reduces filesystem operations.</p>
-<p><a href="https://github.com/infection/infection/releases/tag/0.8.0" target="_blank" rel="external">Full Changelog</a></p>
+<p><a href="https://github.com/infection/infection/releases/tag/0.8.0" target="_blank" rel="noopener">Full Changelog</a></p>
 <hr>
 <p>If you didn’t try Infection with your CI process, now it’s the best time.</p>
 <p>Thanks everyone involved!</p>

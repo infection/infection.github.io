@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head><meta name="generator" content="Hexo 3.8.0">
-        <title>Using with CI — Infection PHP</title>
+        <title>How-to Guides — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <meta property="og:type" content="article">
-        <meta property="og:title" content="Using with CI — Infection PHP">
+        <meta property="og:title" content="How-to Guides — Infection PHP">
         <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
         <meta property="og:image" content="https://infection.github.io//images/logo.png">
 
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="Using with CI — Infection PHP">
+        <meta name="twitter:title" content="How-to Guides — Infection PHP">
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
@@ -208,7 +208,7 @@
         
         
         <li>
-            <a href="/guide/using-with-ci.html" class="sidebar-link current">Using with CI</a>
+            <a href="/guide/using-with-ci.html" class="sidebar-link">Using with CI</a>
         </li>
     
         
@@ -232,7 +232,7 @@
         
         
         <li>
-            <a href="/guide/how-to.html" class="sidebar-link">How-to Guides</a>
+            <a href="/guide/how-to.html" class="sidebar-link current">How-to Guides</a>
         </li>
     
         
@@ -274,52 +274,34 @@
 </div>
 
 
-<div class="content guide with-sidebar using-with-ci-guide">
+<div class="content guide with-sidebar how-to-guide">
     
       
     
     
-      <h1>Using with CI</h1>
+      <h1>How-to Guides</h1>
     
-    <h2 id="CLI-options"><a href="#CLI-options" class="headerlink" title="CLI options"></a>CLI options</h2><p>We like the idea of using Infection together with other code quality tools in your Continuous Integration (CI) server.</p>
-<p>For this purpose, there are two available options:</p>
-<ul>
-<li><code>--min-msi</code></li>
-<li><code>--min-covered-msi</code></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Metrics:</span><br><span class="line">    Mutation Score Indicator (MSI): 47%</span><br><span class="line">    Mutation Code Coverage: 67%</span><br><span class="line">    Covered Code MSI: 70%</span><br></pre></td></tr></table></figure>
-<p>The first option <code>--min-msi</code> allows to control your <a href="./index.html#Mutation-Score-Indicator-MSI">Mutation Score Indicator</a>. As soon as the actual MSI value is below than the value you provided by this option your build will fail.</p>
-<p>Example of usage in CI server:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./infection.phar --min-msi=48 --threads=4</span><br></pre></td></tr></table></figure>
-<p>This example means that if you get MSI <code>47%</code>, the build will be failed. <strong>This forces you to write more tests with each commit.</strong></p>
-<p>The second option <code>--min-covered-msi</code> allows to control <a href="./index.html#Covered-Code-Mutation-Score-Indicator">Covered Code MSI</a>.</p>
-<p>As soon as the actual Covered Code MSI value is below than the value you provided by this option your build will fail.</p>
-<p>Example of usage in CI server:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./infection.phar --min-covered-msi=70 --threads=4</span><br></pre></td></tr></table></figure>
-<p><strong>This forces you to write more effective tests.</strong></p>
-<p>Both these options can be used together. As soon as one of them is failed - the build will also be failed.</p>
-<p>Example:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./infection.phar --min-msi=48 --min-covered-msi=70 --threads=4</span><br></pre></td></tr></table></figure>
-<h2 id="Using-with-Travis"><a href="#Using-with-Travis" class="headerlink" title="Using with Travis"></a>Using with Travis</h2><p>The simplest <code>.travis.yml</code> config to integrate Infection with Travis is:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">before_script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">wget</span> <span class="attr">https://github.com/infection/infection/releases/download/0.11.0/infection.phar</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">wget</span> <span class="attr">https://github.com/infection/infection/releases/download/0.11.0/infection.phar.asc</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">gpg</span> <span class="bullet">--keyserver</span> <span class="string">hkps.pool.sks-keyservers.net</span> <span class="bullet">--recv-keys</span> <span class="number">493</span><span class="string">B4AA0</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">gpg</span> <span class="bullet">--with-fingerprint</span> <span class="bullet">--verify</span> <span class="string">infection.phar.asc</span> <span class="string">infection.phar</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">chmod</span> <span class="string">+x</span> <span class="string">infection.phar</span></span><br><span class="line"></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">./infection.phar</span> <span class="bullet">--min-msi=48</span> <span class="bullet">--threads=4</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><a href="./mutation-badge.html">Read more</a> about how to add a Mutation Badge to your Github Project</p>
-</blockquote>
-<p><a href="https://infection.github.io"><img src="https://badge.stryker-mutator.io/github.com/infection/infection/master" alt="Infection MSI"></a></p>
-
+    <h2 id="How-to-run-Infection-only-for-changed-files"><a href="#How-to-run-Infection-only-for-changed-files" class="headerlink" title="How to run Infection only for changed files"></a>How to run Infection only for changed files</h2><p>If you have thousands of files and too many tests, running Mutation Testing can takes hours for your project. In this case, it’s very convenient to run it only for the modified files.</p>
+<p>Assuming you are on a feature branch, and the main branch is <code>master</code>, we can do it as the following:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CHANGED_FILES=$(git diff origin/master --diff-filter=AM --name-only | grep src/ | paste -sd <span class="string">","</span> -);</span><br><span class="line">INFECTION_FILTER=<span class="string">"--filter=<span class="variable">$&#123;CHANGED_FILES&#125;</span> --ignore-msi-with-no-mutations"</span>;</span><br><span class="line"></span><br><span class="line">infection --threads=4 <span class="variable">$INFECTION_FILTER</span></span><br></pre></td></tr></table></figure>
+<p>The <code>--diff-filter=AM</code> returns only added and modified files, because we are not going to use removed ones.</p>
+<p>The <a href="/guide/command-line-options.html#ignore-msi-with-no-mutations"><code>--ignore-msi-with-no-mutations</code> option</a> tells Infection to not error on min MSI when we have <code>0</code> mutations.</p>
+<h4 id="Example-for-Travis-CI"><a href="#Example-for-Travis-CI" class="headerlink" title="Example for Travis CI:"></a>Example for Travis CI:</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">jobs</span>:</span><br><span class="line">  include:</span><br><span class="line">    - stage: Mutation Testing</span><br><span class="line">    script:</span><br><span class="line">      - |</span><br><span class="line">        <span class="keyword">if</span> [[ <span class="string">"<span class="variable">$&#123;TRAVIS_PULL_REQUEST&#125;</span>"</span> == <span class="string">"false"</span> ]]; <span class="keyword">then</span></span><br><span class="line">            INFECTION_FILTER=<span class="string">""</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            git remote <span class="built_in">set</span>-branches --add origin <span class="variable">$TRAVIS_BRANCH</span>;</span><br><span class="line">            git fetch;</span><br><span class="line">            CHANGED_FILES=$(git diff origin/<span class="variable">$TRAVIS_BRANCH</span> --diff-filter=AM --name-only | grep src/ | paste -sd <span class="string">","</span> -);</span><br><span class="line">            INFECTION_FILTER=<span class="string">"--filter=<span class="variable">$&#123;CHANGED_FILES&#125;</span> --ignore-msi-with-no-mutations"</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"CHANGED_FILES=<span class="variable">$CHANGED_FILES</span>"</span>;</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        </span><br><span class="line">        infection --threads=4 --<span class="built_in">log</span>-verbosity=none <span class="variable">$INFECTION_FILTER</span></span><br></pre></td></tr></table></figure>
+<p>For each job, Travis CI fetches only tested branch: </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=50 --branch=feature/branch</span><br></pre></td></tr></table></figure>
+<p>That’s why we need to fetch <code>$TRAVIS_BRANCH</code> as well to make a <code>git diff</code> possible. Otherwise, you will get an error:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fatal: ambiguous argument <span class="string">'origin/master'</span>: unknown revision or path not <span class="keyword">in</span> the working tree.</span><br></pre></td></tr></table></figure>
     
       <div class="guide-links">
         
-          <span>← <a href="/guide/profiles.html">Profiles</a></span>
+          <span>← <a href="/guide/mutation-badge.html">Mutation Badge</a></span>
         
-        
-          <span style="float:right"><a href="/guide/mutation-badge.html">Mutation Badge</a> →</span>
         
       </div>
     
     <div class="footer">
       Caught a mistake or want to contribute to the documentation?
-      <a href="https://github.com/infection/site/blob/master/src/guide/using-with-ci.md" target="_blank">
+      <a href="https://github.com/infection/site/blob/master/src/guide/how-to.md" target="_blank">
         Edit this page on Github!
       </a>
     </div>

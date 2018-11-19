@@ -227,6 +227,18 @@
         
             
             
+            
+            
+        
+        
+        <li>
+            <a href="/guide/how-to.html" class="sidebar-link">How-to Guides</a>
+        </li>
+    
+        
+        
+            
+            
                 <li><h3>Miscellaneous</h3></li>
             
             
@@ -288,8 +300,8 @@
 </blockquote>
 <p>If you still don’t believe that AST is a thing, just compare these two mutators that replace <code>return functionCall();</code> with <code>functionCall(); return null;</code>:</p>
 <ul>
-<li>Humbug: <a href="https://github.com/humbug/humbug/blob/1.0.0-alpha2/src/Mutator/ReturnValue/FunctionCall.php" target="_blank" rel="external">https://github.com/humbug/humbug/blob/1.0.0-alpha2/src/Mutator/ReturnValue/FunctionCall.php</a></li>
-<li>Infection: <a href="https://github.com/infection/infection/blob/0.2.1/src/Mutator/ReturnValue/FunctionCall.php" target="_blank" rel="external">https://github.com/infection/infection/blob/0.2.1/src/Mutator/ReturnValue/FunctionCall.php</a></li>
+<li>Humbug: <a href="https://github.com/humbug/humbug/blob/1.0.0-alpha2/src/Mutator/ReturnValue/FunctionCall.php" target="_blank" rel="noopener">https://github.com/humbug/humbug/blob/1.0.0-alpha2/src/Mutator/ReturnValue/FunctionCall.php</a></li>
+<li>Infection: <a href="https://github.com/infection/infection/blob/0.2.1/src/Mutator/ReturnValue/FunctionCall.php" target="_blank" rel="noopener">https://github.com/infection/infection/blob/0.2.1/src/Mutator/ReturnValue/FunctionCall.php</a></li>
 </ul>
 <p>Excited?</p>
 <h3 id="Dependencies-in-composer-json"><a href="#Dependencies-in-composer-json" class="headerlink" title="Dependencies in composer.json"></a>Dependencies in <code>composer.json</code></h3><p>I spent much time understanding how we can get rid of PHPUnit and PhpSpec dependencies for production build of Infection.</p>

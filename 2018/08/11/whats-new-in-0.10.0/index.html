@@ -152,13 +152,13 @@
 <div class="content with-sidebar blog post">
     <h1>What's new in Infection 0.10.0</h1>
     <h4>Aug 11, 2018</h4>
-    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.10.0" target="_blank" rel="external">https://github.com/infection/infection/releases/tag/0.10.0</a></p>
+    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.10.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.10.0</a></p>
 <h2 id="BC-Breaks"><a href="#BC-Breaks" class="headerlink" title="BC Breaks"></a>BC Breaks</h2><p>Before upgrading, make sure you know about backward incompatible changes.</p>
 <ul>
 <li>Infection now requires PHP 7.1+. If you can’t for some reason upgrade and stuck on 7.0, don’t worry, you can still use 0.9.0.</li>
 <li>PHAR file is no longer signed with OpenSSL built-in algorithm. See below.</li>
 </ul>
-<h2 id="New-features-and-enhancements"><a href="#New-features-and-enhancements" class="headerlink" title="New features and enhancements"></a>New features and enhancements</h2><h3 id="Phive"><a href="#Phive" class="headerlink" title="Phive"></a>Phive</h3><p>Infection now can be installed by <a href="https://phar.io/" target="_blank" rel="external">Phive</a> - The PHAR Installation and Verification Environment. Since Phive requires <a href="https://www.gnupg.org/" target="_blank" rel="external">GPG</a> signing, we dropped built-in PHP OpenSSL signing. For each release we will upload <code>infection.phar</code> and <code>infection.phar.asc</code>. Previously downloaded <code>infection.phar.pubkey</code> can be deleted.</p>
+<h2 id="New-features-and-enhancements"><a href="#New-features-and-enhancements" class="headerlink" title="New features and enhancements"></a>New features and enhancements</h2><h3 id="Phive"><a href="#Phive" class="headerlink" title="Phive"></a>Phive</h3><p>Infection now can be installed by <a href="https://phar.io/" target="_blank" rel="noopener">Phive</a> - The PHAR Installation and Verification Environment. Since Phive requires <a href="https://www.gnupg.org/" target="_blank" rel="noopener">GPG</a> signing, we dropped built-in PHP OpenSSL signing. For each release we will upload <code>infection.phar</code> and <code>infection.phar.asc</code>. Previously downloaded <code>infection.phar.pubkey</code> can be deleted.</p>
 <p>With Phive you can install Infection as</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phive install infection</span><br></pre></td></tr></table></figure>
 <p>You can still download the PHAR file manually, the process is almost the same:</p>
@@ -170,7 +170,7 @@
 <h3 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h3><p>There was a reorganization of taps in Homebrew PHP and not all previously existed packages have been moved to the Homebrew core, including Infection. </p>
 <p>We created our custom repository so you can continue using <code>brew</code> to install Infection:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew tap infection/homebrew-infection</span><br><span class="line">brew install infection</span><br></pre></td></tr></table></figure>
-<p>Thanks <a href="https://github.com/pierredup" target="_blank" rel="external">Pierre du Plessis</a> for helping and maintaining it!</p>
+<p>Thanks <a href="https://github.com/pierredup" target="_blank" rel="noopener">Pierre du Plessis</a> for helping and maintaining it!</p>
 <h3 id="Time-and-memory"><a href="#Time-and-memory" class="headerlink" title="Time and memory"></a>Time and memory</h3><p>Infection now outputs information about how much time and memory did it take to run mutation testing:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[...] </span><br><span class="line"></span><br><span class="line">M..M...M..SSSSSSSSSS.......M...........SSSS.MSSSSS   (50 / 50)</span><br><span class="line"></span><br><span class="line">Time: 4s. Memory: 20.00MB</span><br></pre></td></tr></table></figure>
 <h3 id="Sorting-the-log-file"><a href="#Sorting-the-log-file" class="headerlink" title="Sorting the log file"></a>Sorting the log file</h3><p>When you have hundreds or even thousands of mutations, and especially when you use <code>--threads</code>, it’s quite difficult to read log file because each time mutations were logged in a random order (due to parallel processes).</p>
@@ -187,7 +187,7 @@
 <figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">private function getListeners(string $eventName): array</span><br><span class="line">&#123;</span><br><span class="line"><span class="deletion">-    return $this-&gt;listeners[$eventName] ?? [];</span></span><br><span class="line"><span class="addition">+    return [];</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>Enjoy!</p>
-<p><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="external">Star</a></p>
+<p><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="noopener">Star</a></p>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 </div>

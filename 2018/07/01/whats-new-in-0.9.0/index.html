@@ -152,12 +152,12 @@
 <div class="content with-sidebar blog post">
     <h1>What's new in Infection 0.9.0</h1>
     <h4>Jul 1, 2018</h4>
-    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.9.0" target="_blank" rel="external">https://github.com/infection/infection/releases/tag/0.9.0</a></p>
+    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.9.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.9.0</a></p>
 <h2 id="BC-Breaks"><a href="#BC-Breaks" class="headerlink" title="BC Breaks"></a>BC Breaks</h2><p>Before upgrading, make sure you know about backward incompatible changes.</p>
 <ul>
 <li><code>--log-verbosity</code> values <code>1</code>, <code>2</code>, <code>3</code> have been deprecated. Use <code>debug</code>, <code>default</code>, <code>none</code> respectively. Read more <a href="/guide/command-line-options.html#log-verbosity">here</a>.</li>
 </ul>
-<h2 id="New-features-and-enhancements"><a href="#New-features-and-enhancements" class="headerlink" title="New features and enhancements"></a>New features and enhancements</h2><h3 id="Profiles"><a href="#Profiles" class="headerlink" title="Profiles"></a>Profiles</h3><p>One of the most wanted feature! <a href="http://localhost:4000/guide/profiles.html" target="_blank" rel="external">It allows you</a> to configure what mutators to use or skip, by one or by “profiles”. This idea about Profiles is pretty much the same as in <a href="http://cs.sensiolabs.org/" target="_blank" rel="external">PHP-CS-Fixer</a> (<code>@PSR2</code>, <code>@symfony</code>, etc.).</p>
+<h2 id="New-features-and-enhancements"><a href="#New-features-and-enhancements" class="headerlink" title="New features and enhancements"></a>New features and enhancements</h2><h3 id="Profiles"><a href="#Profiles" class="headerlink" title="Profiles"></a>Profiles</h3><p>One of the most wanted feature! <a href="http://localhost:4000/guide/profiles.html" target="_blank" rel="noopener">It allows you</a> to configure what mutators to use or skip, by one or by “profiles”. This idea about Profiles is pretty much the same as in <a href="http://cs.sensiolabs.org/" target="_blank" rel="noopener">PHP-CS-Fixer</a> (<code>@PSR2</code>, <code>@symfony</code>, etc.).</p>
 <p>How does it work? The following configuration will use the <code>@default</code> profile, but turn off the <code>@function_signature</code> profile.<br>On top of that, it does not apply the <code>TrueValue</code> mutator on any classes that match the provided ignore patterns. In particular, <code>TrueValue</code> mutator does not mutate the code inside <code>Full\NameSpaced\Class</code> class and inside <code>create()</code> method of all <code>SourceClass</code> classes.</p>
 <p>These ignores can also be added to profiles, to ensure infection is as flexible as you need it.</p>
 <p>All profiles are prepended by an <code>@</code> and in snake case, while all mutators are in PascalCase.</p>
@@ -165,13 +165,13 @@
 <blockquote>
 <p><a href="/guide/profiles.html#The-Profiles">See</a> how Mutators are grouped in Profiles</p>
 </blockquote>
-<h3 id="Prefixed-PHAR"><a href="#Prefixed-PHAR" class="headerlink" title="Prefixed PHAR"></a>Prefixed PHAR</h3><p>Starting from Infection <code>0.9.0</code>, we will be shipping a prefixed PHAR by <a href="https://github.com/humbug/php-scoper" target="_blank" rel="external">PHP-Scoper</a>. What does it mean?</p>
+<h3 id="Prefixed-PHAR"><a href="#Prefixed-PHAR" class="headerlink" title="Prefixed PHAR"></a>Prefixed PHAR</h3><p>Starting from Infection <code>0.9.0</code>, we will be shipping a prefixed PHAR by <a href="https://github.com/humbug/php-scoper" target="_blank" rel="noopener">PHP-Scoper</a>. What does it mean?</p>
 <p>In a nutshell, PHP-Scoper adds a random prefix to each class’ namespace in the bundled code. It means that if you have PHP-Parser <code>3</code> in your project, but <code>infection.phar</code> has PHP-Parser <code>4</code> - there won’t be any conflicts anymore.</p>
 <p>Now you can <strong>safely</strong> use PHAR distribution instead of requiring Infection by <code>Composer</code>.</p>
 <h3 id="Badge-logger"><a href="#Badge-logger" class="headerlink" title="Badge logger"></a>Badge logger</h3><p><a href="https://infection.github.io"><img src="https://badge.stryker-mutator.io/github.com/infection/infection/master" alt="Infection MSI"></a></p>
-<p>Thanks to our friends from <a href="https://stryker-mutator.io/" target="_blank" rel="external">Stryker</a> - mutation testing framework for Javascript - Infection now has a <a href="http://localhost:4000/guide/mutation-badge.html" target="_blank" rel="external">Mutation Badge</a>!</p>
-<p>Add it to your project to show how awesome your are! <a href="http://localhost:4000/guide/mutation-badge.html" target="_blank" rel="external">Run mutation logger</a> on CI (e.g. Travis) to update the badge automatically.</p>
-<h3 id="Per-Mutator-logger"><a href="#Per-Mutator-logger" class="headerlink" title="Per-Mutator logger"></a>Per-Mutator logger</h3><p>New <code>perMutator</code> logger <a href="http://localhost:4000/guide/usage.html" target="_blank" rel="external">can be configured</a> in <code>infection.json</code> config. It shows a detailed report about Mutator effectiveness in a <code>Markdown</code> syntax.</p>
+<p>Thanks to our friends from <a href="https://stryker-mutator.io/" target="_blank" rel="noopener">Stryker</a> - mutation testing framework for Javascript - Infection now has a <a href="http://localhost:4000/guide/mutation-badge.html" target="_blank" rel="noopener">Mutation Badge</a>!</p>
+<p>Add it to your project to show how awesome your are! <a href="http://localhost:4000/guide/mutation-badge.html" target="_blank" rel="noopener">Run mutation logger</a> on CI (e.g. Travis) to update the badge automatically.</p>
+<h3 id="Per-Mutator-logger"><a href="#Per-Mutator-logger" class="headerlink" title="Per-Mutator logger"></a>Per-Mutator logger</h3><p>New <code>perMutator</code> logger <a href="http://localhost:4000/guide/usage.html" target="_blank" rel="noopener">can be configured</a> in <code>infection.json</code> config. It shows a detailed report about Mutator effectiveness in a <code>Markdown</code> syntax.</p>
 <p>Example:</p>
 <table>
 <thead>
@@ -224,13 +224,13 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Ignore-MSI-violations-with-zero-mutations"><a href="#Ignore-MSI-violations-with-zero-mutations" class="headerlink" title="Ignore MSI violations with zero mutations"></a>Ignore MSI violations with zero mutations</h3><p>If your project is quite big, mutation testing can take too much time to run it for each build on CI. In this case, it’s possible to run Infection <a href="https://blog.alejandrocelaya.com/2018/02/17/mutation-testing-with-infection-in-big-php-projects/" target="_blank" rel="external">just for the changed files</a>. </p>
+<h3 id="Ignore-MSI-violations-with-zero-mutations"><a href="#Ignore-MSI-violations-with-zero-mutations" class="headerlink" title="Ignore MSI violations with zero mutations"></a>Ignore MSI violations with zero mutations</h3><p>If your project is quite big, mutation testing can take too much time to run it for each build on CI. In this case, it’s possible to run Infection <a href="https://blog.alejandrocelaya.com/2018/02/17/mutation-testing-with-infection-in-big-php-projects/" target="_blank" rel="noopener">just for the changed files</a>. </p>
 <p>Imagine, you want to have at least 80% <code>MSI</code> and you run Infection as</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./infection.phar [...] --min-msi=80</span><br></pre></td></tr></table></figure>
 <p>When someone pushes the code that is not analyzed by Infection, e.g. new <code>json</code> file, Infection will create <code>0</code> Mutants and the MSI will be <code>0</code>, so the build will fail.</p>
 <p>To avoid this situations, there is a new option <code>--ignore-msi-with-no-mutations</code> just for that.</p>
 <h3 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h3><h4 id="Finally"><a href="#Finally" class="headerlink" title="Finally_"></a><code>Finally_</code></h4><p>This mutator removes <code>finally {}</code> block from your <code>try / catch / finally</code> chain. Goal: to understand whether finally blocks are tested and bring any value.</p>
-<p>By the way, did you know <a href="https://3v4l.org/Hse6E" target="_blank" rel="external">it is possible</a> to not have any of the <code>catch</code> blocks in PHP? ;)</p>
+<p>By the way, did you know <a href="https://3v4l.org/Hse6E" target="_blank" rel="noopener">it is possible</a> to not have any of the <code>catch</code> blocks in PHP? ;)</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    var_dump(<span class="string">'try'</span>);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    var_dump(<span class="string">'finally'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// string(3) "try"</span></span><br><span class="line"><span class="comment">// string(7) "finally"</span></span><br></pre></td></tr></table></figure>
 <h4 id="PregQuote"><a href="#PregQuote" class="headerlink" title="PregQuote"></a><code>PregQuote</code></h4><p>This mutator replaces <code>$a = preg_quote(&#39;text&#39;);</code> with <code>$a = &#39;text&#39;;</code>. Goal: to test whether <code>preg_quote</code> call is useful.</p>
 <h4 id="Set-of-Type-Cast-Mutators"><a href="#Set-of-Type-Cast-Mutators" class="headerlink" title="Set of Type Cast Mutators"></a>Set of <code>Type Cast</code> Mutators</h4><p>These mutators remove type casting (e.g. <code>$count = (int) $request-&gt;get(...)</code> -&gt; <code>$count = $request-&gt;get(...)</code>) in order to check whether this casting is useless or not.</p>
@@ -249,11 +249,11 @@
 <p>the following mutation is incorrect:</p>
 <figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">class Foo implements Doable</span><br><span class="line">&#123;</span><br><span class="line"><span class="deletion">-    public function do(): void &#123;&#125;</span></span><br><span class="line"><span class="addition">+    protected function do(): void &#123;&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>and leads to <code>Fatal error: Access level to Foo::do() must be public (as in class Doable)...</code>.</p>
-<h3 id="Miscellaneous"><a href="#Miscellaneous" class="headerlink" title="Miscellaneous"></a>Miscellaneous</h3><p>We have also replaced our custom logic of disabling Xdebug with the new <code>composer</code> tool: <code>composer/xdebug-handler</code>. Check out <a href="https://github.com/composer/xdebug-handler" target="_blank" rel="external">this great library</a>!</p>
+<h3 id="Miscellaneous"><a href="#Miscellaneous" class="headerlink" title="Miscellaneous"></a>Miscellaneous</h3><p>We have also replaced our custom logic of disabling Xdebug with the new <code>composer</code> tool: <code>composer/xdebug-handler</code>. Check out <a href="https://github.com/composer/xdebug-handler" target="_blank" rel="noopener">this great library</a>!</p>
 <p>It can automatically restart any process with disabled Xdebug in order to achieve the best performance.</p>
 <hr>
-<p>If you use and/or like Infection, please make sure to give us a star:<br><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="external">Star</a></p>
-<p>Also, you can follow us on Twitter: <a href="https://twitter.com/infection_php" target="_blank" rel="external">https://twitter.com/infection_php</a></p>
+<p>If you use and/or like Infection, please make sure to give us a star:<br><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="noopener">Star</a></p>
+<p>Also, you can follow us on Twitter: <a href="https://twitter.com/infection_php" target="_blank" rel="noopener">https://twitter.com/infection_php</a></p>
 <hr>
 <p>Thank you <code>@infection/core</code> and all contributors for <code>0.9.0</code> release. This is a great day for Mutation Testing in PHP.</p>
 <p>Enjoy!</p>
