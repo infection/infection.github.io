@@ -252,6 +252,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2019/01/24/whats-new-in-0.12.0/" class="sidebar-link">What's new in Infection 0.12.0</a>
+        </li>
+    
+        <li>
             <a href="/2018/11/12/whats-new-in-0.11.0/" class="sidebar-link">What's new in Infection 0.11.0</a>
         </li>
     
@@ -318,9 +322,19 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align:center">UnwrapArrayChangeKeyCase</td>
+<td style="text-align:center"><code>$a = array_change_key_case([&#39;foo&#39; =&gt; &#39;bar&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
 <td style="text-align:center">UnwrapArrayChunk</td>
 <td style="text-align:center"><code>$a = array_chunk([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], 2);</code></td>
 <td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayColumn</td>
+<td style="text-align:center"><code>$a = array_column([[&#39;foo&#39; =&gt; &#39;bar]], &#39;foo&#39;);</code></td>
+<td style="text-align:center"><code>$a = [[&#39;foo&#39; =&gt; &#39;bar]];</code></td>
 </tr>
 <tr>
 <td style="text-align:center">UnwrapArrayCombine</td>
@@ -331,6 +345,26 @@
 <td style="text-align:center">UnwrapArrayDiff</td>
 <td style="text-align:center"><code>$a = array_diff([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
 <td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayDiffAssoc</td>
+<td style="text-align:center"><code>$a = array_diff_assoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayDiffKey</td>
+<td style="text-align:center"><code>$a = array_diff_key([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayDiffUassoc</td>
+<td style="text-align:center"><code>$a = array_diff_assoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $callback);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayDiffUkey</td>
+<td style="text-align:center"><code>$a = array_diff_ukey([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $callable);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
 <td style="text-align:center">UnwrapArrayFilter</td>
@@ -348,6 +382,21 @@
 <td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
+<td style="text-align:center">UnwrapArrayIntersectKey</td>
+<td style="text-align:center"><code>$a = array_intersect_key([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;bar&#39; =&gt; &#39;baz&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayIntersectUassoc</td>
+<td style="text-align:center"><code>$a = array_intersect_uassoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;bar&#39; =&gt; &#39;baz&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayIntersectUkey</td>
+<td style="text-align:center"><code>$a = array_intersect_ukey([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;bar&#39; =&gt; &#39;baz&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
 <td style="text-align:center">UnwrapArrayKeys</td>
 <td style="text-align:center"><code>$a = array_keys([&#39;foo&#39; =&gt; &#39;bar&#39;]);</code></td>
 <td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
@@ -360,6 +409,11 @@
 <tr>
 <td style="text-align:center">UnwrapArrayMerge</td>
 <td style="text-align:center"><code>$a = array_merge([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayMergeRecursive</td>
+<td style="text-align:center"><code>$a = array_merge_recursive([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
 <td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
@@ -381,6 +435,21 @@
 <td style="text-align:center">UnwrapArrayReverse</td>
 <td style="text-align:center"><code>$a = array_reverse([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]);</code></td>
 <td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArraySlice</td>
+<td style="text-align:center"><code>$a = array_slice([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], 1);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArraySplice</td>
+<td style="text-align:center"><code>$a = array_splice([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], 1);</code></td>
+<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:center">UnwrapArrayUdiffAssoc</td>
+<td style="text-align:center"><code>$a = array_udiff_assoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $callback);</code></td>
+<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
 <td style="text-align:center">UnwrapArrayUnique</td>
@@ -575,7 +644,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Round-Family"><a href="#Round-Family" class="headerlink" title="Round Family"></a>Round Family</h3><p>The Round Family mutator will make sure that there’s enough tests to cover the rounding possibilities. </p>
+<h3 id="Round-Family"><a href="#Round-Family" class="headerlink" title="Round Family"></a>Round Family</h3><p>The Round Family mutator will make sure that there’s enough tests to cover the rounding possibilities.</p>
 <table>
 <thead>
 <tr>
@@ -617,8 +686,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Boolean-Substitution"><a href="#Boolean-Substitution" class="headerlink" title="Boolean Substitution"></a>Boolean Substitution</h3><p>This temporarily encompasses logical mutators.</p>
-<table>
+<h3 id="Boolean-Substitution"><a href="#Boolean-Substitution" class="headerlink" title="Boolean Substitution"></a>Boolean Substitution</h3><table>
 <thead>
 <tr>
 <th style="text-align:center">Name</th>
@@ -633,7 +701,7 @@
 <td style="text-align:center"><code>[$a-&gt;foo &gt; $b-&gt;bar]</code></td>
 </tr>
 <tr>
-<td style="text-align:center">TrueValue</td>
+<td style="text-align:center"><a href="/guide/mutators.html#TrueValue">TrueValue</a></td>
 <td style="text-align:center">true</td>
 <td style="text-align:center">false</td>
 </tr>
@@ -679,6 +747,13 @@
 </tr>
 </tbody>
 </table>
+<h4 id="TrueValue"><a href="#TrueValue" class="headerlink" title="TrueValue"></a><code>TrueValue</code></h4><p>Default settings:</p>
+<ul>
+<li><code>in_array: false</code>: whether to mutate 3rd argument <code>true</code> in function call</li>
+<li><code>array_search: false</code>: whether to mutate 3rd argument <code>true</code> in function call</li>
+</ul>
+<p>infection.json:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"TrueValue"</span>: &#123;</span><br><span class="line">            <span class="attr">"settings"</span>: &#123;</span><br><span class="line">                <span class="attr">"in_array"</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">"array_search"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Conditional-Boundaries"><a href="#Conditional-Boundaries" class="headerlink" title="Conditional Boundaries"></a>Conditional Boundaries</h3><table>
 <thead>
 <tr>
