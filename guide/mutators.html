@@ -252,6 +252,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2019/05/18/whats-new-in-0.13.0/" class="sidebar-link">What's new in Infection 0.13.0</a>
+        </li>
+    
+        <li>
             <a href="/2019/01/24/whats-new-in-0.12.0/" class="sidebar-link">What's new in Infection 0.12.0</a>
         </li>
     
@@ -315,166 +319,221 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">Name</th>
-<th style="text-align:center">Original</th>
-<th style="text-align:center">Mutated</th>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Original</th>
+<th style="text-align:left">Mutated</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">UnwrapArrayChangeKeyCase</td>
-<td style="text-align:center"><code>$a = array_change_key_case([&#39;foo&#39; =&gt; &#39;bar&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayChangeKeyCase</td>
+<td style="text-align:left"><code>$a = array_change_key_case([&#39;foo&#39; =&gt; &#39;bar&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayChunk</td>
-<td style="text-align:center"><code>$a = array_chunk([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], 2);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayChunk</td>
+<td style="text-align:left"><code>$a = array_chunk([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], 2);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayColumn</td>
-<td style="text-align:center"><code>$a = array_column([[&#39;foo&#39; =&gt; &#39;bar]], &#39;foo&#39;);</code></td>
-<td style="text-align:center"><code>$a = [[&#39;foo&#39; =&gt; &#39;bar]];</code></td>
+<td style="text-align:left">UnwrapArrayColumn</td>
+<td style="text-align:left"><code>$a = array_column([[&#39;foo&#39; =&gt; &#39;bar]], &#39;foo&#39;);</code></td>
+<td style="text-align:left"><code>$a = [[&#39;foo&#39; =&gt; &#39;bar]];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayCombine</td>
-<td style="text-align:center"><code>$a = array_combine([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayCombine</td>
+<td style="text-align:left"><code>$a = array_combine([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayDiff</td>
-<td style="text-align:center"><code>$a = array_diff([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayDiff</td>
+<td style="text-align:left"><code>$a = array_diff([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayDiffAssoc</td>
-<td style="text-align:center"><code>$a = array_diff_assoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayDiffAssoc</td>
+<td style="text-align:left"><code>$a = array_diff_assoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayDiffKey</td>
-<td style="text-align:center"><code>$a = array_diff_key([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayDiffKey</td>
+<td style="text-align:left"><code>$a = array_diff_key([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayDiffUassoc</td>
-<td style="text-align:center"><code>$a = array_diff_assoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $callback);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayDiffUassoc</td>
+<td style="text-align:left"><code>$a = array_diff_assoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $keyCompareFunc);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayDiffUkey</td>
-<td style="text-align:center"><code>$a = array_diff_ukey([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $callable);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayDiffUkey</td>
+<td style="text-align:left"><code>$a = array_diff_ukey([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $keyCompareFunc);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayFilter</td>
-<td style="text-align:center"><code>$a = array_filter([&#39;A&#39;, 1, &#39;C&#39;], &#39;is_int&#39;);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, 1, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayFilter</td>
+<td style="text-align:left"><code>$a = array_filter([&#39;A&#39;, 1, &#39;C&#39;], &#39;is_int&#39;);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, 1, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayFlip</td>
-<td style="text-align:center"><code>$a = array_flip([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayFlip</td>
+<td style="text-align:left"><code>$a = array_flip([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayIntersect</td>
-<td style="text-align:center"><code>$a = array_intersect([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayIntersect</td>
+<td style="text-align:left"><code>$a = array_intersect([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayIntersectKey</td>
-<td style="text-align:center"><code>$a = array_intersect_key([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;bar&#39; =&gt; &#39;baz&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayIntersectAssoc</td>
+<td style="text-align:left"><code>$a = array_intersect_assoc([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayIntersectUassoc</td>
-<td style="text-align:center"><code>$a = array_intersect_uassoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;bar&#39; =&gt; &#39;baz&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayIntersectKey</td>
+<td style="text-align:left"><code>$a = array_intersect_key([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;bar&#39; =&gt; &#39;baz&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayIntersectUkey</td>
-<td style="text-align:center"><code>$a = array_intersect_ukey([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;bar&#39; =&gt; &#39;baz&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayIntersectUassoc</td>
+<td style="text-align:left"><code>$a = array_intersect_uassoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;bar&#39; =&gt; &#39;baz&#39;], $keyCompareFunc);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayKeys</td>
-<td style="text-align:center"><code>$a = array_keys([&#39;foo&#39; =&gt; &#39;bar&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayIntersectUkey</td>
+<td style="text-align:left"><code>$a = array_intersect_ukey([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;bar&#39; =&gt; &#39;baz&#39;], $keyCompareFunc);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayMap</td>
-<td style="text-align:center"><code>$a = array_map(&#39;strtolower&#39;, [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayKeys</td>
+<td style="text-align:left"><code>$a = array_keys([&#39;foo&#39; =&gt; &#39;bar&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayMerge</td>
-<td style="text-align:center"><code>$a = array_merge([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayMap</td>
+<td style="text-align:left"><code>$a = array_map(&#39;strtolower&#39;, [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayMergeRecursive</td>
-<td style="text-align:center"><code>$a = array_merge_recursive([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayMerge</td>
+<td style="text-align:left"><code>$a = array_merge([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayReduce</td>
-<td style="text-align:center"><code>$a = array_reduce([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], $callback, [&#39;D&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;D&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayMergeRecursive</td>
+<td style="text-align:left"><code>$a = array_merge_recursive([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayReplace</td>
-<td style="text-align:center"><code>$a = array_replace([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayPad</td>
+<td style="text-align:left"><code>$a = array_pad([&#39;A&#39;], 2, &#39;B&#39;);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayReplaceRecursive</td>
-<td style="text-align:center"><code>$a = array_replace_recursive([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayReduce</td>
+<td style="text-align:left"><code>$a = array_reduce([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], $callback, [&#39;D&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;D&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayReverse</td>
-<td style="text-align:center"><code>$a = array_reverse([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayReplace</td>
+<td style="text-align:left"><code>$a = array_replace([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArraySlice</td>
-<td style="text-align:center"><code>$a = array_slice([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], 1);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayReplaceRecursive</td>
+<td style="text-align:left"><code>$a = array_replace_recursive([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [&#39;D&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArraySplice</td>
-<td style="text-align:center"><code>$a = array_splice([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], 1);</code></td>
-<td style="text-align:center"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayReverse</td>
+<td style="text-align:left"><code>$a = array_reverse([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayUdiffAssoc</td>
-<td style="text-align:center"><code>$a = array_udiff_assoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $callback);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArraySlice</td>
+<td style="text-align:left"><code>$a = array_slice([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], 1);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayUnique</td>
-<td style="text-align:center"><code>$a = array_unique([&#39;foo&#39;, &#39;bar&#39;, &#39;bar&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39;, &#39;bar&#39;, &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArraySplice</td>
+<td style="text-align:left"><code>$a = array_splice([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], 1);</code></td>
+<td style="text-align:left"><code>$a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapArrayValues</td>
-<td style="text-align:center"><code>$a = array_values([&#39;foo&#39; =&gt; &#39;bar&#39;]);</code></td>
-<td style="text-align:center"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+<td style="text-align:left">UnwrapArrayUdiff</td>
+<td style="text-align:left"><code>$a = array_udiff([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $valueCompareFunc);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapStrRepeat</td>
-<td style="text-align:center"><code>$a = str_repeat(&#39;A&#39;, 3);</code></td>
-<td style="text-align:center"><code>$a = &#39;A&#39;;</code></td>
+<td style="text-align:left">UnwrapArrayUdiffAssoc</td>
+<td style="text-align:left"><code>$a = array_udiff_assoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $valueCompareFunc);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapStrToLower</td>
-<td style="text-align:center"><code>$a = strtolower(&#39;Hello!&#39;);</code></td>
-<td style="text-align:center"><code>$a = &#39;Hello!&#39;;</code></td>
+<td style="text-align:left">UnwrapArrayUdiffUassoc</td>
+<td style="text-align:left"><code>$a = array_udiff_uassoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $valueCompareFunc, $keyCompareFunc);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
 </tr>
 <tr>
-<td style="text-align:center">UnwrapStrToUpper</td>
-<td style="text-align:center"><code>$a = strtoupper(&#39;Hello, world!&#39;);</code></td>
-<td style="text-align:center"><code>$a = &#39;Hello, world!&#39;;</code></td>
+<td style="text-align:left">UnwrapArrayUintersect</td>
+<td style="text-align:left"><code>$a = array_uintersect([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $valueCompareFunc);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapArrayUintersectAssoc</td>
+<td style="text-align:left"><code>$a = array_uintersect_assoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $valueCompareFunc);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapArrayUintersectUassoc</td>
+<td style="text-align:left"><code>$a = array_uintersect_uassoc([&#39;foo&#39; =&gt; &#39;bar&#39;], [&#39;baz&#39; =&gt; &#39;bar], $valueCompareFunc, $keyCompareFunc);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapArrayUnique</td>
+<td style="text-align:left"><code>$a = array_unique([&#39;foo&#39;, &#39;bar&#39;, &#39;bar&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39;, &#39;bar&#39;, &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapArrayValues</td>
+<td style="text-align:left"><code>$a = array_values([&#39;foo&#39; =&gt; &#39;bar&#39;]);</code></td>
+<td style="text-align:left"><code>$a = [&#39;foo&#39; =&gt; &#39;bar&#39;];</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapLcFirst</td>
+<td style="text-align:left"><code>$a = lcfirst(&#39;Hello, world!&#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;Hello, world!&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapStrRepeat</td>
+<td style="text-align:left"><code>$a = str_repeat(&#39;A&#39;, 3);</code></td>
+<td style="text-align:left"><code>$a = &#39;A&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapStrToLower</td>
+<td style="text-align:left"><code>$a = strtolower(&#39;Hello!&#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;Hello!&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapStrToUpper</td>
+<td style="text-align:left"><code>$a = strtoupper(&#39;Hello, world!&#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;Hello, world!&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapTrim</td>
+<td style="text-align:left"><code>$a = trim(&#39; Hello, world! &#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;Hello, world!&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapUcFirst</td>
+<td style="text-align:left"><code>$a = ucfirst(&#39;hello, world!&#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;hello, world!&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapUcWords</td>
+<td style="text-align:left"><code>$a = ucwords(&#39;hello, world!&#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;hello, world!&#39;;</code></td>
 </tr>
 </tbody>
 </table>
@@ -640,6 +699,11 @@
 <tr>
 <td style="text-align:center">Assignment</td>
 <td style="text-align:center">&gt;&gt;=</td>
+<td style="text-align:center">=</td>
+</tr>
+<tr>
+<td style="text-align:center">Assignment Coalesce</td>
+<td style="text-align:center">??=</td>
 <td style="text-align:center">=</td>
 </tr>
 </tbody>
@@ -962,6 +1026,11 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align:center">ArrayItemRemoval</td>
+<td style="text-align:center"><code>[1, $a, &#39;3&#39;]</code></td>
+<td style="text-align:center"><code>[$a, &#39;3&#39;]</code> <em>depending on configuration</em></td>
+</tr>
+<tr>
 <td style="text-align:center">FunctionCallRemoval</td>
 <td style="text-align:center">foo_bar($a)</td>
 <td style="text-align:center">-</td>
@@ -973,6 +1042,24 @@
 </tr>
 </tbody>
 </table>
+<h4 id="ArrayItemRemoval"><a href="#ArrayItemRemoval" class="headerlink" title="ArrayItemRemoval"></a><code>ArrayItemRemoval</code></h4><p>Configuration options:</p>
+<ul>
+<li><code>remove: first</code>: defines the way the mutator operates. Could be:<ul>
+<li><code>first</code> - remove only first element from each array</li>
+<li><code>last</code> - remove only last element from each array</li>
+<li><code>all</code> - remove every element one by one from each array resulting in as many mutations as total number of items in arrays.</li>
+</ul>
+</li>
+<li><code>limit: PHP_INT_MAX</code>: when <code>remove = all</code> specifies maximum number of elements that will be removed form array. Only elements at the beginning will be mutated.</li>
+</ul>
+<blockquote>
+<p>When using <code>all</code> option we advise to set the limit as well</p>
+</blockquote>
+<blockquote>
+<p>You should remember to exclude files containing large arrays (like configuration)<br>when using <code>ArrayItemRemoval</code> mutator in <code>all</code> mode</p>
+</blockquote>
+<p>infection.json:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"ArrayItemRemoval"</span>: &#123;</span><br><span class="line">            <span class="attr">"settings"</span>: &#123;</span><br><span class="line">                <span class="attr">"remove"</span>: <span class="string">"all"</span>,</span><br><span class="line">                <span class="attr">"limit"</span>: <span class="number">15</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Loop"><a href="#Loop" class="headerlink" title="Loop"></a>Loop</h3><table>
 <thead>
 <tr>
@@ -1064,21 +1151,21 @@
 <h3 id="Exceptions"><a href="#Exceptions" class="headerlink" title="Exceptions"></a>Exceptions</h3><table>
 <thead>
 <tr>
-<th style="text-align:center">Name</th>
-<th style="text-align:center">Original</th>
-<th style="text-align:center">Mutated</th>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Original</th>
+<th style="text-align:left">Mutated</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">Throw_</td>
-<td style="text-align:center"><code>throw new NotFoundException();</code></td>
-<td style="text-align:center"><code>new NotFoundException();</code></td>
+<td style="text-align:left">Throw_</td>
+<td style="text-align:left"><code>throw new NotFoundException();</code></td>
+<td style="text-align:left"><code>new NotFoundException();</code></td>
 </tr>
 <tr>
-<td style="text-align:center">Finally_</td>
-<td style="text-align:center"><code>try {} catch (\Exception $e) {} finally {}</code></td>
-<td style="text-align:center"><code>try {} catch (\Exception $e) {}</code></td>
+<td style="text-align:left">Finally_</td>
+<td style="text-align:left"><code>try {} catch (\Exception $e) {} finally {}</code></td>
+<td style="text-align:left"><code>try {} catch (\Exception $e) {}</code></td>
 </tr>
 </tbody>
 </table>
@@ -1126,24 +1213,194 @@
 <h3 id="Regex"><a href="#Regex" class="headerlink" title="Regex"></a>Regex</h3><table>
 <thead>
 <tr>
-<th style="text-align:center">Name</th>
-<th style="text-align:center">Original</th>
-<th style="text-align:center">Mutated</th>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Original</th>
+<th style="text-align:left">Mutated</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">PregQuote</td>
-<td style="text-align:center"><code>$a = preg_quote(&#39;text&#39;);</code></td>
-<td style="text-align:center"><code>$a = &#39;text&#39;;</code></td>
+<td style="text-align:left">PregQuote</td>
+<td style="text-align:left"><code>$a = preg_quote(&#39;text&#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;text&#39;;</code></td>
 </tr>
 <tr>
-<td style="text-align:center">PregMatchMatches</td>
-<td style="text-align:center"><code>preg_match(&#39;/pattern/&#39;, $value, $matches);</code></td>
-<td style="text-align:center"><code>(int) $matches = array();</code></td>
+<td style="text-align:left">PregMatchMatches</td>
+<td style="text-align:left"><code>preg_match(&#39;/pattern/&#39;, $value, $matches);</code></td>
+<td style="text-align:left"><code>(int) $matches = array();</code></td>
 </tr>
 </tbody>
 </table>
+<h3 id="Extensions"><a href="#Extensions" class="headerlink" title="Extensions"></a>Extensions</h3><h4 id="BCMath"><a href="#BCMath" class="headerlink" title="BCMath"></a><code>BCMath</code></h4><table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Original</th>
+<th style="text-align:left">Mutated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">BCMath</td>
+<td style="text-align:left"><code>bcadd($a, $b, $mod);</code></td>
+<td style="text-align:left"><code>(string) ($a + $b);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>bcdiv($a, $b, $mod);</code></td>
+<td style="text-align:left"><code>(string) ($a / $b);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>bcmod($a, $b, $mod);</code></td>
+<td style="text-align:left"><code>(string) ($a % $b);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>bcmul($a, $b, $mod);</code></td>
+<td style="text-align:left"><code>(string) ($a * $b);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>bcpow($a, $b, $mod);</code></td>
+<td style="text-align:left"><code>(string) ($a ** $b);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>bcsub($a, $b, $mod);</code></td>
+<td style="text-align:left"><code>(string) ($a - $b);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>bcsqrt($a, $mod);</code></td>
+<td style="text-align:left"><code>(string) \sqrt($a);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>bcpowmod($a, $b, $c, $mod);</code></td>
+<td style="text-align:left"><code>(string) (\pow($a, $b) % $c);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>bccomp($a, $b, $mod);</code></td>
+<td style="text-align:left"><code>$a &lt;=&gt; $b;</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>&quot;bcpowmod&quot;: true</code>: You are able to disable any of the supported bcmath functions. All supported functions are enabled by default.</li>
+</ul>
+<p>infection.json:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"BCMath"</span>: &#123;</span><br><span class="line">            <span class="attr">"settings"</span>: &#123;</span><br><span class="line">                <span class="attr">"bcpowmod"</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">"bccomp"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="MBString"><a href="#MBString" class="headerlink" title="MBString"></a><code>MBString</code></h4><table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Original</th>
+<th style="text-align:left">Mutated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">MBString</td>
+<td style="text-align:left"><code>mb_chr($code);</code></td>
+<td style="text-align:left"><code>chr($code);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_ord($character);</code></td>
+<td style="text-align:left"><code>ord($character);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_parse_str(&#39;text&#39;, $results);</code></td>
+<td style="text-align:left"><code>parse_str(&#39;text&#39;, $results);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_send_mail($to, $subject, $message, $headers, $parameters);</code></td>
+<td style="text-align:left"><code>mail($to, $subject, $message, $headers, $parameters);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_strcut(&#39;text&#39;, 0, 123, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>substr(&#39;text&#39;, 0, 123);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_stripos(&#39;text&#39;, &#39;t&#39;, 0, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>stripos(&#39;text&#39;, &#39;t&#39;, 0);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_stristr(&#39;text&#39;, &#39;t&#39;, true, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>stristr(&#39;text&#39;, &#39;t&#39;, true);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_strlen(&#39;text&#39;, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>strlen(&#39;text&#39;);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_strpos(&#39;text&#39;, &#39;t&#39;, 0, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>strpos(&#39;text&#39;, &#39;t&#39;, 0);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_strrchr(&#39;text&#39;, &#39;t&#39;, true, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>strrchr(&#39;text&#39;, &#39;t&#39;, true);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_strripos(&#39;text&#39;, &#39;t&#39;, 0, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>strripos(&#39;text&#39;, &#39;t&#39;, 0);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_strrpos(&#39;text&#39;, &#39;t&#39;, 0, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>strrpos(&#39;text&#39;, &#39;t&#39;, 0);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_strstr(&#39;text&#39;, &#39;t&#39;, true, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>strstr(&#39;text&#39;, &#39;t&#39;, true);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_strtolower(&#39;text&#39;, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>strtolower(&#39;text&#39;);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_strtoupper(&#39;text&#39;, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>strtoupper(&#39;text&#39;);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_substr_count(&#39;text&#39;, &#39;t&#39;, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>substr_count(&#39;text&#39;, &#39;t&#39;);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_substr(&#39;text&#39;, 0, 123, &#39;utf-8&#39;);</code></td>
+<td style="text-align:left"><code>substr(&#39;text&#39;, 0, 123);</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>mb_convert_case(&#39;text&#39;, $mode);</code></td>
+<td style="text-align:left"><code>strtoupper(&#39;text&#39;);</code>, <code>strtolower(&#39;text&#39;);</code> or <code>ucwords(&#39;text&#39;);</code> depending on mode</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>&quot;mb_parse_str&quot;: true</code>: You are able to disable any of the supported mb string functions. All supported functions are enabled by default.</li>
+</ul>
+<blockquote>
+<p>Some of the functions are not supported due to complexity to convert them to standard string manipulation functions.<br>Implementing them either does not make sense or creates too many false positive mutations.<br>Not supported functions are <code>mb_ereg*</code>, <code>mb_split</code>, <code>mb_strrichr</code>, <code>mb_get_info</code> and similar.</p>
+</blockquote>
+<p>infection.json:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"MBString"</span>: &#123;</span><br><span class="line">            <span class="attr">"settings"</span>: &#123;</span><br><span class="line">                <span class="attr">"mb_send_mail"</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">"mb_substr_count"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     
       <div class="guide-links">

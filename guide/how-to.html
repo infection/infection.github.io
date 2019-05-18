@@ -252,6 +252,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2019/05/18/whats-new-in-0.13.0/" class="sidebar-link">What's new in Infection 0.13.0</a>
+        </li>
+    
+        <li>
             <a href="/2019/01/24/whats-new-in-0.12.0/" class="sidebar-link">What's new in Infection 0.12.0</a>
         </li>
     
@@ -295,6 +299,27 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=50 --branch=feature/branch</span><br></pre></td></tr></table></figure>
 <p>That’s why we need to fetch <code>$TRAVIS_BRANCH</code> as well to make a <code>git diff</code> possible. Otherwise, you will get an error:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fatal: ambiguous argument <span class="string">'origin/master'</span>: unknown revision or path not <span class="keyword">in</span> the working tree.</span><br></pre></td></tr></table></figure>
+<h2 id="How-to-disable-Mutators-and-profiles"><a href="#How-to-disable-Mutators-and-profiles" class="headerlink" title="How to disable Mutators and profiles"></a>How to disable Mutators and profiles</h2><h3 id="Disable-Mutator"><a href="#Disable-Mutator" class="headerlink" title="Disable Mutator"></a>Disable Mutator</h3><p>Mutators can be disabled in a config file - <code>infection.json.</code>. Let’s say you don’t want to mutate <code>+</code> to <code>-</code>. In order to disable this Mutator, the following config can be used: </p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"@default"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"Plus"</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>The full list of Mutator names can be found <a href="/guide/mutators.html">here</a>.</p>
+</blockquote>
+<p>In this example, we explicitly enable all Mutators from <code>@default</code> profile and disable <code>Plus</code> Mutator.</p>
+<blockquote>
+<p>Read about Profiles <a href="/guide/profiles.html">here</a></p>
+</blockquote>
+<h3 id="Disable-Profile"><a href="#Disable-Profile" class="headerlink" title="Disable Profile"></a>Disable Profile</h3><p>To disable all Mutators that work with Regular Expressions, we should disable the whole <a href="/guide/profiles.html#regex"><code>@regex</code> profile</a>:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"@default"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"@regex"</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Disable-in-particular-class-or-method-or-line"><a href="#Disable-in-particular-class-or-method-or-line" class="headerlink" title="Disable in particular class or method or line"></a>Disable in particular class or method or line</h3><p>Sometimes you may want to disable Mutator or Profile just for one particular method or class. It’s possible with <code>ignore</code> setting of Mutators and Profiles with the following syntax:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"@default"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"@regex"</span>: &#123;</span><br><span class="line">            <span class="attr">"ignore"</span>: [</span><br><span class="line">                <span class="string">"App\\Controller\\User"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"Minus"</span>: &#123;</span><br><span class="line">            <span class="attr">"ignore"</span>: [</span><br><span class="line">                <span class="string">"App\\Controller\\User"</span>,</span><br><span class="line">                <span class="string">"App\\Api\\Product::productList"</span>,</span><br><span class="line">                <span class="string">"App\\Api\\Product::product::33"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Want to ignore the whole class? <code>App\Controller\User</code></p>
+<p>All classes in the namespace: <code>App\Api\*</code> </p>
+<p>All classes <code>Product</code> in any namespace: <code>App\*\Product</code></p>
+<p>Method of the class: <code>App\Api\Product::productList</code></p>
+<p>Method in all classes: <code>App\Api\*::productList</code></p>
+<p>Method by pattern: <code>App\Api\Product::pr?duc?List</code></p>
+<p>Line of the code: <code>App\Api\Product::product::33</code></p>
+<p>Internally, all patterns are passed to <a href="https://php.net/manual/en/function.fnmatch.php" target="_blank" rel="noopener"><code>fnmatch()</code> PHP function</a>. Please read its documentation to better understand how it works.</p>
 
     
       <div class="guide-links">

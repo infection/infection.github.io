@@ -252,6 +252,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2019/05/18/whats-new-in-0.13.0/" class="sidebar-link">What's new in Infection 0.13.0</a>
+        </li>
+    
+        <li>
             <a href="/2019/01/24/whats-new-in-0.12.0/" class="sidebar-link">What's new in Infection 0.12.0</a>
         </li>
     
@@ -288,7 +292,7 @@
     <h3 id="Compatibility-Note"><a href="#Compatibility-Note" class="headerlink" title="Compatibility Note"></a>Compatibility Note</h3><p>Infection requires PHP 7.1+, Xdebug or phpdbg enabled.</p>
 <h2 id="Phar"><a href="#Phar" class="headerlink" title="Phar"></a>Phar</h2><p>Phar distribution is the best and recommended way of installing Infection on your computer.</p>
 <p>Download the latest <code>infection.phar</code> and <code>infection.phar.asc</code>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/infection/infection/releases/download/0.12.0/infection.phar</span><br><span class="line">wget https://github.com/infection/infection/releases/download/0.12.0/infection.phar.asc</span><br><span class="line"></span><br><span class="line">chmod +x infection.phar</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/infection/infection/releases/download/0.13.0/infection.phar</span><br><span class="line">wget https://github.com/infection/infection/releases/download/0.13.0/infection.phar.asc</span><br><span class="line"></span><br><span class="line">chmod +x infection.phar</span><br></pre></td></tr></table></figure>
 <p>The PHAR is signed with a <code>GPG</code> private key. In order to verify whether the PHAR file was signed by Infection team, execute the following:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys 493B4AA0</span><br><span class="line">gpg --with-fingerprint --verify infection.phar.asc infection.phar</span><br></pre></td></tr></table></figure>
 <p>You should see something like:</p>

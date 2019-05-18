@@ -252,6 +252,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2019/05/18/whats-new-in-0.13.0/" class="sidebar-link">What's new in Infection 0.13.0</a>
+        </li>
+    
+        <li>
             <a href="/2019/01/24/whats-new-in-0.12.0/" class="sidebar-link">What's new in Infection 0.12.0</a>
         </li>
     
@@ -354,6 +358,10 @@
 <blockquote>
 <p>See <a href="./mutators.html">here</a> to find all mutator names.</p>
 </blockquote>
+<h3 id="no-progress"><a href="#no-progress" class="headerlink" title="--no-progress"></a><code>--no-progress</code></h3><p>This option disables progress bars output. The main purpose is to use it on Continuous Integration servers to reduce the amount of generated text output, e.g.:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Creating mutated files and processes: 0/45678</span><br><span class="line">Creating mutated files and processes: 1/45678</span><br><span class="line">Creating mutated files and processes: 2/45678</span><br><span class="line">Creating mutated files and processes: 3/45678</span><br><span class="line">...</span><br><span class="line">45k lines of text</span><br><span class="line">...</span><br><span class="line">Creating mutated files and processes: 45678/45678</span><br></pre></td></tr></table></figure>
+<p>Infection automatically enable this mode when either <code>CI</code> or <code>CONTINUOUS_INTEGRATION</code> environment variable are set to <code>&quot;true&quot;</code>.</p>
+<p>For example, there is no need to enable it manually on Travis CI.</p>
 <h3 id="formatter"><a href="#formatter" class="headerlink" title="--formatter"></a><code>--formatter</code></h3><p>This is a name of console output formatter. Possible values are: <code>dot</code>, <code>progress</code>. Default is <code>dot</code> formatter.</p>
 <h3 id="log-verbosity"><a href="#log-verbosity" class="headerlink" title="--log-verbosity"></a><code>--log-verbosity</code></h3><p>The verbosity of the log file, <code>debug</code> - debug mode will add “Killed mutants” into log file and add additional information, <code>default</code> - normal mode will skip “Killed mutants” section in the log file, <code>none</code> - which will disable logging to files.</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --<span class="built_in">log</span>-verbosity=debug</span><br></pre></td></tr></table></figure>
