@@ -176,7 +176,7 @@
 <blockquote>
 <p>The minimum required MSI percentage should be 71.43%, but actual is 71.428571428571%. Improve your tests!</p>
 </blockquote>
-<h2 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h2><p>Infection already mutates some of the new operators from PHP 7.4, and we a couple of new mutators for this new syntax.</p>
+<h2 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h2><p>Infection already mutates some of the new operators from PHP 7.4, and we added a couple of new mutators for this new syntax.</p>
 <h3 id="Spread-Operator-in-Array-Expression"><a href="#Spread-Operator-in-Array-Expression" class="headerlink" title="Spread Operator in Array Expression"></a>Spread Operator in Array Expression</h3><p>RFC: <a href="https://wiki.php.net/rfc/spread_operator_for_array" target="_blank" rel="noopener">https://wiki.php.net/rfc/spread_operator_for_array</a></p>
 <figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $array = [...$collection, 4];</span></span><br><span class="line"><span class="addition">+ $array = [[...$collection][0], 4];</span></span><br></pre></td></tr></table></figure>
 <p>Basically, it removes all elements from <code>$collection</code> except the first one to ensure your code uses everything from the <code>$collection</code> and spread operator is really needed here.</p>
