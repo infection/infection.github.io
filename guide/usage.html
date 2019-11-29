@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head><meta name="generator" content="Hexo 3.8.0">
+    <head><meta name="generator" content="Hexo 3.9.0">
         <title>Usage — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
@@ -252,6 +252,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2019/09/29/whats-new-in-0.15.0/" class="sidebar-link">What's new in Infection 0.15.0</a>
+        </li>
+    
+        <li>
             <a href="/2019/09/20/whats-new-in-0.14.0/" class="sidebar-link">What's new in Infection 0.14.0</a>
         </li>
     
@@ -307,7 +311,7 @@
 <li><code>text</code> - human readable text log file. Must see to understand what is going on during mutation process.</li>
 <li><code>summary</code> - summary log file, which will only tell display the amount of mutants per category, (Killed, Errored, Escaped, Timed Out &amp; Not Covered)</li>
 <li><code>debug</code> - debug log file, which displays what mutations were found on what line, per category.</li>
-<li><code>perMutator</code> - a markdown file which will give a break-down of the effectiveness of each mutator.</li>
+<li><code>perMutator</code> - a markdown file which will give a break-down of the effectiveness of each mutator.<br>Each of the above logs accept a local filename to write to (eg <code>infection.log</code>), or you can write to the terminal using <code>php://stdout</code> or <code>php://stderr</code>, this can be useful in CI to store the mutation results in the output.</li>
 </ul>
 </li>
 <li><code>tmpDir</code> - Optional. It’s a folder where Infection creates its configs, caches and other stuff. It may be useful for people who doesn’t have access to the default system temporary folder and/or doesn’t have write permissions. Either absolute <code>/tmp/folder</code> or relative <code>var/cache</code> paths can be used.</li>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head><meta name="generator" content="Hexo 3.8.0">
+    <head><meta name="generator" content="Hexo 3.9.0">
         <title>Mutators — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
@@ -250,6 +250,10 @@
         </li>
     
     <li><h3>Posts</h3></li>
+    
+        <li>
+            <a href="/2019/09/29/whats-new-in-0.15.0/" class="sidebar-link">What's new in Infection 0.15.0</a>
+        </li>
     
         <li>
             <a href="/2019/09/20/whats-new-in-0.14.0/" class="sidebar-link">What's new in Infection 0.14.0</a>
@@ -513,6 +517,11 @@
 <td style="text-align:left">UnwrapStrRepeat</td>
 <td style="text-align:left"><code>$a = str_repeat(&#39;A&#39;, 3);</code></td>
 <td style="text-align:left"><code>$a = &#39;A&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapStrReplace</td>
+<td style="text-align:left"><code>$a = str_replace(&#39;Afternoon&#39;, &#39;Evening&#39; ,&#39;Good Afternoon!&#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;Good Afternoon!&#39;;</code></td>
 </tr>
 <tr>
 <td style="text-align:left">UnwrapStrToLower</td>
@@ -1064,6 +1073,11 @@
 <td style="text-align:center">MethodCallRemoval</td>
 <td style="text-align:center">$this-&gt;method($var)</td>
 <td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">CloneRemoval</td>
+<td style="text-align:center">clone (new stdClass())</td>
+<td style="text-align:center">new stdClass()</td>
 </tr>
 </tbody>
 </table>
