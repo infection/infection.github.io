@@ -298,6 +298,31 @@
       <h1>Installation</h1>
     
     <h3 id="Compatibility-Note"><a href="#Compatibility-Note" class="headerlink" title="Compatibility Note"></a>Compatibility Note</h3><p>Infection requires PHP 7.2+, <code>XDebug</code>, <code>phpdbg</code> or <code>pcov</code> enabled.</p>
+<p>You can still use an older Infection version if you’re running an older PHP Version.</p>
+<table>
+<thead>
+<tr>
+<th>PHP version</th>
+<th>Infection version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7.2.9+</td>
+<td>&gt;= 0.14</td>
+</tr>
+<tr>
+<td>7.1</td>
+<td>0.10 - 0.13</td>
+</tr>
+<tr>
+<td>7.0</td>
+<td>&lt; 0.10</td>
+</tr>
+</tbody>
+</table>
+<p class="tip"><br><br>Please note that <a href="https://github.com/infection/infection/pull/809#issuecomment-556984454" target="_blank" rel="noopener">Infection 0.13 isn’t supported anymore</a>. Also note that <a href="https://secure.php.net/supported-versions.php" target="_blank" rel="noopener">PHP 7.0 and 7.1 reached EOL</a>.<br><br></p>
+
 <h2 id="Phar"><a href="#Phar" class="headerlink" title="Phar"></a>Phar</h2><p>Phar distribution is the best and recommended way of installing Infection on your computer.</p>
 <p>Download the latest <code>infection.phar</code> and <code>infection.phar.asc</code>:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/infection/infection/releases/download/0.15.0/infection.phar</span><br><span class="line">wget https://github.com/infection/infection/releases/download/0.15.0/infection.phar.asc</span><br><span class="line"></span><br><span class="line">chmod +x infection.phar</span><br></pre></td></tr></table></figure>
