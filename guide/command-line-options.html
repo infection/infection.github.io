@@ -349,7 +349,7 @@
 <li>If <code>build/coverage</code> path is provided, it should contain <code>phpspec-coverage-xml</code> folder</li>
 </ul>
 <p>Example:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># collect coverage</span></span><br><span class="line">vendor/bin/phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/phpunit.junit.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># use coverage</span></span><br><span class="line">infection.phar --coverage=build/coverage</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># collect coverage</span></span><br><span class="line">vendor/bin/phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/junit.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># use coverage</span></span><br><span class="line">infection.phar --coverage=build/coverage</span><br></pre></td></tr></table></figure>
 <h3 id="only-covered"><a href="#only-covered" class="headerlink" title="--only-covered"></a><code>--only-covered</code></h3><p>Run the mutation testing only for covered by tests files.</p>
 <h3 id="show-mutations-or-s"><a href="#show-mutations-or-s" class="headerlink" title="--show-mutations or -s"></a><code>--show-mutations</code> or <code>-s</code></h3><p>Show colorized diffs of mutated files to the console.</p>
 <blockquote>
