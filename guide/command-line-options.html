@@ -252,6 +252,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2020/03/28/whats-new-in-0.16.0/" class="sidebar-link">What's new in Infection 0.16.0</a>
+        </li>
+    
+        <li>
             <a href="/2019/09/29/whats-new-in-0.15.0/" class="sidebar-link">What's new in Infection 0.15.0</a>
         </li>
     
@@ -321,6 +325,7 @@
 <p>On most platforms where GNU coreutils are available, which includes all variants of Linux, there is <code>nproc</code> command that returns the number of processors available. It can be used as such to let Infection run at the full speed:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># on Linux</span></span><br><span class="line">infection -j$(nproc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># on OSX</span></span><br><span class="line">infection -j$(sysctl -n hw.ncpu)</span><br></pre></td></tr></table></figure>
 <h3 id="test-framework"><a href="#test-framework" class="headerlink" title="--test-framework"></a><code>--test-framework</code></h3><p>This is a name of the Test framework to use. Currently Infection supports <code>PHPUnit</code>, <code>PhpSpec</code> and <code>Codeception</code>.</p>
+<p>If you are using <code>infection/infection</code> Composer package, only <code>PHPUnit</code> is installed by default. Other test framework adapter will be automatically installed on demand.<br><a href="/guide/installation.html#Phar">PHAR distribution</a> is bundled with all available adapters. </p>
 <blockquote>
 <p>Feel free to request a new test framework to be supported out of the box in Github’s issues.</p>
 </blockquote>
@@ -329,7 +334,7 @@
 <p>This will execute the phpunit as:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phpunit [...infection options] --verbose --filter=just/unit/tests</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Please note that if you choose to use <code>--filter</code> and <code>--testsuite</code> for PHPUnit, these options will only be applied to the <em>initial</em> test run. Each mutation has a custom <code>phpunit.xml</code> file generated for it which defines a single testsuite containing the tests which should be executed for that mutation. Applying <code>--filter</code> or <code>--testsuite</code> would not make sense in this context as the tests have already been filtered down. </p>
+<p>Please note that if you choose to use <code>--configuration</code>, <code>--filter</code>, or <code>--testsuite</code> for PHPUnit, these options will only be applied to the <em>initial</em> test run. Each mutation has a custom <code>phpunit.xml</code> file generated for it which defines a single testsuite containing the tests which should be executed for that mutation. Applying <code>--filter</code> or <code>--testsuite</code> would not make sense in this context as the tests have already been filtered down. </p>
 </blockquote>
 <h3 id="coverage"><a href="#coverage" class="headerlink" title="--coverage"></a><code>--coverage</code></h3><p>Path to the existing coverage reports.</p>
 <p>When you use Continuous Integration for your project, probably you are already generating code coverage metrics and run PHPUnit with <code>XDebug</code>/<code>phpdbg</code> enabled. Then, you run Infection for mutation testing, which in its turn, generates Code Coverage again for internal needs. This dramatically increases the build time because running your tests with debugger <em>twice</em> requires too much time.</p>
@@ -350,6 +355,9 @@
 </ul>
 <p>Example:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># collect coverage</span></span><br><span class="line">vendor/bin/phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/junit.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># use coverage</span></span><br><span class="line">infection.phar --coverage=build/coverage</span><br></pre></td></tr></table></figure>
+<h3 id="skip-initial-test-suite"><a href="#skip-initial-test-suite" class="headerlink" title="--skip-initial-test-suite"></a><code>--skip-initial-test-suite</code></h3><p>If you have already run the test suite to ensure it is passing, and you are providing coverage using <code>--coverage</code> then you can use this option to increase performance by not running the entire test suite again.</p>
+<p class="tip">Note that it is extremely important that you ensure the test suite is passing when using this option, otherwise test failures would appear like caught mutations and those mutations may be reported incorrectly.</p>
+
 <h3 id="only-covered"><a href="#only-covered" class="headerlink" title="--only-covered"></a><code>--only-covered</code></h3><p>Run the mutation testing only for covered by tests files.</p>
 <h3 id="show-mutations-or-s"><a href="#show-mutations-or-s" class="headerlink" title="--show-mutations or -s"></a><code>--show-mutations</code> or <code>-s</code></h3><p>Show colorized diffs of mutated files to the console.</p>
 <blockquote>
@@ -366,10 +374,15 @@
 <blockquote>
 <p>See <a href="./mutators.html">here</a> to find all mutator names.</p>
 </blockquote>
-<h3 id="no-progress"><a href="#no-progress" class="headerlink" title="--no-progress"></a><code>--no-progress</code></h3><p>This option disables progress bars output. The main purpose is to use it on Continuous Integration servers to reduce the amount of generated text output, e.g.:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Creating mutated files and processes: 0/45678</span><br><span class="line">Creating mutated files and processes: 1/45678</span><br><span class="line">Creating mutated files and processes: 2/45678</span><br><span class="line">Creating mutated files and processes: 3/45678</span><br><span class="line">...</span><br><span class="line">45k lines of text</span><br><span class="line">...</span><br><span class="line">Creating mutated files and processes: 45678/45678</span><br></pre></td></tr></table></figure>
-<p>Infection automatically enable this mode when either <code>CI</code> or <code>CONTINUOUS_INTEGRATION</code> environment variable are set to <code>&quot;true&quot;</code>.</p>
-<p>For example, there is no need to enable it manually on Travis CI.</p>
+<h3 id="no-progress"><a href="#no-progress" class="headerlink" title="--no-progress"></a><code>--no-progress</code></h3><p>This option has two effects:</p>
+<ul>
+<li>It disables intermediate buffering of mutations used to count them. This causes progress bars to not have a total number of mutations displayed, while also reducing memory usage and speeding up the entire process. It is beneficial during CI, and for larger projects.</li>
+<li>It disables dynamic progress bars output to reduce the amount of generated text output.</li>
+</ul>
+<p>Disabling progress bars removes the following lines from output on Continuous Integration servers:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Processing <span class="built_in">source</span> code files: 0/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 1/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 2/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 3/5678</span><br><span class="line">...</span><br><span class="line">5k lines of text</span><br><span class="line">...</span><br><span class="line">Processing <span class="built_in">source</span> code files: 5678/5678</span><br></pre></td></tr></table></figure>
+<p>Progress bar display will be automatically disabled with or without this option when either <code>CI</code> or <code>CONTINUOUS_INTEGRATION</code> environment variables are set to <code>&quot;true&quot;</code>.</p>
+<p>For example, there is no need to enable this option manually on Travis CI just to hide progress bars.</p>
 <h3 id="formatter"><a href="#formatter" class="headerlink" title="--formatter"></a><code>--formatter</code></h3><p>This is a name of console output formatter. Possible values are: <code>dot</code>, <code>progress</code>. Default is <code>dot</code> formatter.</p>
 <h3 id="log-verbosity"><a href="#log-verbosity" class="headerlink" title="--log-verbosity"></a><code>--log-verbosity</code></h3><p>The verbosity of the log file, <code>all</code> - this mode will add “Killed mutants” into log file and add additional information, <code>default</code> - normal mode will skip “Killed mutants” section in the log file, <code>none</code> - which will disable logging to files.</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --log-verbosity=all</span><br></pre></td></tr></table></figure>
