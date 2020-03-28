@@ -355,7 +355,7 @@
 </ul>
 <p>Example:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># collect coverage</span></span><br><span class="line">vendor/bin/phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/junit.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># use coverage</span></span><br><span class="line">infection.phar --coverage=build/coverage</span><br></pre></td></tr></table></figure>
-<h3 id="skip-initial-test-suite"><a href="#skip-initial-test-suite" class="headerlink" title="--skip-initial-test-suite"></a><code>--skip-initial-test-suite</code></h3><p>If you have already run the test suite to ensure it is passing, and you are providing coverage using <code>--coverage</code> then you can use this option to increase performance by not running the entire test suite again.</p>
+<h3 id="skip-initial-tests"><a href="#skip-initial-tests" class="headerlink" title="--skip-initial-tests"></a><code>--skip-initial-tests</code></h3><p>If you have already run the test suite to ensure it is passing, and you are providing coverage using <code>--coverage</code> then you can use this option to increase performance by not running the entire test suite again.</p>
 <p class="tip">Note that it is extremely important that you ensure the test suite is passing when using this option, otherwise test failures would appear like caught mutations and those mutations may be reported incorrectly.</p>
 
 <h3 id="only-covered"><a href="#only-covered" class="headerlink" title="--only-covered"></a><code>--only-covered</code></h3><p>Run the mutation testing only for covered by tests files.</p>
