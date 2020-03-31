@@ -301,8 +301,8 @@
     
       <h1>Installation</h1>
     
-    <h3 id="Compatibility-Note"><a href="#Compatibility-Note" class="headerlink" title="Compatibility Note"></a>Compatibility Note</h3><p>Infection requires PHP 7.2+, <code>XDebug</code>, <code>phpdbg</code> or <code>pcov</code> enabled.</p>
-<p>You can still use an older Infection version if you’re running an older PHP Version.</p>
+    <h3 id="Compatibility-Note"><a href="#Compatibility-Note" class="headerlink" title="Compatibility Note"></a>Compatibility Note</h3><p>Infection requires a recent version of PHP, and <code>XDebug</code>, <code>phpdbg</code>, or <code>pcov</code> enabled.</p>
+<p>You can still use an older Infection version if you’re using an older PHP version.</p>
 <table>
 <thead>
 <tr>
@@ -312,8 +312,12 @@
 </thead>
 <tbody>
 <tr>
+<td>7.3.12</td>
+<td>&gt;= 0.16</td>
+</tr>
+<tr>
 <td>7.2.9+</td>
-<td>&gt;= 0.14</td>
+<td>0.14-0.15</td>
 </tr>
 <tr>
 <td>7.1</td>
@@ -325,7 +329,7 @@
 </tr>
 </tbody>
 </table>
-<p class="tip">Please note that <a href="https://github.com/infection/infection/pull/809#issuecomment-556984454" target="_blank" rel="noopener">Infection 0.13 isn’t supported anymore</a>. Also note that <a href="https://secure.php.net/supported-versions.php" target="_blank" rel="noopener">PHP 7.0 and 7.1 reached EOL</a>.</p>
+<p class="tip">Please note that <a href="https://github.com/infection/infection/pull/809#issuecomment-556984454" target="_blank" rel="noopener">Infection 0.13 isn’t supported anymore</a>. Also note that <a href="https://secure.php.net/supported-versions.php" target="_blank" rel="noopener">PHP 7.2 has reached EOL</a>.</p>
 
 <h2 id="Phar"><a href="#Phar" class="headerlink" title="Phar"></a>Phar</h2><p>Phar distribution is the best and recommended way of installing Infection on your computer. Unlike <code>infection/infection</code>, it is bundled with all officially supported Test Frameworks: <code>PHPUnit</code>, <code>PhpSpec</code>, <code>Codeception</code>.</p>
 <p>Download the latest <code>infection.phar</code> and <code>infection.phar.asc</code>:</p>
