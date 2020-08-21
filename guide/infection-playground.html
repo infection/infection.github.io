@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head><meta name="generator" content="Hexo 3.9.0">
-        <title>Caveats — Infection PHP</title>
+        <title>Infection Playground — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <meta property="og:type" content="article">
-        <meta property="og:title" content="Caveats — Infection PHP">
+        <meta property="og:title" content="Infection Playground — Infection PHP">
         <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
         <meta property="og:image" content="https://infection.github.io//images/logo.png">
 
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="Caveats — Infection PHP">
+        <meta name="twitter:title" content="Infection Playground — Infection PHP">
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
@@ -213,7 +213,7 @@
         
         
         <li>
-            <a href="/guide/caveats.html" class="sidebar-link current">Caveats</a>
+            <a href="/guide/caveats.html" class="sidebar-link">Caveats</a>
         </li>
     
         
@@ -223,7 +223,7 @@
         
         
         <li>
-            <a href="/guide/infection-playground.html" class="sidebar-link new">Infection Playground</a>
+            <a href="/guide/infection-playground.html" class="sidebar-link current new">Infection Playground</a>
         </li>
     
         
@@ -287,32 +287,36 @@
 </div>
 
 
-<div class="content guide with-sidebar caveats-guide">
+<div class="content guide with-sidebar infection-playground-guide">
     
       
     
     
-      <h1>Caveats</h1>
+      <h1>Infection Playground</h1>
     
-    <h2 id="Mutations-must-occur-when-CodeCoverage-has-already-started"><a href="#Mutations-must-occur-when-CodeCoverage-has-already-started" class="headerlink" title="Mutations must occur when CodeCoverage has already started"></a>Mutations must occur when CodeCoverage has already started</h2><p>It may happen that a mutation that fails a test isn’t reported as covered.<br>This can occur when the code-coverage profiler hasn’t started before the mutations occurs.<br>Take for example:</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SourceClassTest</span> <span class="keyword">extends</span> \<span class="title">PHPUnit</span>\<span class="title">Framework</span>\<span class="title">TestCase</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dataProvider</span> instancesProvider</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testAlwaysTrueFromFactoryMethod</span><span class="params">(SourceClass $class)</span>: <span class="title">void</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">self</span>::assertTrue($class-&gt;getValue());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">instancesProvider</span><span class="params">()</span>: <span class="title">array</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [</span><br><span class="line">            [SourceClass::factoryMethod()],</span><br><span class="line">        ];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SourceClass</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> bool $value;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(bool $value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;value = $value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">factoryMethod</span><span class="params">()</span>: <span class="title">self</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">self</span>(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getValue</span><span class="params">()</span>: <span class="title">bool</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>If the <code>TrueValue</code> <a href="/guide/mutators.html#Boolean-Substitution">Boolean Substitution</a> mutator is active, you<br>would expect the mutation to be correctly covered. But in the provided example the mutation<br>occurs in the <code>@dataProvider</code> which runs before the code-coverage driver gets started.</p>
-<p>Be sure to check your mutated code runs inside the test in this case, so a workaround can be the following:</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SourceClassTest</span> <span class="keyword">extends</span> \<span class="title">PHPUnit</span>\<span class="title">Framework</span>\<span class="title">TestCase</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dataProvider</span> instanceFactoriesProvider</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testAlwaysTrueFromFactoryMethod</span><span class="params">(callable $classFactory)</span>: <span class="title">void</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $class = $classFactory();</span><br><span class="line">        <span class="keyword">self</span>::assertTrue($class-&gt;getValue());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">instanceFactoriesProvider</span><span class="params">()</span>: <span class="title">array</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [</span><br><span class="line">            [<span class="keyword">static</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> SourceClass::factoryMethod();</span><br><span class="line">            &#125;],</span><br><span class="line">        ];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <p><a href="https://infection-php.dev/" target="_blank" rel="noopener">https://infection-php.dev/</a></p>
+<p>This is Mutation Testing with <code>Infection</code> right in your browser!</p>
+<p>You can write the code, write the tests, click <code>Run</code> and see Mutation Testing results.</p>
+<p>Here are several reasons for what Infection Playground can be used for:</p>
+<ul>
+<li>to spread mutation testing across more people</li>
+<li>to make it unbelievable easy to try Mutation Testing in PHP - right in your browser. No projects to create locally, no need to install <code>Composer</code>, <code>Infection</code>, <code>PHPUnit</code> - nothing. Just type a couple of lines of the source code, write a test and click <code>Run</code>.</li>
+<li>to provide people a good tool to report issues for <code>Infection</code>. We hope it will be easier for developers to just create an example on <a href="https://infection-php.dev" target="_blank" rel="noopener">https://infection-php.dev</a> site and post a permanent link to GitHub’s issue rather than creating standalone repository or even worse not giving an example at all</li>
+<li>to show real examples for the documentation, e.g. Mutators. These are for <a href="https://infection-php.dev/r/qxk" target="_blank" rel="noopener">PublicVisibility</a> and <a href="https://infection-php.dev/r/j0l" target="_blank" rel="noopener">ProtectedVisibility</a></li>
+</ul>
+<p>Try it. Share your results with colleagues. Experiment with it!</p>
 
     
       <div class="guide-links">
         
-          <span>← <a href="/guide/how-to.html">How-to Guides</a></span>
+          <span>← <a href="/guide/caveats.html">Caveats</a></span>
         
-        
-          <span style="float:right"><a href="/guide/infection-playground.html">Infection Playground</a> →</span>
         
       </div>
     
     <div class="footer">
       Caught a mistake or want to contribute to the documentation?
-      <a href="https://github.com/infection/site/blob/master/src/guide/caveats.md" target="_blank">
+      <a href="https://github.com/infection/site/blob/master/src/guide/infection-playground.md" target="_blank">
         Edit this page on Github!
       </a>
     </div>
