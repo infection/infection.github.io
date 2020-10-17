@@ -241,6 +241,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2020/10/20/whats-new-in-0.18.0/" class="sidebar-link">What's new in Infection 0.18.0</a>
+        </li>
+    
+        <li>
             <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
         </li>
     
@@ -325,6 +329,23 @@
 <p>Method by pattern: <code>App\Api\Product::pr?duc?List</code></p>
 <p>Line of the code: <code>App\Api\Product::product::33</code></p>
 <p>Internally, all patterns are passed to <a href="https://php.net/manual/en/function.fnmatch.php" target="_blank" rel="noopener"><code>fnmatch()</code> PHP function</a>. Please read its documentation to better understand how it works.</p>
+<h3 id="Do-not-mutate-the-source-code-matched-by-regular-expression"><a href="#Do-not-mutate-the-source-code-matched-by-regular-expression" class="headerlink" title="Do not mutate the source code matched by regular expression"></a>Do not mutate the source code matched by regular expression</h3><p>You may want to exclude mutations to the code that, if mutated, has little-to-no impact, or, alternatively, sometimes isn’t worth testing the result of - for example calls to a logging function. </p>
+<p>If your codebase has lots of logging, this can generate many unwanted mutants and will greatly slow down the mutation test run.</p>
+<p>Consider these examples:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $this-&gt;logger-&gt;error($message, /* context */ ['user' =&gt; $user]);</span></span><br><span class="line"><span class="addition">+ $this-&gt;logger-&gt;error($message, []);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- Assert::numeric($string);</span></span><br></pre></td></tr></table></figure>
+<p>To avoid them, you can ignore mutations by regular expression, matching the source code:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"global-ignoreSourceCodeByRegex"</span>: [</span><br><span class="line">            <span class="string">"\\$this-&gt;logger.*"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Or just per Mutator:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"MethodRemoval"</span>: &#123;</span><br><span class="line">            <span class="attr">"ignoreSourceCodeByRegex"</span>: [</span><br><span class="line">                <span class="string">"Assert::.*"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Exact matching:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"MethodRemoval"</span>: &#123;</span><br><span class="line">            <span class="attr">"ignoreSourceCodeByRegex"</span>: [</span><br><span class="line">                <span class="string">"Assert::numeric\\(\\$string\\);"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Ignore any mutants with particular method name, e.g.:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- public function methodCall() &#123;</span></span><br><span class="line"><span class="addition">+ protected function methodCall() &#123;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $this-&gt;methodCall();</span></span><br></pre></td></tr></table></figure>
+<p>with the following config:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"global-ignoreSourceCodeByRegex"</span>: [</span><br><span class="line">            <span class="string">".*methodCall.*"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p class="tip">Do not add any delimiters (like <code>/</code>) to the regular expression: we are adding and escaping them for you.</p>
 
     
       <div class="guide-links">
