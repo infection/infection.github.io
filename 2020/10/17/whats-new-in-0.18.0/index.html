@@ -120,6 +120,10 @@
         <ul style="padding:0">
         
             <li>
+                <a href="/2020/10/28/whats-new-in-0.19.0/" class="sidebar-link">What's new in Infection 0.19.0</a>
+            </li>
+        
+            <li>
                 <a href="/2020/10/17/whats-new-in-0.18.0/" class="sidebar-link current">What's new in Infection 0.18.0</a>
             </li>
         
@@ -155,10 +159,6 @@
                 <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
             </li>
         
-            <li>
-                <a href="/2018/07/01/whats-new-in-0.9.0/" class="sidebar-link">What's new in Infection 0.9.0</a>
-            </li>
-        
         </ul>
     </div>
 </div>
@@ -191,6 +191,9 @@
 <h3 id="Allow-fractional-values-for-timeout"><a href="#Allow-fractional-values-for-timeout" class="headerlink" title="Allow fractional values for timeout"></a>Allow fractional values for timeout</h3><p>Allows fractional values for timeout. For example: half a second.</p>
 <p><code>infection.json</code>:</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"timeout"</span>: <span class="number">0.5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Partial-PHPUnit-9-3-support"><a href="#Partial-PHPUnit-9-3-support" class="headerlink" title="Partial PHPUnit 9.3 support"></a>Partial PHPUnit 9.3 support</h3><p>Infection is routinely tested with and using the most recent version of PHPUnit. The only caveat is the still missing support <a href="https://github.com/sebastianbergmann/phpunit/blob/a0d6b21c6c8f6564212a1a14292d230ee35eba6d/ChangeLog-9.3.md#configuration-of-code-coverage-and-logging-in-phpunitxml" target="_blank" rel="noopener">for the new schema</a>. Therefore, to use Infection with recent versions of PHPUnit one should avoid upgrading the configurations, and list a path to the old schema in the configuration like so:</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">phpunit</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:noNamespaceSchemaLocation</span>=<span class="string">"vendor/phpunit/phpunit/schema/9.2.xsd"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">...</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Using old schema is enough to get Infection running with PHPUnit 9.3 and 9.4.</p>
 <h2 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h2><h3 id="SharedCaseRemoval-mutator"><a href="#SharedCaseRemoval-mutator" class="headerlink" title="SharedCaseRemoval mutator"></a><code>SharedCaseRemoval</code> mutator</h3><p>Code like this:</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> ($value) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'a'</span>:</span><br><span class="line">    doSomething();</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'b'</span>:</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'c'</span>:</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    doSomethingElse();</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Creates the following mutants:</p>
