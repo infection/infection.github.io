@@ -241,6 +241,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link">What's new in Infection 0.20.0</a>
+        </li>
+    
+        <li>
             <a href="/2020/10/28/whats-new-in-0.19.0/" class="sidebar-link">What's new in Infection 0.19.0</a>
         </li>
     
@@ -356,6 +360,22 @@
 </ul>
 <p>Example:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># collect coverage</span></span><br><span class="line">vendor/bin/phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/junit.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># use coverage</span></span><br><span class="line">infection.phar --coverage=build/coverage</span><br></pre></td></tr></table></figure>
+<h3 id="git-diff-filter"><a href="#git-diff-filter" class="headerlink" title="--git-diff-filter"></a><code>--git-diff-filter</code></h3><p>Allows filtering files to mutate by using <code>git diff</code> with <code>--diff-filter</code> option. Sensible values are: <code>AM</code> - added and modified files. <code>A</code> - only added files.</p>
+<p>Best to be used during pull request builds on CI, e.g. with GitHub Actions, Travis CI and so on.</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --git-diff-filter=A</span><br></pre></td></tr></table></figure>
+<p>This command will mutate only those files, that were added in the Pull Request. The diff is done between the current branch and the base branch.</p>
+<blockquote>
+<p>It’s possible to configure the base branch, see <a href="/guide/command-line-options.html#git-diff-base"><code>--git-diff-base</code></a> option</p>
+</blockquote>
+<h3 id="git-diff-base"><a href="#git-diff-base" class="headerlink" title="--git-diff-base"></a><code>--git-diff-base</code></h3><p>Supposed to be used only with <a href="/guide/command-line-options.html#git-diff-filter"><code>--git-diff-filter</code></a> option. Configures the base branch for <code>git diff</code> command.</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --git-diff-base=origin/<span class="variable">$GITHUB_BASE_REF</span> --git-diff-filter=AM</span><br></pre></td></tr></table></figure>
+<h3 id="logger-github"><a href="#logger-github" class="headerlink" title="--logger-github"></a><code>--logger-github</code></h3><p>Supposed to be used only with GitHub Actions. This logger prints GitHub Annotation warnings for escaped Mutants right in the Pull Request:</p>
+<p><img src="/images/github-logger.png" alt="GitHub Annotation Escaped Mutant"></p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --logger-github --git-diff-filter=A</span><br></pre></td></tr></table></figure>
+<p>Here is <a href="https://github.com/infection/infection/blob/bef65fc22faa200edd367ffe12596905947a2a93/.github/workflows/mt-annotations.yaml#L50-L52" target="_blank" rel="noopener">a real example</a> how Infection uses it itself.</p>
 <h3 id="skip-initial-tests"><a href="#skip-initial-tests" class="headerlink" title="--skip-initial-tests"></a><code>--skip-initial-tests</code></h3><p>If you have already run the test suite to ensure it is passing, and you are providing coverage using <code>--coverage</code> then you can use this option to increase performance by not running the entire test suite again.</p>
 <p class="tip">Note that it is extremely important that you ensure the test suite is passing when using this option, otherwise test failures would appear like caught mutations and those mutations may be reported incorrectly.</p>
 

@@ -241,6 +241,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link">What's new in Infection 0.20.0</a>
+        </li>
+    
+        <li>
             <a href="/2020/10/28/whats-new-in-0.19.0/" class="sidebar-link">What's new in Infection 0.19.0</a>
         </li>
     
@@ -519,6 +523,21 @@
 <td style="text-align:left"><code>$a = &#39;Hello, world!&#39;;</code></td>
 </tr>
 <tr>
+<td style="text-align:left">UnwrapLtrim</td>
+<td style="text-align:left"><code>$a = ltrim(&#39; Hello, world!&#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39; Hello, world!&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapRtrim</td>
+<td style="text-align:left"><code>$a = rtrim(&#39;Hello, world! &#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;Hello, world! &#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapStrIreplace</td>
+<td style="text-align:left"><code>$a = str_ireplace(&#39;Afternoon&#39;, &#39;Evening&#39; ,&#39;Good Afternoon!&#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;Good Afternoon!&#39;;</code></td>
+</tr>
+<tr>
 <td style="text-align:left">UnwrapStrRepeat</td>
 <td style="text-align:left"><code>$a = str_repeat(&#39;A&#39;, 3);</code></td>
 <td style="text-align:left"><code>$a = &#39;A&#39;;</code></td>
@@ -527,6 +546,21 @@
 <td style="text-align:left">UnwrapStrReplace</td>
 <td style="text-align:left"><code>$a = str_replace(&#39;Afternoon&#39;, &#39;Evening&#39; ,&#39;Good Afternoon!&#39;);</code></td>
 <td style="text-align:left"><code>$a = &#39;Good Afternoon!&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapStrRev</td>
+<td style="text-align:left"><code>$a = strrev(&#39;Hello!&#39;);</code></td>
+<td style="text-align:left">`$a = ‘Hello!’;</td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapStrShuffle</td>
+<td style="text-align:left"><code>$a = str_shuffle(&#39;Hello!&#39;);</code></td>
+<td style="text-align:left"><code>$a = &#39;Hello!&#39;;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">UnwrapSubstr</td>
+<td style="text-align:left"><code>$a = substr(&#39;Hello!&#39;, 0, -1);</code></td>
+<td style="text-align:left"><code>$a = &#39;Hello!&#39;;</code></td>
 </tr>
 <tr>
 <td style="text-align:left">UnwrapStrToLower</td>
@@ -827,11 +861,6 @@
 <td style="text-align:center"><code>yield $a =&gt; $b;</code></td>
 <td style="text-align:center"><code>yield $a &gt; $b;</code></td>
 </tr>
-<tr>
-<td style="text-align:center">Coalesce</td>
-<td style="text-align:center"><code>$a ?? $b</code></td>
-<td style="text-align:center"><code>$b</code></td>
-</tr>
 </tbody>
 </table>
 <h4 id="TrueValue"><a href="#TrueValue" class="headerlink" title="TrueValue"></a><code>TrueValue</code></h4><p>Default settings:</p>
@@ -970,6 +999,16 @@
 <td style="text-align:center">Spread</td>
 <td style="text-align:center">[…$collection, 2, 3]</td>
 <td style="text-align:center">[[…$collection][0], 2, 3]</td>
+</tr>
+<tr>
+<td style="text-align:center">Coalesce</td>
+<td style="text-align:center">$foo ?? $bar</td>
+<td style="text-align:center">$bar ?? $foo</td>
+</tr>
+<tr>
+<td style="text-align:center">Ternary</td>
+<td style="text-align:center">isset($b) ? ‘B’ : ‘C’</td>
+<td style="text-align:center">isset($b) ? ‘C’ : ‘B’</td>
 </tr>
 </tbody>
 </table>

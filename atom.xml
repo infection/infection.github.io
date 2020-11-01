@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://infection.github.io/"/>
-  <updated>2020-10-27T23:37:41.282Z</updated>
+  <updated>2020-11-01T08:54:15.479Z</updated>
   <id>https://infection.github.io/</id>
   
   <author>
@@ -14,6 +14,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>What&#39;s new in Infection 0.20.0</title>
+    <link href="https://infection.github.io/2020/11/01/whats-new-in-0.20.0/"/>
+    <id>https://infection.github.io/2020/11/01/whats-new-in-0.20.0/</id>
+    <published>2020-11-01T09:11:25.000Z</published>
+    <updated>2020-11-01T08:54:15.479Z</updated>
+    
+    <content type="html"><![CDATA[<p>Release: <a href="https://github.com/infection/infection/releases/tag/0.20.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.20.0</a></p>
+<h2 id="New-features-and-enhancements"><a href="#New-features-and-enhancements" class="headerlink" title="New features and enhancements"></a>New features and enhancements</h2><h3 id="Github-Annotations-logger-🚀"><a href="#Github-Annotations-logger-🚀" class="headerlink" title="Github Annotations logger 🚀"></a>Github Annotations logger 🚀</h3><p>This logger is supposed to be used only with GitHub Actions. It prints GitHub Annotation warnings for <em>escaped</em> Mutants right in the Pull Request:</p>
+<p><img src="/images/github-logger.png" alt="GitHub Annotation Escaped Mutant"></p>
+<p>Usage (look at <a href="https://github.com/infection/infection/blob/bef65fc22faa200edd367ffe12596905947a2a93/.github/workflows/mt-annotations.yaml#L50-L52" target="_blank" rel="noopener">the real example</a> how Infection uses it itself):</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --logger-github --git-diff-filter=AM</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Read below why you may need to use <code>--git-diff-filter</code> option</p>
+</blockquote>
+<p>It’s also possible to configure this logger in <code>infection.json</code> file. Results will be printed to <code>stdout</code>:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"github"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="git-diff-filter-option"><a href="#git-diff-filter-option" class="headerlink" title="--git-diff-filter option"></a><code>--git-diff-filter</code> option</h3><p>Allows filtering files to mutate by using <code>git diff</code> with <code>--diff-filter</code> option. Sensible values are: <code>AM</code> - added and modified files. <code>A</code> - only added files.</p>
+<p>Best to be used during pull request builds on CI, e.g. with GitHub Actions, Travis CI and so on.</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --git-diff-filter=A</span><br></pre></td></tr></table></figure>
+<p>This command will mutate only those files, that were <em>added</em> in the Pull Request. The diff is done between the current branch and the base branch.</p>
+<blockquote>
+<p>It’s possible to configure the base branch, see <a href="/guide/command-line-options.html#git-diff-base"><code>--git-diff-base</code></a> option</p>
+</blockquote>
+<h3 id="git-diff-base-option"><a href="#git-diff-base-option" class="headerlink" title="--git-diff-base option"></a><code>--git-diff-base</code> option</h3><p>Supposed to be used only with <a href="/guide/command-line-options.html#git-diff-filter"><code>--git-diff-filter</code></a> option. Configures the base branch for <code>git diff</code> command.</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --git-diff-base=origin/<span class="variable">$GITHUB_BASE_REF</span> --git-diff-filter=AM</span><br></pre></td></tr></table></figure>
+<h2 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h2><h3 id="Ternary-mutator"><a href="#Ternary-mutator" class="headerlink" title="Ternary mutator"></a><code>Ternary</code> mutator</h3><p>This mutator mutates a ternary operator:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- isset($b) ? 'B' : 'C';</span></span><br><span class="line"><span class="addition">+ isset($b) ? 'C' : 'B';</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">$foo = 'foo';</span><br><span class="line"><span class="deletion">- $foo ?: 'bar';</span></span><br><span class="line"><span class="addition">+ $foo ? 'bar' : $foo;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Coalesce-mutator"><a href="#Coalesce-mutator" class="headerlink" title="Coalesce mutator"></a><code>Coalesce</code> mutator</h3><p>Mutates:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">$foo = 'foo';</span><br><span class="line">$bar = 'bar';</span><br><span class="line"><span class="deletion">- $foo ?? $bar;</span></span><br><span class="line"><span class="addition">+ $bar ?? $foo;</span></span><br></pre></td></tr></table></figure>
+<p>Or more complex case with nested values:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">$foo = 'foo';</span><br><span class="line">$bar = 'bar';</span><br><span class="line">$baz = 'baz';</span><br><span class="line"></span><br><span class="line"><span class="deletion">- $foo ?? $bar ?? $baz;</span></span><br><span class="line"><span class="addition">+ $foo ?? $baz ?? $bar;</span></span><br><span class="line"></span><br><span class="line"><span class="deletion">- $foo ?? $bar ?? $baz;</span></span><br><span class="line"><span class="addition">+ $bar ?? $foo ?? $baz;</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapSubstr-mutator"><a href="#UnwrapSubstr-mutator" class="headerlink" title="UnwrapSubstr mutator"></a><code>UnwrapSubstr</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = substr('abcde', 0, -1);</span></span><br><span class="line"><span class="addition">+ $x = 'abcde';</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapStrRev-mutator"><a href="#UnwrapStrRev-mutator" class="headerlink" title="UnwrapStrRev mutator"></a><code>UnwrapStrRev</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = strrev('Hello!');</span></span><br><span class="line"><span class="addition">+ $x = 'Hello!';</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapLtrim-mutator"><a href="#UnwrapLtrim-mutator" class="headerlink" title="UnwrapLtrim mutator"></a><code>UnwrapLtrim</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = ltrim(' Hello!');</span></span><br><span class="line"><span class="addition">+ $x = ' Hello!';</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapRtrim-mutator"><a href="#UnwrapRtrim-mutator" class="headerlink" title="UnwrapRtrim mutator"></a><code>UnwrapRtrim</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = rtrim('Hello! ');</span></span><br><span class="line"><span class="addition">+ $x = 'Hello! ';</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapStrIreplace-mutator"><a href="#UnwrapStrIreplace-mutator" class="headerlink" title="UnwrapStrIreplace mutator"></a><code>UnwrapStrIreplace</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = str_ireplace('%body%', 'black', '&lt;body text=%BODY%&gt;');</span></span><br><span class="line"><span class="addition">+ $x = '&lt;body text=%BODY%&gt;';</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapStrShuffle-mutator"><a href="#UnwrapStrShuffle-mutator" class="headerlink" title="UnwrapStrShuffle mutator"></a><code>UnwrapStrShuffle</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = str_shuffle('Hello!');</span></span><br><span class="line"><span class="addition">+ $x = 'Hello!';</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Enjoy!</p>
+<p><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="noopener">Star</a></p>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Release: &lt;a href=&quot;https://github.com/infection/infection/releases/tag/0.20.0&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/infection
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>What&#39;s new in Infection 0.19.0</title>
