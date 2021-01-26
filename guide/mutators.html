@@ -62,6 +62,7 @@
     <li><h4>Help</h4></li>
     <li><ul>
       <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
       <li><a href="https://symfony-devs.slack.com/messages/C78M7A4BY" class="nav-link" target="_blank">Slack #infection </a></li>
       <li><a href="https://gitter.im/infection/Lobby" class="nav-link" target="_blank">Gitter </a></li>
     </ul></li>
@@ -97,6 +98,7 @@
     <li><h4>Help</h4></li>
     <li><ul>
       <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
       <li><a href="https://symfony-devs.slack.com/messages/C78M7A4BY" class="nav-link" target="_blank">Slack #infection </a></li>
       <li><a href="https://gitter.im/infection/Lobby" class="nav-link" target="_blank">Gitter </a></li>
     </ul></li>
@@ -223,7 +225,27 @@
         
         
         <li>
-            <a href="/guide/infection-playground.html" class="sidebar-link new">Infection Playground</a>
+            <a href="/guide/debugging-issues.html" class="sidebar-link new">Debugging Issues</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/infection-playground.html" class="sidebar-link">Infection Playground</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/github-sponsors.html" class="sidebar-link">GitHub Sponsors ♥️</a>
         </li>
     
         
@@ -241,6 +263,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
+        </li>
+    
+        <li>
             <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link">What's new in Infection 0.20.0</a>
         </li>
     
@@ -254,42 +280,6 @@
     
         <li>
             <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
-        </li>
-    
-        <li>
-            <a href="/2020/03/28/whats-new-in-0.16.0/" class="sidebar-link">What's new in Infection 0.16.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/09/29/whats-new-in-0.15.0/" class="sidebar-link">What's new in Infection 0.15.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/09/20/whats-new-in-0.14.0/" class="sidebar-link">What's new in Infection 0.14.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/05/18/whats-new-in-0.13.0/" class="sidebar-link">What's new in Infection 0.13.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/01/24/whats-new-in-0.12.0/" class="sidebar-link">What's new in Infection 0.12.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/11/12/whats-new-in-0.11.0/" class="sidebar-link">What's new in Infection 0.11.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/07/01/whats-new-in-0.9.0/" class="sidebar-link">What's new in Infection 0.9.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
         </li>
     
     
@@ -309,6 +299,9 @@
     <p>Infection supports a set of Mutators which are based on AST and <a href="https://github.com/nikic/PHP-Parser" target="_blank" rel="noopener">PHP-Parser</a> project.</p>
 <blockquote>
 <p><a href="./command-line-options.html#--mutators">Read more</a> about how to execute only particular set of mutators using <code>Name</code> column</p>
+</blockquote>
+<blockquote>
+<p>Run the <code>infection describe</code> command to get information about mutators, right from the command line.</p>
 </blockquote>
 <h3 id="Function-Signature"><a href="#Function-Signature" class="headerlink" title="Function Signature"></a>Function Signature</h3><table>
 <thead>
@@ -1006,9 +999,24 @@
 <td style="text-align:center">$bar ?? $foo</td>
 </tr>
 <tr>
+<td style="text-align:center">Concat</td>
+<td style="text-align:center">$foo . $bar</td>
+<td style="text-align:center">$bar . $foo</td>
+</tr>
+<tr>
 <td style="text-align:center">Ternary</td>
 <td style="text-align:center">isset($b) ? ‘B’ : ‘C’</td>
 <td style="text-align:center">isset($b) ? ‘C’ : ‘B’</td>
+</tr>
+<tr>
+<td style="text-align:center">NullSafeMethodCall</td>
+<td style="text-align:center">$object?-&gt;getObject()</td>
+<td style="text-align:center">$object-&gt;getObject()</td>
+</tr>
+<tr>
+<td style="text-align:center">NullSafePropertyCall</td>
+<td style="text-align:center">$object?-&gt;property</td>
+<td style="text-align:center">$object-&gt;property</td>
 </tr>
 </tbody>
 </table>
@@ -1056,11 +1064,6 @@
 <td style="text-align:center">FalseValue</td>
 <td style="text-align:center">return false;</td>
 <td style="text-align:center">return true;</td>
-</tr>
-<tr>
-<td style="text-align:center">OneZeroInteger</td>
-<td style="text-align:center">return 0;</td>
-<td style="text-align:center">return 1;</td>
 </tr>
 <tr>
 <td style="text-align:center">IntegerNegation</td>
@@ -1134,6 +1137,11 @@
 <td style="text-align:center">new stdClass()</td>
 </tr>
 <tr>
+<td style="text-align:center">ConcatOperatorRemoval</td>
+<td style="text-align:center"><code>&#39;foo&#39; . &#39;bar&#39;</code></td>
+<td style="text-align:center"><code>&#39;bar&#39;</code> and <code>&#39;foo&#39;</code></td>
+</tr>
+<tr>
 <td style="text-align:center">SharedCaseRemoval</td>
 <td style="text-align:center"><code>switch($a) { case &#39;a&#39;: case &#39;b&#39;: break; }</code></td>
 <td style="text-align:center"><code>switch($a) { case &#39;b&#39;: break; }</code> <code>switch($a) { case &#39;a&#39;: break; }</code></td>
@@ -1187,6 +1195,16 @@
 <td style="text-align:center">for ($i=0; $i &lt; 10; $i++);</td>
 <td style="text-align:center">for ($i=0; false; $i++);</td>
 </tr>
+<tr>
+<td style="text-align:center">While_</td>
+<td style="text-align:center">while ($condition);</td>
+<td style="text-align:center">while (false);</td>
+</tr>
+<tr>
+<td style="text-align:center">DoWhile</td>
+<td style="text-align:center">do {} while ($condition);</td>
+<td style="text-align:center">do {} while (false);</td>
+</tr>
 </tbody>
 </table>
 <h3 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h3><table>
@@ -1214,16 +1232,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">OneZeroInteger</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">OneZeroInteger</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-</tr>
 <tr>
 <td style="text-align:center">OneZeroFloat</td>
 <td style="text-align:center">0.0</td>
@@ -1326,6 +1334,21 @@
 <td style="text-align:left">PregMatchMatches</td>
 <td style="text-align:left"><code>preg_match(&#39;/pattern/&#39;, $value, $matches);</code></td>
 <td style="text-align:left"><code>(int) $matches = array();</code></td>
+</tr>
+<tr>
+<td style="text-align:left">PregMatchRemoveCaret</td>
+<td style="text-align:left"><code>preg_match(&#39;/^test/&#39;, $string);</code></td>
+<td style="text-align:left"><code>preg_match(&#39;/test/&#39;, $string);</code></td>
+</tr>
+<tr>
+<td style="text-align:left">PregMatchRemoveDollar</td>
+<td style="text-align:left"><code>preg_match(&#39;/test$/&#39;, $string);</code></td>
+<td style="text-align:left"><code>preg_match(&#39;/test/&#39;, $string);</code></td>
+</tr>
+<tr>
+<td style="text-align:left">PregMatchRemoveFlags</td>
+<td style="text-align:left"><code>preg_match(&#39;/test$/iu&#39;, $string);</code></td>
+<td style="text-align:left"><code>preg_match(&#39;/test$/u&#39;, $string);</code>, <code>preg_match(&#39;/test$/i&#39;, $string);</code></td>
 </tr>
 </tbody>
 </table>

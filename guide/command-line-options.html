@@ -62,6 +62,7 @@
     <li><h4>Help</h4></li>
     <li><ul>
       <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
       <li><a href="https://symfony-devs.slack.com/messages/C78M7A4BY" class="nav-link" target="_blank">Slack #infection </a></li>
       <li><a href="https://gitter.im/infection/Lobby" class="nav-link" target="_blank">Gitter </a></li>
     </ul></li>
@@ -97,6 +98,7 @@
     <li><h4>Help</h4></li>
     <li><ul>
       <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
       <li><a href="https://symfony-devs.slack.com/messages/C78M7A4BY" class="nav-link" target="_blank">Slack #infection </a></li>
       <li><a href="https://gitter.im/infection/Lobby" class="nav-link" target="_blank">Gitter </a></li>
     </ul></li>
@@ -223,7 +225,27 @@
         
         
         <li>
-            <a href="/guide/infection-playground.html" class="sidebar-link new">Infection Playground</a>
+            <a href="/guide/debugging-issues.html" class="sidebar-link new">Debugging Issues</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/infection-playground.html" class="sidebar-link">Infection Playground</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/github-sponsors.html" class="sidebar-link">GitHub Sponsors ♥️</a>
         </li>
     
         
@@ -241,6 +263,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
+        </li>
+    
+        <li>
             <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link">What's new in Infection 0.20.0</a>
         </li>
     
@@ -254,42 +280,6 @@
     
         <li>
             <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
-        </li>
-    
-        <li>
-            <a href="/2020/03/28/whats-new-in-0.16.0/" class="sidebar-link">What's new in Infection 0.16.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/09/29/whats-new-in-0.15.0/" class="sidebar-link">What's new in Infection 0.15.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/09/20/whats-new-in-0.14.0/" class="sidebar-link">What's new in Infection 0.14.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/05/18/whats-new-in-0.13.0/" class="sidebar-link">What's new in Infection 0.13.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/01/24/whats-new-in-0.12.0/" class="sidebar-link">What's new in Infection 0.12.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/11/12/whats-new-in-0.11.0/" class="sidebar-link">What's new in Infection 0.11.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/07/01/whats-new-in-0.9.0/" class="sidebar-link">What's new in Infection 0.9.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
         </li>
     
     
@@ -404,6 +394,10 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Processing <span class="built_in">source</span> code files: 0/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 1/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 2/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 3/5678</span><br><span class="line">...</span><br><span class="line">5k lines of text</span><br><span class="line">...</span><br><span class="line">Processing <span class="built_in">source</span> code files: 5678/5678</span><br></pre></td></tr></table></figure>
 <p>Progress bar display will be automatically disabled with or without this option when either <code>CI</code> or <code>CONTINUOUS_INTEGRATION</code> environment variables are set to <code>&quot;true&quot;</code>.</p>
 <p>For example, there is no need to enable this option manually on Travis CI just to hide progress bars.</p>
+<h3 id="noop"><a href="#noop" class="headerlink" title="--noop"></a><code>--noop</code></h3><p>Use noop mutators that do not change the AST. For debugging purposes.</p>
+<blockquote>
+<p>Read about debugging issues with <code>--noop</code> option <a href="/guide/debugging-issues.html">here</a></p>
+</blockquote>
 <h3 id="force-progress"><a href="#force-progress" class="headerlink" title="--force-progress"></a><code>--force-progress</code></h3><p>Outputs progress bars and mutation count during progress even if a CI is detected.</p>
 <p>This option also reverts optimizations made by <code>--no-progress</code> option, read <a href="/guide/command-line-options.html#no-progress">here</a>. </p>
 <h3 id="formatter"><a href="#formatter" class="headerlink" title="--formatter"></a><code>--formatter</code></h3><p>This is a name of console output formatter. Possible values are: <code>dot</code>, <code>progress</code>. Default is <code>dot</code> formatter.</p>

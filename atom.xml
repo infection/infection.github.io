@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://infection.github.io/"/>
-  <updated>2020-11-01T08:54:15.479Z</updated>
+  <updated>2021-01-26T22:24:11.448Z</updated>
   <id>https://infection.github.io/</id>
   
   <author>
@@ -14,6 +14,85 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>What&#39;s new in Infection 0.21.0</title>
+    <link href="https://infection.github.io/2021/01/27/whats-new-in-0.21.0/"/>
+    <id>https://infection.github.io/2021/01/27/whats-new-in-0.21.0/</id>
+    <published>2021-01-27T07:11:19.000Z</published>
+    <updated>2021-01-26T22:24:11.448Z</updated>
+    
+    <content type="html"><![CDATA[<p>Release: <a href="https://github.com/infection/infection/releases/tag/0.21.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.21.0</a></p>
+<h2 id="BC-Breaks"><a href="#BC-Breaks" class="headerlink" title="BC Breaks"></a>BC Breaks</h2><ul>
+<li>Removed <code>OneZeroInteger</code> mutator in favor of <code>IncrementInteger</code>/<code>DecrementInteger</code> mutators</li>
+<li>Renamed <code>@zero_iteration</code> profile to the <code>@loop</code></li>
+</ul>
+<h2 id="GitHub-Sponsors-♥️"><a href="#GitHub-Sponsors-♥️" class="headerlink" title="GitHub Sponsors ♥️"></a>GitHub Sponsors ♥️</h2><p>Finally, we’ve added an ability to support us on GitHub Sponsors.</p>
+<p>We help thousands of projects and teams to write more reliable software by improving their test suites. If you like Infection, consider supporting us on GitHub Sponsors: <a href="https://github.com/sponsors/infection" target="_blank" rel="noopener">https://github.com/sponsors/infection</a></p>
+<p>Thanks to <a href="/guide/github-sponsors.html#Our-awesome-Sponsors">all of you</a> who are already sponsoring us!</p>
+<h2 id="New-features-and-enhancements"><a href="#New-features-and-enhancements" class="headerlink" title="New features and enhancements"></a>New features and enhancements</h2><h3 id="infection-ignore-all-annotation"><a href="#infection-ignore-all-annotation" class="headerlink" title="@infection-ignore-all annotation"></a><code>@infection-ignore-all</code> annotation</h3><p>Give this example Infection won’t mutate or even look at anything inside this function:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** <span class="doctag">@infection</span>-ignore-all */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">doSomethingNastyButCostlyToRefactor</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Likewise, given this annotation Infection won’t consider anything in this loop:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** <span class="doctag">@infection</span>-ignore-all */</span></span><br><span class="line"><span class="keyword">foreach</span> ($foo <span class="keyword">as</span> $bar) &#123;</span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This can be useful when you want to disable all the mutators for a particular piece of the code.</p>
+<blockquote>
+<p>There are many other ways of disabling mutators &amp; profiles: see <a href="/guide/how-to.html#How-to-disable-Mutators-and-profiles">here</a></p>
+</blockquote>
+<h3 id="New-infection-desribe-command"><a href="#New-infection-desribe-command" class="headerlink" title="New infection desribe command"></a>New <code>infection desribe</code> command</h3><p>Run the <code>infection describe</code> command to get information about mutators, right from the command line.</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">infection describe Plus</span><br><span class="line"></span><br><span class="line">Mutator Category: orthogonalReplacement</span><br><span class="line"></span><br><span class="line">Description:</span><br><span class="line">Replaces an addition operator (`+`) with a subtraction operator (`-`).</span><br><span class="line"></span><br><span class="line">For example:</span><br><span class="line"></span><br><span class="line"><span class="deletion">- $a = $b + $c;</span></span><br><span class="line"><span class="addition">+ $a = $b - $c;</span></span><br></pre></td></tr></table></figure>
+<p>For some mutators, there will be pieces of advice on how to kill Mutants. Feel free to share your cases and contribute to this doc.</p>
+<blockquote>
+<p>See the full list of available mutators <a href="/guide/mutators.html">here</a></p>
+</blockquote>
+<h3 id="noop-option-for-Noop-mutators"><a href="#noop-option-for-Noop-mutators" class="headerlink" title="--noop option for Noop mutators"></a><code>--noop</code> option for Noop mutators</h3><p>There can be a situation when Infection kills the Mutant, but if you do the same changes in the source code manually, tests pass.</p>
+<p>Infection runs the tests <strong>in a random order</strong>, and if the project’s tests suite is not ready for it, tests can fail because of reordering. Make sure to always run tests randomly:</p>
+<figure class="highlight xml"><figcaption><span>phpunit.xml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">phpunit</span> <span class="attr">executionOrder</span>=<span class="string">"random"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  ...  --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">phpunit</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Another possible reason is that tests are not ready to be executed in parallel, when you use Infection with a <code>--threads=X</code> parameter.</p>
+<p>Examples:</p>
+<ul>
+<li>tests read and write to the same database</li>
+<li>tests read and write to the same filesystem</li>
+</ul>
+<p>in both cases, one test can override the data written by another test so that one of them fails.</p>
+<p>In order to debug such issues, there is a special <code>--noop</code> option for it. When it’s used, all mutators leave the code untouched, but Infection still runs the tests in order to kill such Mutants.</p>
+<p>If everything works as expected, every Mutant should be escaped. For every mutation (which in fact is not a mutation at all) tests should pass, because the source code is not changed.</p>
+<p>This is an example of how the output can look like:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bin/infection --noop</span><br><span class="line"></span><br><span class="line">Processing <span class="built_in">source</span> code files: 407/407</span><br><span class="line">.: killed, M: escaped, U: uncovered, E: fatal error, T: timed out, S: skipped</span><br><span class="line"></span><br><span class="line">UMMMMMMMMMM                                          (11 / 11)</span><br><span class="line"></span><br><span class="line">11 mutations were generated:</span><br><span class="line">       0 mutants were killed</span><br><span class="line">       1 mutants were not covered by tests</span><br><span class="line">      10 covered mutants were not detected</span><br><span class="line">       0 errors were encountered</span><br><span class="line">       0 time outs were encountered</span><br><span class="line">       0 mutants required more time than configured</span><br><span class="line"></span><br><span class="line">Metrics:</span><br><span class="line">         Mutation Score Indicator (MSI): 0%</span><br><span class="line">         Mutation Code Coverage: 90%</span><br><span class="line">         Covered Code MSI: 0%</span><br></pre></td></tr></table></figure>
+<p>so, Mutants are either not covered by tests or escaped. It means tests are green for each noop mutator that just don’t change the code.</p>
+<p>If, for some reason, some Mutants are killed with <code>--noop</code>, then there is an issue. To further debug the reason, <code>--log-verbosity=all</code> option can be used to analyze <code>infection.log</code> file. Don’t forget to enable <a href="/guide/usage.html#Configuration-settings"><code>text</code> logger</a> in <code>infection.json</code> configuration file:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"text"</span>: <span class="string">"infection.log"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In this log file, you can see tests output for every Mutant, with the information about why tests fail.</p>
+<h2 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h2><h3 id="PregMatchRemoveFlags-mutator"><a href="#PregMatchRemoveFlags-mutator" class="headerlink" title="PregMatchRemoveFlags mutator"></a><code>PregMatchRemoveFlags</code> mutator</h3><p>This mutator removes all flags used in a regular expression in <code>preg_match()</code> function, one by one.</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- preg_match('/^test$/igu', $string);</span></span><br><span class="line"></span><br><span class="line"># Mutation 1</span><br><span class="line"><span class="addition">+ preg_match('/^test$/gu', $string);</span></span><br><span class="line"># Mutation 2</span><br><span class="line"><span class="addition">+ preg_match('/^test$/iu', $string);</span></span><br><span class="line"># Mutation 3</span><br><span class="line"><span class="addition">+ preg_match('/^test$/ig', $string);</span></span><br></pre></td></tr></table></figure>
+<h3 id="PregMatchRemoveCaret-mutator"><a href="#PregMatchRemoveCaret-mutator" class="headerlink" title="PregMatchRemoveCaret mutator"></a><code>PregMatchRemoveCaret</code> mutator</h3><p>Removes <code>^</code> symbol from a regular expression:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- preg_match("/^test$/", $string));</span></span><br><span class="line"><span class="addition">+ preg_match("/test$/", $string));</span></span><br></pre></td></tr></table></figure>
+<h3 id="PregMatchRemoveDollar-mutator"><a href="#PregMatchRemoveDollar-mutator" class="headerlink" title="PregMatchRemoveDollar mutator"></a><code>PregMatchRemoveDollar</code> mutator</h3><p>Removes <code>$</code> symbol from a regular expression:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- preg_match("/^test$/", $string));</span></span><br><span class="line"><span class="addition">+ preg_match("/^test/", $string));</span></span><br></pre></td></tr></table></figure>
+<p>There will be much more mutators for a regular expression. Our core team member <strong>@BackAndTea</strong> is working on <a href="https://github.com/BackEndTea/Regexer" target="_blank" rel="noopener">Regexer</a> - parser for building AST for regexes.<br>This will allow working with them in a much easier way and do more complex mutations.</p>
+<h3 id="PHP-8-NullSafe-mutators"><a href="#PHP-8-NullSafe-mutators" class="headerlink" title="PHP 8 NullSafe mutators"></a>PHP 8 <code>NullSafe</code> mutators</h3><h4 id="NullSafeMethodCall-mutator"><a href="#NullSafeMethodCall-mutator" class="headerlink" title="NullSafeMethodCall mutator"></a><code>NullSafeMethodCall</code> mutator</h4><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $object-&gt;getObject()?-&gt;getName();</span></span><br><span class="line"><span class="addition">+ $object-&gt;getObject()-&gt;getName();</span></span><br></pre></td></tr></table></figure>
+<h4 id="NullSafePropertyCall-mutator"><a href="#NullSafePropertyCall-mutator" class="headerlink" title="NullSafePropertyCall mutator"></a><code>NullSafePropertyCall</code> mutator</h4><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $object-&gt;property?-&gt;name;</span></span><br><span class="line"><span class="addition">+ $object-&gt;property-&gt;name;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Concat-mutator"><a href="#Concat-mutator" class="headerlink" title="Concat mutator"></a><code>Concat</code> mutator</h3><p>Swaps different sides of <code>concatenation</code> operator:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $result = $foo . $bar;</span></span><br><span class="line"><span class="addition">+ $result = $bar . $foo;</span></span><br></pre></td></tr></table></figure>
+<h3 id="ConcatOperandRemoval-mutator"><a href="#ConcatOperandRemoval-mutator" class="headerlink" title="ConcatOperandRemoval mutator"></a><code>ConcatOperandRemoval</code> mutator</h3><p>Swaps different sides of <code>concatenation</code> operator:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $result = $foo . $bar;</span></span><br><span class="line"># Mutation 1</span><br><span class="line"><span class="addition">+ $result = $bar;</span></span><br><span class="line"># Mutation 2</span><br><span class="line"><span class="addition">+ $result = $foo;</span></span><br></pre></td></tr></table></figure>
+<h3 id="While-mutator"><a href="#While-mutator" class="headerlink" title="While mutator"></a><code>While</code> mutator</h3><p>This mutator turns while into 0 iteration cycle:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">$condition = true;</span><br><span class="line"><span class="deletion">- while ($condition) &#123;</span></span><br><span class="line"><span class="addition">+ while (false) &#123;</span></span><br></pre></td></tr></table></figure>
+<h3 id="DoWhile-mutator"><a href="#DoWhile-mutator" class="headerlink" title="DoWhile mutator"></a><code>DoWhile</code> mutator</h3><p>This mutator turns do/while into 1 iteration cycle:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">do &#123;</span><br><span class="line">    $condition = true;</span><br><span class="line"><span class="deletion">- &#125; while ($condition);</span></span><br><span class="line"><span class="addition">+ &#125; while (false);</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Enjoy!</p>
+<p><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="noopener">Star</a></p>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Release: &lt;a href=&quot;https://github.com/infection/infection/releases/tag/0.21.0&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/infection
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>What&#39;s new in Infection 0.20.0</title>

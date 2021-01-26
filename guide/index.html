@@ -62,6 +62,7 @@
     <li><h4>Help</h4></li>
     <li><ul>
       <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
       <li><a href="https://symfony-devs.slack.com/messages/C78M7A4BY" class="nav-link" target="_blank">Slack #infection </a></li>
       <li><a href="https://gitter.im/infection/Lobby" class="nav-link" target="_blank">Gitter </a></li>
     </ul></li>
@@ -97,6 +98,7 @@
     <li><h4>Help</h4></li>
     <li><ul>
       <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
       <li><a href="https://symfony-devs.slack.com/messages/C78M7A4BY" class="nav-link" target="_blank">Slack #infection </a></li>
       <li><a href="https://gitter.im/infection/Lobby" class="nav-link" target="_blank">Gitter </a></li>
     </ul></li>
@@ -223,7 +225,27 @@
         
         
         <li>
-            <a href="/guide/infection-playground.html" class="sidebar-link new">Infection Playground</a>
+            <a href="/guide/debugging-issues.html" class="sidebar-link new">Debugging Issues</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/infection-playground.html" class="sidebar-link">Infection Playground</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/github-sponsors.html" class="sidebar-link">GitHub Sponsors ♥️</a>
         </li>
     
         
@@ -241,6 +263,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
+        </li>
+    
+        <li>
             <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link">What's new in Infection 0.20.0</a>
         </li>
     
@@ -254,42 +280,6 @@
     
         <li>
             <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
-        </li>
-    
-        <li>
-            <a href="/2020/03/28/whats-new-in-0.16.0/" class="sidebar-link">What's new in Infection 0.16.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/09/29/whats-new-in-0.15.0/" class="sidebar-link">What's new in Infection 0.15.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/09/20/whats-new-in-0.14.0/" class="sidebar-link">What's new in Infection 0.14.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/05/18/whats-new-in-0.13.0/" class="sidebar-link">What's new in Infection 0.13.0</a>
-        </li>
-    
-        <li>
-            <a href="/2019/01/24/whats-new-in-0.12.0/" class="sidebar-link">What's new in Infection 0.12.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/11/12/whats-new-in-0.11.0/" class="sidebar-link">What's new in Infection 0.11.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/08/11/whats-new-in-0.10.0/" class="sidebar-link">What's new in Infection 0.10.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/07/01/whats-new-in-0.9.0/" class="sidebar-link">What's new in Infection 0.9.0</a>
-        </li>
-    
-        <li>
-            <a href="/2018/02/28/whats-new-in-0-8-0/" class="sidebar-link">What's new in Infection 0.8.0</a>
         </li>
     
     
@@ -338,7 +328,7 @@
 <p>and so on.</p>
 <h2 id="Metrics-Mutation-Score-Indicator-MSI"><a href="#Metrics-Mutation-Score-Indicator-MSI" class="headerlink" title="Metrics. Mutation Score Indicator (MSI)"></a>Metrics. Mutation Score Indicator (MSI)</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Metrics:</span><br><span class="line">    Mutation Score Indicator (MSI): 47%</span><br><span class="line">    Mutation Code Coverage: 67%</span><br><span class="line">    Covered Code MSI: 70%</span><br></pre></td></tr></table></figure>
 <p>This example results reported a number of metric scores:</p>
-<h3 id="Mutation-Score-Indicator-MSI"><a href="#Mutation-Score-Indicator-MSI" class="headerlink" title="Mutation Score Indicator (MSI)"></a>Mutation Score Indicator (MSI)</h3><p>MSI is 47%. This means that 47% of all generated mutations were detected (i.e. kills, timeouts or fatal errors). The MSI is the primary Mutation Testing metric. Given the code coverage of 65%, there is a 18% difference so Code Coverage was a terrible quality measurement in this example.</p>
+<h3 id="Mutation-Score-Indicator-MSI"><a href="#Mutation-Score-Indicator-MSI" class="headerlink" title="Mutation Score Indicator (MSI)"></a>Mutation Score Indicator (MSI)</h3><p>MSI is 47%. This means that 47% of all generated mutations were detected (i.e. kills, timeouts or fatal errors). The MSI is the primary Mutation Testing metric. Given the code coverage of 67%, there is a 20% difference so Code Coverage was a terrible quality measurement in this example.</p>
 <p>Calculation formula:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TotalDefeatedMutants = KilledCount + TimedOutCount + ErrorCount;</span><br><span class="line"></span><br><span class="line">MSI = (TotalDefeatedMutants / TotalMutantsCount) * 100;</span><br></pre></td></tr></table></figure>
 <h3 id="Mutation-Code-Coverage"><a href="#Mutation-Code-Coverage" class="headerlink" title="Mutation Code Coverage"></a>Mutation Code Coverage</h3><p>MCC is 67%. On average it should be within the same ballpark as your normal code coverage.</p>
