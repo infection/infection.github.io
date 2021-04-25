@@ -63,7 +63,7 @@
     <li><ul>
       <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
       <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
-      <li><a href="https://symfony-devs.slack.com/messages/C78M7A4BY" class="nav-link" target="_blank">Slack #infection </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
       <li><a href="https://gitter.im/infection/Lobby" class="nav-link" target="_blank">Gitter </a></li>
     </ul></li>
     <li><h4>Resource Lists</h4></li>
@@ -99,7 +99,7 @@
     <li><ul>
       <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
       <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
-      <li><a href="https://symfony-devs.slack.com/messages/C78M7A4BY" class="nav-link" target="_blank">Slack #infection </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
       <li><a href="https://gitter.im/infection/Lobby" class="nav-link" target="_blank">Gitter </a></li>
     </ul></li>
     <li><h4>Resource Lists</h4></li>
@@ -306,6 +306,15 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=50 --branch=feature/branch</span><br></pre></td></tr></table></figure>
 <p>That’s why we need to fetch <code>$TRAVIS_BRANCH</code> as well to make a <code>git diff</code> possible. Otherwise, you will get an error:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fatal: ambiguous argument <span class="string">'origin/master'</span>: unknown revision or path not <span class="keyword">in</span> the working tree.</span><br></pre></td></tr></table></figure>
+<h2 id="How-to-run-Infection-for-functional-tests"><a href="#How-to-run-Infection-for-functional-tests" class="headerlink" title="How to run Infection for functional tests"></a>How to run Infection for functional tests</h2><p>Imagine you have functional tests that do real SQL queries. Running such tests in parallel impossible without additional work, because 2 different concurrent processes will write to the same tables and conflict with each other.</p>
+<p>To fix this issue, Infection provides <code>TEST_TOKEN=&lt;int&gt;</code> environment variable for each process that can be used to set up different connections to the databases.</p>
+<p>If you have 3 parallel processes, they will use <code>db_1</code>, <code>db_2</code>, <code>db_3</code> correspondingly.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --threads=3</span><br></pre></td></tr></table></figure>
+<p>An example of how it can be done for Symfony project with Doctrine:</p>
+<figure class="highlight yaml"><figcaption><span>config/packages/test/doctrine.yaml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">parameters:</span></span><br><span class="line"><span class="attr">    test_token:</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="attr">doctrine:</span></span><br><span class="line"><span class="attr">    dbal:</span></span><br><span class="line"><span class="attr">        dbname:</span> <span class="string">'db_%env(default:test_token:TEST_TOKEN)%'</span></span><br></pre></td></tr></table></figure>
+<p>Or as a plain PHP code:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$dbName = sprintf(<span class="string">'db_%s'</span>, getenv(<span class="string">'TEST_TOKEN'</span>));</span><br></pre></td></tr></table></figure>
+<p>For this example to work, you will need to set up 3 database schemas.</p>
 <h2 id="How-to-disable-Mutators-and-profiles"><a href="#How-to-disable-Mutators-and-profiles" class="headerlink" title="How to disable Mutators and profiles"></a>How to disable Mutators and profiles</h2><h3 id="Disable-Mutator"><a href="#Disable-Mutator" class="headerlink" title="Disable Mutator"></a>Disable Mutator</h3><p>Mutators can be disabled in a config file - <code>infection.json.</code>. Let’s say you don’t want to mutate <code>+</code> to <code>-</code>. In order to disable this Mutator, the following config can be used: </p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"@default"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"Plus"</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>

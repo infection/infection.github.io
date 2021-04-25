@@ -63,7 +63,7 @@
     <li><ul>
       <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
       <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
-      <li><a href="https://symfony-devs.slack.com/messages/C78M7A4BY" class="nav-link" target="_blank">Slack #infection </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
       <li><a href="https://gitter.im/infection/Lobby" class="nav-link" target="_blank">Gitter </a></li>
     </ul></li>
     <li><h4>Resource Lists</h4></li>
@@ -99,7 +99,7 @@
     <li><ul>
       <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
       <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
-      <li><a href="https://symfony-devs.slack.com/messages/C78M7A4BY" class="nav-link" target="_blank">Slack #infection </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
       <li><a href="https://gitter.im/infection/Lobby" class="nav-link" target="_blank">Gitter </a></li>
     </ul></li>
     <li><h4>Resource Lists</h4></li>
@@ -358,6 +358,11 @@
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@codeCoverageIgnore</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Calculator</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(float $a, float $b)</span>: <span class="title">float</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> $a + $b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>In this example, method <code>generate()</code> will be skipped from mutation logic, but <code>getDependencies()</code> will be mutated as usual method.</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductFixture</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@codeCoverageIgnore</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">generate</span><span class="params">()</span>: <span class="title">void</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// generate logic</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getDependencies</span><span class="params">()</span>: <span class="title">array</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [CategoryFixture::class];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Exposed-environment-variables"><a href="#Exposed-environment-variables" class="headerlink" title="Exposed environment variables"></a>Exposed environment variables</h2><p>Infection exposes a couple of environment variables:</p>
+<ul>
+<li><code>INFECTION=1</code> this can be used in test environment to check whether the tests are executed from Infection or not.</li>
+<li><code>TEST_TOKEN=&lt;int&gt;</code> for each process that Infection creates for running tests for particular Mutant, it adds <code>TEST_TOKEN=&lt;int&gt;</code> environment variable to be used for setting up connections to different databases. Read more <a href="/guide/how-to.html#How-to-run-Infection-for-functional-tests">here</a>.</li>
+</ul>
 
     
       <div class="guide-links">

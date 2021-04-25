@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://infection.github.io/"/>
-  <updated>2021-01-26T22:24:11.448Z</updated>
+  <updated>2021-04-25T07:43:35.131Z</updated>
   <id>https://infection.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://infection.github.io/2021/01/27/whats-new-in-0.21.0/"/>
     <id>https://infection.github.io/2021/01/27/whats-new-in-0.21.0/</id>
     <published>2021-01-27T07:11:19.000Z</published>
-    <updated>2021-01-26T22:24:11.448Z</updated>
+    <updated>2021-04-25T07:43:35.131Z</updated>
     
     <content type="html"><![CDATA[<p>Release: <a href="https://github.com/infection/infection/releases/tag/0.21.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.21.0</a></p>
 <h2 id="BC-Breaks"><a href="#BC-Breaks" class="headerlink" title="BC Breaks"></a>BC Breaks</h2><ul>
@@ -38,7 +38,7 @@
 <blockquote>
 <p>There are many other ways of disabling mutators &amp; profiles: see <a href="/guide/how-to.html#How-to-disable-Mutators-and-profiles">here</a></p>
 </blockquote>
-<h3 id="New-infection-desribe-command"><a href="#New-infection-desribe-command" class="headerlink" title="New infection desribe command"></a>New <code>infection desribe</code> command</h3><p>Run the <code>infection describe</code> command to get information about mutators, right from the command line.</p>
+<h3 id="New-infection-describe-command"><a href="#New-infection-describe-command" class="headerlink" title="New infection describe command"></a>New <code>infection describe</code> command</h3><p>Run the <code>infection describe</code> command to get information about mutators, right from the command line.</p>
 <figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">infection describe Plus</span><br><span class="line"></span><br><span class="line">Mutator Category: orthogonalReplacement</span><br><span class="line"></span><br><span class="line">Description:</span><br><span class="line">Replaces an addition operator (`+`) with a subtraction operator (`-`).</span><br><span class="line"></span><br><span class="line">For example:</span><br><span class="line"></span><br><span class="line"><span class="deletion">- $a = $b + $c;</span></span><br><span class="line"><span class="addition">+ $a = $b - $c;</span></span><br></pre></td></tr></table></figure>
 <p>For some mutators, there will be pieces of advice on how to kill Mutants. Feel free to share your cases and contribute to this doc.</p>
 <blockquote>
