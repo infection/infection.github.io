@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head><meta name="generator" content="Hexo 3.9.0">
-        <title>What's new in Infection 0.19.0 — Infection PHP</title>
+        <title>Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <meta property="og:type" content="article">
-        <meta property="og:title" content="What's new in Infection 0.19.0 — Infection PHP">
+        <meta property="og:title" content="Infection PHP">
         <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
         <meta property="og:image" content="https://infection.github.io//images/logo.png">
 
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="What's new in Infection 0.19.0 — Infection PHP">
+        <meta name="twitter:title" content="Infection PHP">
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
@@ -37,7 +37,7 @@
 
         <!-- this needs to be loaded before guide's inline scripts -->
         <script src="/js/vue.js"></script>
-        <script>window.PAGE_TYPE = "{{type}}"</script>
+        <script>window.PAGE_TYPE = ""</script>
     </head>
     <body class="docs">        <div id="mobile-bar">
             <a class="menu-button"></a>
@@ -82,11 +82,11 @@
         
             <div id="main" class="fix-sidebar">
                 
-                    <div class="sidebar blog">
-    <ul class="main-menu">
-        <li>
+                    <div class="sidebar">
+  <ul class="main-menu">
+    <li>
   <form id="search-form">
-    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+    <input type="text" id="search-query-sidebar" class="search-query st-default-search-input">
   </form>
 </li>
 <li><a href="/guide/" class="nav-link">Guide</a></li>
@@ -111,74 +111,66 @@
 
 
 
-    </ul>
-    <div class="list">
-        <h2>
-            Recent Posts
-            <a href="/atom.xml" target="_blank" style="vertical-align: middle; margin-left: 5px">
-                <img src="/images/feed.png" style="width:15px;height:15px">
-            </a>
-        </h2>
-        <ul style="padding:0">
-        
-            <li>
-                <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
-            </li>
-        
-            <li>
-                <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
-            </li>
-        
-            <li>
-                <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link">What's new in Infection 0.20.0</a>
-            </li>
-        
-            <li>
-                <a href="/2020/10/28/whats-new-in-0.19.0/" class="sidebar-link current">What's new in Infection 0.19.0</a>
-            </li>
-        
-            <li>
-                <a href="/2020/10/17/whats-new-in-0.18.0/" class="sidebar-link">What's new in Infection 0.18.0</a>
-            </li>
-        
-            <li>
-                <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
-            </li>
-        
-            <li>
-                <a href="/2020/03/28/whats-new-in-0.16.0/" class="sidebar-link">What's new in Infection 0.16.0</a>
-            </li>
-        
-            <li>
-                <a href="/2019/09/29/whats-new-in-0.15.0/" class="sidebar-link">What's new in Infection 0.15.0</a>
-            </li>
-        
-            <li>
-                <a href="/2019/09/20/whats-new-in-0.14.0/" class="sidebar-link">What's new in Infection 0.14.0</a>
-            </li>
-        
-            <li>
-                <a href="/2019/05/18/whats-new-in-0.13.0/" class="sidebar-link">What's new in Infection 0.13.0</a>
-            </li>
-        
-        </ul>
-    </div>
+  </ul>
 </div>
-<div class="content with-sidebar blog post">
-    <h1>What's new in Infection 0.19.0</h1>
-    <h4>Oct 28, 2020</h4>
-    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.19.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.19.0</a></p>
-<h2 id="New-features-and-enhancements"><a href="#New-features-and-enhancements" class="headerlink" title="New features and enhancements"></a>New features and enhancements</h2><h3 id="PHP-versions-support"><a href="#PHP-versions-support" class="headerlink" title="PHP versions support"></a>PHP versions support</h3><p>Infection now requires PHP 7.4+ and works on PHP 8.0 branch 🎉.</p>
-<h3 id="Compatibility-with-PHPUnit-9-3"><a href="#Compatibility-with-PHPUnit-9-3" class="headerlink" title="Compatibility with PHPUnit 9.3+"></a>Compatibility with PHPUnit 9.3+</h3><p><a href="https://github.com/sebastianbergmann/phpunit/blob/a0d6b21c6c8f6564212a1a14292d230ee35eba6d/ChangeLog-9.3.md#configuration-of-code-coverage-and-logging-in-phpunitxml" target="_blank" rel="noopener">There were significant changes in PHPUnit 9.3</a> regarding XML configuration file which caused issue for Infection.</p>
-<p>Now, Infection should be compatible with any PHPUnit version, correctly working with the old and new <code>phpunit.xml</code> schemas.</p>
-<h2 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h2><h3 id="YieldValue-mutator"><a href="#YieldValue-mutator" class="headerlink" title="YieldValue mutator"></a><code>YieldValue</code> mutator</h3><p>Removes a key and leaves only a value of <code>yield</code> statement:</p>
-<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- yield $a =&gt; $b;</span></span><br><span class="line"><span class="addition">+ yield $b;</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>Enjoy!</p>
-<p><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="noopener">Star</a></p>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
 
+<div id="hero">
+  <div class="inner">
+    <div class="left">
+      <img class="hero-logo" src="/images/logo.png">
+    </div><div class="right">
+      <h2 class="vue">Infection</h2>
+      <h1>
+        PHP Mutation<br> Testing Framework
+      </h1>
+      <p>
+        <a class="button" href="/guide/">GET STARTED</a>
+        <a class="button white" href="https://github.com/infection/infection" target="_blank">GITHUB</a>
+      </p>
+    </div>
+  </div>
 </div>
+
+<!-- div id="highlights">
+  <div class="inner">
+    <div class="point">
+      <h2>Approachable</h2>
+      <p>Already know HTML, CSS and JavaScript? Read the guide and start building things in no time!</p>
+    </div>
+
+    <div class="point">
+      <h2>Versatile</h2>
+      <p>Simple, minimal core with an incrementally adoptable stack that can handle apps of any scale.</p>
+    </div>
+
+    <div class="point">
+      <h2>Performant</h2>
+      <p>
+        19kb min+gzip Runtime<br>
+        Blazing Fast Virtual DOM<br>
+        Minimal Optimization Efforts
+      </p>
+    </div>
+  </div>
+</div -->
+
+<div id="footer">
+  <p>Released under the <a href="https://opensource.org/licenses/BSD-3-Clause" target="_blank">BSD-3-Clause License</a><br>
+  Copyright &copy; 2017-2021 Maks Rafalko</p>
+</div>
+
+<script>
+var topScrolled = false
+window.addEventListener('scroll', function () {
+  if (window.pageYOffset > 165 && !topScrolled) {
+    topScrolled = true
+    document.getElementById('mobile-bar').classList.remove('top')
+  } else if (window.pageYOffset <= 165 && topScrolled) {
+    topScrolled = false
+    document.getElementById('mobile-bar').classList.add('top')
+  }
+})
+</script>
 
                 
             </div>

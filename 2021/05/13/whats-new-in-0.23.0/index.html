@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head><meta name="generator" content="Hexo 3.9.0">
-        <title>What's new in Infection 0.8.0 — Infection PHP</title>
+        <title>What's new in Infection 0.23.0 — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <meta property="og:type" content="article">
-        <meta property="og:title" content="What's new in Infection 0.8.0 — Infection PHP">
+        <meta property="og:title" content="What's new in Infection 0.23.0 — Infection PHP">
         <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
         <meta property="og:image" content="https://infection.github.io//images/logo.png">
 
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="What's new in Infection 0.8.0 — Infection PHP">
+        <meta name="twitter:title" content="What's new in Infection 0.23.0 — Infection PHP">
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
@@ -122,7 +122,7 @@
         <ul style="padding:0">
         
             <li>
-                <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
+                <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link current">What's new in Infection 0.23.0</a>
             </li>
         
             <li>
@@ -165,37 +165,22 @@
     </div>
 </div>
 <div class="content with-sidebar blog post">
-    <h1>What's new in Infection 0.8.0</h1>
-    <h4>Feb 28, 2018</h4>
-    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.8.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.8.0</a></p>
-<h2 id="BC-Breaks"><a href="#BC-Breaks" class="headerlink" title="BC Breaks"></a>BC Breaks</h2><p>Before upgrading, make sure you know about backward incompatible changes.</p>
-<ol>
-<li><p><code>exclude</code> setting has been removed from the config file <code>infection.json</code>. Instead, please use <code>excludes</code>. This was done to make Infection’s config file compatible with Humbug’s one.</p>
-</li>
-<li><p>All paths from the config file are now relative to the config file instead of to the current working directory.</p>
-</li>
-</ol>
-<h2 id="New-features-and-enhancements"><a href="#New-features-and-enhancements" class="headerlink" title="New features and enhancements"></a>New features and enhancements</h2><h3 id="Pass-existing-coverage"><a href="#Pass-existing-coverage" class="headerlink" title="Pass existing coverage"></a>Pass existing coverage</h3><p>In Infection 0.8.0, we have implemented a feature that allows providing existing Coverage Reports from <code>PHPUnit</code> and/or <code>PhpSpec</code> to Infection. </p>
-<p>Why is it needed?</p>
-<p>When you use Continuous Integration for your project, probably you are already generating code coverage metrics and run PHPUnit with <code>XDebug</code>/<code>phpdbg</code> enabled. Then, you run Infection for mutation testing, which in its turn, generates Code Coverage again for internal needs. This dramatically increases the build time because running your tests with debugger <em>twice</em> requires too much time.</p>
-<p>Now it’s possible to reuse already generated coverage in Infection. Assuming you have PHPUnit, just do it as following:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># collect XML and JUnit coverage</span></span><br><span class="line">vendor/bin/phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/phpunit.junit.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># use coverage</span></span><br><span class="line">infection.phar --coverage=build/coverage --threads=4</span><br></pre></td></tr></table></figure>
-<p>Moreover, <strong>Infection does not require <code>XDebug</code>/<code>phpdbg</code> enabled</strong> if coverage is provided. It means, before running Infection you can disable debugger at all.</p>
-<h3 id="Pass-PHP-options-to-Initial-Tests-run-process"><a href="#Pass-PHP-options-to-Initial-Tests-run-process" class="headerlink" title="Pass PHP options to Initial Tests run process"></a>Pass PHP options to Initial Tests run process</h3><p>Not all people have <code>Xdebug</code> enabled permanently. You may like running scripts by <code>php -d zend_extension=xdebug.so script.php</code> command in order to debug it.</p>
-<p>Before, it was not possible to run Infection in such a way. Since Infection needs debugger just for <em>Initial Tests Run</em> step to generate code coverage, we’ve added a new option where you can pass additional parameters to PHP executable for this process - <code>--initial-tests-php-options</code>.</p>
-<p>Assuming Xdebug is <em>disabled</em>, you can run it as:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --initial-tests-php-options=<span class="string">"-d zend_extension=xdebug.so"</span></span><br></pre></td></tr></table></figure>
-<h2 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h2><p>Two new mutators have been added:</p>
-<h3 id="Throw-Mutator"><a href="#Throw-Mutator" class="headerlink" title="Throw Mutator"></a>Throw Mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- throw new \FileNotFoundException('...');</span></span><br><span class="line"><span class="addition">+ new \FileNotFoundException('...');</span></span><br></pre></td></tr></table></figure>
-<p>You can run only this mutation operator to see how good your MSI is for exceptions testing:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --mutators=Throw_</span><br></pre></td></tr></table></figure>
-<h3 id="Integer-Decrement-and-Increment-Mutators"><a href="#Integer-Decrement-and-Increment-Mutators" class="headerlink" title="Integer Decrement and Increment Mutators"></a>Integer Decrement and Increment Mutators</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">$users = [new User('Ivan', 17), new User('Ann', 23)];</span><br><span class="line"></span><br><span class="line">// Decrement Mutator</span><br><span class="line"><span class="deletion">- $adults = array_filter($users, function (User $user) &#123; return $user-&gt;getAge() &gt;= 21 &#125;);</span></span><br><span class="line"><span class="addition">+ $adults = array_filter($users, function (User $user) &#123; return $user-&gt;getAge() &gt;= 20 &#125;);</span></span><br><span class="line"></span><br><span class="line">// Increment Mutator</span><br><span class="line"><span class="deletion">- $adults = array_filter($users, function (User $user) &#123; return $user-&gt;getAge() &gt;= 21 &#125;);</span></span><br><span class="line"><span class="addition">+ $adults = array_filter($users, function (User $user) &#123; return $user-&gt;getAge() &gt;= 22 &#125;);</span></span><br></pre></td></tr></table></figure>
-<h1 id="Other-updates"><a href="#Other-updates" class="headerlink" title="Other updates"></a>Other updates</h1><p>Besides that, we’ve improved mutation testing for Traits, improved Public/Protected Visibility mutators a little bit: they don’t mutate abstract methods anymore.</p>
-<p>There was some work to improve Infection Performance. Now, all generated mutants are reused, which reduces filesystem operations.</p>
-<p><a href="https://github.com/infection/infection/releases/tag/0.8.0" target="_blank" rel="noopener">Full Changelog</a></p>
+    <h1>What's new in Infection 0.23.0</h1>
+    <h4>May 13, 2021</h4>
+    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.23.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.23.0</a></p>
+<h2 id="BC-Breaks"><a href="#BC-Breaks" class="headerlink" title="BC Breaks"></a>BC Breaks</h2><ul>
+<li>Ignoring mutating code commented with <code>@codeCoverageIgnore</code> is no longer supported. Use <code>@infection-ignore-all</code> instead. See <a href="https://infection.github.io/guide/usage.html#infection-ignore-all-support">https://infection.github.io/guide/usage.html#infection-ignore-all-support</a> </li>
+</ul>
+<h2 id="Pest-Test-Framework-support"><a href="#Pest-Test-Framework-support" class="headerlink" title="Pest Test Framework support"></a>Pest Test Framework support</h2><p><a href="https://pestphp.com/" target="_blank" rel="noopener">Pest</a> is getting more and more popular nowadays. Together with the Pest team, we’ve added support for this test framework in Infection.</p>
+<p>Install Infection using for example Composer package:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">composer require infection/infection --dev</span><br></pre></td></tr></table></figure>
+<p>Then, you can run mutation testing for Pest:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vendor/bin/infection --test-framework=pest --show-mutations</span><br></pre></td></tr></table></figure>
 <hr>
-<p>If you didn’t try Infection with your CI process, now it’s the best time.</p>
-<p>Thanks everyone involved!</p>
+<p>Enjoying Infection? Consider supporting us on GitHub Sponsors ♥️ </p>
+<p><a href="https://github.com/sponsors/infection" target="_blank" rel="noopener">https://github.com/sponsors/infection</a></p>
+<p><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="noopener">Star</a></p>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 
 </div>
 

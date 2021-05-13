@@ -252,6 +252,16 @@
         
             
             
+        
+        
+        <li>
+            <a href="/guide/supported-test-frameworks.html" class="sidebar-link">Supported Test Frameworks</a>
+        </li>
+    
+        
+        
+            
+            
                 <li><h3>Miscellaneous</h3></li>
             
         
@@ -261,6 +271,10 @@
         </li>
     
     <li><h3>Posts</h3></li>
+    
+        <li>
+            <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
+        </li>
     
         <li>
             <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
@@ -276,10 +290,6 @@
     
         <li>
             <a href="/2020/10/17/whats-new-in-0.18.0/" class="sidebar-link">What's new in Infection 0.18.0</a>
-        </li>
-    
-        <li>
-            <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
         </li>
     
     
@@ -319,20 +329,20 @@
 <h3 id="threads-or-j"><a href="#threads-or-j" class="headerlink" title="--threads or -j"></a><code>--threads</code> or <code>-j</code></h3><p>If you want to run tests for mutated code in parallel, set this to something &gt; 1. It will <strong>dramatically speed up</strong> mutation process. Please note that if your tests somehow depends on each other or use database, this option can lead to failing tests which give many false-positives results.</p>
 <p>On most platforms where GNU coreutils are available, which includes all variants of Linux, there is <code>nproc</code> command that returns the number of processors available. It can be used as such to let Infection run at the full speed:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># on Linux</span></span><br><span class="line">infection -j$(nproc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># on OSX</span></span><br><span class="line">infection -j$(sysctl -n hw.ncpu)</span><br></pre></td></tr></table></figure>
-<h3 id="test-framework"><a href="#test-framework" class="headerlink" title="--test-framework"></a><code>--test-framework</code></h3><p>This is a name of the Test framework to use. Currently Infection supports <code>PHPUnit</code>, <code>PhpSpec</code> and <code>Codeception</code>.</p>
-<p>If you are using <code>infection/infection</code> Composer package, only <code>PHPUnit</code> is installed by default. Other test framework adapter will be automatically installed on demand.<br><a href="/guide/installation.html#Phar">PHAR distribution</a> is bundled with all available adapters. </p>
+<h3 id="test-framework"><a href="#test-framework" class="headerlink" title="--test-framework"></a><code>--test-framework</code></h3><p>This is a name of the Test Framework to use. Currently, Infection supports <code>PHPUnit</code>, <code>PhpSpec</code>, <code>Pest</code> and <code>Codeception</code>.</p>
+<p>If you are using <code>infection/infection</code> Composer package, <code>PHPUnit</code> and <code>Pest</code> are installed by default. Other test framework adapters will be automatically installed on demand.<br><a href="/guide/installation.html#Phar">PHAR distribution</a> is bundled with all available adapters.</p>
 <blockquote>
 <p>Feel free to request a new test framework to be supported out of the box in Github’s issues.</p>
 </blockquote>
-<h3 id="test-framework-options"><a href="#test-framework-options" class="headerlink" title="--test-framework-options"></a><code>--test-framework-options</code></h3><p>This options allows to pass additional options to the test framework. Example for <code>PHPUnit</code>:</p>
+<h3 id="test-framework-options"><a href="#test-framework-options" class="headerlink" title="--test-framework-options"></a><code>--test-framework-options</code></h3><p>This option allows passing additional options to the test framework. Example for <code>PHPUnit</code>:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --test-framework-options=<span class="string">"--verbose --filter=just/unit/tests"</span></span><br></pre></td></tr></table></figure>
-<p>This will execute the phpunit as:</p>
+<p>This will execute the <code>PHPUnit</code> as:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phpunit [...infection options] --verbose --filter=just/unit/tests</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Please note that if you choose to use <code>--configuration</code>, <code>--filter</code>, or <code>--testsuite</code> for PHPUnit, these options will only be applied to the <em>initial</em> test run. Each mutation has a custom <code>phpunit.xml</code> file generated for it which defines a single testsuite containing the tests which should be executed for that mutation. Applying <code>--filter</code> or <code>--testsuite</code> would not make sense in this context as the tests have already been filtered down. </p>
+<p>Please note that if you choose to use <code>--configuration</code>, <code>--filter</code>, or <code>--testsuite</code> for <code>PHPUnit</code>, these options will only be applied to the <em>initial</em> test run. Each mutation has a custom <code>phpunit.xml</code> file generated for it which defines a single testsuite containing the tests which should be executed for that mutation. Applying <code>--filter</code> or <code>--testsuite</code> would not make sense in this context as the tests have already been filtered down. </p>
 </blockquote>
 <h3 id="coverage"><a href="#coverage" class="headerlink" title="--coverage"></a><code>--coverage</code></h3><p>Path to the existing coverage reports.</p>
-<p>When you use Continuous Integration for your project, probably you are already generating code coverage metrics and run PHPUnit with <code>XDebug</code>/<code>phpdbg</code> enabled. Then, you run Infection for mutation testing, which in its turn, generates Code Coverage again for internal needs. This dramatically increases the build time because running your tests with debugger <em>twice</em> requires too much time.</p>
+<p>When you use Continuous Integration for your project, probably you are already generating code coverage metrics and run PHPUnit with <code>Xdebug</code>/<code>phpdbg</code> enabled. Then, you run Infection for mutation testing, which in its turn, generates Code Coverage again for internal needs. This dramatically increases the build time because running your tests with debugger <em>twice</em> requires too much time.</p>
 <p>With this option it’s possible to reuse already generated coverage in Infection.</p>
 <p>For <code>PHPUnit</code> and <code>Codeception</code>:</p>
 <ul>
@@ -403,7 +413,7 @@
 <h3 id="formatter"><a href="#formatter" class="headerlink" title="--formatter"></a><code>--formatter</code></h3><p>This is a name of console output formatter. Possible values are: <code>dot</code>, <code>progress</code>. Default is <code>dot</code> formatter.</p>
 <h3 id="log-verbosity"><a href="#log-verbosity" class="headerlink" title="--log-verbosity"></a><code>--log-verbosity</code></h3><p>The verbosity of the log file, <code>all</code> - this mode will add “Killed mutants” into log file and add additional information, <code>default</code> - normal mode will skip “Killed mutants” section in the log file, <code>none</code> - which will disable logging to files.</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --log-verbosity=all</span><br></pre></td></tr></table></figure>
-<h3 id="initial-tests-php-options"><a href="#initial-tests-php-options" class="headerlink" title="--initial-tests-php-options"></a><code>--initial-tests-php-options</code></h3><p>Run Initial Tests process with additional php options. For example with <code>-d zend_extension=xdebug.so</code> which will run Xebug only for code coverage.<br>May be useful for cases when XDebug is not enabled globally. Also it’s useful from performance point of view.<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --initial-tests-php-options=<span class="string">"-d zend_extension=xdebug.so"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="initial-tests-php-options"><a href="#initial-tests-php-options" class="headerlink" title="--initial-tests-php-options"></a><code>--initial-tests-php-options</code></h3><p>Run Initial Tests process with additional php options. For example with <code>-d zend_extension=xdebug.so</code> which will run <code>Xdebug</code> only for code coverage.<br>May be useful for cases when <code>Xdebug</code> is not enabled globally. Also it’s useful from performance point of view.<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --initial-tests-php-options=<span class="string">"-d zend_extension=xdebug.so"</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="ignore-msi-with-no-mutations"><a href="#ignore-msi-with-no-mutations" class="headerlink" title="--ignore-msi-with-no-mutations"></a><code>--ignore-msi-with-no-mutations</code></h3><p>Ignore MSI violations when no mutations are generated. This will force Infection to return a zero exit code even when the required MSI is not reached.</p>
 <h3 id="debug"><a href="#debug" class="headerlink" title="--debug"></a><code>--debug</code></h3><p>Run Infection in a debug mode. With this option Infection will not erase <code>tmpDir</code> and this might be useful to run particular unit test with a mutated code for example.</p>
 

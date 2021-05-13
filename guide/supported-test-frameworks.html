@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head><meta name="generator" content="Hexo 3.9.0">
-        <title>Mutation Badge — Infection PHP</title>
+        <title>Supported Test Frameworks — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <meta property="og:type" content="article">
-        <meta property="og:title" content="Mutation Badge — Infection PHP">
+        <meta property="og:title" content="Supported Test Frameworks — Infection PHP">
         <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
         <meta property="og:image" content="https://infection.github.io//images/logo.png">
 
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="Mutation Badge — Infection PHP">
+        <meta name="twitter:title" content="Supported Test Frameworks — Infection PHP">
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
@@ -195,7 +195,7 @@
         
         
         <li>
-            <a href="/guide/mutation-badge.html" class="sidebar-link current">Mutation Badge</a>
+            <a href="/guide/mutation-badge.html" class="sidebar-link">Mutation Badge</a>
         </li>
     
         
@@ -255,7 +255,7 @@
         
         
         <li>
-            <a href="/guide/supported-test-frameworks.html" class="sidebar-link">Supported Test Frameworks</a>
+            <a href="/guide/supported-test-frameworks.html" class="sidebar-link current">Supported Test Frameworks</a>
         </li>
     
         
@@ -299,52 +299,36 @@
 </div>
 
 
-<div class="content guide with-sidebar mutation-badge-guide">
+<div class="content guide with-sidebar supported-test-frameworks-guide">
     
       
     
     
-      <h1>Mutation Badge</h1>
+      <h1>Supported Test Frameworks</h1>
     
-    <p>It’s possible to add a fancy mutation score badge for your project. </p>
-<h2 id="How-to-set-it-up"><a href="#How-to-set-it-up" class="headerlink" title="How to set it up"></a>How to set it up</h2><p><a href="https://infection.github.io"><img src="https://badge.stryker-mutator.io/github.com/infection/infection/master" alt="Infection MSI"></a></p>
-<p>Take these steps to enable the mutation score badge on your repository:</p>
-<ol>
-<li><p>Make sure you have enabled a continuous integration service for your project. </p>
-<p>We use <a href="https://github.com/OndraM/ci-detector" target="_blank" rel="noopener"><code>ondram/ci-detector</code></a> to detect continuous-integration services.  </p>
-<p>Feel free to request an additional integration there if the list of <a href="https://github.com/OndraM/ci-detector#supported-continuous-integration-servers" target="_blank" rel="noopener">currently supported continuous-integration servers</a> does not contain a service you require.</p>
-</li>
-<li><p>Go to <a href="https://dashboard.stryker-mutator.io" target="_blank" rel="noopener">https://dashboard.stryker-mutator.io</a> and sign in with your GitHub account. </p>
-<p>We use the <a href="https://dashboard.stryker-mutator.io/" target="_blank" rel="noopener">Stryker Dashboard</a> to store mutation score for badges. Stryker is a mutation testing framework for Javascript that shares its service for other mutations frameworks.</p>
-</li>
-<li><p>Enable a repository for which you want to create a mutation badge. Stryker Dashboard will generate a key for you automatically. </p>
-</li>
-<li><p>Provide the API key for your project as a secret environment variable - either <code>INFECTION_BADGE_API_KEY</code> or <code>STRYKER_DASHBOARD_API_KEY</code> can be used.</p>
-</li>
-<li><p>Configure the badge logger in your <code>infection.json</code> file (you will need Infection version <code>0.9.0</code> or higher):</p>
- <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"badge"</span>: &#123;</span><br><span class="line">            <span class="attr">"branch"</span>: <span class="string">"master"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Force a build by running:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>Your badge will be available at: <code>https://badge.stryker-mutator.io/github.com/{username}/{repository_name}/{branch}</code>. (don’t forget to add it to your readme file)</p>
-<p>If you want to make mutation badge as a link to Infection, use <code>[![Infection MSI](https://badge.stryker-mutator.io/github.com/{username}/{repository_name}/{branch})](https://infection.github.io)</code></p>
-<p>That’s it! Hope you like it.</p>
+    <p>Infection supports the following Test Frameworks:</p>
+<ul>
+<li><a href="https://phpunit.readthedocs.io/en/latest/" target="_blank" rel="noopener">PHPUnit</a></li>
+<li><a href="http://www.phpspec.net/en/stable/" target="_blank" rel="noopener">PhpSpec</a></li>
+<li><a href="https://pestphp.com/" target="_blank" rel="noopener">Pest</a></li>
+<li><a href="https://codeception.com/" target="_blank" rel="noopener">Codeception</a></li>
+</ul>
+<p>If you are using <a href="/guide/installation.html#Phar">Phar distribution</a> (downloading Phar or using <a href="/guide/installation.html#Phive">Phive</a>), all the test frameworks are bundled into it.</p>
+<p>If you are using <code>infection/infection</code> package, only <code>PHPUnit</code> and <code>Pest</code> are bundled. Additional Test Frameworks will be automatically installed on demand.</p>
+<p>For example, running</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --test-framework=codeception</span><br></pre></td></tr></table></figure>
+<p>will notice that adapter is not installed and it will propose to install it in the same process:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">We noticed you are using a <span class="built_in">test</span> framework supported by an external Infection plugin.</span><br><span class="line">Would you like to install infection/codeception-adapter? [yes]:</span><br><span class="line"></span><br><span class="line">Installing infection/codeception-adapter...</span><br></pre></td></tr></table></figure>
 
     
       <div class="guide-links">
         
-          <span>← <a href="/guide/using-with-ci.html">Using with CI</a></span>
-        
-        
-          <span style="float:right"><a href="/guide/how-to.html">How-to Guides</a> →</span>
         
       </div>
     
     <div class="footer">
       Caught a mistake or want to contribute to the documentation?
-      <a href="https://github.com/infection/site/blob/master/src/guide/mutation-badge.md" target="_blank">
+      <a href="https://github.com/infection/site/blob/master/src/guide/supported-test-frameworks.md" target="_blank">
         Edit this page on Github!
       </a>
     </div>

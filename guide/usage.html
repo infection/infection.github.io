@@ -252,6 +252,16 @@
         
             
             
+        
+        
+        <li>
+            <a href="/guide/supported-test-frameworks.html" class="sidebar-link">Supported Test Frameworks</a>
+        </li>
+    
+        
+        
+            
+            
                 <li><h3>Miscellaneous</h3></li>
             
         
@@ -261,6 +271,10 @@
         </li>
     
     <li><h3>Posts</h3></li>
+    
+        <li>
+            <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
+        </li>
     
         <li>
             <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
@@ -276,10 +290,6 @@
     
         <li>
             <a href="/2020/10/17/whats-new-in-0.18.0/" class="sidebar-link">What's new in Infection 0.18.0</a>
-        </li>
-    
-        <li>
-            <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
         </li>
     
     
@@ -325,13 +335,13 @@
 <li><code>minCoveredMsi</code> - optional key, a value for the Minimum Covered Code Mutation Score Indicator (MSI) percentage value</li>
 <li><code>mutators</code>: optional key, it contains the settings for different mutations and profiles, read more about it <a href="/guide/profiles.html">here</a></li>
 <li><code>testFramework</code>: optional key, it sets the framework to use for testing. Defaults to <code>phpunit</code>. This gets overridden by the <code>--test-framework</code> command line argument.</li>
-<li><code>bootstrap</code>: optional key, use to specify a file to include as part of the startup to pre-configure the Infection environment. Useful for adding custom autoloaders not included in composer.</li>
+<li><code>bootstrap</code>: optional key, use it to specify a file to include as part of the startup to pre-configure the Infection environment. Useful for adding custom autoloaders not included in composer.</li>
 <li><code>initialTestsPhpOptions</code>: optional key, specify additional php options for the initial test (IE: Enabling X-Debug). <code>--initial-tests-php-options</code> will override this option.</li>
 <li><code>testFrameworkOptions</code>: optional key, specify additional options to pass to the test framework (IE: Enabling Verbose Mode). <code>--test-framework-options</code> will override this option.</li>
 </ul>
 <h4 id="How-to-use-custom-autoloader-or-bootstrap-file"><a href="#How-to-use-custom-autoloader-or-bootstrap-file" class="headerlink" title="How to use custom autoloader or bootstrap file"></a>How to use custom autoloader or bootstrap file</h4><p>If you have a custom autoloader or bootstrap file for your application, you should tell Infection about it.</p>
-<p>For example you have</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// custom-autoloader.php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> NonPsr4CompliantFile.php</span><br></pre></td></tr></table></figure>
+<p>For example, you have</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// custom-autoloader.php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="string">'NonPsr4CompliantFile.php'</span>;</span><br></pre></td></tr></table></figure>
 <p>then you have to add it to the <code>infection.json</code> file:</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"bootstrap"</span>: <span class="string">"./custom-autoloader.php"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Thus, Infection will know how to autoload <code>NonPsr4CompliantFile</code> class. Without adding it to the config, Infection will not be able to create Mutations because internally it uses <code>new \ReflectionClass()</code> objects.</p>
@@ -353,11 +363,13 @@
 <blockquote>
 <p><a href="./command-line-options.html#coverage">Read more</a> what types of coverage Infection requires and how to do it.</p>
 </blockquote>
-<h2 id="Using-with-PHPUnit"><a href="#Using-with-PHPUnit" class="headerlink" title="Using with PHPUnit"></a>Using with PHPUnit</h2><h3 id="codeCoverageIgnore-support"><a href="#codeCoverageIgnore-support" class="headerlink" title="@codeCoverageIgnore support"></a><code>@codeCoverageIgnore</code> support</h3><p>Infection supports <code>@codeCoverageIgnore</code> annotation on class and method level.</p>
-<p>The following class will not be mutated, because it does not produce any code coverage.</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@codeCoverageIgnore</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Calculator</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(float $a, float $b)</span>: <span class="title">float</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> $a + $b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="infection-ignore-all-support"><a href="#infection-ignore-all-support" class="headerlink" title="@infection-ignore-all support"></a><code>@infection-ignore-all</code> support</h3><p>Infection supports <code>@infection-ignore-all</code> annotation on class, method, and statement level.</p>
+<p>The following class will not be mutated even though it might have few covered lines.</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@infection</span>-ignore-all</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Calculator</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(float $a, float $b)</span>: <span class="title">float</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> $a + $b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>In this example, method <code>generate()</code> will be skipped from mutation logic, but <code>getDependencies()</code> will be mutated as usual method.</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductFixture</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@codeCoverageIgnore</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">generate</span><span class="params">()</span>: <span class="title">void</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// generate logic</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getDependencies</span><span class="params">()</span>: <span class="title">array</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [CategoryFixture::class];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductFixture</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@infection</span>-ignore-all</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">generate</span><span class="params">()</span>: <span class="title">void</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// generate logic</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getDependencies</span><span class="params">()</span>: <span class="title">array</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [CategoryFixture::class];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Likewise, given this annotation Infection won’t consider anything in this loop:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** <span class="doctag">@infection</span>-ignore-all */</span></span><br><span class="line"><span class="keyword">foreach</span> ($foo <span class="keyword">as</span> $bar) &#123;</span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Exposed-environment-variables"><a href="#Exposed-environment-variables" class="headerlink" title="Exposed environment variables"></a>Exposed environment variables</h2><p>Infection exposes a couple of environment variables:</p>
 <ul>
 <li><code>INFECTION=1</code> this can be used in test environment to check whether the tests are executed from Infection or not.</li>

@@ -252,6 +252,16 @@
         
             
             
+        
+        
+        <li>
+            <a href="/guide/supported-test-frameworks.html" class="sidebar-link">Supported Test Frameworks</a>
+        </li>
+    
+        
+        
+            
+            
                 <li><h3>Miscellaneous</h3></li>
             
         
@@ -261,6 +271,10 @@
         </li>
     
     <li><h3>Posts</h3></li>
+    
+        <li>
+            <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
+        </li>
     
         <li>
             <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
@@ -278,10 +292,6 @@
             <a href="/2020/10/17/whats-new-in-0.18.0/" class="sidebar-link">What's new in Infection 0.18.0</a>
         </li>
     
-        <li>
-            <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
-        </li>
-    
     
 </ul>
 
@@ -296,7 +306,7 @@
     
       <h1>Installation</h1>
     
-    <h3 id="Compatibility-Note"><a href="#Compatibility-Note" class="headerlink" title="Compatibility Note"></a>Compatibility Note</h3><p>Infection requires a recent version of PHP, and <code>XDebug</code>, <code>phpdbg</code>, or <code>pcov</code> enabled.</p>
+    <h3 id="Compatibility-Note"><a href="#Compatibility-Note" class="headerlink" title="Compatibility Note"></a>Compatibility Note</h3><p>Infection requires a recent version of PHP, and <code>Xdebug</code>, <code>phpdbg</code>, or <code>pcov</code> enabled.</p>
 <p>You can still use an older Infection version if you’re using an older PHP version.</p>
 <table>
 <thead>
@@ -328,9 +338,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="Phar"><a href="#Phar" class="headerlink" title="Phar"></a>Phar</h2><p>Phar distribution is the best and recommended way of installing Infection on your computer. Unlike <code>infection/infection</code>, it is bundled with all officially supported Test Frameworks: <code>PHPUnit</code>, <code>PhpSpec</code>, <code>Codeception</code>.</p>
+<h2 id="Phar"><a href="#Phar" class="headerlink" title="Phar"></a>Phar</h2><p>Phar distribution is the best and recommended way of installing Infection on your computer. Unlike <code>infection/infection</code>, it is bundled with all officially supported Test Frameworks: <code>PHPUnit</code>, <code>PhpSpec</code>, <code>Pest</code> and <code>Codeception</code>.</p>
 <p>Download the latest <code>infection.phar</code> and <code>infection.phar.asc</code>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/infection/infection/releases/download/0.21.0/infection.phar</span><br><span class="line">wget https://github.com/infection/infection/releases/download/0.21.0/infection.phar.asc</span><br><span class="line"></span><br><span class="line">chmod +x infection.phar</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/infection/infection/releases/download/0.23.0/infection.phar</span><br><span class="line">wget https://github.com/infection/infection/releases/download/0.23.0/infection.phar.asc</span><br><span class="line"></span><br><span class="line">chmod +x infection.phar</span><br></pre></td></tr></table></figure>
 <p>The PHAR is signed <a href="/files/infection.pub">with our GPG key</a>. In order to verify whether the PHAR file was signed by Infection team, execute the following:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gpg --recv-keys C6D76C329EBADE2FB9C458CFC5095986493B4AA0</span><br><span class="line">gpg --with-fingerprint --verify infection.phar.asc infection.phar</span><br></pre></td></tr></table></figure>
 <p>You should see something like:</p>
