@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://infection.github.io/"/>
-  <updated>2021-05-13T16:19:17.921Z</updated>
+  <updated>2021-05-13T16:24:50.595Z</updated>
   <id>https://infection.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://infection.github.io/2021/05/13/whats-new-in-0.23.0/"/>
     <id>https://infection.github.io/2021/05/13/whats-new-in-0.23.0/</id>
     <published>2021-05-13T15:55:19.000Z</published>
-    <updated>2021-05-13T16:19:17.921Z</updated>
+    <updated>2021-05-13T16:24:50.595Z</updated>
     
     <content type="html"><![CDATA[<p>Release: <a href="https://github.com/infection/infection/releases/tag/0.23.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.23.0</a></p>
 <h2 id="BC-Breaks"><a href="#BC-Breaks" class="headerlink" title="BC Breaks"></a>BC Breaks</h2><ul>
@@ -30,7 +30,7 @@
 <p>Install Infection using for example Composer package:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">composer require infection/infection --dev</span><br></pre></td></tr></table></figure>
 <p>Then, you can run mutation testing for Pest:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vendor/bin/infection --test-framework=pest --show-mutations</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">XDEBUG_MODE=coverage vendor/bin/infection --test-framework=pest --show-mutations</span><br></pre></td></tr></table></figure>
 <hr>
 <p>Enjoying Infection? Consider supporting us on GitHub Sponsors ♥️ </p>
 <p><a href="https://github.com/sponsors/infection" target="_blank" rel="noopener">https://github.com/sponsors/infection</a></p>

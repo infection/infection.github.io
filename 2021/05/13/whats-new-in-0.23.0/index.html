@@ -175,7 +175,7 @@
 <p>Install Infection using for example Composer package:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">composer require infection/infection --dev</span><br></pre></td></tr></table></figure>
 <p>Then, you can run mutation testing for Pest:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vendor/bin/infection --test-framework=pest --show-mutations</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">XDEBUG_MODE=coverage vendor/bin/infection --test-framework=pest --show-mutations</span><br></pre></td></tr></table></figure>
 <hr>
 <p>Enjoying Infection? Consider supporting us on GitHub Sponsors ♥️ </p>
 <p><a href="https://github.com/sponsors/infection" target="_blank" rel="noopener">https://github.com/sponsors/infection</a></p>
