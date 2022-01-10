@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head><meta name="generator" content="Hexo 3.8.0">
-        <title>Mutation Badge — Infection PHP</title>
+        <title>Mutation Badge, cloud HTML report — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <meta property="og:type" content="article">
-        <meta property="og:title" content="Mutation Badge — Infection PHP">
+        <meta property="og:title" content="Mutation Badge, cloud HTML report — Infection PHP">
         <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
         <meta property="og:image" content="https://infection.github.io//images/logo.png">
 
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="Mutation Badge — Infection PHP">
+        <meta name="twitter:title" content="Mutation Badge, cloud HTML report — Infection PHP">
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
@@ -193,7 +193,7 @@
         
         
         <li>
-            <a href="/guide/mutation-badge.html" class="sidebar-link current">Mutation Badge</a>
+            <a href="/guide/mutation-badge.html" class="sidebar-link current">Mutation Badge, cloud HTML report</a>
         </li>
     
         
@@ -271,6 +271,10 @@
     <li><h3>Posts</h3></li>
     
         <li>
+            <a href="/2022/01/10/whats-new-in-0.26.0/" class="sidebar-link">What's new in Infection 0.26.0</a>
+        </li>
+    
+        <li>
             <a href="/2021/09/06/whats-new-in-0.25.0/" class="sidebar-link">What's new in Infection 0.25.0</a>
         </li>
     
@@ -286,10 +290,6 @@
             <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
         </li>
     
-        <li>
-            <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link">What's new in Infection 0.20.0</a>
-        </li>
-    
     
 </ul>
 
@@ -302,34 +302,37 @@
       
     
     
-      <h1>Mutation Badge</h1>
+      <h1>Mutation Badge, cloud HTML report</h1>
     
-    <p>It’s possible to add a fancy mutation score badge for your project. </p>
+    <p>We use the <a href="https://dashboard.stryker-mutator.io/" target="_blank" rel="noopener">Stryker Dashboard</a> to store mutation score for badges and host HTML reports in the cloud. <a href="https://stryker-mutator.io" target="_blank" rel="noopener">Stryker</a> is a mutation testing framework for Javascript that shares its service for other mutations frameworks.</p>
 <h2 id="How-to-set-it-up"><a href="#How-to-set-it-up" class="headerlink" title="How to set it up"></a>How to set it up</h2><p><a href="https://infection.github.io"><img src="https://badge.stryker-mutator.io/github.com/infection/infection/master" alt="Infection MSI"></a></p>
-<p>Take these steps to enable the mutation score badge on your repository:</p>
+<p>Take these steps to enable the mutation score badge / cloud HTML report on your repository:</p>
 <ol>
 <li><p>Make sure you have enabled a continuous integration service for your project. </p>
 <p>We use <a href="https://github.com/OndraM/ci-detector" target="_blank" rel="noopener"><code>ondram/ci-detector</code></a> to detect continuous-integration services.  </p>
 <p>Feel free to request an additional integration there if the list of <a href="https://github.com/OndraM/ci-detector#supported-continuous-integration-servers" target="_blank" rel="noopener">currently supported continuous-integration servers</a> does not contain a service you require.</p>
 </li>
-<li><p>Go to <a href="https://dashboard.stryker-mutator.io" target="_blank" rel="noopener">https://dashboard.stryker-mutator.io</a> and sign in with your GitHub account. </p>
-<p>We use the <a href="https://dashboard.stryker-mutator.io/" target="_blank" rel="noopener">Stryker Dashboard</a> to store mutation score for badges. Stryker is a mutation testing framework for Javascript that shares its service for other mutations frameworks.</p>
+<li><p>Go to <a href="https://dashboard.stryker-mutator.io" target="_blank" rel="noopener">https://dashboard.stryker-mutator.io</a> and sign in with your GitHub account.</p>
 </li>
-<li><p>Enable a repository for which you want to create a mutation badge. Stryker Dashboard will generate a key for you automatically. </p>
+<li><p>Enable a repository for which you want to create a mutation badge / cloud HTML report. Stryker Dashboard will generate a key for you automatically. </p>
 </li>
-<li><p>Provide the API key for your project as a secret environment variable - either <code>INFECTION_BADGE_API_KEY</code> or <code>STRYKER_DASHBOARD_API_KEY</code> can be used.</p>
+<li><p>Provide the API key for your project as a secret environment variable - either <code>INFECTION_DASHBOARD_API_KEY</code> or <code>STRYKER_DASHBOARD_API_KEY</code> can be used.</p>
 </li>
-<li><p>Configure the badge logger in your <code>infection.json</code> file (you will need Infection version <code>0.9.0</code> or higher):</p>
- <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"badge"</span>: &#123;</span><br><span class="line">            <span class="attr">"branch"</span>: <span class="string">"/^release-.*$/"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>Configure the <code>stryker</code> logger in your <code>infection.json</code> file:</p>
+<p> for badge</p>
+ <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"stryker"</span>: &#123;</span><br><span class="line">            <span class="attr">"badge"</span>: <span class="string">"/^release-.*$/"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> or for HTML report to host it on Stryker Dashboard</p>
+ <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"stryker"</span>: &#123;</span><br><span class="line">            <span class="attr">"report"</span>: <span class="string">"/^release-.*$/"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> If you provide a value that is not a regular expression starting and ending with <code>/</code>, a direct match will be performed:</p>
- <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"badge"</span>: &#123;</span><br><span class="line">            <span class="attr">"branch"</span>: <span class="string">"main"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"stryker"</span>: &#123;</span><br><span class="line">            <span class="attr">"badge"</span>: <span class="string">"main"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Force a build by running:</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>Your badge will be available at: <code>https://badge.stryker-mutator.io/github.com/{username}/{repository_name}/{branch}</code>. (don’t forget to add it to your readme file)</p>
-<p>If you want to make mutation badge as a link to Infection, use <code>[![Infection MSI](https://badge.stryker-mutator.io/github.com/{username}/{repository_name}/{branch})](https://infection.github.io)</code></p>
+<p>HTML report will be available at URL: <code>https://badge.stryker-mutator.io/github.com/{username}/{repository_name}/{branch}</code>. </p>
+<p>For example <a href="https://dashboard.stryker-mutator.io/reports/github.com/infection/infection/master" target="_blank" rel="noopener">https://dashboard.stryker-mutator.io/reports/github.com/infection/infection/master</a></p>
+<p>To get the Badge image, go to Stryker Dashboard and copy the link there. Don’t forget to add it to your readme file.</p>
 <p>That’s it! Hope you like it.</p>
 
     
