@@ -376,7 +376,9 @@
 <p>Base branch can be changed by using <code>--git-diff-base=main</code> option. In this case, your current branch will be compared with <code>main</code> branch.</p>
 <p>Useful to check how your changes impacts MSI in a feature branch. Useful for those who do not want / can’t write tests for the whole touched legacy file, but wants to cover their own changes (only modified lines).</p>
 <p>Can significantly improve performance since fewer Mutants are generated in comparison to using <code>--git-diff-filter=AM</code> or mutating all files.</p>
-<h3 id="logger-github"><a href="#logger-github" class="headerlink" title="--logger-github"></a><code>--logger-github</code></h3><p>Supposed to be used only with GitHub Actions. This logger prints GitHub Annotation warnings for escaped Mutants right in the Pull Request:</p>
+<h3 id="logger-github"><a href="#logger-github" class="headerlink" title="--logger-github"></a><code>--logger-github</code></h3><p>Supposed to be used only with GitHub Actions. This logger prints GitHub Annotation warnings for escaped Mutants right in the Pull Request.</p>
+<p class="tip">Note that the Github Actions environment is automatically detected and this switch isn’t actually necessary when executed there.</p>
+
 <p><img src="/images/github-logger.png" alt="GitHub Annotation Escaped Mutant"></p>
 <p>Usage:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --logger-github --git-diff-filter=A</span><br></pre></td></tr></table></figure>
