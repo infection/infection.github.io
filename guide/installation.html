@@ -351,7 +351,7 @@
 <h2 id="Composer"><a href="#Composer" class="headerlink" title="Composer"></a>Composer</h2><p>You can install it globally as any other general purpose tool:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">composer global require infection/infection</span><br></pre></td></tr></table></figure>
 <p>Do not forget to include it to <code>~/.bash_profile</code> (or <code>~/.bashrc</code>)!</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=~/.composer/vendor/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=~/.config/composer/vendor/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
 <p>After that, you will be able to run Infection from project root:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cd /path/to/project/root</span></span><br><span class="line"></span><br><span class="line">infection --threads=4</span><br></pre></td></tr></table></figure>
 <h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><p class="tip">This installation type is suitable for Infection development purposes or as a quickest (but not the best) way to try it locally for your project. </p>
