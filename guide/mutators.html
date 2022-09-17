@@ -869,7 +869,7 @@
 <li><code>in_array: false</code>: whether to mutate 3rd argument <code>true</code> in function call</li>
 <li><code>array_search: false</code>: whether to mutate 3rd argument <code>true</code> in function call</li>
 </ul>
-<p>infection.json:</p>
+<p>infection.json5:</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"TrueValue"</span>: &#123;</span><br><span class="line">            <span class="attr">"settings"</span>: &#123;</span><br><span class="line">                <span class="attr">"in_array"</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">"array_search"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Conditional-Boundaries"><a href="#Conditional-Boundaries" class="headerlink" title="Conditional Boundaries"></a>Conditional Boundaries</h3><table>
 <thead>
@@ -1182,7 +1182,7 @@
 <blockquote>
 <p>You should remember to exclude files containing large arrays (like configuration)<br>when using <code>ArrayItemRemoval</code> mutator in <code>all</code> mode</p>
 </blockquote>
-<p>infection.json:</p>
+<p>infection.json5:</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"ArrayItemRemoval"</span>: &#123;</span><br><span class="line">            <span class="attr">"settings"</span>: &#123;</span><br><span class="line">                <span class="attr">"remove"</span>: <span class="string">"all"</span>,</span><br><span class="line">                <span class="attr">"limit"</span>: <span class="number">15</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Loop"><a href="#Loop" class="headerlink" title="Loop"></a>Loop</h3><table>
 <thead>
@@ -1429,7 +1429,7 @@
 <ul>
 <li><code>&quot;bcpowmod&quot;: true</code>: You are able to disable any of the supported bcmath functions. All supported functions are enabled by default.</li>
 </ul>
-<p>infection.json:</p>
+<p>infection.json5:</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"BCMath"</span>: &#123;</span><br><span class="line">            <span class="attr">"settings"</span>: &#123;</span><br><span class="line">                <span class="attr">"bcpowmod"</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">"bccomp"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="MBString"><a href="#MBString" class="headerlink" title="MBString"></a><code>MBString</code></h4><table>
 <thead>
@@ -1543,7 +1543,7 @@
 <blockquote>
 <p>Some of the functions are not supported due to complexity to convert them to standard string manipulation functions.<br>Implementing them either does not make sense or creates too many false positive mutations.<br>Not supported functions are <code>mb_ereg*</code>, <code>mb_split</code>, <code>mb_strrichr</code>, <code>mb_get_info</code> and similar.</p>
 </blockquote>
-<p>infection.json:</p>
+<p>infection.json5:</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"MBString"</span>: &#123;</span><br><span class="line">            <span class="attr">"settings"</span>: &#123;</span><br><span class="line">                <span class="attr">"mb_send_mail"</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">"mb_substr_count"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     

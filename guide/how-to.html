@@ -335,7 +335,7 @@
 <p>Or as a plain PHP code:</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$dbName = sprintf(<span class="string">'db_%s'</span>, getenv(<span class="string">'TEST_TOKEN'</span>));</span><br></pre></td></tr></table></figure>
 <p>For this example to work, you will need to set up 3 database schemas.</p>
-<h2 id="How-to-disable-Mutators-and-profiles"><a href="#How-to-disable-Mutators-and-profiles" class="headerlink" title="How to disable Mutators and profiles"></a>How to disable Mutators and profiles</h2><h3 id="Disable-Mutator"><a href="#Disable-Mutator" class="headerlink" title="Disable Mutator"></a>Disable Mutator</h3><p>Mutators can be disabled in a config file - <code>infection.json.</code>. Let’s say you don’t want to mutate <code>+</code> to <code>-</code>. In order to disable this Mutator, the following config can be used: </p>
+<h2 id="How-to-disable-Mutators-and-profiles"><a href="#How-to-disable-Mutators-and-profiles" class="headerlink" title="How to disable Mutators and profiles"></a>How to disable Mutators and profiles</h2><h3 id="Disable-Mutator"><a href="#Disable-Mutator" class="headerlink" title="Disable Mutator"></a>Disable Mutator</h3><p>Mutators can be disabled in a config file - <code>infection.json5</code>. Let’s say you don’t want to mutate <code>+</code> to <code>-</code>. In order to disable this Mutator, the following config can be used: </p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"mutators"</span>: &#123;</span><br><span class="line">        <span class="attr">"@default"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"Plus"</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>The full list of Mutator names can be found <a href="/guide/mutators.html">here</a>.</p>
@@ -379,7 +379,7 @@
 <p>See other examples <a href="/guide/usage.html#infection-ignore-all-support">here</a>.</p>
 <h2 id="How-to-debug-Infection"><a href="#How-to-debug-Infection" class="headerlink" title="How to debug Infection"></a>How to debug Infection</h2><p>Sometimes you need to better understand what’s going on during execution of Infection. </p>
 <ul>
-<li>to use human-readable log file, use <a href="/guide/usage.html"><code>text</code></a> logger - in <code>infection.json</code> add <code>logs.text</code> key</li>
+<li>to use human-readable log file, use <a href="/guide/usage.html"><code>text</code></a> logger - in <code>infection.json5</code> add <code>logs.text</code> key</li>
 <li>information added to <code>text</code> log file is controlled by <a href="/guide/command-line-options.html#log-verbosity"><code>--log-verbosity</code></a></li>
 </ul>
 <p>When <code>--log-verbosity=all</code> is used, additionally <em>killed</em> and <em>errored</em> mutants will be added to the log file.</p>
@@ -387,7 +387,7 @@
 <p>The verbosity of the log file, <code>all</code> - this mode will add <code>“Killed mutants”</code> into log file and add additional information, <code>default</code> - normal mode will skip <code>“Killed mutants”</code> section in the log file, <code>none</code> - which will disable logging to files.</p>
 </blockquote>
 <p>Use the following config file</p>
-<figure class="highlight json"><figcaption><span>infection.json</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;<span class="attr">"text"</span>: <span class="string">"infection.log"</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><figcaption><span>infection.json5</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;<span class="attr">"text"</span>: <span class="string">"infection.log"</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>and execute Infection with</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --<span class="built_in">log</span>-verbosity=all</span><br></pre></td></tr></table></figure>
 <p>If you want to also log PHPUnit’s output, as well as CLI commands that are executed internally by Infection, use <a href="/guide/command-line-options.html#debug"><code>--debug</code></a></p>

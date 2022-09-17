@@ -325,8 +325,12 @@
 </ul>
 <p>This in no way restricts the initial Infection check on the overall test suite which is still executed in full to ensure all tests are passing correctly before proceeding.</p>
 <h3 id="threads-or-j"><a href="#threads-or-j" class="headerlink" title="--threads or -j"></a><code>--threads</code> or <code>-j</code></h3><p>If you want to run tests for mutated code in parallel, set this to something &gt; 1. It will <strong>dramatically speed up</strong> mutation process. Please note that if your tests somehow depends on each other or use database, this option can lead to failing tests which give many false-positives results.</p>
-<p>On most platforms where GNU coreutils are available, which includes all variants of Linux, there is <code>nproc</code> command that returns the number of processors available. It can be used as such to let Infection run at the full speed:</p>
+<p>To automatically detect the number of CPU cores, use <code>--threads=max</code>.</p>
+<p>For Infection versions below <code>0.26.15</code>, you can detect the number of CPU cores depending on OS:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># on Linux</span></span><br><span class="line">infection -j$(nproc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># on OSX</span></span><br><span class="line">infection -j$(sysctl -n hw.ncpu)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Running Infection with more threads not necessarily leads to better performance. Consider benchmarking several numbers to find one that works best for your particular case.</p>
+</blockquote>
 <h3 id="test-framework"><a href="#test-framework" class="headerlink" title="--test-framework"></a><code>--test-framework</code></h3><p>This is a name of the Test Framework to use. Currently, Infection supports <code>PHPUnit</code>, <code>PhpSpec</code>, <code>Pest</code> and <code>Codeception</code>.</p>
 <p>If you are using <code>infection/infection</code> Composer package, <code>PHPUnit</code> and <code>Pest</code> are installed by default. Other test framework adapters will be automatically installed on demand.<br><a href="/guide/installation.html#Phar">PHAR distribution</a> is bundled with all available adapters.</p>
 <blockquote>
@@ -386,7 +390,7 @@
 <h3 id="logger-html"><a href="#logger-html" class="headerlink" title="--logger-html"></a><code>--logger-html</code></h3><p>This option is used to provide a path to the generated HTML Report:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-html=&apos;mutation-report.html&apos;</span><br></pre></td></tr></table></figure>
 <p>After Infection completes its job, the <code>mutation-report.html</code> file will be generated with HTML report (<a href="/static/html-report-example.html">example</a>).</p>
-<p>Takes precedence over <code>logger.html</code> setting inside <code>infection.json</code> file. If you want to always generate HTML report, it’s better to configure it inside <code>infection.json</code>, see <a href="/guide/usage.html">here</a>.</p>
+<p>Takes precedence over <code>logger.html</code> setting inside <code>infection.json5</code> file. If you want to always generate HTML report, it’s better to configure it inside <code>infection.json5</code>, see <a href="/guide/usage.html">here</a>.</p>
 <blockquote>
 <p>If you want to store HTML report in the cloud (useful for OSS projects), see <a href="/guide/mutation-badge.html">Stryker Dashboard</a> integration</p>
 </blockquote>
@@ -399,7 +403,7 @@
 <blockquote>
 <p>Read more about the problem and solution in <a href="/2021/07/27/whats-new-in-0.24.0/#Major-performance-improvement-for-projects-with-slow-test-suites">this blog post</a></p>
 </blockquote>
-<h3 id="show-mutations-or-s"><a href="#show-mutations-or-s" class="headerlink" title="--show-mutations or -s"></a><code>--show-mutations</code> or <code>-s</code></h3><p>Show colorized diffs of mutated files to the console.</p>
+<h3 id="show-mutations-or-s"><a href="#show-mutations-or-s" class="headerlink" title="--show-mutations or -s"></a><code>--show-mutations</code> or <code>-s</code></h3><p>Show colorized diffs of mutated files to the console. Only escaped mutants are shown by default. </p>
 <blockquote>
 <p>Please note that all mutations are logged to the <code>infection.log</code> file as well.</p>
 </blockquote>

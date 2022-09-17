@@ -344,7 +344,7 @@
 <p>Thanks to Symfony’s Console component, it’s possible to run commands from another command. And this is exactly what we need. Let’s look how the process looks like in Infection:</p>
 <ul>
 <li>you run <code>infection</code> for the first time</li>
-<li>it does not find <code>infection.json.dist</code></li>
+<li>and it does not find any of <code>infection.json5</code> / <code>infection.json</code> / <code>infection.json5.dist</code> / <code>infection.json.dist</code></li>
 <li>it automatically runs <code>infection configure</code> command without interrupting the main process</li>
 <li>it asks you some questions and <em>tries to guess</em> all possible values for you</li>
 <li>after configuration is done, it just continues with the initial command</li>

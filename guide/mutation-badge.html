@@ -318,7 +318,7 @@
 </li>
 <li><p>Provide the API key for your project as a secret environment variable - either <code>INFECTION_DASHBOARD_API_KEY</code> or <code>STRYKER_DASHBOARD_API_KEY</code> can be used.</p>
 </li>
-<li><p>Configure the <code>stryker</code> logger in your <code>infection.json</code> file:</p>
+<li><p>Configure the <code>stryker</code> logger in your <code>infection.json5</code> file:</p>
 <p> for badge</p>
  <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"stryker"</span>: &#123;</span><br><span class="line">            <span class="attr">"badge"</span>: <span class="string">"/^release-.*$/"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> or for HTML report to host it on Stryker Dashboard</p>
@@ -331,7 +331,7 @@
  <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"stryker"</span>: &#123;</span><br><span class="line">            <span class="attr">"badge"</span>: <span class="string">"main"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Force a build by running:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span> git push origin master</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>HTML report will be available at URL: <code>https://badge.stryker-mutator.io/github.com/{username}/{repository_name}/{branch}</code>. </p>
