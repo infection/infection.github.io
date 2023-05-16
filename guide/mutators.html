@@ -803,7 +803,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Boolean-Substitution"><a href="#Boolean-Substitution" class="headerlink" title="Boolean Substitution"></a>Boolean Substitution</h3><table>
+<h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h3><table>
 <thead>
 <tr>
 <th style="text-align:center">Name</th>
@@ -861,6 +861,36 @@
 <td style="text-align:center">Yield_</td>
 <td style="text-align:center"><code>yield $a =&gt; $b;</code></td>
 <td style="text-align:center"><code>yield $a &gt; $b;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">LogicalAndAllSubExprNegation</td>
+<td style="text-align:center"><code>$a = $b &amp;&amp; $c;</code></td>
+<td style="text-align:center"><code>$a = !$b &amp;&amp; !$c;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">LogicalAndNegation</td>
+<td style="text-align:center"><code>$a = $b &amp;&amp; $c;</code></td>
+<td style="text-align:center"><code>$a = !($b &amp;&amp; $c);</code></td>
+</tr>
+<tr>
+<td style="text-align:center">LogicalAndSingleSubExprNegation</td>
+<td style="text-align:center"><code>$a = $b &amp;&amp; $c;</code></td>
+<td style="text-align:center"><code>$a = !$b &amp;&amp; $c;</code>, <code>$a = $b &amp;&amp; !$c;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">LogicalOrAllSubExprNegation</td>
+<td style="text-align:center">$a = $b &#124;&#124; $c;</td>
+<td style="text-align:center">$a = !$b &#124;&#124; !$c;</td>
+</tr>
+<tr>
+<td style="text-align:center">LogicalOrNegation</td>
+<td style="text-align:center">$a = $b &#124;&#124; $c;</td>
+<td style="text-align:center">$a = !($b &#124;&#124; $c);</td>
+</tr>
+<tr>
+<td style="text-align:center">LogicalOrSingleSubExprNegation</td>
+<td style="text-align:center">$a = $b &#124;&#124; $c;</td>
+<td style="text-align:center">$a = !$b &#124;&amp;#124, $c; $a = $b &#124;&#124; !$c;</td>
 </tr>
 </tbody>
 </table>
@@ -1040,6 +1070,16 @@
 <td style="text-align:center">Ternary</td>
 <td style="text-align:center"><code>isset($b) ? &#39;B&#39; : &#39;C&#39;</code></td>
 <td style="text-align:center"><code>isset($b) ? &#39;C&#39; : &#39;B&#39;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">ElseIfNegation</td>
+<td style="text-align:center"><code>} elseif ($this-&gt;bar()) {</code></td>
+<td style="text-align:center"><code>} elseif (!$this-&gt;bar()) {</code></td>
+</tr>
+<tr>
+<td style="text-align:center">IfNegation</td>
+<td style="text-align:center"><code>if ($this-&gt;fooBar()) {</code></td>
+<td style="text-align:center"><code>if (!$this-&gt;fooBar()) {</code></td>
 </tr>
 </tbody>
 </table>
