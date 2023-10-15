@@ -388,11 +388,21 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --logger-github --git-diff-filter=A</span><br></pre></td></tr></table></figure>
 <p>Here is <a href="https://github.com/infection/infection/blob/bef65fc22faa200edd367ffe12596905947a2a93/.github/workflows/mt-annotations.yaml#L50-L52" target="_blank" rel="noopener">a real example</a> how Infection uses it itself.</p>
 <h3 id="logger-gitlab"><a href="#logger-gitlab" class="headerlink" title="--logger-gitlab"></a><code>--logger-gitlab</code></h3><p>This option is used to provide a path to the generated GitLab (Code Climate) Code Quality Report:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-gitlab=&apos;gitlab-coverage.json&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-gitlab=<span class="string">'gitlab-coverage.json'</span></span><br></pre></td></tr></table></figure>
 <p>After Infection completes its job, the <code>gitlab-coverage.json</code> file will be generated. This file can than be included as a <code>codequality</code> report artifact.</p>
 <p>Takes precedence over <code>logger.gitlab</code> setting inside <code>infection.json5</code> file. If you want to always generate the GitLab Coverage report it’s better to configure it inside <code>infection.json5</code>, see <a href="/guide/usage.html">here</a>.</p>
+<blockquote>
+<p>See <a href="https://gitlab.com/maks-rafalko/infection-gitlab-integration-example/-/blob/e9248aecc694ce822ea5c79654e115c8044fadf3/.gitlab-ci.yml#L18-27" target="_blank" rel="noopener">this sample repository</a> as an example of how to configure Code Qulity with Infection </p>
+</blockquote>
+<p>This is how it works on PR main page:</p>
+<p><img src="/images/gitlab-logger-pr-view.png" alt="GitHub Annotation Escaped Mutant"></p>
+<p>This is how it works on diff view:</p>
+<p><img src="/images/gitlab-logger-diff-view.png" alt="GitHub Annotation Escaped Mutant"></p>
+<blockquote>
+<p>Note that “See findings in merge request diff view” is <a href="https://docs.gitlab.com/ee/ci/testing/code_quality.html#features-per-tier" target="_blank" rel="noopener">not available</a> on free tier</p>
+</blockquote>
 <h3 id="logger-html"><a href="#logger-html" class="headerlink" title="--logger-html"></a><code>--logger-html</code></h3><p>This option is used to provide a path to the generated HTML Report:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-html=&apos;mutation-report.html&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-html=<span class="string">'mutation-report.html'</span></span><br></pre></td></tr></table></figure>
 <p>After Infection completes its job, the <code>mutation-report.html</code> file will be generated with HTML report (<a href="/static/html-report-example.html">example</a>).</p>
 <p>Takes precedence over <code>logger.html</code> setting inside <code>infection.json5</code> file. If you want to always generate HTML report, it’s better to configure it inside <code>infection.json5</code>, see <a href="/guide/usage.html">here</a>.</p>
 <blockquote>
