@@ -641,9 +641,10 @@ body {
   font-size: 1.05em;
   font-weight: 600;
   letter-spacing: 0.1em;
-}
-#hero .button:first-child {
   margin-right: 1em;
+}
+#hero .button:last-child {
+  margin-right: 0;
 }
 #hero .social-buttons {
   list-style-type: none;
