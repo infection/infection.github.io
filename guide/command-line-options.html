@@ -383,6 +383,7 @@
 <p>Useful to check how your changes impacts MSI in a feature branch. Useful for those who do not want / can’t write tests for the whole touched legacy file, but wants to cover their own changes (only modified lines).</p>
 <p>Can significantly improve performance since fewer Mutants are generated in comparison to using <code>--git-diff-filter=AM</code> or mutating all files.</p>
 <h3 id="logger-github"><a href="#logger-github" class="headerlink" title="--logger-github"></a><code>--logger-github</code></h3><p>Supposed to be used only with GitHub Actions. This logger prints GitHub Annotation warnings for escaped Mutants right in the Pull Request.</p>
+<p>Use <code>--logger-github=true</code> to force-enable or <code>--logger-github=false</code> to force-disable it.</p>
 <p class="tip">Note that the Github Actions environment is automatically detected and this switch isn’t actually necessary when executed there.</p>
 
 <p><img src="/images/github-logger.png" alt="GitHub Annotation Escaped Mutant"></p>
