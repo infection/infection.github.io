@@ -318,7 +318,7 @@
 <p>Useful to check how your changes impacts MSI in a feature branch. Useful for those who do not want / can’t write tests for the whole touched legacy file, but wants to cover their own changes (only modified lines).</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --git-diff-lines</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p><a href="/guide/command-line-options.html#git-diff-lines">Read more</a> about <a href="(/guide/command-line-options.html#git-diff-lines"><code>--git-diff-lines</code></a></p>
+<p><a href="/guide/command-line-options.html#git-diff-lines">Read more</a> about <a href="/guide/command-line-options.html#git-diff-lines"><code>--git-diff-lines</code></a></p>
 </blockquote>
 <h3 id="By-using-filter-option-for-the-old-Infection-versions"><a href="#By-using-filter-option-for-the-old-Infection-versions" class="headerlink" title="By using --filter option (for the old Infection versions)"></a>By using <code>--filter</code> option (for the old Infection versions)</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CHANGED_FILES=$(git diff origin/master --diff-filter=AM --name-only | grep src/ | paste -sd <span class="string">","</span> -);</span><br><span class="line">INFECTION_FILTER=<span class="string">"--filter=<span class="variable">$&#123;CHANGED_FILES&#125;</span> --ignore-msi-with-no-mutations"</span>;</span><br><span class="line"></span><br><span class="line">infection --threads=4 <span class="variable">$INFECTION_FILTER</span></span><br></pre></td></tr></table></figure>
 <p>The <code>--diff-filter=AM</code> returns only added and modified files, because we are not going to use removed ones.</p>
