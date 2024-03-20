@@ -386,7 +386,7 @@
 <p>Meant to be used together with <code>--git-diff-lines</code> / <code>--git-diff-filter</code> / <code>--filter</code></p>
 </blockquote>
 <p>This option can dramatically decrease the time needed for “Initial Tests Run” stage. </p>
-<p>If project has <code>N</code> tests files and we run Infection with, for example, <code>infection --git-diff-lines</code> and only 1 file <code>Foo.php</code> is updated/added in a Pull Request - it doesn’t make sense to run all the <code>N</code> tests to generate code coverage if we know that only 1 file of <code>N</code> covers the source code file <code>FooTest.php</code>.</p>
+<p>If project has <code>N</code> tests files and we run Infection with, for example, <code>infection --git-diff-lines</code> and only 1 file <code>Foo.php</code> is updated/added in a Pull Request - it doesn’t make sense to run all the <code>N</code> tests to generate code coverage if we know that only 1 file of <code>N</code> covers the source code file - <code>FooTest.php</code>.</p>
 <p>In practice, <code>PHPUnit</code> even has different methods that help define which test file covers which class:</p>
 <ul>
 <li><a href="https://docs.phpunit.de/en/11.0/configuration.html#the-requirecoveragemetadata-attribute" target="_blank" rel="noopener"><code>requireCoverageMetadata</code></a> configuration attribute</li>
@@ -394,7 +394,7 @@
 </ul>
 <p>In the example above, Infection would run only <code>FooTest.php</code> to generate coverage for <code>Foo.php</code>.</p>
 <p>Without this option, Infection will attempt to run <em>all</em> the project’s tests, as it doesn’t know which tests cover <code>Foo.php</code>.</p>
-<p>Currently, <code>--map-source-class-to-test</code> supports the only one strategy of mapping source class to test file: by adding <code>*Test</code> postfix to a file name. If source class is named <code>Foo</code>, Infection will try o run <code>FooTest</code>.</p>
+<p>Currently, <code>--map-source-class-to-test</code> supports the only one strategy of mapping source class to test file: by adding <code>*Test</code> postfix to a file name. If source class is named <code>Foo</code>, Infection will try to run <code>FooTest</code>.</p>
 <p>Under the hood, it builds a regex for <code>--filter</code> option: <code>--filter=&#39;FooTest|BarTest&#39;</code>.</p>
 <h3 id="logger-github"><a href="#logger-github" class="headerlink" title="--logger-github"></a><code>--logger-github</code></h3><p>Supposed to be used only with GitHub Actions. This logger prints GitHub Annotation warnings for escaped Mutants right in the Pull Request.</p>
 <p>Use <code>--logger-github=true</code> to force-enable or <code>--logger-github=false</code> to force-disable it.</p>
