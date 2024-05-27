@@ -177,6 +177,16 @@
         
         
         <li>
+            <a href="/guide/custom-mutators.html" class="sidebar-link new">Custom Mutators</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
             <a href="/guide/profiles.html" class="sidebar-link">Profiles</a>
         </li>
     
@@ -227,7 +237,7 @@
         
         
         <li>
-            <a href="/guide/debugging-issues.html" class="sidebar-link new">Debugging Issues</a>
+            <a href="/guide/debugging-issues.html" class="sidebar-link">Debugging Issues</a>
         </li>
     
         
@@ -328,7 +338,7 @@
 <p>Example:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./infection.phar --min-msi=48 --min-covered-msi=70 --threads=4</span><br></pre></td></tr></table></figure>
 <h2 id="Using-with-Travis"><a href="#Using-with-Travis" class="headerlink" title="Using with Travis"></a>Using with Travis</h2><p>The simplest <code>.travis.yml</code> config to integrate Infection with Travis is:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">before_script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">wget</span> <span class="attr">https://github.com/infection/infection/releases/download/0.28.1/infection.phar</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">wget</span> <span class="attr">https://github.com/infection/infection/releases/download/0.28.1/infection.phar.asc</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">gpg</span> <span class="bullet">--recv-keys</span> <span class="string">C6D76C329EBADE2FB9C458CFC5095986493B4AA0</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">gpg</span> <span class="bullet">--with-fingerprint</span> <span class="bullet">--verify</span> <span class="string">infection.phar.asc</span> <span class="string">infection.phar</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">chmod</span> <span class="string">+x</span> <span class="string">infection.phar</span></span><br><span class="line"></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">./infection.phar</span> <span class="bullet">--min-msi=48</span> <span class="bullet">--threads=4</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">before_script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">wget</span> <span class="attr">https://github.com/infection/infection/releases/download/0.29.0/infection.phar</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">wget</span> <span class="attr">https://github.com/infection/infection/releases/download/0.29.0/infection.phar.asc</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">gpg</span> <span class="bullet">--recv-keys</span> <span class="string">C6D76C329EBADE2FB9C458CFC5095986493B4AA0</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">gpg</span> <span class="bullet">--with-fingerprint</span> <span class="bullet">--verify</span> <span class="string">infection.phar.asc</span> <span class="string">infection.phar</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">chmod</span> <span class="string">+x</span> <span class="string">infection.phar</span></span><br><span class="line"></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">./infection.phar</span> <span class="bullet">--min-msi=48</span> <span class="bullet">--threads=4</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><a href="./mutation-badge.html">Read more</a> about how to add a Mutation Badge to your Github Project</p>
 </blockquote>
@@ -337,10 +347,6 @@
     
       <div class="guide-links">
         
-          <span>← <a href="/guide/profiles.html">Profiles</a></span>
-        
-        
-          <span style="float:right"><a href="/guide/mutation-badge.html">Mutation Badge, cloud HTML report</a> →</span>
         
       </div>
     
