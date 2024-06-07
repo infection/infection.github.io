@@ -348,7 +348,7 @@
 <h3 id="test-framework"><a href="#test-framework" class="headerlink" title="--test-framework"></a><code>--test-framework</code></h3><p>This is a name of the Test Framework to use. Currently, Infection supports <code>PHPUnit</code>, <code>PhpSpec</code>, <code>Pest</code> and <code>Codeception</code>.</p>
 <p>If you are using <code>infection/infection</code> Composer package, <code>PHPUnit</code> and <code>Pest</code> are installed by default. Other test framework adapters will be automatically installed on demand.<br><a href="/guide/installation.html#Phar">PHAR distribution</a> is bundled with all available adapters.</p>
 <blockquote>
-<p>Feel free to request a new test framework to be supported out of the box in Github’s issues.</p>
+<p>Feel free to request a new test framework to be supported out of the box in GitHub’s issues.</p>
 </blockquote>
 <h3 id="test-framework-options"><a href="#test-framework-options" class="headerlink" title="--test-framework-options"></a><code>--test-framework-options</code></h3><p>This option allows passing additional options to the test framework. Example for <code>PHPUnit</code>:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --<span class="built_in">test</span>-framework-options=<span class="string">"--verbose --filter=just/unit/tests"</span></span><br></pre></td></tr></table></figure>
@@ -410,12 +410,15 @@
 <p>Under the hood, it builds a regex for <code>--filter</code> option: <code>--filter=&#39;FooTest|BarTest&#39;</code>.</p>
 <h3 id="logger-github"><a href="#logger-github" class="headerlink" title="--logger-github"></a><code>--logger-github</code></h3><p>Supposed to be used only with GitHub Actions. This logger prints GitHub Annotation warnings for escaped Mutants right in the Pull Request.</p>
 <p>Use <code>--logger-github=true</code> to force-enable or <code>--logger-github=false</code> to force-disable it.</p>
-<p class="tip">Note that the Github Actions environment is automatically detected and this switch isn’t actually necessary when executed there.</p>
+<p class="tip">Note that the GitHub Actions environment is automatically detected and this switch isn’t actually necessary when executed there.</p>
 
 <p><img src="/images/github-logger.png" alt="GitHub Annotation Escaped Mutant"></p>
 <p>Usage:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --logger-github --git-diff-filter=A</span><br></pre></td></tr></table></figure>
 <p>Here is <a href="https://github.com/infection/infection/blob/bef65fc22faa200edd367ffe12596905947a2a93/.github/workflows/mt-annotations.yaml#L50-L52" target="_blank" rel="noopener">a real example</a> how Infection uses it itself.</p>
+<blockquote>
+<p>Note: Infection automatically detects <code>GITHUB_WORKSPACE</code> environment variable for report linking.</p>
+</blockquote>
 <h3 id="logger-gitlab"><a href="#logger-gitlab" class="headerlink" title="--logger-gitlab"></a><code>--logger-gitlab</code></h3><p>This option is used to provide a path to the generated GitLab (Code Climate) Code Quality Report:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-gitlab=<span class="string">'gitlab-coverage.json'</span></span><br></pre></td></tr></table></figure>
 <p>After Infection completes its job, the <code>gitlab-coverage.json</code> file will be generated. This file can than be included as a <code>codequality</code> report artifact.</p>
@@ -429,6 +432,15 @@
 <p><img src="/images/gitlab-logger-diff-view.png" alt="GitHub Annotation Escaped Mutant"></p>
 <blockquote>
 <p>Note that “See findings in merge request diff view” is <a href="https://docs.gitlab.com/ee/ci/testing/code_quality.html#features-per-tier" target="_blank" rel="noopener">not available</a> on free tier</p>
+</blockquote>
+<blockquote>
+<p>Note: Infection automatically detects <code>CI_PROJECT_DIR</code> environment variable for report linking.</p>
+</blockquote>
+<h3 id="logger-project-root-directory"><a href="#logger-project-root-directory" class="headerlink" title="--logger-project-root-directory"></a><code>--logger-project-root-directory</code></h3><p>While generating GitHub and GitLab reports, Infection need to replace some links to their correct path according to your<br>repository. To do so, it will auto-detect <code>GITHUB_WORKSPACE</code> GitHub environment variable, and <code>CI_PROJECT_DIR</code> GitLab<br>environment variable as project root directory.</p>
+<p>If this auto-detection does not fit your needs (for instance, while using custom Docker image and custom project path in<br>GitLab CI), you can customize the path to replace using <code>--logger-project-root-directory</code> option:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-project-root-directory=<span class="string">'/custom/project/root/directory/path'</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: if <code>GITHUB_WORKSPACE</code> and <code>CI_PROJECT_DIR</code> cannot be detected, and <code>--logger-project-root-directory</code> option is<br>not set, Infection will try to retrieve the project root directory using <code>git rev-parse --show-toplevel</code>.</p>
 </blockquote>
 <h3 id="logger-html"><a href="#logger-html" class="headerlink" title="--logger-html"></a><code>--logger-html</code></h3><p>This option is used to provide a path to the generated HTML Report:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-html=<span class="string">'mutation-report.html'</span></span><br></pre></td></tr></table></figure>
