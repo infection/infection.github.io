@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+        <title>Caveats — Infection PHP</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="Caveats — Infection PHP">
+        <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta property="og:image" content="https://infection.github.io//images/logo.png">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Caveats — Infection PHP">
+        <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+        <link rel="icon" href="/images/logo.png" type="image/png">
+
+        <meta name="msapplication-TileColor" content="#4fc08d">
+        <meta name="theme-color" content="#4fc08d">
+
+        <meta name="msapplication-config" content="browserconfig.xml">
+        <link rel="manifest" href="/manifest.json">
+
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="/css/page.css">
+
+        <!-- this needs to be loaded before guide's inline scripts -->
+        <script src="/js/vue.js"></script>
+        <script>window.PAGE_TYPE = "guide"</script>
+    </head>
+    <body class="docs">        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.png">
+    <span>Infection</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link current">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+  </ul>
+</div>
+
+        
+            <div id="main" class="fix-sidebar">
+                
+                    
+    <div class="sidebar">
+    <ul class="main-menu">
+        <li>
+  <form id="search-form">
+    <input type="text" id="search-query-sidebar" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link current">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+    </ul>
+    <div class="list">
+        <ul class="menu-root">
+    
+        
+        
+            
+                <li><h3>Documentation</h3></li>
+            
+            
+        
+        
+        <li>
+            <a href="/guide/index.html" class="sidebar-link">Introduction</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/installation.html" class="sidebar-link">Installation</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/usage.html" class="sidebar-link">Usage</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/command-line-options.html" class="sidebar-link">Command Line Options</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/mutators.html" class="sidebar-link">Mutators</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/custom-mutators.html" class="sidebar-link new">Custom Mutators</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/profiles.html" class="sidebar-link">Profiles</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/using-with-ci.html" class="sidebar-link">Using with CI</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/mutation-badge.html" class="sidebar-link">Mutation Badge, cloud HTML report</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/how-to.html" class="sidebar-link">How-to Guides</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/caveats.html" class="sidebar-link current">Caveats</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/debugging-issues.html" class="sidebar-link">Debugging Issues</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/infection-playground.html" class="sidebar-link">Infection Playground</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/github-sponsors.html" class="sidebar-link">GitHub Sponsors ♥️</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/supported-test-frameworks.html" class="sidebar-link">Supported Test Frameworks</a>
+        </li>
+    
+        
+        
+            
+            
+                <li><h3>Miscellaneous</h3></li>
+            
+        
+        
+        <li>
+            <a href="/guide/compare.html" class="sidebar-link">Compare with competitors</a>
+        </li>
+    
+    <li><h3>Posts</h3></li>
+    
+        <li>
+            <a href="/2022/01/10/whats-new-in-0.26.0/" class="sidebar-link">What's new in Infection 0.26.0</a>
+        </li>
+    
+        <li>
+            <a href="/2021/09/06/whats-new-in-0.25.0/" class="sidebar-link">What's new in Infection 0.25.0</a>
+        </li>
+    
+        <li>
+            <a href="/2021/07/27/whats-new-in-0.24.0/" class="sidebar-link">What's new in Infection 0.24.0</a>
+        </li>
+    
+        <li>
+            <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
+        </li>
+    
+        <li>
+            <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
+        </li>
+    
+    
+</ul>
+
+    </div>
+</div>
+
+
+<div class="content guide with-sidebar caveats-guide">
+    
+      
+    
+    
+      <h1>Caveats</h1>
+    
+    <h2 id="Mutations-must-occur-when-CodeCoverage-has-already-started"><a href="#Mutations-must-occur-when-CodeCoverage-has-already-started" class="headerlink" title="Mutations must occur when CodeCoverage has already started"></a>Mutations must occur when CodeCoverage has already started</h2><p>It may happen that a mutation that fails a test isn’t reported as covered.<br>This can occur when the code-coverage profiler hasn’t started before the mutations occurs.<br>Take for example:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SourceClassTest</span> <span class="keyword">extends</span> \<span class="title">PHPUnit</span>\<span class="title">Framework</span>\<span class="title">TestCase</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dataProvider</span> instancesProvider</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testAlwaysTrueFromFactoryMethod</span><span class="params">(SourceClass $class)</span>: <span class="title">void</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">self</span>::assertTrue($class-&gt;getValue());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">instancesProvider</span><span class="params">()</span>: <span class="title">array</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [</span><br><span class="line">            [SourceClass::factoryMethod()],</span><br><span class="line">        ];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SourceClass</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> bool $value;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(bool $value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;value = $value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">factoryMethod</span><span class="params">()</span>: <span class="title">self</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">self</span>(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getValue</span><span class="params">()</span>: <span class="title">bool</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>If the <code>TrueValue</code> <a href="/guide/mutators.html#Boolean-Substitution">Boolean Substitution</a> mutator is active, you<br>would expect the mutation to be correctly covered. But in the provided example the mutation<br>occurs in the <code>@dataProvider</code> which runs before the code-coverage driver gets started.</p>
+<p>Be sure to check your mutated code runs inside the test in this case, so a workaround can be the following:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SourceClassTest</span> <span class="keyword">extends</span> \<span class="title">PHPUnit</span>\<span class="title">Framework</span>\<span class="title">TestCase</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dataProvider</span> instanceFactoriesProvider</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testAlwaysTrueFromFactoryMethod</span><span class="params">(callable $classFactory)</span>: <span class="title">void</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $class = $classFactory();</span><br><span class="line">        <span class="keyword">self</span>::assertTrue($class-&gt;getValue());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">instanceFactoriesProvider</span><span class="params">()</span>: <span class="title">array</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [</span><br><span class="line">            [<span class="keyword">static</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> SourceClass::factoryMethod();</span><br><span class="line">            &#125;],</span><br><span class="line">        ];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+      <div class="guide-links">
+        
+        
+      </div>
+    
+    <div class="footer">
+      Caught a mistake or want to contribute to the documentation?
+      <a href="https://github.com/infection/site/blob/master/src/guide/caveats.md" target="_blank">
+        Edit this page on Github!
+      </a>
+    </div>
+</div>
+
+                
+            </div>
+            <script src="/js/smooth-scroll.min.js"></script>
+        
+
+        <!-- main custom script for sidebars, version selects etc. -->
+        <script src="/js/css.escape.js"></script>
+        <script src="/js/common.js"></script>
+        <script src="/js/theme-switch.js"></script>
+
+        <!-- search -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+        <link rel="stylesheet" href="/css/search.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+        <script>
+        [
+          '#search-query-nav',
+          '#search-query-sidebar',
+          '#search-query-menu'
+        ].forEach(function (selector) {
+          if (!document.querySelector(selector)) return
+          docsearch({
+              apiKey: '75081c711113ff76f9ed83bf001741a1',
+              indexName: 'infection',
+              inputSelector: selector,
+              debug: false // Set debug to true if you want to inspect the dropdown
+          });
+        })
+        </script>
+
+        <!-- fastclick -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body)
+        }, false)
+        </script>
+    </body>
+</html>

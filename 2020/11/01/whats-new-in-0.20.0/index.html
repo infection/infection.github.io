@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+        <title>What's new in Infection 0.20.0 — Infection PHP</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="What's new in Infection 0.20.0 — Infection PHP">
+        <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta property="og:image" content="https://infection.github.io//images/logo.png">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="What's new in Infection 0.20.0 — Infection PHP">
+        <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+        <link rel="icon" href="/images/logo.png" type="image/png">
+
+        <meta name="msapplication-TileColor" content="#4fc08d">
+        <meta name="theme-color" content="#4fc08d">
+
+        <meta name="msapplication-config" content="browserconfig.xml">
+        <link rel="manifest" href="/manifest.json">
+
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="/css/page.css">
+
+        <!-- this needs to be loaded before guide's inline scripts -->
+        <script src="/js/vue.js"></script>
+        <script>window.PAGE_TYPE = "{{type}}"</script>
+    </head>
+    <body class="docs">        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.png">
+    <span>Infection</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+  </ul>
+</div>
+
+        
+            <div id="main" class="fix-sidebar">
+                
+                    <div class="sidebar blog">
+    <ul class="main-menu">
+        <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+    </ul>
+    <div class="list">
+        <h2>
+            Recent Posts
+            <a href="/atom.xml" target="_blank" style="vertical-align: middle; margin-left: 5px">
+                <img src="/images/feed.png" style="width:15px;height:15px">
+            </a>
+        </h2>
+        <ul style="padding:0">
+        
+            <li>
+                <a href="/2022/01/10/whats-new-in-0.26.0/" class="sidebar-link">What's new in Infection 0.26.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/09/06/whats-new-in-0.25.0/" class="sidebar-link">What's new in Infection 0.25.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/07/27/whats-new-in-0.24.0/" class="sidebar-link">What's new in Infection 0.24.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link current">What's new in Infection 0.20.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/10/28/whats-new-in-0.19.0/" class="sidebar-link">What's new in Infection 0.19.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/10/17/whats-new-in-0.18.0/" class="sidebar-link">What's new in Infection 0.18.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/03/28/whats-new-in-0.16.0/" class="sidebar-link">What's new in Infection 0.16.0</a>
+            </li>
+        
+        </ul>
+    </div>
+</div>
+<div class="content with-sidebar blog post">
+    <h1>What's new in Infection 0.20.0</h1>
+    <h4>Nov 1, 2020</h4>
+    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.20.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.20.0</a></p>
+<h2 id="New-features-and-enhancements"><a href="#New-features-and-enhancements" class="headerlink" title="New features and enhancements"></a>New features and enhancements</h2><h3 id="Github-Annotations-logger-🚀"><a href="#Github-Annotations-logger-🚀" class="headerlink" title="Github Annotations logger 🚀"></a>Github Annotations logger 🚀</h3><p>This logger is supposed to be used only with GitHub Actions. It prints GitHub Annotation warnings for <em>escaped</em> Mutants right in the Pull Request:</p>
+<p><img src="/images/github-logger.png" alt="GitHub Annotation Escaped Mutant"></p>
+<p>Usage (look at <a href="https://github.com/infection/infection/blob/bef65fc22faa200edd367ffe12596905947a2a93/.github/workflows/mt-annotations.yaml#L50-L52" target="_blank" rel="noopener">the real example</a> how Infection uses it itself):</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --logger-github --git-diff-filter=AM</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Read below why you may need to use <code>--git-diff-filter</code> option</p>
+</blockquote>
+<p>It’s also possible to configure this logger in <code>infection.json</code> file. Results will be printed to <code>stdout</code>:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"github"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="git-diff-filter-option"><a href="#git-diff-filter-option" class="headerlink" title="--git-diff-filter option"></a><code>--git-diff-filter</code> option</h3><p>Allows filtering files to mutate by using <code>git diff</code> with <code>--diff-filter</code> option. Sensible values are: <code>AM</code> - added and modified files. <code>A</code> - only added files.</p>
+<p>Best to be used during pull request builds on CI, e.g. with GitHub Actions, Travis CI and so on.</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --git-diff-filter=A</span><br></pre></td></tr></table></figure>
+<p>This command will mutate only those files, that were <em>added</em> in the Pull Request. The diff is done between the current branch and the base branch.</p>
+<blockquote>
+<p>It’s possible to configure the base branch, see <a href="/guide/command-line-options.html#git-diff-base"><code>--git-diff-base</code></a> option</p>
+</blockquote>
+<h3 id="git-diff-base-option"><a href="#git-diff-base-option" class="headerlink" title="--git-diff-base option"></a><code>--git-diff-base</code> option</h3><p>Supposed to be used only with <a href="/guide/command-line-options.html#git-diff-filter"><code>--git-diff-filter</code></a> option. Configures the base branch for <code>git diff</code> command.</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --git-diff-base=origin/<span class="variable">$GITHUB_BASE_REF</span> --git-diff-filter=AM</span><br></pre></td></tr></table></figure>
+<h2 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h2><h3 id="Ternary-mutator"><a href="#Ternary-mutator" class="headerlink" title="Ternary mutator"></a><code>Ternary</code> mutator</h3><p>This mutator mutates a ternary operator:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- isset($b) ? 'B' : 'C';</span></span><br><span class="line"><span class="addition">+ isset($b) ? 'C' : 'B';</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">$foo = 'foo';</span><br><span class="line"><span class="deletion">- $foo ?: 'bar';</span></span><br><span class="line"><span class="addition">+ $foo ? 'bar' : $foo;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Coalesce-mutator"><a href="#Coalesce-mutator" class="headerlink" title="Coalesce mutator"></a><code>Coalesce</code> mutator</h3><p>Mutates:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">$foo = 'foo';</span><br><span class="line">$bar = 'bar';</span><br><span class="line"><span class="deletion">- $foo ?? $bar;</span></span><br><span class="line"><span class="addition">+ $bar ?? $foo;</span></span><br></pre></td></tr></table></figure>
+<p>Or more complex case with nested values:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">$foo = 'foo';</span><br><span class="line">$bar = 'bar';</span><br><span class="line">$baz = 'baz';</span><br><span class="line"></span><br><span class="line"><span class="deletion">- $foo ?? $bar ?? $baz;</span></span><br><span class="line"><span class="addition">+ $foo ?? $baz ?? $bar;</span></span><br><span class="line"></span><br><span class="line"><span class="deletion">- $foo ?? $bar ?? $baz;</span></span><br><span class="line"><span class="addition">+ $bar ?? $foo ?? $baz;</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapSubstr-mutator"><a href="#UnwrapSubstr-mutator" class="headerlink" title="UnwrapSubstr mutator"></a><code>UnwrapSubstr</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = substr('abcde', 0, -1);</span></span><br><span class="line"><span class="addition">+ $x = 'abcde';</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapStrRev-mutator"><a href="#UnwrapStrRev-mutator" class="headerlink" title="UnwrapStrRev mutator"></a><code>UnwrapStrRev</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = strrev('Hello!');</span></span><br><span class="line"><span class="addition">+ $x = 'Hello!';</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapLtrim-mutator"><a href="#UnwrapLtrim-mutator" class="headerlink" title="UnwrapLtrim mutator"></a><code>UnwrapLtrim</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = ltrim(' Hello!');</span></span><br><span class="line"><span class="addition">+ $x = ' Hello!';</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapRtrim-mutator"><a href="#UnwrapRtrim-mutator" class="headerlink" title="UnwrapRtrim mutator"></a><code>UnwrapRtrim</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = rtrim('Hello! ');</span></span><br><span class="line"><span class="addition">+ $x = 'Hello! ';</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapStrIreplace-mutator"><a href="#UnwrapStrIreplace-mutator" class="headerlink" title="UnwrapStrIreplace mutator"></a><code>UnwrapStrIreplace</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = str_ireplace('%body%', 'black', '&lt;body text=%BODY%&gt;');</span></span><br><span class="line"><span class="addition">+ $x = '&lt;body text=%BODY%&gt;';</span></span><br></pre></td></tr></table></figure>
+<h3 id="UnwrapStrShuffle-mutator"><a href="#UnwrapStrShuffle-mutator" class="headerlink" title="UnwrapStrShuffle mutator"></a><code>UnwrapStrShuffle</code> mutator</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $x = str_shuffle('Hello!');</span></span><br><span class="line"><span class="addition">+ $x = 'Hello!';</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Enjoy!</p>
+<p><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="noopener">Star</a></p>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+</div>
+
+                
+            </div>
+            <script src="/js/smooth-scroll.min.js"></script>
+        
+
+        <!-- main custom script for sidebars, version selects etc. -->
+        <script src="/js/css.escape.js"></script>
+        <script src="/js/common.js"></script>
+        <script src="/js/theme-switch.js"></script>
+
+        <!-- search -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+        <link rel="stylesheet" href="/css/search.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+        <script>
+        [
+          '#search-query-nav',
+          '#search-query-sidebar',
+          '#search-query-menu'
+        ].forEach(function (selector) {
+          if (!document.querySelector(selector)) return
+          docsearch({
+              apiKey: '75081c711113ff76f9ed83bf001741a1',
+              indexName: 'infection',
+              inputSelector: selector,
+              debug: false // Set debug to true if you want to inspect the dropdown
+          });
+        })
+        </script>
+
+        <!-- fastclick -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body)
+        }, false)
+        </script>
+    </body>
+</html>

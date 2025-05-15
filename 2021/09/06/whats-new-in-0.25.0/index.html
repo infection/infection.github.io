@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+        <title>What's new in Infection 0.25.0 — Infection PHP</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="What's new in Infection 0.25.0 — Infection PHP">
+        <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta property="og:image" content="https://infection.github.io//images/logo.png">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="What's new in Infection 0.25.0 — Infection PHP">
+        <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+        <link rel="icon" href="/images/logo.png" type="image/png">
+
+        <meta name="msapplication-TileColor" content="#4fc08d">
+        <meta name="theme-color" content="#4fc08d">
+
+        <meta name="msapplication-config" content="browserconfig.xml">
+        <link rel="manifest" href="/manifest.json">
+
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="/css/page.css">
+
+        <!-- this needs to be loaded before guide's inline scripts -->
+        <script src="/js/vue.js"></script>
+        <script>window.PAGE_TYPE = "{{type}}"</script>
+    </head>
+    <body class="docs">        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.png">
+    <span>Infection</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+  </ul>
+</div>
+
+        
+            <div id="main" class="fix-sidebar">
+                
+                    <div class="sidebar blog">
+    <ul class="main-menu">
+        <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+    </ul>
+    <div class="list">
+        <h2>
+            Recent Posts
+            <a href="/atom.xml" target="_blank" style="vertical-align: middle; margin-left: 5px">
+                <img src="/images/feed.png" style="width:15px;height:15px">
+            </a>
+        </h2>
+        <ul style="padding:0">
+        
+            <li>
+                <a href="/2022/01/10/whats-new-in-0.26.0/" class="sidebar-link">What's new in Infection 0.26.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/09/06/whats-new-in-0.25.0/" class="sidebar-link current">What's new in Infection 0.25.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/07/27/whats-new-in-0.24.0/" class="sidebar-link">What's new in Infection 0.24.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link">What's new in Infection 0.20.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/10/28/whats-new-in-0.19.0/" class="sidebar-link">What's new in Infection 0.19.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/10/17/whats-new-in-0.18.0/" class="sidebar-link">What's new in Infection 0.18.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/03/28/whats-new-in-0.16.0/" class="sidebar-link">What's new in Infection 0.16.0</a>
+            </li>
+        
+        </ul>
+    </div>
+</div>
+<div class="content with-sidebar blog post">
+    <h1>What's new in Infection 0.25.0</h1>
+    <h4>Sep 6, 2021</h4>
+    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.25.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.25.0</a></p>
+<h3 id="Speed-up-Infection-runs-by-remembering-which-test-killed-a-mutant"><a href="#Speed-up-Infection-runs-by-remembering-which-test-killed-a-mutant" class="headerlink" title="Speed up Infection runs by remembering which test killed a mutant"></a>Speed up Infection runs by remembering which test killed a mutant</h3><p>When Infection runs Mutation Analysis for the first time, we can save the information about which Mutant was killed by which test, and then on the subsequent Infection executions (second and farther), we can use this cached knowledge and run those tests that killed particular Mutants first.</p>
+<p>This will benefit all Infection users, especially those who use Infection with slow functional tests where the difference between running 1 or 2 tests can be in seconds.</p>
+<p>Here is an example for the real project, showing the difference between the very first and the second Infection runs for one particular Mutant:</p>
+<p><a href="/images/posts/0-25-0/infection-cache.png"><img src="/images/posts/0-25-0/infection-cache.png" alt="infectionCache"></a></p>
+<p>You can notice that on the first Infection run, we had to run 489 tests in order to kill <code>PublicVisibility</code> Mutant and it took 38 seconds (!), because functional tests are quite slow.</p>
+<p>On the same time, on the second Infection run, we got the previously saved information and executed failed test first (that test that was 489th on the first run), and we killed Mutant by 0.5s.</p>
+<p>Running this new feature for one branch on the real project with slow functional test, we got the following result:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- Time: 1m 49s. Memory: 0.07GB (first run)</span></span><br><span class="line"><span class="addition">+ Time: 38s. Memory: 0.07GB (second run)</span></span><br></pre></td></tr></table></figure>
+<h3 id="Generate-coverage-for-filtered-files-only-when-filter-or-git-diff-filter-are-used"><a href="#Generate-coverage-for-filtered-files-only-when-filter-or-git-diff-filter-are-used" class="headerlink" title="Generate coverage for filtered files only when --filter or --git-diff-filter are used"></a>Generate coverage for filtered files only when <code>--filter</code> or <code>--git-diff-filter</code> are used</h3><p>Collecting coverage data is very expensive operation.</p>
+<p>In previous versions, when Infection ran your test suite, it did it with <code>--coverage-xml</code> and <code>--log-junit</code> report, because Infection needs this data to know by whats tests particular line of the source code is covered, and how fast the tests are.</p>
+<p>Imagine, you have 1000 tests that takes 1m to be executed. When you run them with coverage, 1m can become 2, 3 or even more minutes, because <strong>collecting code coverage data costs a lot</strong>.</p>
+<p>More and more people start using Infection for changed files only (this can greatly decrease the time needed for Mutation Analysis), and collecting coverage data for <strong>all</strong> the files is useless when you are mutating only 2 files from thousands.</p>
+<p>When the <code>--filter</code> option is used in Infection, we 100% know that we will mutate only particular files, so we need the code coverage only for them.</p>
+<p>Starting from <code>0.25.0</code>, the next command line</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">infection --filter=src/path/to/File1.php,src/path/to/File2.php</span><br></pre></td></tr></table></figure>
+<p>creates the following <code>phpunit.xml</code> for initial tests under the hood:</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">phpunit</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">coverage</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">file</span>&gt;</span>src/path/to/File1.php/<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">file</span>&gt;</span>src/path/to/File2.php/<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">coverage</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">phpunit</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>This will dramatically decrease the time needed for collecting coverage data since we reduce the number of processed files.</p>
+<blockquote>
+<p>We recommend using <code>pcov</code> to collect coverage, not <code>Xdebug</code> or <code>phpdbg</code></p>
+</blockquote>
+<h4 id="Some-numbers"><a href="#Some-numbers" class="headerlink" title="Some numbers"></a>Some numbers</h4><p>Tests with the whole<code>src</code> <strong>folder</strong> in <code>coverage.include</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">............................................                  2423 / 2423 (100%)</span><br><span class="line"></span><br><span class="line">Time: 03:11.112, Memory: 587.62 MB</span><br><span class="line"></span><br><span class="line">OK (2423 tests, 9861 assertions)</span><br><span class="line">Generating code coverage report ... <span class="keyword">done</span> [00:12.564]</span><br></pre></td></tr></table></figure>
+<p>Tests with 5 <strong>files</strong> in <code>coverage.include</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">............................................                  2423 / 2423 (100%)</span><br><span class="line"></span><br><span class="line">Time: 01:12.771, Memory: 34.00 MB</span><br><span class="line"></span><br><span class="line">OK (2423 tests, 9861 assertions)</span><br><span class="line">Generating code coverage report ... <span class="keyword">done</span> [00:00.041]</span><br></pre></td></tr></table></figure>
+<p>Difference:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- Time: 03:11.112, Memory: 587.62 MB</span></span><br><span class="line"><span class="addition">+ Time: 01:12.771, Memory: 34.00 MB</span></span><br></pre></td></tr></table></figure>
+<p>So, it saves 2 from 3 minutes.</p>
+<p>Another case is with Infection and <code>--filter</code> option used for the real project.</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">infection -j4 --only-covered --filter=src/Recorder/RecorderCapabilities.php --ignore-msi-with-no-mutations --show-mutations  --log-verbosity=all --only-covering-test-cases</span><br><span class="line"></span><br><span class="line"><span class="deletion">- Time: 8s. Memory: 28.00MB (0.24.0)</span></span><br><span class="line"><span class="addition">+ Time: 2s. Memory: 26.00MB (0.25.0)</span></span><br></pre></td></tr></table></figure>
+<p>it is <code>4x</code> faster for the filtered file set.</p>
+<p>Notes: this feature will benefit those developers, who use Infection with <code>--filter</code> or <code>--git-diff-filter</code> options, running MT for the changed/added files.</p>
+<h3 id="JSON-schema-inside-infection-json"><a href="#JSON-schema-inside-infection-json" class="headerlink" title="JSON schema inside infection.json"></a>JSON schema inside <code>infection.json</code></h3><p>Infection will now add <code>$schema</code> property to generated <code>infection.json</code> file. This will allow IDEs to <strong>autocomplete</strong> all the settings available for usage.</p>
+<p>If you already use Infection, please do the following:</p>
+<ol>
+<li>Rename <code>infection.json.dist</code> to <code>infection.json</code> if applicable</li>
+<li><p>Add <code>$schema</code> to your <code>infection.json</code> file:<br>if you installed Infection via <code>Composer</code>:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"$schema"</span>: <span class="string">"vendor/infection/infection/resources/schema.json"</span>  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>or if you downloaded PHAR distribution:</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"$schema"</span>: <span class="string">"https://raw.githubusercontent.com/infection/infection/0.25.0/resources/schema.json"</span>  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Detect-syntax-errors-during-mutation-analysis"><a href="#Detect-syntax-errors-during-mutation-analysis" class="headerlink" title="Detect syntax errors during mutation analysis"></a>Detect syntax errors during mutation analysis</h3><p>Infection will now detect syntax errors produced by Mutation Operators. Chances that it will happen with built-in mutators are quite low, because we are linting the mutated source code in Infection tests.</p>
+<p>But since in the future we will allow users to add their own mutators, it’s better to track syntax errors and do not treat such cases as Killed Mutants.</p>
+<p>Example of the logs generated for syntax error:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Syntax Errors mutants:</span><br><span class="line">======================</span><br><span class="line"></span><br><span class="line">1) /infection/tests/e2e/Syntax_Error_PHPUnit/src/SourceClass.php:14    [M] SyntaxError</span><br><span class="line"></span><br><span class="line">--- Original</span><br><span class="line">+++ New</span><br><span class="line">@@ @@</span><br><span class="line">     &#125;</span><br><span class="line">     public function bar() : string</span><br><span class="line">     &#123;</span><br><span class="line">-        return $this-&gt;foo();</span><br><span class="line">+        return $-&gt;foo();</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">  PHPUnit 9.5.8 by Sebastian Bergmann and contributors.</span><br><span class="line">  </span><br><span class="line">  Warning:       Your XML configuration validates against a deprecated schema.</span><br><span class="line">  Suggestion:    Migrate your XML configuration using &quot;--migrate-configuration&quot;!</span><br><span class="line">  </span><br><span class="line">  E                                                                   1 / 1 (100%)</span><br><span class="line">  </span><br><span class="line">  Time: 00:00.005, Memory: 6.00 MB</span><br><span class="line">  </span><br><span class="line">  There was 1 error:</span><br><span class="line">  </span><br><span class="line">  1) Syntax_Error_PHPUnit\Test\SourceClassTest::test_hello</span><br><span class="line">  ParseError: syntax error, unexpected token &quot;-&gt;&quot;, expecting variable or &quot;&#123;&quot; or &quot;$&quot;</span><br><span class="line">  </span><br><span class="line">  /infection/tests/e2e/Syntax_Error_PHPUnit/src/SourceClass.php:13</span><br><span class="line">  /infection/tests/e2e/Syntax_Error_PHPUnit/tests/SourceClassTest.php:12</span><br></pre></td></tr></table></figure>
+<p>Among these new features, <a href="https://github.com/infection/infection/compare/0.24.0...0.25.0" target="_blank" rel="noopener">there were several bug fixes and internal improvement</a> so please upgrade.</p>
+<hr>
+<p>Enjoying Infection? Consider supporting us on GitHub Sponsors ♥️</p>
+<p><a href="https://github.com/sponsors/infection" target="_blank" rel="noopener">https://github.com/sponsors/infection</a></p>
+<p><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="noopener">Star</a></p>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+</div>
+
+                
+            </div>
+            <script src="/js/smooth-scroll.min.js"></script>
+        
+
+        <!-- main custom script for sidebars, version selects etc. -->
+        <script src="/js/css.escape.js"></script>
+        <script src="/js/common.js"></script>
+        <script src="/js/theme-switch.js"></script>
+
+        <!-- search -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+        <link rel="stylesheet" href="/css/search.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+        <script>
+        [
+          '#search-query-nav',
+          '#search-query-sidebar',
+          '#search-query-menu'
+        ].forEach(function (selector) {
+          if (!document.querySelector(selector)) return
+          docsearch({
+              apiKey: '75081c711113ff76f9ed83bf001741a1',
+              indexName: 'infection',
+              inputSelector: selector,
+              debug: false // Set debug to true if you want to inspect the dropdown
+          });
+        })
+        </script>
+
+        <!-- fastclick -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body)
+        }, false)
+        </script>
+    </body>
+</html>

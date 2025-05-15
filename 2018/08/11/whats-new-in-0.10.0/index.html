@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+        <title>What's new in Infection 0.10.0 — Infection PHP</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="What's new in Infection 0.10.0 — Infection PHP">
+        <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta property="og:image" content="https://infection.github.io//images/logo.png">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="What's new in Infection 0.10.0 — Infection PHP">
+        <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+        <link rel="icon" href="/images/logo.png" type="image/png">
+
+        <meta name="msapplication-TileColor" content="#4fc08d">
+        <meta name="theme-color" content="#4fc08d">
+
+        <meta name="msapplication-config" content="browserconfig.xml">
+        <link rel="manifest" href="/manifest.json">
+
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="/css/page.css">
+
+        <!-- this needs to be loaded before guide's inline scripts -->
+        <script src="/js/vue.js"></script>
+        <script>window.PAGE_TYPE = "{{type}}"</script>
+    </head>
+    <body class="docs">        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.png">
+    <span>Infection</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+  </ul>
+</div>
+
+        
+            <div id="main" class="fix-sidebar">
+                
+                    <div class="sidebar blog">
+    <ul class="main-menu">
+        <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+    </ul>
+    <div class="list">
+        <h2>
+            Recent Posts
+            <a href="/atom.xml" target="_blank" style="vertical-align: middle; margin-left: 5px">
+                <img src="/images/feed.png" style="width:15px;height:15px">
+            </a>
+        </h2>
+        <ul style="padding:0">
+        
+            <li>
+                <a href="/2022/01/10/whats-new-in-0.26.0/" class="sidebar-link">What's new in Infection 0.26.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/09/06/whats-new-in-0.25.0/" class="sidebar-link">What's new in Infection 0.25.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/07/27/whats-new-in-0.24.0/" class="sidebar-link">What's new in Infection 0.24.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link">What's new in Infection 0.20.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/10/28/whats-new-in-0.19.0/" class="sidebar-link">What's new in Infection 0.19.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/10/17/whats-new-in-0.18.0/" class="sidebar-link">What's new in Infection 0.18.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/03/28/whats-new-in-0.16.0/" class="sidebar-link">What's new in Infection 0.16.0</a>
+            </li>
+        
+        </ul>
+    </div>
+</div>
+<div class="content with-sidebar blog post">
+    <h1>What's new in Infection 0.10.0</h1>
+    <h4>Aug 11, 2018</h4>
+    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.10.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.10.0</a></p>
+<h2 id="BC-Breaks"><a href="#BC-Breaks" class="headerlink" title="BC Breaks"></a>BC Breaks</h2><p>Before upgrading, make sure you know about backward incompatible changes.</p>
+<ul>
+<li>Infection now requires PHP 7.1+. If you can’t for some reason upgrade and stuck on 7.0, don’t worry, you can still use 0.9.0.</li>
+<li>PHAR file is no longer signed with OpenSSL built-in algorithm. See below.</li>
+</ul>
+<h2 id="New-features-and-enhancements"><a href="#New-features-and-enhancements" class="headerlink" title="New features and enhancements"></a>New features and enhancements</h2><h3 id="Phive"><a href="#Phive" class="headerlink" title="Phive"></a>Phive</h3><p>Infection now can be installed by <a href="https://phar.io/" target="_blank" rel="noopener">Phive</a> - The PHAR Installation and Verification Environment. Since Phive requires <a href="https://www.gnupg.org/" target="_blank" rel="noopener">GPG</a> signing, we dropped built-in PHP OpenSSL signing. For each release we will upload <code>infection.phar</code> and <code>infection.phar.asc</code>. Previously downloaded <code>infection.phar.pubkey</code> can be deleted.</p>
+<p>With Phive you can install Infection as</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phive install infection</span><br></pre></td></tr></table></figure>
+<p>You can still download the PHAR file manually, the process is almost the same:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/infection/infection/releases/download/0.10.0/infection.phar</span><br><span class="line">wget https://github.com/infection/infection/releases/download/0.10.0/infection.phar.asc</span><br><span class="line"></span><br><span class="line">chmod +x infection.phar</span><br></pre></td></tr></table></figure>
+<p>Verify integrity:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gpg --recv-keys C6D76C329EBADE2FB9C458CFC5095986493B4AA0</span><br><span class="line"></span><br><span class="line">gpg --with-fingerprint --verify infection.phar.asc infection.phar</span><br></pre></td></tr></table></figure>
+<p>You should see something like:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gpg: Signature made Sun Aug  5 21:46:42 2018 +03</span><br><span class="line">gpg:                using RSA key XYZ</span><br><span class="line">gpg: Good signature from <span class="string">"Infection PHP &lt;maks.rafalko@gmail.com&gt;"</span> [ultimate]</span><br><span class="line">Primary key fingerprint: C6D7 6C32 9EBA DE2F B9C4  58CF C509 5986 493B 4AA0</span><br></pre></td></tr></table></figure>
+<h3 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h3><p>There was a reorganization of taps in Homebrew PHP and not all previously existed packages have been moved to the Homebrew core, including Infection. </p>
+<p>We created our custom repository so you can continue using <code>brew</code> to install Infection:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew tap infection/homebrew-infection</span><br><span class="line">brew install infection</span><br></pre></td></tr></table></figure>
+<p>Thanks <a href="https://github.com/pierredup" target="_blank" rel="noopener">Pierre du Plessis</a> for helping and maintaining it!</p>
+<h3 id="Time-and-memory"><a href="#Time-and-memory" class="headerlink" title="Time and memory"></a>Time and memory</h3><p>Infection now outputs information about how much time and memory did it take to run mutation testing:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[...] </span><br><span class="line"></span><br><span class="line">M..M...M..SSSSSSSSSS.......M...........SSSS.MSSSSS   (50 / 50)</span><br><span class="line"></span><br><span class="line">Time: 4s. Memory: 20.00MB</span><br></pre></td></tr></table></figure>
+<h3 id="Sorting-the-log-file"><a href="#Sorting-the-log-file" class="headerlink" title="Sorting the log file"></a>Sorting the log file</h3><p>When you have hundreds or even thousands of mutations, and especially when you use <code>--threads</code>, it’s quite difficult to read log file because each time mutations were logged in a random order (due to parallel processes).</p>
+<p>Now mutations are sorted by file path and then by line of the mutation:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3) Domain/Model/Goal/Goal.php:82    [M] MethodCallRemoval</span><br><span class="line"></span><br><span class="line">4) Domain/Model/Goal/Goal.php:83    [M] MethodCallRemoval</span><br><span class="line"></span><br><span class="line">5) Domain/Model/Goal/Goal.php:113    [M] PublicVisibility</span><br></pre></td></tr></table></figure>
+<h2 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h2><h3 id="FunctionCallRemoval-and-MethodCallRemoval"><a href="#FunctionCallRemoval-and-MethodCallRemoval" class="headerlink" title="FunctionCallRemoval and MethodCallRemoval"></a><code>FunctionCallRemoval</code> and <code>MethodCallRemoval</code></h3><p>These two mutators will remove function or method calls that are not part of another statement (e.g. <code>if</code>/<code>loop</code>), or get assigned to a value.</p>
+<p>This should help make sure that your tests are covering side effects caused by an action.</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-        ksort($this-&gt;calculatorPerMutator);</span></span><br><span class="line"><span class="addition">+</span></span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-        $this-&gt;eventDispatcher-&gt;dispatch(new InitialTestSuiteStarted());</span></span><br><span class="line"><span class="addition">+</span></span><br></pre></td></tr></table></figure>
+<h3 id="PregMatchMatches"><a href="#PregMatchMatches" class="headerlink" title="PregMatchMatches"></a><code>PregMatchMatches</code></h3><p>Helps to check you are correctly testing the logic of <code>preg_match()</code> calls:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- preg_match('/a/', 'abc', $foo);</span></span><br><span class="line"><span class="addition">+ $foo = array();</span></span><br></pre></td></tr></table></figure>
+<h3 id="Coalesce"><a href="#Coalesce" class="headerlink" title="Coalesce"></a><code>Coalesce</code></h3><p>This mutator removes condition part of <code>Coalesce</code> operator (<code>$a ?? $b</code> -&gt; <code>$b</code>):</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">private function getListeners(string $eventName): array</span><br><span class="line">&#123;</span><br><span class="line"><span class="deletion">-    return $this-&gt;listeners[$eventName] ?? [];</span></span><br><span class="line"><span class="addition">+    return [];</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Enjoy!</p>
+<p><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="noopener">Star</a></p>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+</div>
+
+                
+            </div>
+            <script src="/js/smooth-scroll.min.js"></script>
+        
+
+        <!-- main custom script for sidebars, version selects etc. -->
+        <script src="/js/css.escape.js"></script>
+        <script src="/js/common.js"></script>
+        <script src="/js/theme-switch.js"></script>
+
+        <!-- search -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+        <link rel="stylesheet" href="/css/search.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+        <script>
+        [
+          '#search-query-nav',
+          '#search-query-sidebar',
+          '#search-query-menu'
+        ].forEach(function (selector) {
+          if (!document.querySelector(selector)) return
+          docsearch({
+              apiKey: '75081c711113ff76f9ed83bf001741a1',
+              indexName: 'infection',
+              inputSelector: selector,
+              debug: false // Set debug to true if you want to inspect the dropdown
+          });
+        })
+        </script>
+
+        <!-- fastclick -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body)
+        }, false)
+        </script>
+    </body>
+</html>

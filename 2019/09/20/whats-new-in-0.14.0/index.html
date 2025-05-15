@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+        <title>What's new in Infection 0.14.0 — Infection PHP</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="What's new in Infection 0.14.0 — Infection PHP">
+        <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta property="og:image" content="https://infection.github.io//images/logo.png">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="What's new in Infection 0.14.0 — Infection PHP">
+        <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+        <link rel="icon" href="/images/logo.png" type="image/png">
+
+        <meta name="msapplication-TileColor" content="#4fc08d">
+        <meta name="theme-color" content="#4fc08d">
+
+        <meta name="msapplication-config" content="browserconfig.xml">
+        <link rel="manifest" href="/manifest.json">
+
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="/css/page.css">
+
+        <!-- this needs to be loaded before guide's inline scripts -->
+        <script src="/js/vue.js"></script>
+        <script>window.PAGE_TYPE = "{{type}}"</script>
+    </head>
+    <body class="docs">        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.png">
+    <span>Infection</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+  </ul>
+</div>
+
+        
+            <div id="main" class="fix-sidebar">
+                
+                    <div class="sidebar blog">
+    <ul class="main-menu">
+        <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+    </ul>
+    <div class="list">
+        <h2>
+            Recent Posts
+            <a href="/atom.xml" target="_blank" style="vertical-align: middle; margin-left: 5px">
+                <img src="/images/feed.png" style="width:15px;height:15px">
+            </a>
+        </h2>
+        <ul style="padding:0">
+        
+            <li>
+                <a href="/2022/01/10/whats-new-in-0.26.0/" class="sidebar-link">What's new in Infection 0.26.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/09/06/whats-new-in-0.25.0/" class="sidebar-link">What's new in Infection 0.25.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/07/27/whats-new-in-0.24.0/" class="sidebar-link">What's new in Infection 0.24.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
+            </li>
+        
+            <li>
+                <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/11/01/whats-new-in-0.20.0/" class="sidebar-link">What's new in Infection 0.20.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/10/28/whats-new-in-0.19.0/" class="sidebar-link">What's new in Infection 0.19.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/10/17/whats-new-in-0.18.0/" class="sidebar-link">What's new in Infection 0.18.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/08/18/whats-new-in-0.17.0/" class="sidebar-link">What's new in Infection 0.17.0</a>
+            </li>
+        
+            <li>
+                <a href="/2020/03/28/whats-new-in-0.16.0/" class="sidebar-link">What's new in Infection 0.16.0</a>
+            </li>
+        
+        </ul>
+    </div>
+</div>
+<div class="content with-sidebar blog post">
+    <h1>What's new in Infection 0.14.0</h1>
+    <h4>Sep 20, 2019</h4>
+    <p>Release: <a href="https://github.com/infection/infection/releases/tag/0.14.0" target="_blank" rel="noopener">https://github.com/infection/infection/releases/tag/0.14.0</a></p>
+<p>Infection now requires PHP 7.2.9+. If you can’t for some reason upgrade, don’t worry, you can still use previous versions.</p>
+<p>Most of the work in <code>0.14.0</code> was done to improve stability, performance and DX. However, there are a couple of new features and enhancements.</p>
+<h3 id="Performance-and-memory-consumption"><a href="#Performance-and-memory-consumption" class="headerlink" title="Performance and memory consumption"></a>Performance and memory consumption</h3><p>We <a href="https://github.com/infection/infection/pull/710" target="_blank" rel="noopener">made an update</a> to dramatically reduce memory usage by using classes instead of object-like arrays. For example, running Infection for Psalm now takes 58% less memory (<code>5G</code> instead of <code>12G</code>).</p>
+<blockquote>
+<p>Read <a href="https://steemit.com/php/@crell/php-use-associative-arrays-basically-never" target="_blank" rel="noopener">this blog post</a> to understand why you should prefer classes.</p>
+</blockquote>
+<h3 id="Precision-in-metrics-calculator"><a href="#Precision-in-metrics-calculator" class="headerlink" title="Precision in metrics calculator"></a>Precision in metrics calculator</h3><p>You can now use whatever precision you want in <code>--min-msi</code> and <code>--covered-min-msi</code> options without rounding.</p>
+<p>Example:</p>
+<blockquote>
+<p>The minimum required MSI percentage should be 71.43%, but actual is 71.428571428571%. Improve your tests!</p>
+</blockquote>
+<h2 id="New-Mutators"><a href="#New-Mutators" class="headerlink" title="New Mutators"></a>New Mutators</h2><p>Infection already mutates some of the new operators from PHP 7.4, and we added a couple of new mutators for this new syntax.</p>
+<h3 id="Spread-Operator-in-Array-Expression"><a href="#Spread-Operator-in-Array-Expression" class="headerlink" title="Spread Operator in Array Expression"></a>Spread Operator in Array Expression</h3><p>RFC: <a href="https://wiki.php.net/rfc/spread_operator_for_array" target="_blank" rel="noopener">https://wiki.php.net/rfc/spread_operator_for_array</a></p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $array = [...$collection, 4];</span></span><br><span class="line"><span class="addition">+ $array = [[...$collection][0], 4];</span></span><br></pre></td></tr></table></figure>
+<p>Basically, it removes all elements from <code>$collection</code> except the first one to ensure your code uses everything from the <code>$collection</code> and spread operator is really needed here.</p>
+<h3 id="Leave-one-element-in-array"><a href="#Leave-one-element-in-array" class="headerlink" title="Leave one element in array"></a>Leave one element in array</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- return $collection;</span></span><br><span class="line"><span class="addition">+ return \count($collection) &gt; 1 ? array_slice($collection, 0, 1, true) : $collection;</span></span><br></pre></td></tr></table></figure>
+<p>It is similar to the previous one, but works without spread operator. It leaves only one element in the returned array.</p>
+<h3 id="Unwrap-mb-str-split"><a href="#Unwrap-mb-str-split" class="headerlink" title="Unwrap mb_str_split"></a>Unwrap <code>mb_str_split</code></h3><p>RFC: <a href="https://wiki.php.net/rfc/mb_str_split" target="_blank" rel="noopener">https://wiki.php.net/rfc/mb_str_split</a></p>
+<p>In <code>0.13.0</code>, we’ve added a new mutator that converts <code>mb_*</code> functions to usual ones. PHP 7.4 adds new function - <code>mb_str_split</code> which will be also mutated to <code>str_split</code>.</p>
+<h2 id="Removed-functionality"><a href="#Removed-functionality" class="headerlink" title="Removed functionality"></a>Removed functionality</h2><h3 id="Remove-the-self-update-command"><a href="#Remove-the-self-update-command" class="headerlink" title="Remove the self-update command"></a>Remove the <code>self-update</code> command</h3><p>We have removed self-update command and recommend using <a href="https://phar.io/" target="_blank" rel="noopener">PHIVE</a>.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phive install infection</span><br></pre></td></tr></table></figure>
+<p>When you want to upgrade infection, run</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phive update infection</span><br></pre></td></tr></table></figure>
+<h2 id="Developer-Experience-DX"><a href="#Developer-Experience-DX" class="headerlink" title="Developer Experience (DX)"></a>Developer Experience (DX)</h2><h3 id="infection-json-schema-validation"><a href="#infection-json-schema-validation" class="headerlink" title="infection.json schema validation"></a><code>infection.json</code> schema validation</h3><p>Starting from <code>0.14.0</code>, all mutators are validated by <a href="https://github.com/infection/infection/blob/master/resources/schema.json" target="_blank" rel="noopener">our JSON schema</a>. No more incorrect configuration.</p>
+<h3 id="xdebug-filter"><a href="#xdebug-filter" class="headerlink" title="xdebug-filter"></a><code>xdebug-filter</code></h3><p><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Did you know you can significantly speed up code coverage collecting by using xdebug-filter?<br><br>With this simple diff, our PHPUnit run is now 30% faster (from 6 to 4 minutes).<br><br>Read the blog post by <a href="https://twitter.com/s_bergmann?ref_src=twsrc%5Etfw" target="_blank" rel="noopener">@s_bergmann</a> and <a href="https://twitter.com/belanur?ref_src=twsrc%5Etfw" target="_blank" rel="noopener">@belanur</a> that explains it in details <a href="https://t.co/4PWeQrEdIQ" target="_blank" rel="noopener">https://t.co/4PWeQrEdIQ</a> <a href="https://t.co/8ny2ojLaJT" target="_blank" rel="noopener">pic.twitter.com/8ny2ojLaJT</a></p>&mdash; Infection PHP (@infection_php) <a href="https://twitter.com/infection_php/status/1171519807167926272?ref_src=twsrc%5Etfw" target="_blank" rel="noopener">September 10, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </p>
+<p>Our builds are faster now which is a good thing when providing PRs and developing Infection locally.</p>
+<p>We recommend you read the mentioned blog post and apply the same approach for your project, or use <code>pcov</code> for collecting code coverage data.</p>
+<h2 id="Internals"><a href="#Internals" class="headerlink" title="Internals"></a>Internals</h2><h3 id="Rework-Infection-command"><a href="#Rework-Infection-command" class="headerlink" title="Rework Infection command"></a>Rework Infection command</h3><p>We have reworked the main entry point of Infection application - <code>InfectionCommand</code> class.</p>
+<p>This is how the mutation testing algorithm looks like:</p>
+<p><img src="/images/posts/0-14-0/infection-algorithm.png" alt="before"></p>
+<p>And this is how <code>InfectionCommand</code> now looks like:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">execute</span><span class="params">(InputInterface $input, OutputInterface $output)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $adapter = <span class="keyword">$this</span>-&gt;startUp();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;runInitialTestSuite($adapter);</span><br><span class="line">    <span class="keyword">$this</span>-&gt;runMutationTesting($adapter);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">$this</span>-&gt;checkMetrics()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This should help new contributors with understanding the processes inside Infection.</p>
+<blockquote>
+<p>All other enhancements and bugfixes are listed in the changelog: <a href="https://github.com/infection/infection/blob/0.14/CHANGELOG.md" target="_blank" rel="noopener">https://github.com/infection/infection/blob/0.14/CHANGELOG.md</a></p>
+</blockquote>
+<hr>
+<h2 id="Next-steps"><a href="#Next-steps" class="headerlink" title="Next steps"></a>Next steps</h2><h3 id="Codeception"><a href="#Codeception" class="headerlink" title="Codeception"></a>Codeception</h3><p>We are working really hard to integrate Codeception into Infection. There were major blocker issues and we had to patch Codeception as well to fix them. We really hope to complete the work by <code>0.15.0</code> release in the next couple of months.</p>
+<h3 id="Split-Infection-to-separate-packages"><a href="#Split-Infection-to-separate-packages" class="headerlink" title="Split Infection to separate packages"></a>Split Infection to separate packages</h3><p>Currently, Infection is a quite a big project with all the code placed inside one repository. We will definitely split it to several ones.</p>
+<ol>
+<li>First of all, we want to extract all Mutators to a separate package. <a href="https://github.com/infection/infection/issues/669" target="_blank" rel="noopener">Read the reasoning here.</a></li>
+<li>We need to extract Test Framework adapters to separate packages because now it’s not convenient to maintain the code, set package requirements for test framework adapters and update the code (e.g. we can’t say that Infection requires <code>codeception/codeception: ^3.1.1</code> because not all the users will use Codeception, so it must be a separate package)</li>
+</ol>
+<p>Have another great idea? Let us know! </p>
+<hr>
+<p>Enjoy!</p>
+<p><a class="github-button" href="https://github.com/infection/infection" data-icon="octicon-star" data-show-count="true" aria-label="Star infection/infection on GitHub" target="_blank" rel="noopener">Star</a></p>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+</div>
+
+                
+            </div>
+            <script src="/js/smooth-scroll.min.js"></script>
+        
+
+        <!-- main custom script for sidebars, version selects etc. -->
+        <script src="/js/css.escape.js"></script>
+        <script src="/js/common.js"></script>
+        <script src="/js/theme-switch.js"></script>
+
+        <!-- search -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+        <link rel="stylesheet" href="/css/search.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+        <script>
+        [
+          '#search-query-nav',
+          '#search-query-sidebar',
+          '#search-query-menu'
+        ].forEach(function (selector) {
+          if (!document.querySelector(selector)) return
+          docsearch({
+              apiKey: '75081c711113ff76f9ed83bf001741a1',
+              indexName: 'infection',
+              inputSelector: selector,
+              debug: false // Set debug to true if you want to inspect the dropdown
+          });
+        })
+        </script>
+
+        <!-- fastclick -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body)
+        }, false)
+        </script>
+    </body>
+</html>

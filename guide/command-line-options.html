@@ -1,0 +1,561 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+        <title>Command Line Options — Infection PHP</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="Command Line Options — Infection PHP">
+        <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta property="og:image" content="https://infection.github.io//images/logo.png">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Command Line Options — Infection PHP">
+        <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
+        <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+        <link rel="icon" href="/images/logo.png" type="image/png">
+
+        <meta name="msapplication-TileColor" content="#4fc08d">
+        <meta name="theme-color" content="#4fc08d">
+
+        <meta name="msapplication-config" content="browserconfig.xml">
+        <link rel="manifest" href="/manifest.json">
+
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Infection PHP" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="/css/page.css">
+
+        <!-- this needs to be loaded before guide's inline scripts -->
+        <script src="/js/vue.js"></script>
+        <script>window.PAGE_TYPE = "guide"</script>
+    </head>
+    <body class="docs">        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.png">
+    <span>Infection</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link current">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+  </ul>
+</div>
+
+        
+            <div id="main" class="fix-sidebar">
+                
+                    
+    <div class="sidebar">
+    <ul class="main-menu">
+        <li>
+  <form id="search-form">
+    <input type="text" id="search-query-sidebar" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/guide/" class="nav-link current">Guide</a></li>
+<li><a href="https://infection-php.dev/" target="_blank">Playground</a></li>
+<li><a href="https://github.com/infection/infection" target="_blank">GitHub</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecosystem</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Help</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/infection_php" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://mastodon.social/@infection_php" class="nav-link" target="_blank">Mastodon </a></li>
+      <li><a href="https://discord.gg/ZUmyHTJ" class="nav-link" target="_blank">Discord </a></li>
+      <li><a href="https://github.com/infection/infection/discussions" class="nav-link" target="_blank">Infection Discussions </a></li>
+    </ul></li>
+    <li><h4>Resource Lists</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/infection" class="nav-link" target="_blank">Official Repos</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+
+
+<li>
+    <a id="theme-toggle" style="cursor: pointer;">
+        <i id="theme-toggle-icon" class="theme-icon"></i>
+    </a>
+</li>
+
+    </ul>
+    <div class="list">
+        <ul class="menu-root">
+    
+        
+        
+            
+                <li><h3>Documentation</h3></li>
+            
+            
+        
+        
+        <li>
+            <a href="/guide/index.html" class="sidebar-link">Introduction</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/installation.html" class="sidebar-link">Installation</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/usage.html" class="sidebar-link">Usage</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/command-line-options.html" class="sidebar-link current">Command Line Options</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/mutators.html" class="sidebar-link">Mutators</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/custom-mutators.html" class="sidebar-link new">Custom Mutators</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/profiles.html" class="sidebar-link">Profiles</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/using-with-ci.html" class="sidebar-link">Using with CI</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/mutation-badge.html" class="sidebar-link">Mutation Badge, cloud HTML report</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/how-to.html" class="sidebar-link">How-to Guides</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/caveats.html" class="sidebar-link">Caveats</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/debugging-issues.html" class="sidebar-link">Debugging Issues</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/infection-playground.html" class="sidebar-link">Infection Playground</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/github-sponsors.html" class="sidebar-link">GitHub Sponsors ♥️</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/supported-test-frameworks.html" class="sidebar-link">Supported Test Frameworks</a>
+        </li>
+    
+        
+        
+            
+            
+                <li><h3>Miscellaneous</h3></li>
+            
+        
+        
+        <li>
+            <a href="/guide/compare.html" class="sidebar-link">Compare with competitors</a>
+        </li>
+    
+    <li><h3>Posts</h3></li>
+    
+        <li>
+            <a href="/2022/01/10/whats-new-in-0.26.0/" class="sidebar-link">What's new in Infection 0.26.0</a>
+        </li>
+    
+        <li>
+            <a href="/2021/09/06/whats-new-in-0.25.0/" class="sidebar-link">What's new in Infection 0.25.0</a>
+        </li>
+    
+        <li>
+            <a href="/2021/07/27/whats-new-in-0.24.0/" class="sidebar-link">What's new in Infection 0.24.0</a>
+        </li>
+    
+        <li>
+            <a href="/2021/05/13/whats-new-in-0.23.0/" class="sidebar-link">What's new in Infection 0.23.0</a>
+        </li>
+    
+        <li>
+            <a href="/2021/01/27/whats-new-in-0.21.0/" class="sidebar-link">What's new in Infection 0.21.0</a>
+        </li>
+    
+    
+</ul>
+
+    </div>
+</div>
+
+
+<div class="content guide with-sidebar command-line-options-guide">
+    
+      
+    
+    
+      <h1>Command Line Options</h1>
+    
+    <p>Besides general Symfony Console application command line options, Infection has its own ones.</p>
+<h3 id="filter"><a href="#filter" class="headerlink" title="--filter"></a><code>--filter</code></h3><p>If you’re only interested in mutating a subset of your files, you can pass a <code>--filter</code> option containing:</p>
+<ul>
+<li><p>a relative file path:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=src/Service/Mailer.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>a filename:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=Mailer.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>a relative directory path:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=src/Service/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>a comma separated list of relative paths:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=src/Service/Mailer.php,src/Entity/Foobar.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>a comma separated list of filenames:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=Mailer.php,Foobar.php</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>This in no way restricts the initial Infection check on the overall test suite which is still executed in full to ensure all tests are passing correctly before proceeding.</p>
+<h3 id="threads-or-j"><a href="#threads-or-j" class="headerlink" title="--threads or -j"></a><code>--threads</code> or <code>-j</code></h3><p>If you want to run tests for mutated code in parallel, set this to something &gt; 1. It will <strong>dramatically speed up</strong> mutation process. Please note that if your tests somehow depends on each other or use database, this option can lead to failing tests which give many false-positives results.</p>
+<p>To automatically detect the number of CPU cores, use <code>--threads=max</code>.</p>
+<p>For Infection versions below <code>0.26.15</code>, you can detect the number of CPU cores depending on OS:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># on Linux</span></span><br><span class="line">infection -j$(nproc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># on OSX</span></span><br><span class="line">infection -j$(sysctl -n hw.ncpu)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Running Infection with more threads does not necessarily lead to better performance. Consider benchmarking several numbers to find one that works best for your particular case.</p>
+</blockquote>
+<h3 id="test-framework"><a href="#test-framework" class="headerlink" title="--test-framework"></a><code>--test-framework</code></h3><p>This is a name of the Test Framework to use. Currently, Infection supports <code>PHPUnit</code>, <code>PhpSpec</code> and <code>Codeception</code>.</p>
+<p>If you are using <code>infection/infection</code> Composer package, <code>PHPUnit</code> is installed by default. Other test framework adapters will be automatically installed on demand.<br><a href="/guide/installation.html#Phar">PHAR distribution</a> is bundled with all available adapters.</p>
+<blockquote>
+<p>Feel free to request a new test framework to be supported out of the box in GitHub’s issues.</p>
+</blockquote>
+<h3 id="test-framework-options"><a href="#test-framework-options" class="headerlink" title="--test-framework-options"></a><code>--test-framework-options</code></h3><p>This option allows passing additional options to the test framework. Example for <code>PHPUnit</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --<span class="built_in">test</span>-framework-options=<span class="string">"--verbose --filter=just/unit/tests"</span></span><br></pre></td></tr></table></figure>
+<p>This will execute the <code>PHPUnit</code> as:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phpunit [...infection options] --verbose --filter=just/unit/tests</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Please note that if you choose to use <code>--configuration</code>, <code>--filter</code>, or <code>--testsuite</code> for <code>PHPUnit</code>, these options will only be applied to the <em>initial</em> test run. Each mutation has a custom <code>phpunit.xml</code> file generated for it which defines a single testsuite containing the tests which should be executed for that mutation. Applying <code>--filter</code> or <code>--testsuite</code> would not make sense in this context as the tests have already been filtered down. </p>
+</blockquote>
+<h3 id="coverage"><a href="#coverage" class="headerlink" title="--coverage"></a><code>--coverage</code></h3><p>Path to the existing coverage reports.</p>
+<p>When you use Continuous Integration for your project, probably you are already generating code coverage metrics and run <code>PHPUnit</code> with <code>Xdebug</code>/<code>phpdbg</code> enabled. Then, you run Infection for mutation testing, which in its turn, generates Code Coverage again for internal needs. This dramatically increases the build time because running your tests with debugger <em>twice</em> requires too much time.</p>
+<p>With this option it’s possible to reuse already generated coverage in Infection.</p>
+<p>For <code>PHPUnit</code> and <code>Codeception</code>:</p>
+<ul>
+<li>Infection requires both the<code>xml</code> and <code>junit</code> reports to work</li>
+<li>If <code>build/coverage</code> path is provided, it should contain <code>coverage-xml</code> folder and <code>junit.xml</code> file<ul>
+<li><code>build/coverage/coverage-xml/*</code></li>
+<li><code>build/coverage/junit.xml</code></li>
+</ul>
+</li>
+</ul>
+<p>For <code>PhpSpec</code>:</p>
+<ul>
+<li>Infection requires the <code>xml</code> report to work</li>
+<li>If <code>build/coverage</code> path is provided, it should contain <code>phpspec-coverage-xml</code> folder</li>
+</ul>
+<p>Example:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># collect coverage</span></span><br><span class="line">vendor/bin/phpunit --coverage-xml=build/coverage/coverage-xml --<span class="built_in">log</span>-junit=build/coverage/junit.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># use coverage</span></span><br><span class="line">infection.phar --coverage=build/coverage</span><br></pre></td></tr></table></figure>
+<h3 id="git-diff-filter"><a href="#git-diff-filter" class="headerlink" title="--git-diff-filter"></a><code>--git-diff-filter</code></h3><p>Allows filtering files to mutate by using <code>git diff</code> with <code>--diff-filter</code> option. Sensible values are: <code>AM</code> - added and modified files. <code>A</code> - only added files.</p>
+<p>Best to be used during pull request builds on CI, e.g. with GitHub Actions, Travis CI and so on.</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --git-diff-filter=A</span><br></pre></td></tr></table></figure>
+<p>This command will mutate only those files that were added in the Pull Request. The diff is done between the current branch and a common ancestor of it and the base branch. If there is no common ancestor available, perhaps because your CI server used a shallow checkout, or you have unrelated branches, infection will use a direct diff between branches as a fallback.</p>
+<blockquote>
+<p>It’s possible to configure the base branch, see <a href="/guide/command-line-options.html#git-diff-base"><code>--git-diff-base</code></a> option</p>
+</blockquote>
+<blockquote>
+<p>It’s possible to mutate only touched <strong>lines</strong>, see  <a href="/guide/command-line-options.html#git-diff-lines"><code>--git-diff-lines</code></a> option</p>
+</blockquote>
+<h3 id="git-diff-base"><a href="#git-diff-base" class="headerlink" title="--git-diff-base"></a><code>--git-diff-base</code></h3><p>Supposed to be used only with <a href="/guide/command-line-options.html#git-diff-filter"><code>--git-diff-filter</code></a> option. Configures the base branch for <code>git diff</code> command.</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --git-diff-base=origin/<span class="variable">$GITHUB_BASE_REF</span> --git-diff-filter=AM</span><br></pre></td></tr></table></figure>
+<h3 id="git-diff-lines"><a href="#git-diff-lines" class="headerlink" title="--git-diff-lines"></a><code>--git-diff-lines</code></h3><p>Allows mutating only touched <strong>lines</strong> of code. Under the hood, this option mutates only added and changed files, comparing your current branch with <code>master</code> branch by default.</p>
+<p>Base branch can be changed by using <code>--git-diff-base=main</code> option. In this case, your current branch will be compared with <code>main</code> branch.</p>
+<p>Useful to check how your changes impacts MSI in a feature branch. Useful for those who do not want / can’t write tests for the whole touched legacy file, but wants to cover their own changes (only modified lines).</p>
+<p>Can significantly improve performance since fewer Mutants are generated in comparison to using <code>--git-diff-filter=AM</code> or mutating all files.</p>
+<h3 id="map-source-class-to-test"><a href="#map-source-class-to-test" class="headerlink" title="--map-source-class-to-test"></a><code>--map-source-class-to-test</code></h3><blockquote>
+<p>Meant to be used together with <code>--git-diff-lines</code> / <code>--git-diff-filter</code> / <code>--filter</code></p>
+</blockquote>
+<p>This option can dramatically decrease the time needed for “Initial Tests Run” stage. </p>
+<p>If project has <code>N</code> tests files and we run Infection with, for example, <code>infection --git-diff-lines</code> and only 1 file <code>Foo.php</code> is updated/added in a Pull Request - it doesn’t make sense to run all the <code>N</code> tests to generate code coverage if we know that only 1 file of <code>N</code> covers the source code file - <code>FooTest.php</code>.</p>
+<p>In practice, <code>PHPUnit</code> even has different methods that help define which test file covers which class:</p>
+<ul>
+<li><a href="https://docs.phpunit.de/en/11.0/configuration.html#the-requirecoveragemetadata-attribute" target="_blank" rel="noopener"><code>requireCoverageMetadata</code></a> configuration attribute</li>
+<li><a href="https://docs.phpunit.de/en/11.0/attributes.html#code-coverage" target="_blank" rel="noopener"><code>#[CoversClass(...)]</code></a> attribute</li>
+</ul>
+<p>In the example above, Infection would run only <code>FooTest.php</code> to generate coverage for <code>Foo.php</code>.</p>
+<p>Without this option, Infection will attempt to run <em>all</em> the project’s tests, as it doesn’t know which tests cover <code>Foo.php</code>.</p>
+<p>Currently, <code>--map-source-class-to-test</code> supports the only one strategy of mapping source class to test file: by adding <code>*Test</code> postfix to a file name. If source class is named <code>Foo</code>, Infection will try to run <code>FooTest</code>.</p>
+<p>Under the hood, it builds a regex for <code>--filter</code> option: <code>--filter=&#39;FooTest|BarTest&#39;</code>.</p>
+<h3 id="logger-github"><a href="#logger-github" class="headerlink" title="--logger-github"></a><code>--logger-github</code></h3><p>Supposed to be used only with GitHub Actions. This logger prints GitHub Annotation warnings for escaped Mutants right in the Pull Request.</p>
+<p>Use <code>--logger-github=true</code> to force-enable or <code>--logger-github=false</code> to force-disable it.</p>
+<p class="tip">Note that the GitHub Actions environment is automatically detected and this switch isn’t actually necessary when executed there.</p>
+
+<p><img src="/images/github-logger.png" alt="GitHub Annotation Escaped Mutant"></p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --logger-github --git-diff-filter=A</span><br></pre></td></tr></table></figure>
+<p>Here is <a href="https://github.com/infection/infection/blob/bef65fc22faa200edd367ffe12596905947a2a93/.github/workflows/mt-annotations.yaml#L50-L52" target="_blank" rel="noopener">a real example</a> how Infection uses it itself.</p>
+<blockquote>
+<p>Note: Infection automatically detects <code>GITHUB_WORKSPACE</code> environment variable for report linking.</p>
+</blockquote>
+<h3 id="logger-gitlab"><a href="#logger-gitlab" class="headerlink" title="--logger-gitlab"></a><code>--logger-gitlab</code></h3><p>This option is used to provide a path to the generated GitLab (Code Climate) Code Quality Report:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-gitlab=<span class="string">'gitlab-coverage.json'</span></span><br></pre></td></tr></table></figure>
+<p>After Infection completes its job, the <code>gitlab-coverage.json</code> file will be generated. This file can than be included as a <code>codequality</code> report artifact.</p>
+<p>Takes precedence over <code>logger.gitlab</code> setting inside <code>infection.json5</code> file. If you want to always generate the GitLab Coverage report it’s better to configure it inside <code>infection.json5</code>, see <a href="/guide/usage.html">here</a>.</p>
+<blockquote>
+<p>See <a href="https://gitlab.com/maks-rafalko/infection-gitlab-integration-example/-/blob/e9248aecc694ce822ea5c79654e115c8044fadf3/.gitlab-ci.yml#L18-27" target="_blank" rel="noopener">this sample repository</a> as an example of how to configure Code Quality with Infection </p>
+</blockquote>
+<p>This is how it works on PR main page:</p>
+<p><img src="/images/gitlab-logger-pr-view.png" alt="GitHub Annotation Escaped Mutant"></p>
+<p>This is how it works on diff view:</p>
+<p><img src="/images/gitlab-logger-diff-view.png" alt="GitHub Annotation Escaped Mutant"></p>
+<blockquote>
+<p>Note that “See findings in merge request diff view” is <a href="https://docs.gitlab.com/ee/ci/testing/code_quality.html#features-per-tier" target="_blank" rel="noopener">not available</a> on free tier</p>
+</blockquote>
+<blockquote>
+<p>Note: Infection automatically detects <code>CI_PROJECT_DIR</code> environment variable for report linking.</p>
+</blockquote>
+<h3 id="logger-project-root-directory"><a href="#logger-project-root-directory" class="headerlink" title="--logger-project-root-directory"></a><code>--logger-project-root-directory</code></h3><p>While generating GitHub and GitLab reports, Infection need to replace some links to their correct path according to your<br>repository. To do so, it will auto-detect <code>GITHUB_WORKSPACE</code> GitHub environment variable, and <code>CI_PROJECT_DIR</code> GitLab<br>environment variable as project root directory.</p>
+<p>If this auto-detection does not fit your needs (for instance, while using custom Docker image and custom project path in<br>GitLab CI), you can customize the path to replace using <code>--logger-project-root-directory</code> option:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-project-root-directory=<span class="string">'/custom/project/root/directory/path'</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: if <code>GITHUB_WORKSPACE</code> and <code>CI_PROJECT_DIR</code> cannot be detected, and <code>--logger-project-root-directory</code> option is<br>not set, Infection will try to retrieve the project root directory using <code>git rev-parse --show-toplevel</code>.</p>
+</blockquote>
+<h3 id="logger-html"><a href="#logger-html" class="headerlink" title="--logger-html"></a><code>--logger-html</code></h3><p>This option is used to provide a path to the generated HTML Report:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-html=<span class="string">'mutation-report.html'</span></span><br></pre></td></tr></table></figure>
+<p>After Infection completes its job, the <code>mutation-report.html</code> file will be generated with HTML report (<a href="/static/html-report-example.html">example</a>).</p>
+<p>Takes precedence over <code>logger.html</code> setting inside <code>infection.json5</code> file. If you want to always generate HTML report, it’s better to configure it inside <code>infection.json5</code>, see <a href="/guide/usage.html">here</a>.</p>
+<blockquote>
+<p>If you want to store HTML report in the cloud (useful for OSS projects), see <a href="/guide/mutation-badge.html">Stryker Dashboard</a> integration</p>
+</blockquote>
+<h3 id="skip-initial-tests"><a href="#skip-initial-tests" class="headerlink" title="--skip-initial-tests"></a><code>--skip-initial-tests</code></h3><p>If you have already run the test suite to ensure it is passing, and you are providing coverage using <code>--coverage</code> then you can use this option to increase performance by not running the entire test suite again.</p>
+<p class="tip">Note that it is extremely important that you ensure the test suite is passing when using this option, otherwise test failures would appear like caught mutations and those mutations may be reported incorrectly.</p>
+
+<h3 id="only-covered"><a href="#only-covered" class="headerlink" title="--only-covered"></a><code>--only-covered</code></h3><p>Run the mutation testing only for covered by tests files.</p>
+<h3 id="only-covering-test-cases"><a href="#only-covering-test-cases" class="headerlink" title="--only-covering-test-cases"></a><code>--only-covering-test-cases</code></h3><p>Execute only those test cases that cover mutated line, not the whole test file with covering test cases. Can dramatically speed up Mutation Testing for slow test suites, like functional or integration. </p>
+<p>For <code>PHPUnit</code> it uses <code>--filter</code> option under the hood. This option is not applicable for other test frameworks.</p>
+<blockquote>
+<p>Read more about the problem and solution in <a href="/2021/07/27/whats-new-in-0.24.0/#Major-performance-improvement-for-projects-with-slow-test-suites">this blog post</a></p>
+</blockquote>
+<h3 id="show-mutations-or-s"><a href="#show-mutations-or-s" class="headerlink" title="--show-mutations or -s"></a><code>--show-mutations</code> or <code>-s</code></h3><p>Show colorized diffs of mutated files to the console. Only escaped mutants are shown by default. </p>
+<blockquote>
+<p>Please note that all mutations are logged to the <code>infection.log</code> file as well.</p>
+</blockquote>
+<h3 id="configuration-or-c"><a href="#configuration-or-c" class="headerlink" title="--configuration or -c"></a><code>--configuration</code> or <code>-c</code></h3><p>If you want to use custom configuration file path or name, use this option for it.</p>
+<h3 id="min-msi"><a href="#min-msi" class="headerlink" title="--min-msi"></a><code>--min-msi</code></h3><p>This is a minimum threshold of Mutation Score Indicator (MSI) in percentage. Can be used with CI server to automatically control tests quality.</p>
+<blockquote>
+<p>Read more about <a href="./using-with-ci.html">using Infection in CI server</a></p>
+</blockquote>
+<h3 id="min-covered-msi"><a href="#min-covered-msi" class="headerlink" title="--min-covered-msi"></a><code>--min-covered-msi</code></h3><p>This is a minimum threshold of Covered Code Mutation Score Indicator (MSI) in percentage. Can be used with CI server to automatically control tests quality.</p>
+<h3 id="mutators"><a href="#mutators" class="headerlink" title="--mutators"></a><code>--mutators</code></h3><p>This is a comma separated option to specify a particular set of mutators or <a href="/guide/profiles.html">profiles</a> that need to be executed. Example:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --mutators=PublicVisibility,Plus,Decrement,@number</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>See <a href="./mutators.html">here</a> to find all mutator names.</p>
+</blockquote>
+<h3 id="no-progress"><a href="#no-progress" class="headerlink" title="--no-progress"></a><code>--no-progress</code></h3><p>This option has two effects:</p>
+<ul>
+<li>It disables intermediate buffering of mutations used to count them. This causes progress bars to not have a total number of mutations displayed, while also reducing memory usage and speeding up the entire process. It is beneficial during CI, and for larger projects.</li>
+<li>It disables dynamic progress bars output to reduce the amount of generated text output.</li>
+</ul>
+<p>Disabling progress bars removes the following lines from output on Continuous Integration servers:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Processing <span class="built_in">source</span> code files: 0/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 1/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 2/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 3/5678</span><br><span class="line">...</span><br><span class="line">5k lines of text</span><br><span class="line">...</span><br><span class="line">Processing <span class="built_in">source</span> code files: 5678/5678</span><br></pre></td></tr></table></figure>
+<p>Progress bar display will be automatically disabled with or without this option when either <code>CI</code> or <code>CONTINUOUS_INTEGRATION</code> environment variables are set to <code>&quot;true&quot;</code>.</p>
+<p>For example, there is no need to enable this option manually on Travis CI just to hide progress bars.</p>
+<h3 id="noop"><a href="#noop" class="headerlink" title="--noop"></a><code>--noop</code></h3><p>Use noop mutators that do not change the AST. For debugging purposes.</p>
+<blockquote>
+<p>Read about debugging issues with <code>--noop</code> option <a href="/guide/debugging-issues.html">here</a></p>
+</blockquote>
+<h3 id="force-progress"><a href="#force-progress" class="headerlink" title="--force-progress"></a><code>--force-progress</code></h3><p>Outputs progress bars and mutation count during progress even if a CI is detected.</p>
+<p>This option also reverts optimizations made by <code>--no-progress</code> option, read <a href="/guide/command-line-options.html#no-progress">here</a>. </p>
+<h3 id="formatter"><a href="#formatter" class="headerlink" title="--formatter"></a><code>--formatter</code></h3><p>This is a name of console output formatter. Possible values are: <code>dot</code>, <code>progress</code>. Default is <code>dot</code> formatter.</p>
+<h3 id="log-verbosity"><a href="#log-verbosity" class="headerlink" title="--log-verbosity"></a><code>--log-verbosity</code></h3><p>The verbosity of the log file, <code>all</code> - this mode will add “Killed mutants” into log file and add additional information, <code>default</code> - normal mode will skip “Killed mutants” section in the log file, <code>none</code> - which will disable logging to files.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --<span class="built_in">log</span>-verbosity=all</span><br></pre></td></tr></table></figure>
+<h3 id="initial-tests-php-options"><a href="#initial-tests-php-options" class="headerlink" title="--initial-tests-php-options"></a><code>--initial-tests-php-options</code></h3><p>Run Initial Tests process with additional php options. For example with <code>-d zend_extension=xdebug.so</code> which will run <code>Xdebug</code> only for code coverage.<br>May be useful for cases when <code>Xdebug</code> is not enabled globally. Also it’s useful from performance point of view.<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --initial-tests-php-options=<span class="string">"-d zend_extension=xdebug.so"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="ignore-msi-with-no-mutations"><a href="#ignore-msi-with-no-mutations" class="headerlink" title="--ignore-msi-with-no-mutations"></a><code>--ignore-msi-with-no-mutations</code></h3><p>Ignore MSI violations when no mutations are generated. This will force Infection to return a zero exit code even when the required MSI is not reached.</p>
+<h3 id="debug"><a href="#debug" class="headerlink" title="--debug"></a><code>--debug</code></h3><p>Run Infection in a debug mode. With this option Infection will not erase <code>tmpDir</code> and this might be useful to run particular unit test with a mutated code for example.</p>
+<p>Also, this option will add test framework’s output to log file so you can analyze by which test particular Mutant was killed, and additional information about executed command lines will be added.</p>
+
+    
+      <div class="guide-links">
+        
+        
+      </div>
+    
+    <div class="footer">
+      Caught a mistake or want to contribute to the documentation?
+      <a href="https://github.com/infection/site/blob/master/src/guide/command-line-options.md" target="_blank">
+        Edit this page on Github!
+      </a>
+    </div>
+</div>
+
+                
+            </div>
+            <script src="/js/smooth-scroll.min.js"></script>
+        
+
+        <!-- main custom script for sidebars, version selects etc. -->
+        <script src="/js/css.escape.js"></script>
+        <script src="/js/common.js"></script>
+        <script src="/js/theme-switch.js"></script>
+
+        <!-- search -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+        <link rel="stylesheet" href="/css/search.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+        <script>
+        [
+          '#search-query-nav',
+          '#search-query-sidebar',
+          '#search-query-menu'
+        ].forEach(function (selector) {
+          if (!document.querySelector(selector)) return
+          docsearch({
+              apiKey: '75081c711113ff76f9ed83bf001741a1',
+              indexName: 'infection',
+              inputSelector: selector,
+              debug: false // Set debug to true if you want to inspect the dropdown
+          });
+        })
+        </script>
+
+        <!-- fastclick -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body)
+        }, false)
+        </script>
+    </body>
+</html>
