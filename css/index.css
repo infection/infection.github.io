@@ -302,6 +302,21 @@ body.dark-theme .footer {
   color: #999;
   border-top: 1px solid #444;
 }
+html.dark-theme .version-since,
+body.dark-theme .version-since {
+  color: #42b983;
+  border-color: #42b983;
+}
+.version-since {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #42b983;
+  border: 1px solid #42b983;
+  border-radius: 12px;
+  padding: 1px 8px;
+  vertical-align: middle;
+}
 body {
   font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   font-size: 15px;

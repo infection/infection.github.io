@@ -418,6 +418,16 @@
 <p>Without this option, Infection will attempt to run <em>all</em> the project’s tests, as it doesn’t know which tests cover <code>Foo.php</code>.</p>
 <p>Currently, <code>--map-source-class-to-test</code> supports the only one strategy of mapping source class to test file: by adding <code>*Test</code> postfix to a file name. If source class is named <code>Foo</code>, Infection will try to run <code>FooTest</code>.</p>
 <p>Under the hood, it builds a regex for <code>--filter</code> option: <code>--filter=&#39;FooTest|BarTest&#39;</code>.</p>
+<h3 id="id"><a href="#id" class="headerlink" title="--id"></a><code>--id</code></h3><p><span class="version-since">Available in Infection 0.30.0+</span></p>
+<p>Run only one Mutant by its ID. Can be used multiple times. If source code is changed, this value can be invalidated. Pass all previous options with this one.</p>
+<p>Example of usage: you completed a feature and wrote tests, then you run</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection --git-diff-lines</span><br></pre></td></tr></table></figure>
+<p>to get all mutations for the new and changed lines. But if there are too many mutations, it can be more convenient to focus on just 1 mutant at a time.</p>
+<p>Imagine you want to work on this Mutant:</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">11) src/SourceClass.php:9    [M] Minus [ID] 6fa7eadad5b9fd1a72e4d80c83a61cc3</span><br><span class="line"></span><br><span class="line">@@ @@</span><br><span class="line"> &#123;</span><br><span class="line"><span class="deletion">-    public function hello(): string</span></span><br><span class="line"><span class="addition">+    protected function hello(): string</span></span><br><span class="line">     &#123;</span><br><span class="line">         return 'hello';</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>So you copy <code>6fa7eadad5b9fd1a72e4d80c83a61cc3</code> value and run the same command as previously, just adding <code>--id=6fa7eadad5b9fd1a72e4d80c83a61cc3</code>:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection --git-diff-lines --id=6fa7eadad5b9fd1a72e4d80c83a61cc3</span><br></pre></td></tr></table></figure>
+<p>With this, Infection will only produce one mutant, and you can update your tests and re-run this command to check if it’s killed or still not.</p>
 <h3 id="logger-github"><a href="#logger-github" class="headerlink" title="--logger-github"></a><code>--logger-github</code></h3><p>Supposed to be used only with GitHub Actions. This logger prints GitHub Annotation warnings for escaped Mutants right in the Pull Request.</p>
 <p>Use <code>--logger-github=true</code> to force-enable or <code>--logger-github=false</code> to force-disable it.</p>
 <p class="tip">Note that the GitHub Actions environment is automatically detected and this switch isn’t actually necessary when executed there.</p>
@@ -468,7 +478,8 @@
 <blockquote>
 <p>Read more about the problem and solution in <a href="/2021/07/27/whats-new-in-0.24.0/#Major-performance-improvement-for-projects-with-slow-test-suites">this blog post</a></p>
 </blockquote>
-<h3 id="show-mutations-or-s"><a href="#show-mutations-or-s" class="headerlink" title="--show-mutations or -s"></a><code>--show-mutations</code> or <code>-s</code></h3><p>Show colorized diffs of mutated files to the console. Only escaped mutants are shown by default. </p>
+<h3 id="show-mutations-or-s"><a href="#show-mutations-or-s" class="headerlink" title="--show-mutations or -s"></a><code>--show-mutations</code> or <code>-s</code></h3><p>Limits how many colorized diffs of mutated files are shown to the console. 20 mutated diffs are shown by default.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --show-mutations=0 <span class="comment"># don't show any diffs</span></span><br><span class="line">infection --show-mutations=50 <span class="comment"># will show 50 mutated diffs</span></span><br><span class="line">infection --show-mutations=max <span class="comment"># will show all mutated diffs</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>Please note that all mutations are logged to the <code>infection.log</code> file as well.</p>
 </blockquote>
