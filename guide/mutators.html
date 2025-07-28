@@ -1249,6 +1249,11 @@
 <td style="text-align:center"><code>&#39;bar&#39;</code> and <code>&#39;foo&#39;</code></td>
 </tr>
 <tr>
+<td style="text-align:center">ReturnRemoval</td>
+<td style="text-align:center"><code>return $foo;</code></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
 <td style="text-align:center">SharedCaseRemoval</td>
 <td style="text-align:center"><code>switch($a) { case &#39;a&#39;: case &#39;b&#39;: break; }</code></td>
 <td style="text-align:center"><code>switch($a) { case &#39;b&#39;: break; }</code> <code>switch($a) { case &#39;a&#39;: break; }</code></td>
