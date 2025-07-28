@@ -473,11 +473,16 @@
 <p class="tip">Note that it is extremely important that you ensure the test suite is passing when using this option, otherwise test failures would appear like caught mutations and those mutations may be reported incorrectly.</p>
 
 <h3 id="only-covered"><a href="#only-covered" class="headerlink" title="--only-covered"></a><code>--only-covered</code></h3><p>Run the mutation testing only for covered by tests files.</p>
+<blockquote>
+<p>This option was removed in Infection 0.31.0, use <code>--with-uncovered</code> instead</p>
+</blockquote>
 <h3 id="only-covering-test-cases"><a href="#only-covering-test-cases" class="headerlink" title="--only-covering-test-cases"></a><code>--only-covering-test-cases</code></h3><p>Execute only those test cases that cover mutated line, not the whole test file with covering test cases. Can dramatically speed up Mutation Testing for slow test suites, like functional or integration. </p>
 <p>For <code>PHPUnit</code> it uses <code>--filter</code> option under the hood. This option is not applicable for other test frameworks.</p>
 <blockquote>
 <p>Read more about the problem and solution in <a href="/2021/07/27/whats-new-in-0.24.0/#Major-performance-improvement-for-projects-with-slow-test-suites">this blog post</a></p>
 </blockquote>
+<h3 id="with-uncovered"><a href="#with-uncovered" class="headerlink" title="--with-uncovered"></a><code>--with-uncovered</code></h3><p><span class="version-since">Available in Infection 0.31.0+</span></p>
+<p>Allow mutation of code not covered by tests.</p>
 <h3 id="show-mutations-or-s"><a href="#show-mutations-or-s" class="headerlink" title="--show-mutations or -s"></a><code>--show-mutations</code> or <code>-s</code></h3><p>Limits how many colorized diffs of mutated files are shown to the console. 20 mutated diffs are shown by default.</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --show-mutations=0 <span class="comment"># don't show any diffs</span></span><br><span class="line">infection --show-mutations=50 <span class="comment"># will show 50 mutated diffs</span></span><br><span class="line">infection --show-mutations=max <span class="comment"># will show all mutated diffs</span></span><br></pre></td></tr></table></figure>
 <blockquote>
