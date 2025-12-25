@@ -515,10 +515,22 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Processing <span class="built_in">source</span> code files: 0/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 1/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 2/5678</span><br><span class="line">Processing <span class="built_in">source</span> code files: 3/5678</span><br><span class="line">...</span><br><span class="line">5k lines of text</span><br><span class="line">...</span><br><span class="line">Processing <span class="built_in">source</span> code files: 5678/5678</span><br></pre></td></tr></table></figure>
 <p>Progress bar display will be automatically disabled with or without this option when either <code>CI</code> or <code>CONTINUOUS_INTEGRATION</code> environment variables are set to <code>&quot;true&quot;</code>.</p>
 <p>For example, there is no need to enable this option manually on Travis CI just to hide progress bars.</p>
-<h3 id="noop"><a href="#noop" class="headerlink" title="--noop"></a><code>--noop</code></h3><p>Use noop mutators that do not change the AST. For debugging purposes.</p>
+<h3 id="noop"><a href="#noop" class="headerlink" title="--noop"></a><code>--noop</code></h3><p>Use noop mutators that do not change the AST. </p>
+<p>All mutant processes run actual tests. It is expected that all Mutants are escaped, because the code is not changed.</p>
+<p>For debugging purposes.</p>
 <blockquote>
 <p>Read about debugging issues with <code>--noop</code> option <a href="/guide/debugging-issues.html">here</a></p>
 </blockquote>
+<blockquote>
+<p>If you want to see applied mutations but not run tests, use <code>--dry-run</code> option. </p>
+</blockquote>
+<h3 id="dry-run"><a href="#dry-run" class="headerlink" title="--dry-run"></a><code>--dry-run</code></h3><p>Run Mutation Testing with applied mutations but without actually running the tests for each Mutant.</p>
+<p>All mutant processes returns <code>0</code> exit code. It is expected that all Mutants are escaped.</p>
+<p>Can be useful for:</p>
+<ul>
+<li>print all mutations that will be applied - when combined with <code>--show-mutations=max</code></li>
+<li>debugging purposes</li>
+</ul>
 <h3 id="force-progress"><a href="#force-progress" class="headerlink" title="--force-progress"></a><code>--force-progress</code></h3><p>Outputs progress bars and mutation count during progress even if a CI is detected.</p>
 <p>This option also reverts optimizations made by <code>--no-progress</code> option, read <a href="/guide/command-line-options.html#no-progress">here</a>. </p>
 <h3 id="static-analysis-tool-options"><a href="#static-analysis-tool-options" class="headerlink" title="--static-analysis-tool-options"></a><code>--static-analysis-tool-options</code></h3><p>Specify additional options to pass to the static analysis tool (e.g. memory limit). </p>
