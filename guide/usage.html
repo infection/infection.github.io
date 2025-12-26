@@ -342,7 +342,7 @@
 <li><code>&quot;excludes&quot;: [&quot;Folder/with/File.php&quot;]</code> skips the file <code>src/Folder/with/File.php</code>.</li>
 <li><code>&quot;excludes&quot;: [&quot;/\\.interface\\.php/&quot;]</code> skips all files containing <code>.interface.php</code> in the name.</li>
 <li><code>&quot;excludes&quot;: [&quot;{Infrastructure/.*}&quot;]</code> skips all files within <code>src/Infrastructure</code> folder. Note that braces (<code>{}</code>) is a valid regex delimiter in PHP.</li>
-<li><code>&quot;excludes&quot;: [&quot;{.*/Infrastructure/.*}&quot;]</code> skips all files within the <code>Infrastructure</code> path of the second level of directories within <code>src</code>. Therefore, <code>src/Shared/Infrastructure</code> or <code>src/SomeBoundedContext/Infrastructure</code> would be excluded, whereas <code>src/Shared/Domain</code> or <code>src/SomeBoundedContext/Application</code> would not.</li>
+<li><code>&quot;excludes&quot;: [&quot;{.*/Infrastructure/.*}&quot;]</code> skips all files within the <code>Infrastructure</code> path of the second level of directories within <code>src</code>. Therefore, <code>src/Shared/Infrastructure</code> or <code>src/SomeBoundedContext/Infrastructure</code> would be excluded, whereas <code>src/Shared/Domain</code> or <code>src/SomeBoundedContext/Application</code> would not.<br>Use <code>bin/infection config:list-sources</code> to debug and see which files are to be used excluded. This command understands <code>infection.json5</code> file as well as different CLI options, such as <code>--filter</code> etc.</li>
 </ul>
 </li>
 </ul>
