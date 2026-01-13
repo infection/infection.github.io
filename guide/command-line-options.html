@@ -347,7 +347,9 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=Mailer.php,Foobar.php</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>This in no way restricts the initial Infection check on the overall test suite which is still executed in full to ensure all tests are passing correctly before proceeding.</p>
+<p>This in no way restricts the initial Infection check on the overall test suite, which is still executed in full to ensure all tests are passing correctly before proceeding.</p>
+<p class="tip">You can check the result of the filter applied by using <code>infection config:list-sources --filter=&lt;filter&gt;</code>.</p>
+
 <h3 id="threads-or-j"><a href="#threads-or-j" class="headerlink" title="--threads or -j"></a><code>--threads</code> or <code>-j</code></h3><p>If you want to run tests for mutated code in parallel, set this to something &gt; 1. It will <strong>dramatically speed up</strong> mutation process. Please note that if your tests somehow depends on each other or use database, this option can lead to failing tests which give many false-positives results.</p>
 <p>To automatically detect the number of CPU cores, use <code>--threads=max</code>.</p>
 <p>For Infection versions below <code>0.26.15</code>, you can detect the number of CPU cores depending on OS:</p>
@@ -397,13 +399,19 @@
 <blockquote>
 <p>It’s possible to mutate only touched <strong>lines</strong>, see  <a href="/guide/command-line-options.html#git-diff-lines"><code>--git-diff-lines</code></a> option</p>
 </blockquote>
+<p class="tip">You can check the result of the filter applied by using <code>infection config:list-sources</code> and/or debug the<br>git values used by using the infection git commands. They can be listed with <code>infection list git</code>.</p>
+
 <h3 id="git-diff-base"><a href="#git-diff-base" class="headerlink" title="--git-diff-base"></a><code>--git-diff-base</code></h3><p>Supposed to be used only with <a href="/guide/command-line-options.html#git-diff-filter"><code>--git-diff-filter</code></a> option. Configures the base branch for <code>git diff</code> command.</p>
 <p>Usage:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is needed on GitHub Actions to fetch the base branch to make a diff</span></span><br><span class="line">git fetch --depth=1 origin <span class="variable">$GITHUB_BASE_REF</span></span><br><span class="line"></span><br><span class="line">infection.phar --git-diff-base=origin/<span class="variable">$GITHUB_BASE_REF</span> --git-diff-filter=AM</span><br></pre></td></tr></table></figure>
+<p class="tip">You can check the result of the filter applied by using <code>infection config:list-sources</code> and/or debug the<br>git values used by using the infection git commands. They can be listed with <code>infection list git</code>.</p>
+
 <h3 id="git-diff-lines"><a href="#git-diff-lines" class="headerlink" title="--git-diff-lines"></a><code>--git-diff-lines</code></h3><p>Allows mutating only touched <strong>lines</strong> of code. Under the hood, this option mutates only added and changed files, comparing your current branch with <code>master</code> branch by default.</p>
 <p>Base branch can be changed by using <code>--git-diff-base=main</code> option. In this case, your current branch will be compared with <code>main</code> branch.</p>
 <p>Useful to check how your changes impacts MSI in a feature branch. Useful for those who do not want / can’t write tests for the whole touched legacy file, but wants to cover their own changes (only modified lines).</p>
 <p>Can significantly improve performance since fewer Mutants are generated in comparison to using <code>--git-diff-filter=AM</code> or mutating all files.</p>
+<p class="tip">You can check the result of the filter applied by using <code>infection config:list-sources</code> and/or debug the<br>git values used by using the infection git commands. They can be listed with <code>infection list git</code>.</p>
+
 <h3 id="map-source-class-to-test"><a href="#map-source-class-to-test" class="headerlink" title="--map-source-class-to-test"></a><code>--map-source-class-to-test</code></h3><blockquote>
 <p>Meant to be used together with <code>--git-diff-lines</code> / <code>--git-diff-filter</code> / <code>--filter</code></p>
 </blockquote>
@@ -476,6 +484,13 @@
 <blockquote>
 <p>The option supports <code>php://stdout</code> value which can, for instance, be useful in a CI environment.</p>
 </blockquote>
+<h3 id="logger-summary-json"><a href="#logger-summary-json" class="headerlink" title="--logger-summary-json"></a><code>--logger-summary-json</code></h3><p>This option is used to provide a path to the generated summary JSON report:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-summary-json=<span class="string">'summary.json'</span></span><br></pre></td></tr></table></figure>
+<p>After Infection completes its job, the <code>summary.json</code> file will be generated with machine-readable JSON containing only general stats (similar to <code>json</code> logger but without individual mutant details). This can be programmatically analyzed, for example on CI.</p>
+<p>Takes precedence over <code>logger.summaryJson</code> setting inside <code>infection.json5</code> file. If you want to always generate summary JSON report, it’s better to configure it inside <code>infection.json5</code>, see <a href="/guide/usage.html">here</a>.</p>
+<blockquote>
+<p>The option supports <code>php://stdout</code> value which can, for instance, be useful in a CI environment.</p>
+</blockquote>
 <h3 id="skip-initial-tests"><a href="#skip-initial-tests" class="headerlink" title="--skip-initial-tests"></a><code>--skip-initial-tests</code></h3><p>If you have already run the test suite to ensure it is passing, and you are providing coverage using <code>--coverage</code> then you can use this option to increase performance by not running the entire test suite again.</p>
 <p class="tip">Note that it is extremely important that you ensure the test suite is passing when using this option, otherwise test failures would appear like caught mutations and those mutations may be reported incorrectly.</p>
 
@@ -501,6 +516,22 @@
 <p>Read more about <a href="./using-with-ci.html">using Infection in CI server</a></p>
 </blockquote>
 <h3 id="min-covered-msi"><a href="#min-covered-msi" class="headerlink" title="--min-covered-msi"></a><code>--min-covered-msi</code></h3><p>This is a minimum threshold of Covered Code Mutation Score Indicator (MSI) in percentage. Can be used with CI server to automatically control tests quality.</p>
+<h3 id="with-timeouts"><a href="#with-timeouts" class="headerlink" title="--with-timeouts"></a><code>--with-timeouts</code></h3><p>Treats timed-out mutants as escaped instead of killed - this affects MSI calculation.</p>
+<p>By default, timed-out mutants are counted as “killed” because the mutation was detected (the test didn’t pass). However, timeouts can hide real test gaps, especially on CI environments with weaker CPUs where mutations that would escape locally instead time out.</p>
+<p>A timeout is not an unnatural outcome of the tests with mutation testing, but it leads to bad performance unless the timeout is very strict. As such, in some cases, you may want to add more tests than it is strictly necessary to fight against those timeouts.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Get your real MSI with timeouts counted as escaped</span></span><br><span class="line">infection --with-timeouts --min-msi=80</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Show timed-out mutations <span class="keyword">in</span> output (alongside escaped ones)</span></span><br><span class="line">infection --with-timeouts --show-mutations</span><br></pre></td></tr></table></figure>
+<p>Use this option when you want stricter MSI calculation that doesn’t hide potential test gaps behind timeouts.</p>
+<blockquote>
+<p>This option can also be set in <a href="/guide/usage.html">configuration file</a> as <code>timeoutsAsEscaped</code></p>
+</blockquote>
+<h3 id="max-timeouts"><a href="#max-timeouts" class="headerlink" title="--max-timeouts"></a><code>--max-timeouts</code></h3><p>Fails the build if the number of timed-out mutants exceeds the specified threshold. This is a hard limit that does not affect MSI calculation.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Fail if any timeouts occur (strict mode for PRs)</span></span><br><span class="line">infection --git-diff-lines --max-timeouts=0</span><br><span class="line"></span><br><span class="line"><span class="comment"># Allow some timeouts but set a ceiling</span></span><br><span class="line">infection --max-timeouts=10</span><br><span class="line"></span><br><span class="line"><span class="comment"># Combined: strict MSI + hard ceiling</span></span><br><span class="line">infection --with-timeouts --max-timeouts=5 --min-msi=75</span><br></pre></td></tr></table></figure>
+<p>Useful for preventing timeout accumulation over time. Especially valuable for PR workflows where you want zero new timeouts introduced.</p>
+<blockquote>
+<p>This option can also be set in <a href="/guide/usage.html">configuration file</a> as <code>maxTimeouts</code></p>
+</blockquote>
+<p class="tip">The <code>--with-timeouts</code> and <code>--max-timeouts</code> options are independent. One affects metric calculation, the other is a hard limit. They can be used separately or together.</p>
+
 <h3 id="mutators"><a href="#mutators" class="headerlink" title="--mutators"></a><code>--mutators</code></h3><p>This is a comma separated option to specify a particular set of mutators or <a href="/guide/profiles.html">profiles</a> that need to be executed. Example:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --mutators=PublicVisibility,Plus,Decrement,@number</span><br></pre></td></tr></table></figure>
 <blockquote>
