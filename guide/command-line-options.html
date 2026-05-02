@@ -564,6 +564,34 @@
 </ul>
 <h3 id="force-progress"><a href="#force-progress" class="headerlink" title="--force-progress"></a><code>--force-progress</code></h3><p>Outputs progress bars and mutation count during progress even if a CI is detected.</p>
 <p>This option also reverts optimizations made by <code>--no-progress</code> option, read <a href="/guide/command-line-options.html#no-progress">here</a>. </p>
+<h3 id="static-analysis-tool"><a href="#static-analysis-tool" class="headerlink" title="--static-analysis-tool"></a><code>--static-analysis-tool</code></h3><p>Enable static analysis integration to catch escaped mutants that are not killed by tests.</p>
+<p>Supported static analysis tools: <code>phpstan</code>, <code>mago</code>.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --static-analysis-tool=phpstan</span><br><span class="line">infection --static-analysis-tool=mago</span><br></pre></td></tr></table></figure>
+<p>When enabled, Infection will:</p>
+<ol>
+<li>Run an initial static analysis check to ensure the tool passes and warm up caches</li>
+<li>Execute the static analysis tool for each mutant that escapes (is not killed by) the test suite</li>
+<li>Mark escaped mutants as “Killed by SA” if the static analysis tool detects errors</li>
+</ol>
+<p>This feature helps improve mutation testing effectiveness by catching logical errors that tests might miss, such as:</p>
+<ul>
+<li>Type violations</li>
+<li>Dead code detection  </li>
+<li>Unreachable code paths</li>
+</ul>
+<p><strong>Requirements for PHPStan:</strong></p>
+<ul>
+<li>PHPStan must be installed at <code>vendor/bin/phpstan</code></li>
+<li>A valid PHPStan configuration file should be present in your project</li>
+</ul>
+<p><strong>Requirements for Mago:</strong></p>
+<ul>
+<li>Mago (&gt;= 1.23.0) must be installed at <code>vendor/bin/mago</code></li>
+<li>Install via Composer: <code>composer require --dev carthage-software/mago</code></li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> This is an opt-in feature. Static analysis is only performed on mutants that escape the test suite, ensuring optimal performance.</p>
+</blockquote>
 <h3 id="static-analysis-tool-options"><a href="#static-analysis-tool-options" class="headerlink" title="--static-analysis-tool-options"></a><code>--static-analysis-tool-options</code></h3><p>Specify additional options to pass to the static analysis tool (e.g. memory limit). </p>
 <p>Example: <code>--static-analysis-tool-options=&quot;--memory-limit=-1 --stop-on-error&quot;</code>.</p>
 <h3 id="formatter"><a href="#formatter" class="headerlink" title="--formatter"></a><code>--formatter</code></h3><p>This is a name of console output formatter. Possible values are: <code>dot</code>, <code>progress</code>. Default is <code>dot</code> formatter.</p>
