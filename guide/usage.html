@@ -167,6 +167,16 @@
         
         
         <li>
+            <a href="/guide/static-analysis-integration.html" class="sidebar-link new">Static Analysis Integration</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
             <a href="/guide/command-line-options.html" class="sidebar-link">Command Line Options</a>
         </li>
     
@@ -187,7 +197,7 @@
         
         
         <li>
-            <a href="/guide/custom-mutators.html" class="sidebar-link new">Custom Mutators</a>
+            <a href="/guide/custom-mutators.html" class="sidebar-link">Custom Mutators</a>
         </li>
     
         
@@ -398,19 +408,6 @@
 <p>then you have to add it to the <code>infection.json5</code> file:</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"bootstrap"</span>: <span class="string">"./custom-autoloader.php"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Thus, Infection will know how to autoload <code>NonPsr4CompliantFile</code> class. Without adding it to the config, Infection will not be able to create Mutations because internally it uses <code>new \ReflectionClass()</code> objects.</p>
-<h2 id="Static-Analysis-Integration"><a href="#Static-Analysis-Integration" class="headerlink" title="Static Analysis Integration"></a>Static Analysis Integration</h2><p>If you come from a statically typed language with AoT compilers, you may be confused about the scope of this feature, but in the PHP ecosystem, producing runnable code that does not respect the type system is very easy, and mutation testing tools do this all the time.</p>
-<p>Consider this example (credit: <a href="https://github.com/Roave/infection-static-analysis-plugin#background" target="_blank" rel="noopener">Roave/infection-static-analysis-plugin</a>):</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@template</span> T</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> array&lt;T&gt; $values</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> list&lt;T&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeAList</span><span class="params">(array $values)</span>: <span class="title">array</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> array_values($values);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Given a test like:</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test_makes_a_list</span><span class="params">()</span>: <span class="title">void</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $list = makeAList([<span class="string">'a'</span> =&gt; <span class="string">'b'</span>, <span class="string">'c'</span> =&gt; <span class="string">'d'</span>]);</span><br><span class="line"></span><br><span class="line">    assert(count($list) === <span class="number">2</span>);</span><br><span class="line">    assert(in_array(<span class="string">'b'</span>, $list, <span class="keyword">true</span>));</span><br><span class="line">    assert(in_array(<span class="string">'d'</span>, $list, <span class="keyword">true</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>A mutation testing framework will produce the following mutation, since the test does not verify the output precisely enough:</p>
-<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"> function makeAList(array $values): array</span><br><span class="line"> &#123;</span><br><span class="line"><span class="deletion">-    return array_values($values);</span></span><br><span class="line"><span class="addition">+    return $values;</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>This mutated code is valid PHP, but violates the <code>@return list&lt;T&gt;</code> type declaration. A static analysis tool can detect that the actual return value is no longer a <code>list&lt;T&gt;</code> but a map of <code>array&lt;int|string, T&gt;</code>, and kill this mutant — preventing you from having to write an unnecessary test.</p>
-<p>Infection supports <code>phpstan</code> and <code>mago</code> as static analysis tools. To enable the integration, install the tool and set <code>staticAnalysisTool</code> in your config:</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"staticAnalysisTool"</span>: <span class="string">"phpstan"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>or pass it via CLI:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --static-analysis-tool=phpstan</span><br><span class="line">infection --static-analysis-tool=mago</span><br></pre></td></tr></table></figure>
-<p>Static analysis is only run on <strong>escaped mutants</strong>.</p>
 <h2 id="Running-Infection"><a href="#Running-Infection" class="headerlink" title="Running Infection"></a>Running Infection</h2><p>Ensure that your tests are all in a passing state (incomplete and skipped tests are allowed). Infection will quit if any of your tests are failing.</p>
 <p>If you have installed Infection as a global composer package, just run it in your project’s root:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection</span><br></pre></td></tr></table></figure>
