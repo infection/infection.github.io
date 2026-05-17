@@ -367,7 +367,7 @@
 <blockquote>
 <p>Running Infection with more threads does not necessarily lead to better performance. Consider benchmarking several numbers to find one that works best for your particular case.</p>
 </blockquote>
-<h3 id="test-framework"><a href="#test-framework" class="headerlink" title="--test-framework"></a><code>--test-framework</code></h3><p>This is a name of the Test Framework to use. Currently, Infection supports <code>PHPUnit</code>, <code>PhpSpec</code> and <code>Codeception</code>.</p>
+<h3 id="test-framework"><a href="#test-framework" class="headerlink" title="--test-framework"></a><code>--test-framework</code></h3><p>This is a name of the Test Framework to use. Currently, Infection supports <code>PHPUnit</code>, <code>PhpSpec</code>, <code>Codeception</code> and <code>Testo</code>.</p>
 <p>If you are using <code>infection/infection</code> Composer package, <code>PHPUnit</code> is installed by default. Other test framework adapters will be automatically installed on demand.<br><a href="/guide/installation.html#Phar">PHAR distribution</a> is bundled with all available adapters.</p>
 <blockquote>
 <p>Feel free to request a new test framework to be supported out of the box in GitHub’s issues.</p>
@@ -605,6 +605,13 @@
 <h3 id="static-analysis-tool-options"><a href="#static-analysis-tool-options" class="headerlink" title="--static-analysis-tool-options"></a><code>--static-analysis-tool-options</code></h3><p>Specify additional options to pass to the static analysis tool (e.g. memory limit). </p>
 <p>Example: <code>--static-analysis-tool-options=&quot;--memory-limit=-1 --stop-on-error&quot;</code>.</p>
 <h3 id="formatter"><a href="#formatter" class="headerlink" title="--formatter"></a><code>--formatter</code></h3><p>This is a name of console output formatter. Possible values are: <code>dot</code>, <code>progress</code>. Default is <code>dot</code> formatter.</p>
+<h3 id="dots-per-row"><a href="#dots-per-row" class="headerlink" title="--dots-per-row"></a><code>--dots-per-row</code></h3><p>Number of dots per row in the dot progress formatter. Use <code>&quot;max&quot;</code> to fit the terminal width.</p>
+<p>Accepted values: a positive integer (e.g. <code>--dots-per-row=80</code>) or the literal <code>&quot;max&quot;</code> (e.g. <code>--dots-per-row=max</code>). Default is <code>50</code>. Only applies when the <code>dot</code> progress formatter is in use.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --dots-per-row=80</span><br><span class="line">infection --dots-per-row=max</span><br></pre></td></tr></table></figure>
+<p>With <code>&quot;max&quot;</code>, the formatter fits as many dots as the terminal width allows after reserving room for the <code>(current / total)</code> suffix on the right, and never exceeds the total mutation count when it is known.</p>
+<blockquote>
+<p>This option can also be set in <a href="/guide/usage.html">configuration file</a> as <code>dotsPerRow</code>. The CLI flag takes precedence over the configuration file value.</p>
+</blockquote>
 <h3 id="log-verbosity"><a href="#log-verbosity" class="headerlink" title="--log-verbosity"></a><code>--log-verbosity</code></h3><p>The verbosity of the log file, <code>all</code> - this mode will add “Killed mutants” into log file and add additional information, <code>default</code> - normal mode will skip “Killed mutants” section in the log file, <code>none</code> - which will disable logging to files.</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --<span class="built_in">log</span>-verbosity=all</span><br></pre></td></tr></table></figure>
 <h3 id="initial-tests-php-options"><a href="#initial-tests-php-options" class="headerlink" title="--initial-tests-php-options"></a><code>--initial-tests-php-options</code></h3><p>Run Initial Tests process with additional php options. For example with <code>-d zend_extension=xdebug.so</code> which will run <code>Xdebug</code> only for code coverage.<br>May be useful for cases when <code>Xdebug</code> is not enabled globally. Also it’s useful from performance point of view.<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --initial-tests-php-options=<span class="string">"-d zend_extension=xdebug.so"</span></span><br></pre></td></tr></table></figure></p>
