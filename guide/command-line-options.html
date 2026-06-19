@@ -372,13 +372,20 @@
 <blockquote>
 <p>Feel free to request a new test framework to be supported out of the box in GitHub’s issues.</p>
 </blockquote>
-<h3 id="test-framework-options"><a href="#test-framework-options" class="headerlink" title="--test-framework-options"></a><code>--test-framework-options</code></h3><p>This option allows passing additional options to the test framework. Example for <code>PHPUnit</code>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --<span class="built_in">test</span>-framework-options=<span class="string">"--verbose --filter=just/unit/tests"</span></span><br></pre></td></tr></table></figure>
+<h3 id="test-framework-extra-args"><a href="#test-framework-extra-args" class="headerlink" title="--test-framework-extra-args"></a><code>--test-framework-extra-args</code></h3><p><span class="version-since">Available in Infection 0.34.0+</span></p>
+<p>This option allows passing additional options and arguments to the test framework. Example for <code>PHPUnit</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --<span class="built_in">test</span>-framework-extra-args=<span class="string">"--verbose --filter=just/unit/tests"</span></span><br></pre></td></tr></table></figure>
 <p>This will execute the <code>PHPUnit</code> as:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phpunit [...infection options] --verbose --filter=just/unit/tests</span><br></pre></td></tr></table></figure>
+<p>or, another example with argument: this will narrow executed tests only for 1 file:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --<span class="built_in">test</span>-framework-extra-args=<span class="string">"tests/FooTest.php"</span></span><br></pre></td></tr></table></figure>
+<p>This will execute the <code>PHPUnit</code> as:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phpunit [...infection options] tests/FooTest.php</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Please note that if you choose to use <code>--configuration</code>, <code>--filter</code>, or <code>--testsuite</code> for <code>PHPUnit</code>, these options will only be applied to the <em>initial</em> test run. Each mutation has a custom <code>phpunit.xml</code> file generated for it which defines a single testsuite containing the tests which should be executed for that mutation. Applying <code>--filter</code> or <code>--testsuite</code> would not make sense in this context as the tests have already been filtered down. </p>
+<p>Please note that if you choose to use <code>--configuration</code>, <code>--filter</code>, or <code>--testsuite</code> for <code>PHPUnit</code>, these options will only be applied to the <em>initial</em> test run. Each mutation has a custom <code>phpunit.xml</code> file generated for it which defines a single testsuite containing the tests which should be executed for that mutation. Applying <code>--filter</code> or <code>--testsuite</code> would not make sense in this context as the tests have already been filtered down.</p>
 </blockquote>
+<h3 id="test-framework-options-deprecated"><a href="#test-framework-options-deprecated" class="headerlink" title="--test-framework-options (deprecated)"></a><code>--test-framework-options</code> (deprecated)</h3><p>This option is deprecated since <code>0.34.0</code>.</p>
+<p>Use <a href="#test-framework-extra-args"><code>--test-framework-extra-args</code></a> instead.</p>
 <h3 id="coverage"><a href="#coverage" class="headerlink" title="--coverage"></a><code>--coverage</code></h3><p>Path to the existing coverage reports.</p>
 <p>When you use Continuous Integration for your project, probably you are already generating code coverage metrics and run <code>PHPUnit</code> with <code>Xdebug</code>/<code>phpdbg</code> enabled. Then, you run Infection for mutation testing, which in its turn, generates Code Coverage again for internal needs. This dramatically increases the build time because running your tests with debugger <em>twice</em> requires too much time.</p>
 <p>With this option it’s possible to reuse already generated coverage in Infection.</p>
@@ -492,14 +499,14 @@
 <p>After Infection completes its job, the <code>mutation-report.log</code> file will be generated with human-readable text report.</p>
 <p>Takes precedence over <code>logger.text</code> setting inside <code>infection.json5</code> file. If you want to always generate text report, it’s better to configure it inside <code>infection.json5</code>, see <a href="/guide/usage.html">here</a>.</p>
 <blockquote>
-<p>The option supports <code>php://stdout</code> value which can, for instance, be useful in a CI environment.</p>
+<p>The option supports <code>php://stdout</code>, <code>php://stderr</code>, and <code>php://output</code> values. <code>php://stdout</code> and <code>php://stderr</code> can be useful in CI environments, while <code>php://output</code> can be useful for same-process PHP wrappers that capture output with output buffering.</p>
 </blockquote>
 <h3 id="logger-summary-json"><a href="#logger-summary-json" class="headerlink" title="--logger-summary-json"></a><code>--logger-summary-json</code></h3><p>This option is used to provide a path to the generated summary JSON report:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection.phar --logger-summary-json=<span class="string">'summary.json'</span></span><br></pre></td></tr></table></figure>
 <p>After Infection completes its job, the <code>summary.json</code> file will be generated with machine-readable JSON containing only general stats (similar to <code>json</code> logger but without individual mutant details). This can be programmatically analyzed, for example on CI.</p>
 <p>Takes precedence over <code>logger.summaryJson</code> setting inside <code>infection.json5</code> file. If you want to always generate summary JSON report, it’s better to configure it inside <code>infection.json5</code>, see <a href="/guide/usage.html">here</a>.</p>
 <blockquote>
-<p>The option supports <code>php://stdout</code> value which can, for instance, be useful in a CI environment.</p>
+<p>The option supports <code>php://stdout</code>, <code>php://stderr</code>, and <code>php://output</code> values. <code>php://stdout</code> and <code>php://stderr</code> can be useful in CI environments, while <code>php://output</code> can be useful for same-process PHP wrappers that capture output with output buffering.</p>
 </blockquote>
 <h3 id="skip-initial-tests"><a href="#skip-initial-tests" class="headerlink" title="--skip-initial-tests"></a><code>--skip-initial-tests</code></h3><p>If you have already run the test suite to ensure it is passing, and you are providing coverage using <code>--coverage</code> then you can use this option to increase performance by not running the entire test suite again.</p>
 <p class="tip">Note that it is extremely important that you ensure the test suite is passing when using this option, otherwise test failures would appear like caught mutations and those mutations may be reported incorrectly.</p>
