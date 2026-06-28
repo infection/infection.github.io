@@ -167,7 +167,7 @@
         
         
         <li>
-            <a href="/guide/static-analysis-integration.html" class="sidebar-link new">Static Analysis Integration</a>
+            <a href="/guide/arguments.html" class="sidebar-link new">Command Line Arguments</a>
         </li>
     
         
@@ -178,6 +178,16 @@
         
         <li>
             <a href="/guide/command-line-options.html" class="sidebar-link current">Command Line Options</a>
+        </li>
+    
+        
+        
+            
+            
+        
+        
+        <li>
+            <a href="/guide/static-analysis-integration.html" class="sidebar-link">Static Analysis Integration</a>
         </li>
     
         
@@ -339,27 +349,6 @@
       <h1>Command Line Options</h1>
     
     <p>Besides general Symfony Console application command line options, Infection has its own ones.</p>
-<h3 id="filter"><a href="#filter" class="headerlink" title="--filter"></a><code>--filter</code></h3><p>If you’re only interested in mutating a subset of your files, you can pass a <code>--filter</code> option containing:</p>
-<ul>
-<li><p>a relative file path:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=src/Service/Mailer.php</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>a filename:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=Mailer.php</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>a relative directory path:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=src/Service/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>a comma separated list of relative paths:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=src/Service/Mailer.php,src/Entity/Foobar.php</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>a comma separated list of filenames:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=Mailer.php,Foobar.php</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>This in no way restricts the initial Infection check on the overall test suite, which is still executed in full to ensure all tests are passing correctly before proceeding.</p>
-<p class="tip">You can check the result of the filter applied by using <code>infection config:list-sources --filter=&lt;filter&gt;</code>.</p>
-
 <h3 id="threads-or-j"><a href="#threads-or-j" class="headerlink" title="--threads or -j"></a><code>--threads</code> or <code>-j</code></h3><p>If you want to run tests for mutated code in parallel, set this to something &gt; 1. It will <strong>dramatically speed up</strong> mutation process. Please note that if your tests somehow depends on each other or use database, this option can lead to failing tests which give many false-positives results.</p>
 <p>To automatically detect the number of CPU cores, use <code>--threads=max</code>.</p>
 <p>For Infection versions below <code>0.26.15</code>, you can detect the number of CPU cores depending on OS:</p>
@@ -625,9 +614,34 @@
 <h3 id="ignore-msi-with-no-mutations"><a href="#ignore-msi-with-no-mutations" class="headerlink" title="--ignore-msi-with-no-mutations"></a><code>--ignore-msi-with-no-mutations</code></h3><p>Ignore MSI violations when no mutations are generated. This will force Infection to return a zero exit code even when the required MSI is not reached.</p>
 <h3 id="debug"><a href="#debug" class="headerlink" title="--debug"></a><code>--debug</code></h3><p>Run Infection in a debug mode. With this option Infection will not erase <code>tmpDir</code> and this might be useful to run particular unit test with a mutated code for example.</p>
 <p>Also, this option will add test framework’s output to log file so you can analyze by which test particular Mutant was killed, and additional information about executed command lines will be added.</p>
+<h3 id="filter-deprecated"><a href="#filter-deprecated" class="headerlink" title="--filter (deprecated)"></a><code>--filter</code> (deprecated)</h3><p><span class="version-since">Deprecated since Infection 0.34.0</span></p>
+<p>This option is deprecated. Use positional arguments instead:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection src/Service/Mailer.php</span><br><span class="line">infection src/Service/Mailer.php src/Entity/Foobar.php</span><br></pre></td></tr></table></figure>
+<p>If you’re only interested in mutating a subset of your files, you can pass a <code>--filter</code> option containing:</p>
+<ul>
+<li><p>a relative file path:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=src/Service/Mailer.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>a filename:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=Mailer.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>a relative directory path:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=src/Service/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>a comma separated list of relative paths:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=src/Service/Mailer.php,src/Entity/Foobar.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>a comma separated list of filenames:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection --filter=Mailer.php,Foobar.php</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>This in no way restricts the initial Infection check on the overall test suite, which is still executed in full to ensure all tests are passing correctly before proceeding.</p>
+<p class="tip">You can check the result of the filter applied by using <code>infection config:list-sources --filter=&lt;filter&gt;</code>.</p>
 
     
       <div class="guide-links">
+        
+          <span>← <a href="/guide/arguments.html">Command Line Arguments</a></span>
         
         
       </div>

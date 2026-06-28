@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head><meta name="generator" content="Hexo 3.8.0">
-        <title>Mutation Badge, cloud HTML report — Infection PHP</title>
+        <title>Command Line Arguments — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <meta property="og:type" content="article">
-        <meta property="og:title" content="Mutation Badge, cloud HTML report — Infection PHP">
+        <meta property="og:title" content="Command Line Arguments — Infection PHP">
         <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
         <meta property="og:image" content="https://infection.github.io//images/logo.png">
 
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="Mutation Badge, cloud HTML report — Infection PHP">
+        <meta name="twitter:title" content="Command Line Arguments — Infection PHP">
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
@@ -167,7 +167,7 @@
         
         
         <li>
-            <a href="/guide/arguments.html" class="sidebar-link new">Command Line Arguments</a>
+            <a href="/guide/arguments.html" class="sidebar-link current new">Command Line Arguments</a>
         </li>
     
         
@@ -237,7 +237,7 @@
         
         
         <li>
-            <a href="/guide/mutation-badge.html" class="sidebar-link current">Mutation Badge, cloud HTML report</a>
+            <a href="/guide/mutation-badge.html" class="sidebar-link">Mutation Badge, cloud HTML report</a>
         </li>
     
         
@@ -341,57 +341,129 @@
 </div>
 
 
-<div class="content guide with-sidebar mutation-badge-guide">
+<div class="content guide with-sidebar arguments-guide">
     
       
     
     
-      <h1>Mutation Badge, cloud HTML report</h1>
+      <h1>Command Line Arguments</h1>
     
-    <p>We use the <a href="https://dashboard.stryker-mutator.io/" target="_blank" rel="noopener">Stryker Dashboard</a> to store mutation score for badges and host HTML reports in the cloud. <a href="https://stryker-mutator.io" target="_blank" rel="noopener">Stryker</a> is a mutation testing framework for Javascript that shares its service for other mutations frameworks.</p>
-<h2 id="How-to-set-it-up"><a href="#How-to-set-it-up" class="headerlink" title="How to set it up"></a>How to set it up</h2><p><a href="https://infection.github.io"><img src="https://badge.stryker-mutator.io/github.com/infection/infection/master" alt="Infection MSI"></a></p>
-<p>Take these steps to enable the mutation score badge / cloud HTML report on your repository:</p>
-<ol>
-<li><p>Make sure you have enabled a continuous integration service for your project. </p>
-<p>We use <a href="https://github.com/OndraM/ci-detector" target="_blank" rel="noopener"><code>ondram/ci-detector</code></a> to detect continuous-integration services.  </p>
-<p>Feel free to request an additional integration there if the list of <a href="https://github.com/OndraM/ci-detector#supported-continuous-integration-servers" target="_blank" rel="noopener">currently supported continuous-integration servers</a> does not contain a service you require.</p>
+    <p>Starting from version 0.34, Infection supports positional arguments to scope Mutation Analysis to source paths, tests paths or both.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection src/Domain</span><br></pre></td></tr></table></figure>
+<p>will mutate all files inside <code>src/Domain</code>.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection src/Domain/UserRepository.php</span><br></pre></td></tr></table></figure>
+<p>will mutate just one file <code>src/Domain/UserRepository.php</code>.</p>
+<p>Mutating several folders, files or mix is also possible:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection src/Domain src/Infrastructure src/Some/ConcreteFile.php</span><br></pre></td></tr></table></figure>
+<p>In general, you can pass the argument(s) containing:</p>
+<ul>
+<li><p>a relative file path:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection src/Service/Mailer.php</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Go to <a href="https://dashboard.stryker-mutator.io" target="_blank" rel="noopener">https://dashboard.stryker-mutator.io</a> and sign in with your GitHub account.</p>
+<li><p>a filename:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection Mailer.php</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Enable a repository for which you want to create a mutation badge / cloud HTML report. Stryker Dashboard will generate a key for you automatically. </p>
+<li><p>a relative directory path:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection src/Service/</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Provide the API key for your project as a secret environment variable - either <code>INFECTION_DASHBOARD_API_KEY</code> or <code>STRYKER_DASHBOARD_API_KEY</code> can be used.</p>
+<li><p>a space separated list of relative paths:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection src/Service/Mailer.php src/Entity/Foobar.php</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Configure the <code>stryker</code> logger in your <code>infection.json5</code> file:</p>
-<p> for badge</p>
- <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"stryker"</span>: &#123;</span><br><span class="line">            <span class="attr">"badge"</span>: <span class="string">"/^release-.*$/"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> or for HTML report to host it on Stryker Dashboard</p>
- <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"stryker"</span>: &#123;</span><br><span class="line">            <span class="attr">"report"</span>: <span class="string">"/^release-.*$/"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>a space separated list of filenames:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">infection Mailer.php Foobar.php</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>This in no way restricts the initial Infection check on the overall test suite, which is still executed in full to ensure all tests are passing correctly before proceeding.</p>
 <blockquote>
-<p>You can use either <code>badge</code> or <code>report</code>, but not both.</p>
-<p>Using HTML report automatically enables badge on Stryker Dashboard. </p>
+<p>You can check the result of the filter applied by using <code>infection config:list-sources &lt;filter&gt;</code></p>
 </blockquote>
-<p> If you provide a value that is not a regular expression starting and ending with <code>/</code>, a direct match will be performed:</p>
- <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"logs"</span>: &#123;</span><br><span class="line">        <span class="attr">"stryker"</span>: &#123;</span><br><span class="line">            <span class="attr">"badge"</span>: <span class="string">"main"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Force a build by running:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin main</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>HTML report will be available at URL: <code>https://badge.stryker-mutator.io/github.com/{username}/{repository_name}/{branch}</code>. </p>
-<p>For example <a href="https://dashboard.stryker-mutator.io/reports/github.com/infection/infection/master" target="_blank" rel="noopener">https://dashboard.stryker-mutator.io/reports/github.com/infection/infection/master</a></p>
-<p>To get the Badge image, go to Stryker Dashboard and copy the link there. Don’t forget to add it to your readme file.</p>
-<p>That’s it! Hope you like it.</p>
+<hr>
+<p>To specify what test(s) needs to be executed, you can run</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection tests/Domain</span><br></pre></td></tr></table></figure>
+<p>This will run only <code>tests/Domain</code> tests and mutate only those files that marked as covered by these tests.</p>
+<blockquote>
+<p>For PHPUnit, this boils down to <code>phpunit tests/Domain</code></p>
+</blockquote>
+<p>Specifying several folders, files or mix is also possible:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection tests/Domain tests/Infrastructure tests/Some/ConcreteTestFile.php</span><br></pre></td></tr></table></figure>
+<h1 id="Best-for-performance"><a href="#Best-for-performance" class="headerlink" title="Best for performance"></a>Best for performance</h1><p>Even if you are working on a big project with slow tests suite, you can greatly benefit from specifying both path to a source file and covering test:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection src/Domain/UserRepository.php tests/Domain/UserRepositoryTest.php</span><br></pre></td></tr></table></figure>
+<p>In this case, Infection will run only <code>tests/Domain/UserRepositoryTest.php</code> test and mutate only <code>src/Domain/UserRepository.php</code>.</p>
+<p>If for PHPUnit you use <code>#[CoversClass(UserRepository::class)]</code> for <code>UserRepositoryTest.php</code>, these both calls are equivalent:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection src/Domain/UserRepository.php tests/Domain/UserRepositoryTest.php</span><br><span class="line"></span><br><span class="line">infection tests/Domain/UserRepositoryTest.php</span><br></pre></td></tr></table></figure>
+<h2 id="Partial-name-matching"><a href="#Partial-name-matching" class="headerlink" title="Partial name matching"></a>Partial name matching</h2><p>If you don’t want to provide full paths, Infection also accepts bare filenames (with or without the <code>.php</code> extension), matching any file whose name contains the given string:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection Mailer</span><br><span class="line">infection Mailer.php</span><br><span class="line">infection Plus_</span><br></pre></td></tr></table></figure>
+<h2 id="Any-order-is-supported"><a href="#Any-order-is-supported" class="headerlink" title="Any order is supported"></a>Any order is supported</h2><p>Source paths and test paths can be mixed in <strong>any order</strong>. Infection detects which arguments are source files and which are test files automatically:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># source first, then tests</span></span><br><span class="line">infection src/Service/Mailer.php tests/Unit/Service/MailerTest.php</span><br><span class="line"></span><br><span class="line"><span class="comment"># tests first, then source - identical result</span></span><br><span class="line">infection tests/Unit/Service/MailerTest.php src/Service/Mailer.php</span><br></pre></td></tr></table></figure>
+<h2 id="N-mixed-paths"><a href="#N-mixed-paths" class="headerlink" title="N mixed paths"></a>N mixed paths</h2><p>You can pass as many source and test paths as you need, in any combination:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">infection src/Differ/Differ.php tests/Differ src/Mutator/Plus_.php tests/Mutator/Plus_.php</span><br></pre></td></tr></table></figure>
+<p>This will:</p>
+<ul>
+<li>Mutate <code>src/Differ/Differ.php</code> and all files matching <code>Plus_.php</code></li>
+<li>Run only <code>tests/Differ</code> and <code>tests/Mutator/Plus_.php</code> tests</li>
+</ul>
+<h2 id="All-supported-forms-at-a-glance"><a href="#All-supported-forms-at-a-glance" class="headerlink" title="All supported forms at a glance"></a>All supported forms at a glance</h2><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>infection src/Service/Mailer.php</code></td>
+<td>Mutate one source file</td>
+</tr>
+<tr>
+<td><code>infection src/Service/</code></td>
+<td>Mutate entire source folder</td>
+</tr>
+<tr>
+<td><code>infection Mailer.php</code></td>
+<td>Mutate all files named <code>Mailer.php</code></td>
+</tr>
+<tr>
+<td><code>infection Mailer</code></td>
+<td>Mutate all files matching <code>Mailer</code></td>
+</tr>
+<tr>
+<td><code>infection src/A.php src/B.php</code></td>
+<td>Mutate multiple source files</td>
+</tr>
+<tr>
+<td><code>infection tests/Unit/</code></td>
+<td>Run only tests in <code>tests/Unit/</code></td>
+</tr>
+<tr>
+<td><code>infection tests/Unit/MailerTest.php</code></td>
+<td>Run one test file</td>
+</tr>
+<tr>
+<td><code>infection src/Service/Mailer.php tests/Unit/MailerTest.php</code></td>
+<td>Mutate one file, run one test</td>
+</tr>
+<tr>
+<td><code>infection src/Service/ tests/Unit/</code></td>
+<td>Mutate folder, run test folder</td>
+</tr>
+<tr>
+<td><code>infection src/A.php tests/A src/B.php tests/B</code></td>
+<td>N mixed paths in any order</td>
+</tr>
+</tbody>
+</table>
 
     
       <div class="guide-links">
         
         
+          <span style="float:right"><a href="/guide/command-line-options.html">Command Line Options</a> →</span>
+        
       </div>
     
     <div class="footer">
       Caught a mistake or want to contribute to the documentation?
-      <a href="https://github.com/infection/site/blob/master/src/guide/mutation-badge.md" target="_blank">
+      <a href="https://github.com/infection/site/blob/master/src/guide/arguments.md" target="_blank">
         Edit this page on Github!
       </a>
     </div>
