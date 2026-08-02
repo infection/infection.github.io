@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head><meta name="generator" content="Hexo 3.8.0">
-        <title>Introduction — Infection PHP</title>
+        <title>Backward Compatibility — Infection PHP</title>
         <meta charset="utf-8">
         <meta name="description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <meta property="og:type" content="article">
-        <meta property="og:title" content="Introduction — Infection PHP">
+        <meta property="og:title" content="Backward Compatibility — Infection PHP">
         <meta property="og:description" content="Infection - PHP Mutation Testing Framework.">
         <meta property="og:image" content="https://infection.github.io//images/logo.png">
 
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="Introduction — Infection PHP">
+        <meta name="twitter:title" content="Backward Compatibility — Infection PHP">
         <meta name="twitter:description" content="Infection - PHP Mutation Testing Framework.">
         <meta name="twitter:image" content="https://infection.github.io/images/logo.png">
 
@@ -137,7 +137,7 @@
         
         
         <li>
-            <a href="/guide/index.html" class="sidebar-link current">Introduction</a>
+            <a href="/guide/index.html" class="sidebar-link">Introduction</a>
         </li>
     
         
@@ -157,7 +157,7 @@
         
         
         <li>
-            <a href="/guide/backward-compatibility.html" class="sidebar-link">Backward Compatibility</a>
+            <a href="/guide/backward-compatibility.html" class="sidebar-link current">Backward Compatibility</a>
         </li>
     
         
@@ -351,58 +351,33 @@
 </div>
 
 
-<div class="content guide with-sidebar index-guide">
+<div class="content guide with-sidebar backward-compatibility-guide">
     
       
     
     
-      <h1>Introduction</h1>
+      <h1>Backward Compatibility</h1>
     
-    <h2 id="What-is-Mutation-Testing"><a href="#What-is-Mutation-Testing" class="headerlink" title="What is Mutation Testing?"></a>What is Mutation Testing?</h2><p>Mutation Testing is a fault-based testing technique which provides a testing criterion called the <em>Mutation Score Indicator (MSI)</em>. The MSI can be used to measure the effectiveness of a test set in terms of its ability to detect faults.</p>
-<p>Mutation testing involves modifying a program in small ways. Each mutated version is called a <strong>Mutant</strong>. To assess the quality of a given test set, these mutants are executed against the input test set to see if the seeded faults can be detected. If mutated program produces failing tests, this is called a <em>killed mutant</em>. If tests are green with mutated code, then we have an <em>escaped</em> mutant. </p>
-<p>Test suites are measured by the percentage of mutants that they kill. New tests can be designed to kill additional mutants.</p>
-<p>Mutants are based on well-defined <strong>Mutators</strong> (<a href="./mutators.html">mutation operators</a>) that either mimic typical programming errors (such as using the wrong operator or variable name) or force the creation of valuable tests (such as dividing each expression by zero)</p>
-<blockquote>
-<p>Read more about Mutation Testing in <a href="https://web.archive.org/web/20210625032118/http://crestweb.cs.ucl.ac.uk/resources/mutation_testing_repository/" target="_blank" rel="noopener">Mutation Testing Repository</a></p>
-</blockquote>
-<h2 id="What-is-Infection"><a href="#What-is-Infection" class="headerlink" title="What is Infection?"></a>What is Infection?</h2><p>Infection is a <strong>PHP mutation testing library</strong> based on AST (Abstract Syntax Tree) mutations. It works as a CLI tool and can be executed from your project’s root. </p>
-<blockquote>
-<p>Read a <a href="https://medium.com/@maks_rafalko/infection-mutation-testing-framework-c9ccf02eefd1" target="_blank" rel="noopener">detailed post</a> about Mutation Testing and Infection on Medium</p>
-</blockquote>
-<p>Infection currently supports <code>PHPUnit</code>, <code>PhpSpec</code>, <code>Codeception</code> and <code>Testo</code> test frameworks, requires PHP 8.3+ and Xdebug/phpdbg/pcov installed.</p>
-<p>In a nutshell, it </p>
+    <p>Infection follows <a href="https://semver.org/" target="_blank" rel="noopener">Semantic Versioning</a> and provides a stronger backward-compatibility promise for its pre-1.0 releases.</p>
+<p>This policy applies to all user-facing projects maintained by the Infection organisation, such as <a href="https://github.com/infection/infection" target="_blank" rel="noopener"><code>infection/infection</code></a> and <a href="https://github.com/infection/abstract-testframework-adapter" target="_blank" rel="noopener"><code>infection/abstract-testframework-adapter</code></a>. It does not apply to internal projects, such as <a href="https://github.com/infection/site" target="_blank" rel="noopener"><code>infection/site</code></a> or <a href="https://github.com/infection/benchmark-source" target="_blank" rel="noopener"><code>infection/benchmark-source</code></a>.</p>
+<h2 id="Versioning-policy"><a href="#Versioning-policy" class="headerlink" title="Versioning policy"></a>Versioning policy</h2><p>Before 1.0, each minor release is treated as a major release for backward-compatibility purposes. Backward-incompatible changes may be introduced in a new minor release, but not in a patch release. For example, <code>0.35.0</code> may contain changes that are incompatible with <code>0.34.x</code>, while <code>0.34.1</code> must remain compatible with <code>0.34.0</code>.</p>
+<p>From 1.0 onwards, backward-incompatible changes may be introduced only in major releases.</p>
+<p>This policy matches <a href="https://getcomposer.org/doc/articles/versions.md#caret-version-range-" target="_blank" rel="noopener">Composer’s handling of caret version constraints</a>. A constraint such as <code>^0.34</code> installs versions greater than or equal to <code>0.34.0</code> and lower than <code>0.35.0</code>. You can use it to receive compatible fixes without accepting a release that may contain backward-incompatible changes.</p>
+<h2 id="What-is-covered"><a href="#What-is-covered" class="headerlink" title="What is covered"></a>What is covered</h2><p>The backward-compatibility promise covers:</p>
 <ul>
-<li>runs the test suite to see if all tests pass</li>
-<li>mutates the source code with a set of predefined mutators (mutation operators)</li>
-<li>for each Mutant (modified code with one change) it runs the tests that cover changed line</li>
-<li>analyzes whether the tests start to fail</li>
-<li>collects the results of killed, escaped Mutants, errors and timeouts</li>
+<li>PHP code that are part of Infection’s public API.</li>
+<li>Non-debug command names and their accepted arguments and options.</li>
+<li>Configuration file keys and their accepted value types.</li>
 </ul>
-<p>Given you have a <code>Form</code> class with <code>hasErrors()</code> method,</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Form.php</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hasErrors</span><span class="params">()</span>: <span class="title">bool</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> count(<span class="keyword">$this</span>-&gt;errors) &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Infection will create the following mutants:</p>
-<p>Conditional boundary mutator:</p>
-<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">public function hasErrors(): bool</span><br><span class="line">&#123;</span><br><span class="line"><span class="deletion">-    return count($this-&gt;errors) &gt; 0;</span></span><br><span class="line"><span class="addition">+    return count($this-&gt;errors) &gt;= 0;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Conditional negotiation mutator:</p>
-<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">public function hasErrors(): bool</span><br><span class="line">&#123;</span><br><span class="line"><span class="deletion">-    return count($this-&gt;errors) &gt; 0;</span></span><br><span class="line"><span class="addition">+    return count($this-&gt;errors) &lt; 0;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Integer 0-1, 1-0 mutator:</p>
-<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">public function hasErrors(): bool</span><br><span class="line">&#123;</span><br><span class="line"><span class="deletion">-    return count($this-&gt;errors) &gt; 0;</span></span><br><span class="line"><span class="addition">+    return count($this-&gt;errors) &gt; 1;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>and so on.</p>
-<h2 id="Metrics-Mutation-Score-Indicator-MSI"><a href="#Metrics-Mutation-Score-Indicator-MSI" class="headerlink" title="Metrics. Mutation Score Indicator (MSI)"></a>Metrics. Mutation Score Indicator (MSI)</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Metrics:</span><br><span class="line">    Mutation Score Indicator (MSI): 47%</span><br><span class="line">    Mutation Code Coverage: 67%</span><br><span class="line">    Covered Code MSI: 70%</span><br></pre></td></tr></table></figure>
-<p>This example results reported a number of metric scores:</p>
-<h3 id="Mutation-Score-Indicator-MSI"><a href="#Mutation-Score-Indicator-MSI" class="headerlink" title="Mutation Score Indicator (MSI)"></a>Mutation Score Indicator (MSI)</h3><p>MSI is 47%. This means that 47% of all generated mutations were detected (i.e. kills, timeouts or fatal errors). The MSI is the primary Mutation Testing metric. Given the code coverage of 67%, there is a 20% difference so Code Coverage was a terrible quality measurement in this example.</p>
-<p>Calculation formula:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TotalDefeatedMutants = KilledCount + TimedOutCount + ErrorCount;</span><br><span class="line"></span><br><span class="line">MSI = (TotalDefeatedMutants / TotalMutantsCount) * 100;</span><br></pre></td></tr></table></figure>
-<h3 id="Mutation-Code-Coverage"><a href="#Mutation-Code-Coverage" class="headerlink" title="Mutation Code Coverage"></a>Mutation Code Coverage</h3><p>MCC is 67%. On average it should be within the same ballpark as your normal code coverage.</p>
-<p>Calculation formula:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TotalCoveredByTestsMutants = TotalMutantsCount - NotCoveredByTestsCount;</span><br><span class="line"></span><br><span class="line">CoveredRate = (TotalCoveredByTestsMutants / TotalMutantsCount) * 100;</span><br></pre></td></tr></table></figure>
-<h3 id="Covered-Code-Mutation-Score-Indicator"><a href="#Covered-Code-Mutation-Score-Indicator" class="headerlink" title="Covered Code Mutation Score Indicator"></a>Covered Code Mutation Score Indicator</h3><p>MSI for code <em>that is actually covered by tests</em> was 70% (ignoring not tested code). This shows you how effective the tests really are.</p>
-<p>Calculation formula:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TotalCoveredByTestsMutants = TotalMutantsCount - NotCoveredByTestsCount;</span><br><span class="line">TotalDefeatedMutants = KilledCount + TimedOutCount + ErrorCount;</span><br><span class="line"></span><br><span class="line">CoveredCodeMSI = (TotalDefeatedMutants / TotalCoveredByTestsMutants) * 100;</span><br></pre></td></tr></table></figure>
-<p>If you examine these metrics, the standout issue is that the MSI of 47% is 18 points lower than the reported Code Coverage at 65%. These unit tests are far less effective than Code Coverage alone could detect.</p>
-<p>Interpreting these results requires some context. The logs will list all undetected mutations as diffs against the original source code. Examining these will provide further insight as to what specific mutations went undetected.</p>
-<h2 id="Ready-for-More"><a href="#Ready-for-More" class="headerlink" title="Ready for More?"></a>Ready for More?</h2><p>We’ve just briefly introduced the basic information about Mutation Testing and Infection itself - the rest of this guide will cover other advanced features with much details, so make sure to read through it all!</p>
-<p>Want to try Infection right now? Use our <a href="https://infection-php.dev/" target="_blank" rel="noopener">Playground</a>.</p>
+<p>New features may be added while preserving these existing interfaces.</p>
+<h2 id="What-is-not-covered"><a href="#What-is-not-covered" class="headerlink" title="What is not covered"></a>What is not covered</h2><p>The backward-compatibility promise does not cover:</p>
+<ul>
+<li>PHP code marked with <code>@internal</code>.</li>
+<li>commands whose names start with <code>debug:</code>.</li>
+<li>The content, formatting or ordering of command output.</li>
+</ul>
+<p>These unsupported interfaces may change in any release. We still aim to limit disruption and welcome reports when a change has an unexpectedly large impact.</p>
+<p>Security fixes may require an exceptional backward-incompatible change in a maintained release.</p>
 
     
       <div class="guide-links">
@@ -412,7 +387,7 @@
     
     <div class="footer">
       Caught a mistake or want to contribute to the documentation?
-      <a href="https://github.com/infection/site/blob/master/src/guide/index.md" target="_blank">
+      <a href="https://github.com/infection/site/blob/master/src/guide/backward-compatibility.md" target="_blank">
         Edit this page on Github!
       </a>
     </div>
