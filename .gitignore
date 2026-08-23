@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# VitePress
+.vitepress/cache/
+.vitepress/dist/
+
+# Baseline snapshot for URL verification (generated, not source)
+.baseline/
+
+# Editors
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
