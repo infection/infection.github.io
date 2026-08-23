@@ -1,7 +1,18 @@
 {
+  "name": "infection-site",
+  "private": true,
+  "type": "module",
+  "description": "infection.github.io — PHP Mutation Testing Framework",
   "scripts": {
-    "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "check:urls": "node bin/check-urls.mjs",
+    "check": "npm run build && npm run check:urls",
+    "manifest": "node bin/build-manifest.mjs ../infection-site/public > bin/url-manifest.json"
+  },
+  "devDependencies": {
+    "gray-matter": "4.0.3",
+    "vitepress": "1.6.4"
   }
 }
