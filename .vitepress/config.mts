@@ -119,7 +119,7 @@ export default defineConfig({
     socialLinks: [{ icon: 'github', link: 'https://github.com/infection/infection' }],
 
     editLink: {
-      pattern: 'https://github.com/infection/infection.github.io/edit/master/:path',
+      pattern: 'https://github.com/infection/infection.github.io/edit/main/:path',
       text: 'Edit this page on GitHub'
     },
 
