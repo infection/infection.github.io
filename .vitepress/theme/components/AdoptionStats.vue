@@ -49,7 +49,7 @@ const stats = computed(() => [
     <div class="adoption-container">
       <p class="adoption-eyebrow">Adopted across the PHP ecosystem</p>
       <h2 class="adoption-title">
-        The de facto standard for mutation testing in PHP
+        The standard for mutation testing in PHP
       </h2>
       <p class="adoption-lede">
         Infection is the tool the PHP community reaches for when line coverage
