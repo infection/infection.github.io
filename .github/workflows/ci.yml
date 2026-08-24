@@ -1,0 +1,48 @@
+name: CI
+
+# Pushes to the default branch are already gated by deploy.yml, which runs
+# the same build + check before it publishes anything.
+on:
+  pull_request:
+
+# Read-only: this workflow never touches Pages
+permissions:
+  contents: read
+
+# A new push to a PR supersedes the run in progress
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Build and verify legacy URLs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Cache VitePress
+        uses: actions/cache@v6
+        with:
+          path: .vitepress/cache
+          key: ${{ runner.os }}-vitepress-${{ hashFiles('package-lock.json', 'posts/**', 'guide/**', 'menu/**', '.vitepress/**') }}
+          restore-keys: |
+            ${{ runner.os }}-vitepress-
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Together these two steps are `npm run check`, split so a failure
+      # says whether the build broke or the URL contract did.
+      - name: Build with VitePress
+        run: npm run docs:build
+
+      - name: Verify legacy URLs and anchors
+        run: npm run check:urls

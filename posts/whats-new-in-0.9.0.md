@@ -18,7 +18,7 @@ Before upgrading, make sure you know about backward incompatible changes.
 
 ### Profiles
 
-One of the most wanted feature! [It allows you](http://localhost:4000/guide/profiles.html) to configure what mutators to use or skip, by one or by "profiles". This idea about Profiles is pretty much the same as in [PHP-CS-Fixer](http://cs.sensiolabs.org/) (`@PSR2`, `@symfony`, etc.).
+One of the most wanted feature! [It allows you](/guide/profiles.html) to configure what mutators to use or skip, by one or by "profiles". This idea about Profiles is pretty much the same as in [PHP-CS-Fixer](http://cs.sensiolabs.org/) (`@PSR2`, `@symfony`, etc.).
 
 How does it work? The following configuration will use the `@default` profile, but turn off the `@function_signature` profile.
 On top of that, it does not apply the `TrueValue` mutator on any classes that match the provided ignore patterns. In particular, `TrueValue` mutator does not mutate the code inside `Full\NameSpaced\Class` class and inside `create()` method of all `SourceClass` classes.
@@ -57,9 +57,9 @@ Now you can **safely** use PHAR distribution instead of requiring Infection by `
 
 [![Infection MSI](https://badge.stryker-mutator.io/github.com/infection/infection/master)](https://infection.github.io)
 
-Thanks to our friends from [Stryker](https://stryker-mutator.io/) - mutation testing framework for Javascript - Infection now has a [Mutation Badge](http://localhost:4000/guide/mutation-badge.html)!
+Thanks to our friends from [Stryker](https://stryker-mutator.io/) - mutation testing framework for Javascript - Infection now has a [Mutation Badge](/guide/mutation-badge.html)!
 
-Add it to your project to show how awesome your are! [Run mutation logger](http://localhost:4000/guide/mutation-badge.html) on CI (e.g. Travis) to update the badge automatically.
+Add it to your project to show how awesome your are! [Run mutation logger](/guide/mutation-badge.html) on CI (e.g. Travis) to update the badge automatically.
 
 ### Per-Mutator logger
 
