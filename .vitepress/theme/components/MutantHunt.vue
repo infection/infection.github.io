@@ -70,8 +70,8 @@ const SPECS: Spec[] = [
     // Feature 4. One element removed from the list -- you have to notice an
     // absence, which is the hardest kind of mutant to catch.
     mutator: 'ArrayItemRemoval',
-    pattern: /PHPUnit, Pest, Codeception/,
-    replace: 'PHPUnit, Codeception'
+    pattern: /PHPUnit, Codeception and PHPSpec/,
+    replace: 'PHPUnit and PHPSpec'
   },
   {
     // Feature 4 again -- one card can carry several mutants, as in a real run.

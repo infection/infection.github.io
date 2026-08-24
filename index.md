@@ -23,12 +23,12 @@ hero:
 features:
   - icon: 🧬
     title: Mutation Testing, not coverage
-    details: Line coverage only proves a line ran. Infection changes the code under test and reports the mutations your suite still passes on — the gaps coverage cannot see.
+    details: Line coverage only proves a line was executed. Infection changes the code under test and reports the mutations your suite still passes on — the gaps coverage cannot see.
     link: /guide/
     linkText: How it works
   - icon: 📊
     title: Mutation Score Indicator
-    details: A single number for test-suite quality, enforceable in CI with --min-msi and --min-covered-msi, and publishable as a badge on your README.
+    details: A single number for test-suite quality, enforceable in CI with --min-msi and --min-covered-msi, and publishable as a badge on your README. Measures the quality of the tests. Fail builds.
     link: /guide/mutation-badge.html
     linkText: MSI and badges
   - icon: ⚡
@@ -38,7 +38,7 @@ features:
     linkText: Command line options
   - icon: 🧩
     title: Works with your stack
-    details: PHPUnit, Pest, Codeception and PHPSpec, with 60+ mutators grouped into profiles, custom mutators, and static analysis integration.
+    details: PHPUnit, Codeception and PHPSpec, with 100+ mutators grouped into profiles, custom mutators, and static analysis integration.
     link: /guide/supported-test-frameworks.html
     linkText: Supported frameworks
 ---
