@@ -23,7 +23,7 @@ export default defineConfig({
   // /guide/x and break every inbound link on the internet.
   cleanUrls: false,
 
-  srcExclude: ['MIGRATION_PLAN.md', 'README.md'],
+  srcExclude: ['MIGRATION_PLAN.md', 'README.md', 'TODO.md'],
 
   ignoreDeadLinks: [
     // Absolute dev-server URLs baked into a 2018 post. Already broken on the

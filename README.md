@@ -5,9 +5,9 @@ Source for [infection.github.io](https://infection.github.io), built with
 
 ```bash
 npm install
-npm run dev        # local dev server
-npm run build      # static build into .vitepress/dist
-npm run check      # build + verify every legacy URL and anchor still resolves
+npm run docs:dev      # local dev server
+npm run docs:build    # static build into .vitepress/dist
+npm run check         # docs:build + verify every legacy URL and anchor still resolves
 ```
 
 ## Layout
