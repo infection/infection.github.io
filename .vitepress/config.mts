@@ -112,7 +112,7 @@ export default defineConfig({
       {
         text: 'Posts',
         collapsed: false,
-        items: posts.slice(0, 5).map((post) => ({ text: post.title, link: post.url }))
+        items: posts.slice(0, 15).map((post) => ({ text: post.title, link: post.url }))
       }
     ],
 
