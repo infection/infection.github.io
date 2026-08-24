@@ -2,6 +2,6 @@
 import { loadPosts } from '../.vitepress/posts'
 
 export default {
-  watch: ['../posts/*.md'],
+  watch: ['./*.md'],
   load: () => loadPosts()
 }

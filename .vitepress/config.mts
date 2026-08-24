@@ -86,7 +86,7 @@ export default defineConfig({
     nav: [
       { text: 'Guide', link: '/guide/', activeMatch: '/guide/' },
       { text: 'Playground', link: 'https://infection-php.dev/' },
-      { text: 'Posts', link: posts[0].url, activeMatch: '^/\\d{4}/' },
+      { text: 'Posts', link: '/posts/', activeMatch: '^(/posts/|/\\d{4}/)' },
       {
         text: 'Ecosystem',
         items: [
@@ -112,7 +112,7 @@ export default defineConfig({
       {
         text: 'Posts',
         collapsed: false,
-        items: posts.slice(0, 15).map((post) => ({ text: post.title, link: post.url }))
+        items: posts.slice(0, 5).map((post) => ({ text: post.title, link: post.url }))
       }
     ],
 

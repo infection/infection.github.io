@@ -33,13 +33,16 @@ export interface Post {
   title: string
   /** ISO-8601, for the Atom feed and for sorting. */
   date: string
+  /** The post's `##` headings, used as a preview on the post index. */
+  sections: string[]
 }
 
 let cached: Post[] | undefined
 
 export function loadPosts(): Post[] {
   cached ??= readdirSync(POSTS_DIR)
-    .filter((file) => file.endsWith('.md'))
+    // index.md is the list of the posts, not one of them.
+    .filter((file) => file.endsWith('.md') && file !== 'index.md')
     .map((file) => {
       const raw = readFileSync(join(POSTS_DIR, file), 'utf-8')
       const normalized = normalizeHexoFrontmatter(raw)
@@ -63,6 +66,7 @@ export function loadPosts(): Post[] {
         source: `posts/${file}`,
         url: `/${year}/${month}/${day}/${slug}/`,
         title: (data.title as string) ?? slug,
+        sections: sectionHeadings(normalized),
         // The feed needs a timezone; the originals carry none. Pinning to UTC
         // keeps builds reproducible. Only <published> shifts by an hour or two
         // against the old feed -- the <id>, which readers dedupe on, is
@@ -73,6 +77,57 @@ export function loadPosts(): Post[] {
     .sort((a, b) => b.date.localeCompare(a.date))
 
   return cached
+}
+
+const HEADING = /^(##|###)\s+(.+?)\s*#*\s*$/
+const FENCE = /^\s*(?:```|~~~)/
+
+/**
+ * The section headings of a post ("BC Breaks", "New features and enhancements"),
+ * shown on the post index as a table of contents. Headings rather than an
+ * excerpt because today's posts open on a bare `Release: <url>` line, where a
+ * first paragraph would say nothing; a post without any headings simply shows
+ * none.
+ *
+ * `##` is the level every post but one uses for its sections; 0.25.0 went
+ * straight to `###`, so that level stands in when there are no `##` at all.
+ *
+ * Fenced blocks are tracked because shell samples in these posts contain lines
+ * like `## run it again`, which would otherwise be picked up as headings.
+ */
+function sectionHeadings(markdown: string): string[] {
+  const h2: string[] = []
+  const h3: string[] = []
+  let inFence = false
+
+  for (const line of markdown.split('\n')) {
+    if (FENCE.test(line)) {
+      inFence = !inFence
+      continue
+    }
+
+    if (inFence) continue
+
+    const heading = HEADING.exec(line)
+    if (heading) (heading[1] === '##' ? h2 : h3).push(plainText(heading[2]))
+  }
+
+  return h2.length ? h2 : h3
+}
+
+/**
+ * Headings are read straight out of the source, so they still carry markdown --
+ * `--filter` in backticks, the odd [link](url). These end up as plain-text
+ * chips, where the markup would show through literally.
+ */
+function plainText(heading: string): string {
+  return heading
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/(?<![*\w])\*([^*]+)\*(?!\w)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 /**

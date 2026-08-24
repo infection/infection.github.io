@@ -7,14 +7,14 @@
  * pagination for pages nobody visits is not worth it; 200-byte redirect stubs
  * make the "every URL still resolves" claim literally true for ~0 maintenance.
  *
- * `/archives/index.html` itself is a real page (archives/index.md) -- these are
- * only the sub-pages that redirect to it.
+ * `/archives/` itself is in that set: the post index lives at `/posts/`
+ * (posts/index.md), so the old URL redirects there like the rest.
  */
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { loadPosts } from './posts'
 
-const TARGET = '/archives/'
+const TARGET = '/posts/'
 
 export async function writeLegacyStubs(outDir: string): Promise<void> {
   for (const path of legacyArchivePaths()) {
@@ -36,6 +36,7 @@ export function legacyArchivePaths(): string[] {
   }
 
   return [
+    'archives/index.html',
     ...[...years].sort().map((year) => `archives/${year}/index.html`),
     ...[...months].sort().map((month) => `archives/${month}/index.html`),
     // Hexo paginated both the archive index and the home page at 10 per page.

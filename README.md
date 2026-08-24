@@ -15,8 +15,8 @@ npm run check         # docs:build + verify every legacy URL and anchor still re
 | Path | What |
 | --- | --- |
 | `guide/*.md` | 19 documentation pages → `/guide/*.html` |
-| `posts/*.md` | 19 release posts → `/YYYY/MM/DD/<slug>/` via `rewrites` |
-| `archives/` | post index → `/archives/` |
+| `posts/<slug>.md` | 19 blog posts → `/YYYY/MM/DD/<slug>/` via `rewrites` |
+| `posts/index.md` | post index → `/posts/` (the posts themselves live beside it) |
 | `public/` | images, `files/infection.pub` (GPG key), `static/`, `manifest.json`, `CNAME` |
 | `.vitepress/` | config plus the Hexo-compatibility modules described below |
 | `bin/` | the URL/anchor verification harness |

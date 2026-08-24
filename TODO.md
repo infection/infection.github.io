@@ -134,7 +134,7 @@ you can overrule:
 | Question | Chosen | Where |
 | --- | --- | --- |
 | Replicate the old design or re-skin the default theme? | **Re-skin.** Default theme + Infection green (`#42b983`, the old `$green`), gradient hero wordmark, home hero + 4 feature cards | `.vitepress/theme/style.css`, `index.md` |
-| Archives / pagination? | **Meta-refresh stubs** (plan's recommendation) to a real `/archives/` index page | `.vitepress/legacy-stubs.ts`, `archives/` |
+| Archives / pagination? | **Meta-refresh stubs** (plan's recommendation) to a real post index at `/posts/` | `.vitepress/legacy-stubs.ts`, `posts/index.md` |
 | Search? | **Local MiniSearch** (plan's recommendation). 247 KB index, full content | `config.mts` → `themeConfig.search` |
 | Keep post date URLs? | **Yes**, rebuilt from each post's own `date:` | `.vitepress/posts.ts` |
 

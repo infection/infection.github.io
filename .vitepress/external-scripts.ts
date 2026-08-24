@@ -20,7 +20,7 @@
  * and never reaches the template compiler.
  *
  * Note this deliberately only touches scripts with a `src`. A `<script setup>`
- * block (see `archives/index.md`) belongs to the page's SFC and is left for
+ * block (see `posts/index.md`) belongs to the page's SFC and is left for
  * mdit-vue's own sfc plugin to hoist.
  */
 import type MarkdownIt from 'markdown-it'
