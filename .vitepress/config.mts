@@ -76,7 +76,7 @@ export default defineConfig({
   },
 
   themeConfig: {
-    logo: '/images/logo.png',
+    logo: { light: '/images/logo.svg', dark: '/images/logo-dark.svg', alt: 'Infection' },
     siteTitle: 'Infection',
 
     // Replaces the dead docsearch.js v2 setup (headings-only index, crawler no

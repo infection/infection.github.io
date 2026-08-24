@@ -6,7 +6,8 @@ hero:
   text: PHP Mutation Testing Framework
   tagline: Find the tests you are missing. Infection mutates your source code and tells you which changes your test suite fails to catch.
   image:
-    src: /images/logo.png
+    light: /images/logo.svg
+    dark: /images/logo-dark.svg
     alt: Infection
   actions:
     - theme: brand
