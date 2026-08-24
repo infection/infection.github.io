@@ -4,6 +4,8 @@ type: guide
 order: 30
 ---
 
+# Usage
+
 ## Configuration
 
 The first time you run Infection for your project, it will ask you several questions to create a config file `infection.json5`, with the following structure:
@@ -164,13 +166,13 @@ Ensure that your tests are all in a passing state (incomplete and skipped tests 
 
 If you have installed Infection as a global composer package, just run it in your project's root:
 
-``` bash
+```shell
 infection
 ```
 
 or if you cloned it to some folder:
 
-``` bash
+```shell
 # cd /path/to/project/root
 
 ~/infection/bin/infection
@@ -184,7 +186,7 @@ In order to run Infection with Xdebug, you have several options:
 
 In this case just run
 
-```bash
+```shell
 ./infection.phar --threads=4
 ```
 
@@ -194,7 +196,7 @@ Since Infection needs Xdebug *only* to generate code coverage in a separate proc
 
 Assuming Xdebug is disabled globally, run
 
-```bash
+```shell
 ./infection.phar --initial-tests-php-options="-d zend_extension=xdebug.so"
 ```
 
@@ -202,7 +204,7 @@ Assuming Xdebug is disabled globally, run
 
 In order to run Infection with `phpdbg` instead of Xdebug, you need to execute the following command:
 
-```bash
+```shell
 phpdbg -qrr infection.phar
 ```
 
@@ -210,7 +212,7 @@ phpdbg -qrr infection.phar
 
 It is possible to run Infection without any debugger enabled. However, in this case you should provide already generated code coverage as an option
 
-```bash
+```shell
 ./infection.phar --coverage=path/to/coverage
 ```
 

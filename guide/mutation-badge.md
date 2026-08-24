@@ -4,6 +4,8 @@ type: guide
 order: 80
 ---
 
+# Mutation Badge, cloud HTML report
+
 We use the [Stryker Dashboard](https://dashboard.stryker-mutator.io/) to store mutation score for badges and host HTML reports in the cloud. [Stryker](https://stryker-mutator.io) is a mutation testing framework for Javascript that shares its service for other mutations frameworks.
 
 ## How to set it up

@@ -5,6 +5,8 @@ order: 110
 is_new: false
 ---
 
+# Debugging Issues
+
 There can be a situation, when Infection kills the Mutant, but if you do the same changes in the source code manually, tests pass.
 
 Infection runs the tests **in a random order**, and if the project's tests suite is not ready for it, tests can fail because of reordering. Make sure to always run tests randomly:
@@ -32,7 +34,7 @@ If everything works as expected, every Mutant should be escaped. For every mutat
 
 This is an example of how the output can look like:
 
-```bash
+```shell
 bin/infection --noop
 
 Processing source code files: 407/407

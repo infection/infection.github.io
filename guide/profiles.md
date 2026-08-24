@@ -4,6 +4,8 @@ type: guide
 order: 61
 ---
 
+# Profiles
+
 Infection supports the use of mutator profiles for the command line and configuration file.
 
 The following configuration file will use the `@default` profile, but turn off the `@function_signature` profile.

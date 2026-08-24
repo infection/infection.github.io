@@ -4,6 +4,8 @@ date: 2021-09-06 10:13:32
 type: '{{type}}'
 ---
 
+# What's new in Infection 0.25.0
+
 Release: https://github.com/infection/infection/releases/tag/0.25.0
 
 ### Speed up Infection runs by remembering which test killed a mutant

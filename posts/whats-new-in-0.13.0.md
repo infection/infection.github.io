@@ -4,6 +4,8 @@ date: 2019-05-18 11:42:23
 type: '{{type}}'
 ---
 
+# What's new in Infection 0.13.0
+
 Release: https://github.com/infection/infection/releases/tag/0.13.0
 
 ## New features and enhancements

@@ -5,6 +5,8 @@ order: 39
 is_new: true
 ---
 
+# Command Line Arguments
+
 Starting from version 0.34, Infection supports positional arguments to scope Mutation Analysis to source paths, tests paths or both.
 
 ```shell
@@ -28,26 +30,26 @@ infection src/Domain src/Infrastructure src/Some/ConcreteFile.php
 In general, you can pass the argument(s) containing:
 
 - a relative file path:
-``` bash
+```shell
 infection src/Service/Mailer.php
 ```
 
 - a filename:
-``` bash
+```shell
 infection Mailer.php
 ```
 
 - a relative directory path:
-``` bash
+```shell
 infection src/Service/
 ```
 
 - a space separated list of relative paths:
-``` bash
+```shell
 infection src/Service/Mailer.php src/Entity/Foobar.php
 ```
 - a space separated list of filenames:
-``` bash
+```shell
 infection Mailer.php Foobar.php
 ```
 
@@ -105,7 +107,7 @@ infection Plus_
 
 Source paths and test paths can be mixed in **any order**. Infection detects which arguments are source files and which are test files automatically:
 
-```bash
+```shell
 # source first, then tests
 infection src/Service/Mailer.php tests/Unit/Service/MailerTest.php
 

@@ -4,6 +4,8 @@ type: guide
 order: 45
 ---
 
+# Static Analysis Integration
+
 <span class="version-since">PHPStan integration: available in Infection 0.30.0+</span> <span class="version-since">Mago integration: available in Infection 0.32.7+</span>
 
 Static Analysis Integration helps improve mutation testing effectiveness by catching logical errors that tests might miss, such as:
@@ -64,7 +66,7 @@ Infection supports [`phpstan`](https://phpstan.org/) and [`mago`](https://mago.c
 
 or [pass it via CLI](/guide/command-line-options.html#static-analysis-tool):
 
-```bash
+```shell
 infection --static-analysis-tool=phpstan
 infection --static-analysis-tool=mago
 ```

@@ -4,6 +4,8 @@ type: guide
 order: 25
 ---
 
+# Backward Compatibility
+
 Infection follows [Semantic Versioning](https://semver.org/) and provides a stronger backward-compatibility promise for its pre-1.0 releases.
 
 This policy applies to all user-facing projects maintained by the Infection organisation, such as [`infection/infection`](https://github.com/infection/infection) and [`infection/abstract-testframework-adapter`](https://github.com/infection/abstract-testframework-adapter). It does not apply to internal projects, such as [`infection/site`](https://github.com/infection/site) or [`infection/benchmark-source`](https://github.com/infection/benchmark-source).

@@ -4,6 +4,8 @@ type: guide
 order: 50
 ---
 
+# Mutators
+
 Infection supports a set of Mutators which are based on AST and [PHP-Parser](https://github.com/nikic/PHP-Parser) project.
 
 > [Read more](./command-line-options.html#--mutators) about how to execute only particular set of mutators using `Name` column

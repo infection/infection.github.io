@@ -4,6 +4,8 @@ date: 2020-10-17 12:11:23
 type: '{{type}}'
 ---
 
+# What's new in Infection 0.18.0
+
 Release: https://github.com/infection/infection/releases/tag/0.18.0
 
 ## New features and enhancements

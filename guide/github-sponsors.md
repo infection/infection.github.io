@@ -5,6 +5,8 @@ order: 130
 is_new: false
 ---
 
+# GitHub Sponsors ♥️
+
 We help thousands of projects and teams to write more reliable software by improving their test suites.
 
 ## Sponsorship Goal

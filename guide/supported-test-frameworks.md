@@ -5,6 +5,8 @@ order: 150
 is_new: false
 ---
 
+# Supported Test Frameworks
+
 Infection supports the following Test Frameworks:
 
 * [PHPUnit](https://phpunit.readthedocs.io/en/latest/)
@@ -18,13 +20,13 @@ If you are using `infection/infection` package, only `PHPUnit` is bundled. Addit
 
 For example, running
 
-```bash
+```shell
 infection --test-framework=codeception
 ```
 
 will notice that adapter is not installed and it will propose to install it in the same process:
 
-```bash
+```shell
 We noticed you are using a test framework supported by an external Infection plugin.
 Would you like to install infection/codeception-adapter? [yes]:
 

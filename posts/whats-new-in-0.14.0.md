@@ -4,6 +4,8 @@ date: 2019-09-20 12:50:13
 type: '{{type}}'
 ---
 
+# What's new in Infection 0.14.0
+
 Release: https://github.com/infection/infection/releases/tag/0.14.0
 
 Infection now requires PHP 7.2.9+. If you can't for some reason upgrade, don't worry, you can still use previous versions.

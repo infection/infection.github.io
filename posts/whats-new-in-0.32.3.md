@@ -5,6 +5,8 @@ date: 2026-01-14 12:00:00
 type: '{{type}}'
 ---
 
+# What's new in Infection 0.32.3
+
 Release: https://github.com/infection/infection/releases/tag/0.32.3
 
 ## Timeout Control Options

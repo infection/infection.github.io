@@ -4,6 +4,8 @@ type: guide
 order: 10
 ---
 
+# Introduction
+
 ## What is Mutation Testing?
 
 Mutation Testing is a fault-based testing technique which provides a testing criterion called the *Mutation Score Indicator (MSI)*. The MSI can be used to measure the effectiveness of a test set in terms of its ability to detect faults.
@@ -78,7 +80,7 @@ and so on.
 
 ## Metrics. Mutation Score Indicator (MSI)
 
-```
+```shell
 Metrics:
     Mutation Score Indicator (MSI): 47%
     Mutation Code Coverage: 67%
@@ -93,7 +95,7 @@ MSI is 47%. This means that 47% of all generated mutations were detected (i.e. k
 
 Calculation formula:
 
-```
+```shell
 TotalDefeatedMutants = KilledCount + TimedOutCount + ErrorCount;
 
 MSI = (TotalDefeatedMutants / TotalMutantsCount) * 100;
@@ -106,7 +108,7 @@ MCC is 67%. On average it should be within the same ballpark as your normal code
 
 Calculation formula:
 
-```
+```shell
 TotalCoveredByTestsMutants = TotalMutantsCount - NotCoveredByTestsCount;
 
 CoveredRate = (TotalCoveredByTestsMutants / TotalMutantsCount) * 100;
@@ -118,7 +120,7 @@ MSI for code *that is actually covered by tests* was 70% (ignoring not tested co
 
 Calculation formula:
 
-```
+```shell
 TotalCoveredByTestsMutants = TotalMutantsCount - NotCoveredByTestsCount;
 TotalDefeatedMutants = KilledCount + TimedOutCount + ErrorCount;
 

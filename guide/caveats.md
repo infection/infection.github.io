@@ -4,6 +4,8 @@ type: guide
 order: 100
 ---
 
+# Caveats
+
 ## Mutations must occur when CodeCoverage has already started
 
 It may happen that a mutation that fails a test isn't reported as covered.

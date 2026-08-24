@@ -4,6 +4,8 @@ date: 2018-08-11 21:51:31
 type: '{{type}}'
 ---
 
+# What's new in Infection 0.10.0
+
 Release: https://github.com/infection/infection/releases/tag/0.10.0
 
 ## BC Breaks

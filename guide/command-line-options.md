@@ -4,6 +4,8 @@ type: guide
 order: 40
 ---
 
+# Command Line Options
+
 Besides general Symfony Console application command line options, Infection has its own ones.
 
 ### `--threads` or `-j`
@@ -14,7 +16,7 @@ To automatically detect the number of CPU cores, use `--threads=max`.
 
 For Infection versions below `0.26.15`, you can detect the number of CPU cores depending on OS:
 
-``` bash
+```shell
 # on Linux
 infection -j$(nproc)
 
@@ -39,25 +41,25 @@ If you are using `infection/infection` Composer package, `PHPUnit` is installed 
 
 This option allows passing additional options and arguments to the test framework. Example for `PHPUnit`:
 
-```bash
+```shell
 infection --test-framework-extra-args="--verbose --filter=just/unit/tests"
 ```
 
 This will execute the `PHPUnit` as:
 
-```bash
+```shell
 phpunit [...infection options] --verbose --filter=just/unit/tests
 ```
 
 or, another example with argument: this will narrow executed tests only for 1 file:
 
-```bash
+```shell
 infection --test-framework-extra-args="tests/FooTest.php"
 ```
 
 This will execute the `PHPUnit` as:
 
-```bash
+```shell
 phpunit [...infection options] tests/FooTest.php
 ```
 
@@ -91,7 +93,7 @@ For `PhpSpec`:
 
 Example:
 
-```bash
+```shell
 # collect coverage
 vendor/bin/phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/junit.xml
 
@@ -107,7 +109,7 @@ Best to be used during pull request builds on CI, e.g. with GitHub Actions, Trav
 
 Usage:
 
-```bash
+```shell
 # this is needed on GitHub Actions to fetch the base branch to make a diff
 git fetch --depth=1 origin $GITHUB_BASE_REF
 
@@ -129,7 +131,7 @@ Supposed to be used only with [`--git-diff-filter`](/guide/command-line-options.
 
 Usage:
 
-```bash
+```shell
 # this is needed on GitHub Actions to fetch the base branch to make a diff
 git fetch --depth=1 origin $GITHUB_BASE_REF
 
@@ -222,7 +224,7 @@ Use `--logger-github=true` to force-enable or `--logger-github=false` to force-d
 
 Usage:
 
-```bash
+```shell
 # this is needed on GitHub Actions to fetch the base branch to make a diff
 git fetch --depth=1 origin $GITHUB_BASE_REF
 
@@ -237,7 +239,7 @@ Here is [a real example](https://github.com/infection/infection/blob/bef65fc22fa
 
 This option is used to provide a path to the generated GitLab (Code Climate) Code Quality Report:
 
-```bash
+```shell
 infection.phar --logger-gitlab='gitlab-coverage.json'
 ```
 After Infection completes its job, the `gitlab-coverage.json` file will be generated. This file can than be included as a `codequality` report artifact.
@@ -267,7 +269,7 @@ environment variable as project root directory.
 If this auto-detection does not fit your needs (for instance, while using custom Docker image and custom project path in
 GitLab CI), you can customize the path to replace using `--logger-project-root-directory` option:
 
-```bash
+```shell
 infection.phar --logger-project-root-directory='/custom/project/root/directory/path'
 ```
 
@@ -278,7 +280,7 @@ infection.phar --logger-project-root-directory='/custom/project/root/directory/p
 
 This option is used to provide a path to the generated HTML Report:
 
-```bash
+```shell
 infection.phar --logger-html='mutation-report.html'
 ```
 
@@ -292,7 +294,7 @@ Takes precedence over `logger.html` setting inside `infection.json5` file. If yo
 
 This option is used to provide a path to the generated text report:
 
-```bash
+```shell
 infection.phar --logger-text='mutation-report.log'
 ```
 
@@ -306,7 +308,7 @@ Takes precedence over `logger.text` setting inside `infection.json5` file. If yo
 
 This option is used to provide a path to the generated summary JSON report:
 
-```bash
+```shell
 infection.phar --logger-summary-json='summary.json'
 ```
 
@@ -346,7 +348,7 @@ Allow mutation of code not covered by tests.
 
 Limits how many colorized diffs of mutated files are shown to the console. 20 mutated diffs are shown by default.
 
-```bash
+```shell
 infection --show-mutations=0 # don't show any diffs
 infection --show-mutations=50 # will show 50 mutated diffs
 infection --show-mutations=max # will show all mutated diffs
@@ -392,7 +394,7 @@ Use this option when you want stricter MSI calculation that doesn't hide potenti
 
 Fails the build if the number of timed-out mutants exceeds the specified threshold. This is a hard limit that does not affect MSI calculation.
 
-```bash
+```shell
 # Fail if any timeouts occur (strict mode for PRs)
 infection --git-diff-lines --max-timeouts=0
 
@@ -413,7 +415,7 @@ Useful for preventing timeout accumulation over time. Especially valuable for PR
 
 This is a comma separated option to specify a particular set of mutators or [profiles](/guide/profiles.html) that need to be executed. Example:
 
-``` bash
+```bash
 infection --mutators=PublicVisibility,Plus,Decrement,@number
 ```
 
@@ -427,7 +429,7 @@ This option has two effects:
 
 Disabling progress bars removes the following lines from output on Continuous Integration servers:
 
-```bash
+```shell
 Processing source code files: 0/5678
 Processing source code files: 1/5678
 Processing source code files: 2/5678
@@ -478,7 +480,7 @@ Enable static analysis integration to catch escaped mutants that are not killed 
 
 Supported static analysis tools: `phpstan`, `mago`.
 
-```bash
+```shell
 infection --static-analysis-tool=phpstan
 infection --static-analysis-tool=mago
 ```
@@ -519,7 +521,7 @@ Number of dots per row in the dot progress formatter. Use `"max"` to fit the ter
 
 Accepted values: a positive integer (e.g. `--dots-per-row=80`) or the literal `"max"` (e.g. `--dots-per-row=max`). Default is `50`. Only applies when the `dot` progress formatter is in use.
 
-```bash
+```shell
 infection --dots-per-row=80
 infection --dots-per-row=max
 ```
@@ -532,7 +534,7 @@ With `"max"`, the formatter fits as many dots as the terminal width allows after
 
 The verbosity of the log file, `all` - this mode will add "Killed mutants" into log file and add additional information, `default` - normal mode will skip "Killed mutants" section in the log file, `none` - which will disable logging to files.
 
-``` bash
+```shell
 infection --log-verbosity=all
 ```
 
@@ -540,7 +542,7 @@ infection --log-verbosity=all
 
 Run Initial Tests process with additional php options. For example with `-d zend_extension=xdebug.so` which will run `Xdebug` only for code coverage.
 May be useful for cases when `Xdebug` is not enabled globally. Also it's useful from performance point of view.
-``` bash
+```shell
 infection --initial-tests-php-options="-d zend_extension=xdebug.so"
 ```
 
@@ -560,7 +562,7 @@ Also, this option will add test framework's output to log file so you can analyz
 
 This option is deprecated. Use positional arguments instead:
 
-``` bash
+```shell
 infection src/Service/Mailer.php
 infection src/Service/Mailer.php src/Entity/Foobar.php
 ```
@@ -568,26 +570,26 @@ infection src/Service/Mailer.php src/Entity/Foobar.php
 If you're only interested in mutating a subset of your files, you can pass a `--filter` option containing:
 
 - a relative file path:
-``` bash
+```shell
 infection --filter=src/Service/Mailer.php
 ```
 
 - a filename:
-``` bash
+```shell
 infection --filter=Mailer.php
 ```
 
 - a relative directory path:
-``` bash
+```shell
 infection --filter=src/Service/
 ```
 
 - a comma separated list of relative paths:
-``` bash
+```shell
 infection --filter=src/Service/Mailer.php,src/Entity/Foobar.php
 ```
 - a comma separated list of filenames:
-``` bash
+```shell
 infection --filter=Mailer.php,Foobar.php
 ```
 

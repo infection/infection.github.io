@@ -4,6 +4,8 @@ date: 2020-11-01 12:11:25
 type: '{{type}}'
 ---
 
+# What's new in Infection 0.20.0
+
 Release: https://github.com/infection/infection/releases/tag/0.20.0
 
 ## New features and enhancements

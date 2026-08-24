@@ -4,6 +4,8 @@ date: 2018-02-28 00:40:12
 type: '{{type}}'
 ---
 
+# What's new in Infection 0.8.0
+
 Release: https://github.com/infection/infection/releases/tag/0.8.0
 
 ## BC Breaks

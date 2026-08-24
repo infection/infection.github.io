@@ -5,6 +5,8 @@ order: 120
 is_new: false
 ---
 
+# Infection Playground
+
 https://infection-php.dev/
 
 This is Mutation Testing with `Infection` right in your browser!

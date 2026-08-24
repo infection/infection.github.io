@@ -4,6 +4,8 @@ type: guide
 order: 70
 ---
 
+# Using with CI
+
 ## CLI options
 
 We like the idea of using Infection together with other code quality tools in your Continuous Integration (CI) server.
@@ -24,7 +26,7 @@ The first option `--min-msi` allows to control your [Mutation Score Indicator](.
 
 Example of usage in CI server:
 
-``` bash
+```shell
 ./infection.phar --min-msi=48 --threads=4
 ```
 
@@ -36,7 +38,7 @@ As soon as the actual Covered Code MSI value is below than the value you provide
 
 Example of usage in CI server:
 
-``` bash
+```shell
 ./infection.phar --min-covered-msi=70 --threads=4
 ```
 
@@ -46,7 +48,7 @@ Both these options can be used together. As soon as one of them is failed - the 
 
 Example:
 
-``` bash
+```shell
 ./infection.phar --min-msi=48 --min-covered-msi=70 --threads=4
 ```
 

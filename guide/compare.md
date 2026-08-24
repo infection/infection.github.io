@@ -4,6 +4,8 @@ type: guide
 order: 1010
 ---
 
+# Compare with competitors
+
 What is the difference between Infection and other PHP mutation testing libraries?
 
 Well, there is only one competitor at the moment - Humbug.  

@@ -4,6 +4,8 @@ type: guide
 order: 90
 ---
 
+# How-to Guides
+
 ## How to run Infection only for changed files
 
 If you have thousands of files and too many tests, running Mutation Testing can take hours for your project. In this case, it's very convenient to run it only for the modified files.
@@ -18,7 +20,7 @@ This option allows filtering files for mutation by using `git diff` under the ho
 
 If we want to mutate only `A`dded and `M`odified files, use:
 
-```bash
+```shell
 infection --git-diff-filter=AM
 ```
 
@@ -32,7 +34,7 @@ This allows mutating only touched **lines** of code.
 
 Useful to check how your changes impact MSI in a feature branch. Useful for those who do not want / can’t write tests for the whole touched legacy file but want to cover their own changes (only modified lines).
 
-```bash
+```shell
 infection --git-diff-lines
 ```
 
@@ -42,7 +44,7 @@ infection --git-diff-lines
 
 ### By using `--filter` option (for the old Infection versions)
 
-```bash
+```shell
 CHANGED_FILES=$(git diff origin/master --diff-filter=AM --name-only | grep src/ | paste -sd "," -);
 INFECTION_FILTER="--filter=${CHANGED_FILES} --ignore-msi-with-no-mutations";
 
@@ -57,7 +59,7 @@ The [`--ignore-msi-with-no-mutations` option](/guide/command-line-options.html#i
 
 #### Example for Travis CI:
 
-```bash
+```shell
 jobs:
   include:
     - stage: Mutation Testing
@@ -79,13 +81,13 @@ jobs:
 
 For each job, Travis CI fetches only tested branch: 
 
-```bash
+```shell
 git clone --depth=50 --branch=feature/branch
 ```
  
 That's why we need to fetch `$TRAVIS_BRANCH` as well to make a `git diff` possible. Otherwise, you will get an error:
 
-```bash
+```shell
 fatal: ambiguous argument 'origin/master': unknown revision or path not in the working tree.
 ```
 
@@ -97,7 +99,7 @@ To fix this issue, Infection provides `TEST_TOKEN=<int>` environment variable fo
 
 If you have 3 parallel processes, they will use `db_1`, `db_2`, `db_3` correspondingly.
 
-```bash
+```shell
 infection --threads=3
 ```
 
@@ -319,12 +321,12 @@ Use the following config file
 
 and execute Infection with
 
-```bash
+```shell
 infection --log-verbosity=all
 ```
 
 If you want to also log PHPUnit's output, as well as CLI commands that are executed internally by Infection, use [`--debug`](/guide/command-line-options.html#debug)
 
-```bash
+```shell
 infection --log-verbosity=all --debug
 ```

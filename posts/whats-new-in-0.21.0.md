@@ -4,6 +4,8 @@ date: 2021-01-27 10:11:19
 type: '{{type}}'
 ---
 
+# What's new in Infection 0.21.0
+
 Release: https://github.com/infection/infection/releases/tag/0.21.0
 
 ## BC Breaks

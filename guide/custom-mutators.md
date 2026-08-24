@@ -4,6 +4,8 @@ type: guide
 order: 60
 ---
 
+# Custom Mutators
+
 Starting from Infection 0.29.12, it's possible to create custom mutators that can be used by Infection.
 
 > Before creating mutator, make sure it's not already supported by Infection itself by looking into our [built-in mutators](/guide/mutators.html). Don't forget to share results, probably your new mutator can be added to Infection core!
@@ -25,7 +27,7 @@ Imaging we want to create a mutator that replaces any string with `Infected!`, l
  
 Custom Mutator must implement `Mutator` interface which is located in `infection/mutator` package. Install it by:
 
-```bash
+```shell
 composer require infection/mutator
 ```
 
@@ -108,7 +110,7 @@ Now, it's time to add mutator to Infection's config and enable it:
 
 And let's check if Infection sees it by running
 
-```bash
+```shell
 bin/infection describe App\\Mutator\\AnyStringToInfectedMutator 
 ```
 
@@ -118,7 +120,7 @@ This should display information from `AnyStringToInfectedMutator::getDefinition(
 
 It's time to mutate the code with our own cool mutator. You can run Infection as you usually do, or just with this new mutator to quickly get the feedback:
 
-```bash
+```shell
 bin/infection  --mutators="App\\Mutator\\AnyStringToInfectedMutator" --show-mutations
 ```
 
@@ -126,7 +128,7 @@ bin/infection  --mutators="App\\Mutator\\AnyStringToInfectedMutator" --show-muta
 
 In order to write quality tests for your mutator, we highly recommend to use our generator and `BaseMutatorTestCase` from `infection/infection`:
 
-```bash
+```shell
 composer require infection/infection --dev
 
 vendor/bin/infection make:mutator AnyStringToInfectedMutator

@@ -4,6 +4,8 @@ date: 2020-03-28 11:03:56
 type: '{{type}}'
 ---
 
+# What's new in Infection 0.16.0
+
 Release: https://github.com/infection/infection/releases/tag/0.16.0
 
 ## BC Breaks
