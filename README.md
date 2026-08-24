@@ -41,6 +41,61 @@ that in memory; `.vitepress/marked-html-blocks.ts` restores marked's habit of
 rendering markdown inside raw HTML blocks, which the `<p class="tip">` callouts
 depend on. Both can be deleted once the source files are normalised for real.
 
+## Landing page adoption numbers
+
+The stats band under the hero (`31M+ installs`, `2,329 dependents`, …) is
+rendered by `.vitepress/theme/components/AdoptionStats.vue` from data supplied
+by `.vitepress/packagist.data.ts`, a VitePress data loader that reads
+[the Packagist API](https://packagist.org/packages/infection/infection.json).
+
+The loader runs **at build time**, and the result is inlined into the generated
+HTML. Readers' browsers never call Packagist.
+
+### Reloading the data
+
+| Where | When it re-fetches |
+| --- | --- |
+| `npm run docs:build` / `npm run check` | **Every build.** Nothing is cached between builds — a rebuild is all a refresh takes. |
+| `npm run docs:dev` | Once per dev-server start. Vite caches the loader module, and editing `.md` files will *not* re-run it. |
+
+So in production the numbers are as fresh as the last deploy; to refresh them,
+just build again.
+
+In dev, to force a re-fetch without restarting the server, touch the loader —
+VitePress invalidates the module when the loader file itself changes:
+
+```bash
+touch .vitepress/packagist.data.ts
+```
+
+### When Packagist is unreachable
+
+The fetch has a 10s timeout and falls back to the `FALLBACK` snapshot hardcoded
+in the loader, so an offline or egress-less build still succeeds. It is not
+silent — the build logs:
+
+```
+[packagist.data] could not reach Packagist (fetch failed); using the 2026-08-24 snapshot.
+```
+
+If you see that line in CI, the deployed numbers are the snapshot's, not live.
+
+### Refreshing the fallback snapshot
+
+`FALLBACK` only shows up when the network fails, but it should not be allowed to
+rot — the "as of" date on the page comes from it. Refresh it occasionally with:
+
+```bash
+curl -s https://packagist.org/packages/infection/infection.json \
+  | python3 -c "import json,sys; d=json.load(sys.stdin)['package']; \
+      print(d['downloads'], d['dependents'], d['github_stars'])"
+```
+
+then update the constant and its `fetchedAt` date by hand.
+
+Note that `github_stars` is Packagist's cached copy of the GitHub count and can
+lag the real number by a day or so.
+
 ## Regenerating the URL contract
 
 `bin/url-manifest.json` is extracted from the last Hexo build:

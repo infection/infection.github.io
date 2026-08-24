@@ -22,11 +22,17 @@ const VERBATIM_TAGS = new Set(['pre', 'script', 'style'])
 const OPENING_TAG = /^\s*<([a-zA-Z][a-zA-Z0-9-]*)/
 
 export function markedHtmlBlocks(md: MarkdownIt): void {
-  md.renderer.rules.html_block = (tokens, idx) => {
+  // Chain rather than replace: the rule already in place is mdit-vue's, which
+  // lifts `<script setup>` and `<style>` blocks into the page's SFC. Returning
+  // their content verbatim instead would leave them in the Vue *template*,
+  // where the compiler rejects them as tags with side effects.
+  const next = md.renderer.rules.html_block!
+
+  md.renderer.rules.html_block = (tokens, idx, options, env, self) => {
     const { content } = tokens[idx]
     const tag = OPENING_TAG.exec(content)?.[1]?.toLowerCase()
 
-    if (!tag || VERBATIM_TAGS.has(tag)) return content
+    if (!tag || VERBATIM_TAGS.has(tag)) return next(tokens, idx, options, env, self)
 
     // The tags themselves survive: markdown-it's inline html rule passes them
     // through unchanged, exactly like marked's inline `tag` rule did.

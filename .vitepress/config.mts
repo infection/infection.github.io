@@ -2,6 +2,7 @@ import { join } from 'node:path'
 import { defineConfig } from 'vitepress'
 import { slugify } from './slugify'
 import { markedHtmlBlocks } from './marked-html-blocks'
+import { externalScripts } from './external-scripts'
 import { publicAssetLinks } from './public-asset-links'
 import { hexoFrontmatterPlugin } from './hexo-frontmatter'
 import { loadPosts, postRewrites } from './posts'
@@ -59,7 +60,11 @@ export default defineConfig({
     // turns "PHPUnit's" into "PHPUnit’s" -- which some live anchors depend on.
     typographer: true,
     config: (md) => {
+      // Order matters: externalScripts is installed last, so it runs first and
+      // strips `<script src>` tags before markedHtmlBlocks inline-renders the
+      // block they sit in (the Twitter embeds put one next to a <blockquote>).
       markedHtmlBlocks(md)
+      externalScripts(md)
       publicAssetLinks(md, join(__dirname, '..', 'public'))
     }
   },
