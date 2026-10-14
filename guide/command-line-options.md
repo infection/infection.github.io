@@ -12,7 +12,15 @@ Besides general Symfony Console application command line options, Infection has 
 
 If you want to run tests for mutated code in parallel, set this to something > 1. It will **dramatically speed up** mutation process. Please note that if your tests somehow depends on each other or use database, this option can lead to failing tests which give many false-positives results.
 
-To automatically detect the number of CPU cores, use `--threads=max`.
+By default or with `--threads=auto`, Infection selects the number of threads automatically and leaves some CPU capacity for other processes. The exact number is a heuristic and can change between versions.
+
+To use all the available CPU cores but one (reserved for the main process), use `--threads=max`. This is a good choice for a dedicated machine or when the tests are IO-bound.
+
+Both values respect CPU quota limits, such as `docker run --cpus=2` or `taskset -c 0,2`.
+
+<span class="version-since">`--threads=auto` is available in Infection 0.35.8+</span>
+
+In Infection `0.35.7`, `--threads=max` used the same heuristic as `--threads=auto`. Between versions `0.33.2` and `0.35.6`, Infection used  `--threads=max` as the default.
 
 For Infection versions below `0.26.15`, you can detect the number of CPU cores depending on OS:
 
