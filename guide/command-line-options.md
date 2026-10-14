@@ -20,7 +20,7 @@ Both values respect CPU quota limits, such as `docker run --cpus=2` or `taskset 
 
 <span class="version-since">`--threads=auto` is available in Infection 0.35.8+</span>
 
-In Infection `0.35.7`, `--threads=max` used the same heuristic as `--threads=auto`. From `0.33.2` and including `0.35.6`, Infection used  `--threads=max` as the default.
+In Infection `0.35.7`, `--threads=max` used the same heuristic as `--threads=auto`. Between versions `0.33.2` and `0.35.6`, Infection used  `--threads=max` as the default.
 
 For Infection versions below `0.26.15`, you can detect the number of CPU cores depending on OS:
 
