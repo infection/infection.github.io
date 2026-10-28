@@ -149,8 +149,24 @@ infection.phar --git-diff-lines --git-diff-base=origin/main
 
 These examples assume `origin/main` has been fetched. For CI, use the [GitHub Actions](/guide/using-with-ci.html#GitHub-Actions) or [GitLab](/guide/using-with-ci.html#GitLab) instructions to select the source commit and comparison base. Fetching a target branch alone does not make Infection use it; `--git-diff-base` selects it explicitly.
 
-<p class="tip">You can check the result of the filter applied by using `infection config:list-sources` and/or debug the
-git values used by using the infection git commands. They can be listed with `infection list git`.</p>
+<p class="tip">Use Infection's Git commands to inspect the default base, the resolved comparison reference, and the changed files or line ranges before running mutation testing:</p>
+
+```shell
+# Print the default reference used when --git-diff-base is omitted.
+infection git:default-base
+
+# Resolve the merge base of the default reference and HEAD.
+infection git:base-reference
+
+# Inspect an explicit target and the changes relative to its merge base.
+infection git:base-reference --base=origin/main
+infection git:changed-files --base=origin/main
+infection git:changed-lines --base=origin/main
+```
+
+`git:default-base` prints the selected default reference, including the `origin/master` fallback; it does not verify that the reference exists locally or identify the CI request's target. `git:base-reference` prints the merge-base SHA, or leaves the base reference unchanged if Git cannot find a merge base. To select an explicit target, the diagnostic option is `--base`, whereas the mutation-testing command uses `--git-diff-base`.
+
+Use `git branch --remotes` to list the remote-tracking branches available locally, and `infection list git` to list Infection's Git diagnostic commands.
 
 ### `--git-diff-lines`
 
