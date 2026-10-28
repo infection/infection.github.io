@@ -58,6 +58,8 @@ Use [`--git-diff-lines`](./command-line-options.html#git-diff-lines) to mutate a
 
 Two choices determine the scope: the source commit checked out for the job, and the reference supplied as the comparison base. Fetch both commits and enough history to find their merge base. A shallow checkout containing only their tips may hide that ancestor and cause Infection to fall back to a direct diff.
 
+To inspect the local default, run `infection git:default-base`. To check the comparison reference for a CI job, run `infection git:base-reference --base="$PR_BASE_SHA"` for the GitHub example below, or `infection git:base-reference --base="$MR_BASE_SHA"` for GitLab, after preparing the checkout and setting those variables. Use the same executable as your job, such as `vendor/bin/infection`. See the [Git diagnostic commands](./command-line-options.html#git-diff-base) for inspecting changed files and line ranges too.
+
 The examples below test the request's own source commit. Keep your normal tests against merged results or merge train commits in separate jobs to check that the combined changes work together. Install dependencies and generate any reused coverage after selecting the source commit; coverage from a synthetic merge checkout may describe different code.
 
 ### GitHub Actions
