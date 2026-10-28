@@ -10,7 +10,9 @@ order: 90
 
 If you have thousands of files and too many tests, running Mutation Testing can take hours for your project. In this case, it's very convenient to run it only for the modified files.
 
-Assuming you are on a feature branch, and the main branch is `main`, we can do it as the following:
+The examples below assume you are on a feature branch and compare it with Infection's [default base](/guide/command-line-options.html#git-diff-base). To compare with another target, pass it explicitly, for example `--git-diff-base=origin/main`.
+
+For pull request and merge request builds, use the [CI instructions](/guide/using-with-ci.html#Mutate-only-the-changes-in-a-pull-request-or-merge-request). They cover selecting the source commit and comparison base on GitHub Actions and GitLab, including native GitHub stacks and GitLab merge trains.
 
 <p class="tip">You can check the default branch used by using `infection git:default-base`.</p>
 
@@ -58,6 +60,8 @@ The [`--ignore-msi-with-no-mutations` option](/guide/command-line-options.html#i
 <p class="tip">You can check the list of changed files by using `infection git:changed-files`.</p>
 
 #### Example for Travis CI:
+
+This is a manual filtering example for old Infection versions. For current versions, use `--git-diff-lines` or `--git-diff-filter` with an explicit `--git-diff-base`, as described in [Using with Travis](/guide/using-with-ci.html#Using-with-Travis).
 
 ```shell
 jobs:

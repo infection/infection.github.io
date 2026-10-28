@@ -113,18 +113,17 @@ infection.phar --coverage=build/coverage
 
 Allows filtering files to mutate by using `git diff` with `--diff-filter` option. Sensible values are: `AM` - added and modified files. `A` - only added files.
 
-Best to be used during pull request builds on CI, e.g. with GitHub Actions, Travis CI and so on.
+Use it to restrict mutation testing to the files changed on a feature branch or in a pull request.
 
 Usage:
 
 ```shell
-# this is needed on GitHub Actions to fetch the base branch to make a diff
-git fetch --depth=1 origin $GITHUB_BASE_REF
-
-infection.phar --git-diff-filter=A
+infection.phar --git-diff-filter=A --git-diff-base=origin/main
 ```
 
-This command will mutate only those files that were added in the Pull Request. The diff is done between the current branch and a common ancestor of it and the base branch. If there is no common ancestor available, perhaps because your CI server used a shallow checkout, or you have unrelated branches, infection will use a direct diff between branches as a fallback.
+This command mutates only files added since the merge base of `HEAD` and the fetched `origin/main` reference. See [`--git-diff-base`](#git-diff-base) for the default base and fallback behaviour.
+
+For pull request and merge request builds, follow the [CI examples](/guide/using-with-ci.html#Mutate-only-the-changes-in-a-pull-request-or-merge-request) to check out the source commit and fetch the correct comparison history.
 
 > It's possible to configure the base branch, see [`--git-diff-base`](/guide/command-line-options.html#git-diff-base) option
 
@@ -135,25 +134,45 @@ git values used by using the infection git commands. They can be listed with `in
 
 ### `--git-diff-base`
 
-Supposed to be used only with [`--git-diff-filter`](/guide/command-line-options.html#git-diff-filter) option. Configures the base branch for `git diff` command.
+Sets the branch reference or commit SHA used with [`--git-diff-filter`](#git-diff-filter) or [`--git-diff-lines`](#git-diff-lines).
+
+Without this option, Infection resolves the local symbolic reference `refs/remotes/origin/HEAD`, which normally identifies `origin`'s default branch. If it cannot resolve that reference, it falls back to `origin/master`. Infection does not automatically select the target of a CI pull request or merge request. Pass that target explicitly, including when it is a non-default branch or the immediate parent in a stack.
+
+Infection finds the merge base of the supplied reference and `HEAD`, then compares the checked-out files with that ancestor. This excludes changes made only on the target branch since the branches diverged. Both commits and enough history to find their common ancestor must be available locally. If Git cannot find a merge base, Infection falls back to a direct diff against the supplied reference, which can include changes outside the pull request.
 
 Usage:
 
 ```shell
-# this is needed on GitHub Actions to fetch the base branch to make a diff
-git fetch --depth=1 origin $GITHUB_BASE_REF
-
-infection.phar --git-diff-base=origin/$GITHUB_BASE_REF --git-diff-filter=AM
+infection.phar --git-diff-filter=AM --git-diff-base=origin/main
+infection.phar --git-diff-lines --git-diff-base=origin/main
 ```
 
-<p class="tip">You can check the result of the filter applied by using `infection config:list-sources` and/or debug the
-git values used by using the infection git commands. They can be listed with `infection list git`.</p>
+These examples assume `origin/main` has been fetched. For CI, use the [GitHub Actions](/guide/using-with-ci.html#GitHub-Actions) or [GitLab](/guide/using-with-ci.html#GitLab) instructions to select the source commit and comparison base. Fetching a target branch alone does not make Infection use it; `--git-diff-base` selects it explicitly.
+
+<p class="tip">Use Infection's Git commands to inspect the default base, the resolved comparison reference, and the changed files or line ranges before running mutation testing:</p>
+
+```shell
+# Print the default reference used when --git-diff-base is omitted.
+infection git:default-base
+
+# Resolve the merge base of the default reference and HEAD.
+infection git:base-reference
+
+# Inspect an explicit target and the changes relative to its merge base.
+infection git:base-reference --base=origin/main
+infection git:changed-files --base=origin/main
+infection git:changed-lines --base=origin/main
+```
+
+`git:default-base` prints the selected default reference, including the `origin/master` fallback; it does not verify that the reference exists locally or identify the CI request's target. `git:base-reference` prints the merge-base SHA, or leaves the base reference unchanged if Git cannot find a merge base. To select an explicit target, the diagnostic option is `--base`, whereas the mutation-testing command uses `--git-diff-base`.
+
+Use `git branch --remotes` to list the remote-tracking branches available locally, and `infection list git` to list Infection's Git diagnostic commands.
 
 ### `--git-diff-lines`
 
-Allows mutating only touched **lines** of code. Under the hood, this option mutates only added and changed files, comparing your current branch with `master` branch by default.
+Mutates only added and modified **lines** of source code in added and modified files.
 
-Base branch can be changed by using `--git-diff-base=main` option. In this case, your current branch will be compared with `main` branch.
+The default base and merge-base comparison are described under [`--git-diff-base`](#git-diff-base). To select another base, pass it explicitly, for example `--git-diff-lines --git-diff-base=origin/main`. Infection does not infer the current pull request or merge request's target from the CI environment.
 
 Useful to check how your changes impacts MSI in a feature branch. Useful for those who do not want / can't write tests for the whole touched legacy file, but wants to cover their own changes (only modified lines).
 
@@ -230,16 +249,13 @@ Use `--logger-github=true` to force-enable or `--logger-github=false` to force-d
 
 ![GitHub Annotation Escaped Mutant](/images/github-logger.png)
 
-Usage:
+After preparing the checkout and `PR_BASE_SHA` as shown in the [GitHub Actions example](/guide/using-with-ci.html#GitHub-Actions), annotate escaped mutants in added files with:
 
 ```shell
-# this is needed on GitHub Actions to fetch the base branch to make a diff
-git fetch --depth=1 origin $GITHUB_BASE_REF
-
-infection.phar --logger-github --git-diff-filter=A
+infection.phar --logger-github=true --git-diff-filter=A --git-diff-base="$PR_BASE_SHA"
 ```
 
-Here is [a real example](https://github.com/infection/infection/blob/bef65fc22faa200edd367ffe12596905947a2a93/.github/workflows/mt-annotations.yaml#L50-L52) how Infection uses it itself.
+Use `--git-diff-lines` instead of `--git-diff-filter=A` to mutate added and modified lines in both added and modified files.
 
 > Note: Infection automatically detects `GITHUB_WORKSPACE` environment variable for report linking.
 
@@ -253,6 +269,8 @@ infection.phar --logger-gitlab='gitlab-coverage.json'
 After Infection completes its job, the `gitlab-coverage.json` file will be generated. This file can than be included as a `codequality` report artifact.
 
 Takes precedence over `logger.gitlab` setting inside `infection.json5` file. If you want to always generate the GitLab Coverage report it's better to configure it inside `infection.json5`, see [here](/guide/usage.html).
+
+To restrict this report to the current MR's changed lines, follow the [GitLab CI example](/guide/using-with-ci.html#GitLab). It selects the MR's own source commit and diff base for ordinary MR pipelines, merged results pipelines, and merge trains.
 
 > See [this sample repository](https://gitlab.com/maks-rafalko/infection-gitlab-integration-example/-/blob/e9248aecc694ce822ea5c79654e115c8044fadf3/.gitlab-ci.yml#L18-27) as an example of how to configure Code Quality with Infection 
 
