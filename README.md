@@ -16,7 +16,7 @@ For workflow or Docker Compose changes, also run the security audit with Docker:
 docker compose run --rm zizmor
 ```
 
-The dedicated zizmor workflow runs the same version and severity threshold in CI.
+The CI workflow runs zizmor with the same version and severity threshold.
 
 ## Layout
 
