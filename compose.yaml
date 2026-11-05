@@ -1,0 +1,7 @@
+services:
+  zizmor:
+    image: ghcr.io/zizmorcore/zizmor:1.32.0
+    command: --quiet --quiet --min-severity=low .github
+    working_dir: /opt/infection-site
+    volumes:
+      - .:/opt/infection-site:ro
