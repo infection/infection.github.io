@@ -10,6 +10,14 @@ npm run docs:build    # static build into .vitepress/dist
 npm run check         # docs:build + verify every legacy URL and anchor still resolves
 ```
 
+For workflow or Docker Compose changes, also run the security audit with Docker:
+
+```bash
+docker compose run --rm zizmor
+```
+
+The CI workflow runs zizmor with the same version and severity threshold.
+
 ## Layout
 
 | Path | What |
