@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: quarterly
+    cooldown:
+      default-days: 21
+    open-pull-requests-limit: 1
+    groups:
+      dependencies:
+        patterns:
+          - '*'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: quarterly
+    cooldown:
+      default-days: 21
+    open-pull-requests-limit: 1
+    groups:
+      dependencies:
+        patterns:
+          - '*'
