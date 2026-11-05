@@ -57,7 +57,7 @@ jobs:
         run: npm run check:urls
 
   zizmor:
-    name: Run zizmor
+    name: Zizmor
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
