@@ -8,7 +8,7 @@
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
     "check:urls": "node bin/check-urls.mjs",
-    "check": "npm run docs:build && npm run check:urls",
+    "check": "vitepress build && node bin/check-urls.mjs",
     "manifest": "node bin/build-manifest.mjs ../infection-site/public > bin/url-manifest.json"
   },
   "devDependencies": {
