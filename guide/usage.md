@@ -235,13 +235,21 @@ class Example
 
 Here, `ArrayItemRemoval` and `FalseValue` are excluded throughout `values()`. Other enabled mutators, such as `TrueValue`, can still apply.
 
-List one or more exact, case-sensitive [mutator names](/guide/mutators.html), separated by commas, on the same comment line as `@infection-ignore`. Spaces around names are optional. Profile names such as `@default` and wildcard patterns are not supported. Configured custom mutator names are supported.
+List one or more exact, case-sensitive [mutator names](/guide/mutators.html), separated by commas, on the same comment line as `@infection-ignore`. Spaces around names are optional. Ordinary comments and PHPDoc comments are both supported. Profile names such as `@default` and wildcard patterns are not supported. Configured custom mutator names are supported.
 
-Infection warns about unknown names and lists with no names, including lists containing only spaces or commas. Each warning includes the source file and the annotated code's line number. Unknown names have no effect; valid names in the same list still apply. Built-in mutator names are recognised even when those mutators are disabled.
+Infection warns about unknown names and lists with no names, including lists containing only spaces or commas. Each warning includes the source file and the annotated code's line number. The run continues. Unknown names have no effect; valid names in the same list still apply. Built-in mutator names are recognised even when those mutators are disabled. An annotation only excludes mutations; it does not enable a disabled mutator.
+
+Keep explanations on a separate comment line so they are not interpreted as part of a mutator name:
+
+```php
+// Removing this fast path changes performance without changing the result.
+// @infection-ignore ReturnRemoval
+return [];
+```
 
 #### Nested annotations
 
-The annotation applies to the annotated code and everything nested inside it. Nested annotations add exclusions to those inherited from the enclosing code. Ordinary comments work too:
+The annotation applies to the annotated code and everything nested inside it. A class annotation covers all methods; a method annotation covers its signature and body; a statement annotation covers the statement and its expressions. Nested annotations add exclusions to those inherited from the enclosing code:
 
 ```php
 // @infection-ignore ArrayItemRemoval
@@ -282,20 +290,20 @@ class Example
 }
 ```
 
-As with [`@infection-ignore-all`](#infection-ignore-all-support), excluded mutations are not generated and do not contribute to the `Ignored` result count.
+Place annotations on their own line before the target code. A trailing annotation can attach to the next statement. An annotation after the final statement in a method does not exclude that statement.
+
+As with [`@infection-ignore-all`](#infection-ignore-all-support), excluded mutations are never generated, so they do not contribute to MSI or appear in the `Ignored` result count. That count records mutations excluded by source-code regular expressions.
 
 ### `@infection-ignore-all` support
 
-Infection supports `@infection-ignore-all` annotation on class, method, and statement level.
+Use `@infection-ignore-all` to exclude all mutations from a class, method, or statement and everything inside it.
 
 To exclude only named mutators, use [`@infection-ignore`](#infection-ignore-support).
 
-The following class will not be mutated even though it might have few covered lines.
+Infection will not mutate the following class, even if tests cover some of its lines.
 
 ```php
-/**
- * @infection-ignore-all
- */
+// @infection-ignore-all
 class Calculator
 {
     public function add(float $a, float $b): float
@@ -305,14 +313,12 @@ class Calculator
 }
 ```
  
-In this example, method `generate()` will be skipped from mutation logic, but `getDependencies()` will be mutated as usual method.
+In this example, Infection skips `generate()` and mutates `getDependencies()` as usual.
  
 ```php
 class ProductFixture
 {
-    /**
-     * @infection-ignore-all
-     */
+    // @infection-ignore-all
     public function generate(): void
     {
         // generate logic
@@ -325,10 +331,10 @@ class ProductFixture
 }
 ```
 
-Likewise, given this annotation Infection won't consider anything in this loop:
+Similarly, this annotation excludes all mutations within the loop:
 
 ```php
-/** @infection-ignore-all */
+// @infection-ignore-all
 foreach ($foo as $bar) {
     // 
 }

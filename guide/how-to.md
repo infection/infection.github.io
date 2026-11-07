@@ -295,18 +295,16 @@ class Calculator
 }
 ```
 
-The `Plus` mutator is excluded from the return statement. Other enabled mutators can still apply. To exclude several mutators, separate their exact, case-sensitive names with commas, for example `@infection-ignore ArrayItemRemoval, FalseValue`.
+The `Plus` mutator is excluded from the return statement. Other enabled mutators can still apply. To exclude several mutators, separate their exact, case-sensitive names with commas, for example `@infection-ignore ArrayItemRemoval, FalseValue`. Place the annotation on its own line before the target code.
 
 See [the usage guide](/guide/usage.html#infection-ignore-support) for nested annotations, warnings, and where to place annotations.
 
 ### Disable by `@infection-ignore-all` annotation
 
-It's possible to disable all mutations by adding `@infection-ignore-all` annotation on class, method, and statement level.
+Use `@infection-ignore-all` before a class, method, or statement to exclude all mutations within that scope.
 
 ```php
-/**
- * @infection-ignore-all
- */
+// @infection-ignore-all
 class Calculator
 {
     public function add(float $a, float $b): float
@@ -316,7 +314,7 @@ class Calculator
 }
 ```
 
-See other examples [here](/guide/usage.html#infection-ignore-all-support).
+See the [usage guide](/guide/usage.html#infection-ignore-all-support) for more examples.
 
 ## How to debug Infection
 
