@@ -75,3 +75,23 @@ jobs:
           annotations: true
           inputs: .github
           min-severity: low
+
+  status:
+    name: CI status
+    # Both dependencies must run on PRs; deployment builds the site on pushes.
+    if: ${{ always() && github.event_name == 'pull_request' }}
+    needs:
+      - check
+      - zizmor
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+
+    steps:
+      - name: Successful run
+        if: ${{ !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && !contains(needs.*.result, 'skipped') }}
+        run: exit 0
+
+      - name: Failing run
+        if: ${{ always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')) }}
+        run: exit 1
