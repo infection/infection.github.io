@@ -6,13 +6,13 @@ date: 2026-11-05 12:00:00
 
 # What's new in Infection 0.35.10
 
-Infection 0.35.10 introduces `@infection-ignore` annotations to exclude specific mutators from a section of code. Other enabled mutators can still apply, allowing you to continue mutation testing the surrounding behaviour.
+Infection 0.35.10 adds `@infection-ignore`, so you can skip specific mutators for a piece of code and keep checking it with the other mutators you've enabled.
 
 Release: [Infection 0.35.10](https://github.com/infection/infection/releases/tag/0.35.10).
 
 ## Exclude a mutation that adds no value
 
-Consider a method that returns early when given an empty list:
+Say you have a method that returns early for an empty list:
 
 ```php
 class NameSorter
@@ -30,9 +30,9 @@ class NameSorter
 }
 ```
 
-Removing the early return leaves the result unchanged: sorting an empty list still produces an empty list. Tests that check only the method's result cannot detect this mutation.
+If Infection removes that early return, the method still sorts an empty list and returns an empty list. There's no change in the result for your tests to catch.
 
-Use `@infection-ignore` to exclude `ReturnRemoval` from that return statement:
+You can skip `ReturnRemoval` for just that statement by adding a comment above it:
 
 ```php
 class NameSorter
@@ -52,25 +52,25 @@ class NameSorter
 }
 ```
 
-Other mutators can still apply to the annotated statement, and mutations elsewhere in the method are unaffected. Using `@infection-ignore` instead of `@infection-ignore-all` limits the exclusion to the mutator you have investigated. The explanation stays beside the relevant code.
+Infection can still use other mutators on this statement and mutate the rest of the method. Using `@infection-ignore-all` here would skip every mutator on the statement. With `@infection-ignore`, you skip only the mutator you've checked, and the reason stays next to the code.
 
 ## List mutators and choose the scope
 
-To exclude several mutators, separate their names with commas:
+To skip several mutators, separate their names with commas:
 
 ```php
 // @infection-ignore ArrayItemRemoval, FalseValue
 return [false, true];
 ```
 
-Here, Infection can still change `true` to `false` with `TrueValue`.
+In this example, Infection can still change `true` to `false` with `TrueValue`.
 
-Place an annotation before a method or class to apply it throughout that scope. Nested annotations add to the enclosing exclusions without replacing them or affecting code outside the annotated scope.
+You can put the annotation above a method or class too. It then applies to everything inside. If you add another annotation inside that code, its exclusions add to the outer ones; they don't replace them or extend beyond the annotated code.
 
-Use exact, case-sensitive mutator names. Profiles and wildcards are not supported. Unknown names and empty lists produce warnings, and the run continues.
+Spell mutator names exactly as Infection does, including capital letters. You can't use profiles or wildcards. If a name isn't recognised or the list is empty, Infection warns you and continues the run.
 
-Place annotations on their own line before the target code, with any explanation on a separate line. A comment after a statement can attach to the following statement instead.
+Put the annotation on its own line, above the code you want it to affect. Keep your explanation on a separate line. A comment after a statement can end up attached to the next one instead.
 
-Excluded mutations are never generated and do not contribute to MSI. Before excluding an escaping mutation, check whether it reveals a missing test or unnecessary code.
+Infection doesn't generate the mutations you exclude, so they don't count towards MSI. Before excluding an escaped mutation, check whether it points to a missing test or code you no longer need.
 
-See the [annotation reference](/guide/usage.html#infection-ignore-support) for scope, placement, and warning details, or the [how-to guide](/guide/how-to.html#Disable-specific-mutators-by-infection-ignore-annotation) for a quick example.
+For more on scope, comment placement, and warnings, see the [annotation reference](/guide/usage.html#infection-ignore-support). The [how-to guide](/guide/how-to.html#Disable-specific-mutators-by-infection-ignore-annotation) has a quick example.

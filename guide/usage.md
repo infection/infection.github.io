@@ -220,7 +220,7 @@ It is possible to run Infection without any debugger enabled. However, in this c
 
 ### `@infection-ignore` support
 
-Use `@infection-ignore` to exclude specific mutators on a class, method, or statement while allowing other mutators to apply:
+Put `@infection-ignore` above a class, method, or statement to skip specific mutators there. Infection can still use the other mutators you've enabled:
 
 ```php
 class Example
@@ -233,13 +233,13 @@ class Example
 }
 ```
 
-Here, `ArrayItemRemoval` and `FalseValue` are excluded throughout `values()`. Other enabled mutators, such as `TrueValue`, can still apply.
+Here, Infection skips `ArrayItemRemoval` and `FalseValue` throughout `values()`. It can still use other enabled mutators, such as `TrueValue`.
 
-List one or more exact, case-sensitive [mutator names](/guide/mutators.html), separated by commas, on the same comment line as `@infection-ignore`. Spaces around names are optional. Ordinary comments and PHPDoc comments are both supported. Profile names such as `@default` and wildcard patterns are not supported. Configured custom mutator names are supported.
+Write the [mutator names](/guide/mutators.html) exactly as Infection spells them, including capital letters, and separate them with commas. Keep the whole list on the same comment line as `@infection-ignore`; spaces around names are optional. You can use ordinary comments or PHPDoc comments. Configured custom mutator names work too, but profiles such as `@default` and wildcard patterns don't.
 
-Infection warns about unknown names and lists with no names, including lists containing only spaces or commas. Each warning includes the source file and the annotated code's line number. The run continues. Unknown names have no effect; valid names in the same list still apply. Built-in mutator names are recognised even when those mutators are disabled. An annotation only excludes mutations; it does not enable a disabled mutator.
+If a name isn't recognised or the list is empty, Infection warns you and continues the run. This includes lists containing only spaces or commas. The warning gives you the source file and the annotated code's line number. Unknown names have no effect, but valid names in the same list still work. Built-in names are recognised even if you've disabled those mutators; the annotation won't enable them.
 
-Keep explanations on a separate comment line so they are not interpreted as part of a mutator name:
+Keep your explanation on a separate comment line so Infection doesn't read it as part of a mutator name:
 
 ```php
 // Removing this fast path changes performance without changing the result.
@@ -249,7 +249,7 @@ return [];
 
 #### Nested annotations
 
-The annotation applies to the annotated code and everything nested inside it. A class annotation covers all methods; a method annotation covers its signature and body; a statement annotation covers the statement and its expressions. Nested annotations add exclusions to those inherited from the enclosing code:
+The annotation applies to the class, method, or statement it belongs to and everything inside it. Above a class, it covers all methods. Above a method, it covers the signature and body. Above a statement, it covers that statement and its expressions. If you add another annotation inside that code, its exclusions add to the outer ones:
 
 ```php
 // @infection-ignore ArrayItemRemoval
@@ -265,11 +265,11 @@ class Example
 }
 ```
 
-`ArrayItemRemoval` is excluded throughout the class. `FalseValue` is excluded only in the assignment to `$defaults`; it can still mutate the `false` in the return statement. `TrueValue` remains enabled in both statements. An inner annotation cannot re-enable an inherited exclusion.
+Infection skips `ArrayItemRemoval` throughout the class. It skips `FalseValue` only in the assignment to `$defaults`, so it can still change the `false` in the return statement. `TrueValue` stays enabled in both statements. An annotation inside a class or method can't bring back a mutator excluded by an outer annotation.
 
 #### Choosing where to annotate
 
-An annotation affects the annotated code and its contents, so place it on the code targeted by the mutator or on an enclosing statement, method, or class. For example, `ArrayItemRemoval` targets an array, so annotating one of its items does not exclude that mutation:
+Put the annotation above the code the mutator changes, or above a statement, method, or class that contains it. For example, `ArrayItemRemoval` works on the whole array. Putting its name above one array item won't stop Infection from removing that item:
 
 ```php
 class Example
@@ -290,9 +290,9 @@ class Example
 }
 ```
 
-Place annotations on their own line before the target code. A trailing annotation can attach to the next statement. An annotation after the final statement in a method does not exclude that statement.
+Put the annotation on its own line before the code you want it to affect. A comment after a statement can attach to the next statement instead. If it's after the last statement in a method, it won't exclude mutations from that statement.
 
-As with [`@infection-ignore-all`](#infection-ignore-all-support), excluded mutations are never generated, so they do not contribute to MSI or appear in the `Ignored` result count. That count records mutations excluded by source-code regular expressions.
+As with [`@infection-ignore-all`](#infection-ignore-all-support), Infection doesn't generate the mutations you exclude. They don't count towards MSI or appear in the `Ignored` count, which is used for mutations excluded by source-code regular expressions.
 
 ### `@infection-ignore-all` support
 
