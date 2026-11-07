@@ -225,7 +225,7 @@ Use `@infection-ignore` to exclude specific mutators on a class, method, or stat
 ```php
 class Example
 {
-    /** @infection-ignore ArrayItemRemoval, FalseValue */
+    // @infection-ignore ArrayItemRemoval, FalseValue
     public function values(): array
     {
         return [false, true];
@@ -244,7 +244,7 @@ Infection warns about unknown names and lists with no names, including lists con
 The annotation applies to the annotated code and everything nested inside it. Nested annotations add exclusions to those inherited from the enclosing code. Ordinary comments work too:
 
 ```php
-/** @infection-ignore ArrayItemRemoval */
+// @infection-ignore ArrayItemRemoval
 class Example
 {
     public function values(): array
