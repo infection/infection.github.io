@@ -6,7 +6,7 @@ date: 2026-11-05 12:00:00
 
 # What's new in Infection 0.35.10
 
-Infection 0.35.10 adds `@infection-ignore`, so you can skip specific mutators for a piece of code and keep checking it with the other mutators you've enabled.
+Infection 0.35.10 adds `@infection-ignore` alongside the existing `@infection-ignore-all`, so you can skip only specific mutators for a piece of code.
 
 Release: [Infection 0.35.10](https://github.com/infection/infection/releases/tag/0.35.10).
 
@@ -30,9 +30,9 @@ class NameSorter
 }
 ```
 
-If Infection removes that early return, the method still sorts an empty list and returns an empty list. There's no change in the result for your tests to catch.
+If Infection removes that early return, the method still sorts an empty list and returns an empty list. Tests that only check the returned value won't notice. You could extract the sorting call into a separate method and use a partial mock to check that it isn't called for an empty list, but that changes the code and tests just to observe this optimisation.
 
-You can skip `ReturnRemoval` for just that statement by adding a comment above it:
+If that extra test would add little value for your project, you can now skip `ReturnRemoval` for just that statement by adding a comment above it:
 
 ```php
 class NameSorter
@@ -69,8 +69,10 @@ You can put the annotation above a method or class too. It then applies to every
 
 Spell mutator names exactly as Infection does, including capital letters. You can't use profiles or wildcards. If a name isn't recognised or the list is empty, Infection warns you and continues the run.
 
+If a future release renames or removes a mutator, an annotation using its old name won't stop CI with an annotation error. You'll get a warning instead. If the mutator was renamed, update the annotation to keep excluding it.
+
 Put the annotation on its own line, above the code you want it to affect. Keep your explanation on a separate line. A comment after a statement can end up attached to the next one instead.
 
 Infection doesn't generate the mutations you exclude, so they don't count towards MSI. Before excluding an escaped mutation, check whether it points to a missing test or code you no longer need.
 
-For more on scope, comment placement, and warnings, see the [annotation reference](/guide/usage.html#infection-ignore-support). The [how-to guide](/guide/how-to.html#Disable-specific-mutators-by-infection-ignore-annotation) has a quick example.
+For more on scope, comment placement, and warnings, see the [annotation reference](/guide/usage.html#infection-ignore-support). The [how-to guide](/guide/how-to.html#Ignore-specific-mutators-by-infection-ignore-annotation) has a quick example.

@@ -239,6 +239,10 @@ Write the [mutator names](/guide/mutators.html) exactly as Infection spells them
 
 If a name isn't recognised or the list is empty, Infection warns you and continues the run. This includes lists containing only spaces or commas. The warning gives you the source file and the annotated code's line number. Unknown names have no effect, but valid names in the same list still work. Built-in names are recognised even if you've disabled those mutators; the annotation won't enable them.
 
+If a future release renames or removes a mutator, an annotation using its old name will produce a warning rather than stop CI with an annotation error. If the mutator was renamed, update the annotation to keep excluding it.
+
+Before excluding an escaped mutation, check whether it points to a missing test or code you no longer need.
+
 Keep your explanation on a separate comment line so Infection doesn't read it as part of a mutator name:
 
 ```php
@@ -303,7 +307,9 @@ To exclude only named mutators, use [`@infection-ignore`](#infection-ignore-supp
 Infection will not mutate the following class, even if tests cover some of its lines.
 
 ```php
-// @infection-ignore-all
+/**
+ * @infection-ignore-all
+ */
 class Calculator
 {
     public function add(float $a, float $b): float
@@ -318,7 +324,9 @@ In this example, Infection skips `generate()` and mutates `getDependencies()` as
 ```php
 class ProductFixture
 {
-    // @infection-ignore-all
+    /**
+     * @infection-ignore-all
+     */
     public function generate(): void
     {
         // generate logic
