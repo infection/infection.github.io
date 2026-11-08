@@ -220,7 +220,7 @@ It is possible to run Infection without any debugger enabled. However, in this c
 
 ### `@infection-ignore` support
 
-Put `@infection-ignore` above a class, method, or statement to skip specific mutators there. Infection can still use the other mutators you've enabled:
+Put `@infection-ignore` above a class, method, or statement to skip specific [mutators](/guide/mutators.html) there. Infection can still use the other mutators you've enabled:
 
 ```php
 class Example
