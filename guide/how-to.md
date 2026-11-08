@@ -282,7 +282,7 @@ with the following config:
 
 ### Ignore specific mutators by `@infection-ignore` annotation
 
-Put `@infection-ignore` above a class, method, or statement and list the mutators you want to skip:
+An `@infection-ignore` annotation lets you skip specific mutators for a class, method, or statement. For example, this skips `Plus` for one return statement:
 
 ```php
 class Calculator
@@ -295,7 +295,7 @@ class Calculator
 }
 ```
 
-Here, Infection skips `Plus` for the return statement but can still use other enabled mutators. To skip several mutators, separate their names with commas, for example `@infection-ignore ArrayItemRemoval, FalseValue`. Spell the names exactly as Infection does, including capital letters, and keep the annotation on its own line above the code.
+Other enabled mutators can still apply. The annotation accepts several names separated by commas, such as `@infection-ignore ArrayItemRemoval, FalseValue`. Names are case-sensitive, and an annotation above a statement applies to that statement.
 
 The [usage guide](/guide/usage.html#infection-ignore-support) explains how nested annotations work, where to put them, and what the warnings mean.
 

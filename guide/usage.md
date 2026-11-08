@@ -220,7 +220,7 @@ It is possible to run Infection without any debugger enabled. However, in this c
 
 ### `@infection-ignore` support
 
-Put `@infection-ignore` above a class, method, or statement to skip specific [mutators](/guide/mutators.html) there. Infection can still use the other mutators you've enabled:
+With `@infection-ignore`, you can skip specific [mutators](/guide/mutators.html) for a class, method, or statement. Other enabled mutators can still apply. For example, this annotation skips two mutators throughout `values()`:
 
 ```php
 class Example
@@ -230,50 +230,90 @@ class Example
     {
         return [false, true];
     }
-}
-```
 
-Here, Infection skips `ArrayItemRemoval` and `FalseValue` throughout `values()`. It can still use other enabled mutators, such as `TrueValue`.
-
-Write the [mutator names](/guide/mutators.html) exactly as Infection spells them, including capital letters, and separate them with commas. Keep the whole list on the same comment line as `@infection-ignore`; spaces around names are optional. You can use ordinary comments or PHPDoc comments. Configured custom mutator names work too, but profiles such as `@default` and wildcard patterns don't.
-
-If a name isn't recognised or the list is empty, Infection warns you and continues the run. This includes lists containing only spaces or commas. The warning gives you the source file and the annotated code's line number. Unknown names have no effect, but valid names in the same list still work. Built-in names are recognised even if you've disabled those mutators; the annotation won't enable them.
-
-If a future release renames or removes a mutator, an annotation using its old name will produce a warning rather than stop CI with an annotation error. If the mutator was renamed, update the annotation to keep excluding it.
-
-Before excluding an escaped mutation, check whether it points to a missing test or code you no longer need.
-
-Keep your explanation on a separate comment line so Infection doesn't read it as part of a mutator name:
-
-```php
-// Removing this fast path changes performance without changing the result.
-// @infection-ignore ReturnRemoval
-return [];
-```
-
-#### Nested annotations
-
-The annotation applies to the class, method, or statement it belongs to and everything inside it. Above a class, it covers all methods. Above a method, it covers the signature and body. Above a statement, it covers that statement and its expressions. If you add another annotation inside that code, its exclusions add to the outer ones:
-
-```php
-// @infection-ignore ArrayItemRemoval
-class Example
-{
-    public function values(): array
+    public function otherValues(): array
     {
-        // @infection-ignore FalseValue
-        $defaults = [false, true];
-
         return [false, true];
     }
 }
 ```
 
-Infection skips `ArrayItemRemoval` throughout the class. It skips `FalseValue` only in the assignment to `$defaults`, so it can still change the `false` in the return statement. `TrueValue` stays enabled in both statements. An annotation inside a class or method can't bring back a mutator excluded by an outer annotation.
+Infection won't remove items from the array in `values()` with `ArrayItemRemoval` or change its `false` to `true` with `FalseValue`. It can still change `true` to `false` with `TrueValue`. The annotation doesn't affect `otherValues()`, where all enabled mutators remain available.
+
+#### Mutator names and warnings
+
+The annotation accepts a comma-separated list of [mutator names](/guide/mutators.html) on one comment line. Names are case-sensitive, and spaces around them are optional. Ordinary comments and PHPDoc comments both work. Configured custom mutator names are supported too; profiles such as `@default` and wildcard patterns aren't.
+
+For example, `FalseValue` is a recognised name, but `falsevalue` isn't:
+
+```php
+// @infection-ignore FalseValue, falsevalue
+return [false, true];
+```
+
+Infection skips `FalseValue` here and warns about `falsevalue`. The warning identifies the source file and the annotated statement's line number, for example:
+
+```text
+[warning] Unknown mutator "falsevalue" in @infection-ignore at /app/src/Example.php:12.
+```
+
+An empty list also produces a warning and doesn't exclude any mutators:
+
+```php
+// @infection-ignore
+return false;
+```
+
+A list containing only spaces or commas is treated as empty too. In each case, Infection continues the run. Valid names in the same list still take effect. Built-in names are recognised even if you've disabled those mutators; the annotation won't enable them.
+
+The same warning behaviour applies if a future release removes or renames a mutator, so an old name won't stop CI with an annotation error. After a rename, the annotation needs the new name to keep excluding that mutator.
+
+An escaped mutation can point to a missing test or code you no longer need, so it's worth understanding it before adding an exclusion. When an exclusion makes sense, a separate comment line leaves room to explain why without Infection reading the explanation as part of a mutator name:
+
+```php
+if ($names === []) {
+    // Removing this early return only affects performance.
+    // @infection-ignore ReturnRemoval
+    return [];
+}
+
+sort($names);
+
+return $names;
+```
+
+#### Nested annotations
+
+An annotation on a class applies to all its methods. On a method, it covers the signature and body; on a statement, it covers the statement and its expressions. An annotation inside that code adds to the outer exclusions:
+
+```php
+// ArrayItemRemoval is excluded in both methods.
+// TrueValue remains available throughout the class.
+// @infection-ignore ArrayItemRemoval
+class Example
+{
+    public function values(): array
+    {
+        // FalseValue is excluded only for this assignment.
+        // This adds an exclusion; it can't re-enable ArrayItemRemoval.
+        // @infection-ignore FalseValue
+        $defaults = [false, true];
+
+        // FalseValue can still change false to true here.
+        return [false, true];
+    }
+
+    public function otherValues(): array
+    {
+        // FalseValue can still change false to true here too.
+        return [false, true];
+    }
+}
+```
 
 #### Choosing where to annotate
 
-Put the annotation above the code the mutator changes, or above a statement, method, or class that contains it. For example, `ArrayItemRemoval` works on the whole array. Putting its name above one array item won't stop Infection from removing that item:
+An annotation affects the code it belongs to and everything inside it, but not the surrounding code. This matters for mutators such as `ArrayItemRemoval`, which targets an entire array. An annotation on one array item won't prevent its removal; an annotation on the containing return statement will:
 
 ```php
 class Example
@@ -294,7 +334,26 @@ class Example
 }
 ```
 
-Put the annotation on its own line before the code you want it to affect. A comment after a statement can attach to the next statement instead. If it's after the last statement in a method, it won't exclude mutations from that statement.
+Comment placement matters too. An annotation above a statement applies to that statement, while an annotation at the end of a statement can attach to the next one instead:
+
+```php
+class Example
+{
+    public function values(): array
+    {
+        // FalseValue is excluded for $first.
+        // @infection-ignore FalseValue
+        $first = false;
+
+        $second = false; // @infection-ignore FalseValue
+        $third = false; // The trailing annotation applies here, not to $second.
+
+        return [$first, $second, $third]; // @infection-ignore ArrayItemRemoval
+    }
+}
+```
+
+The annotation after the final `return` doesn't exclude `ArrayItemRemoval`: there's no following statement for it to affect. An annotation on its own line above the `return` would apply to the returned array.
 
 As with [`@infection-ignore-all`](#infection-ignore-all-support), Infection doesn't generate the mutations you exclude. They don't count towards MSI or appear in the `Ignored` count, which is used for mutations excluded by source-code regular expressions.
 
