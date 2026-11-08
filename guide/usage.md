@@ -218,11 +218,152 @@ It is possible to run Infection without any debugger enabled. However, in this c
 
 > [Read more](./command-line-options.html#coverage) what types of coverage Infection requires and how to do it.
 
+### `@infection-ignore` support
+
+With `@infection-ignore`, you can skip specific [mutators](/guide/mutators.html) for a class, method, or statement. Other enabled mutators can still apply. For example, this annotation skips two mutators throughout `values()`:
+
+```php
+class Example
+{
+    // @infection-ignore ArrayItemRemoval, FalseValue
+    public function values(): array
+    {
+        return [false, true];
+    }
+
+    public function otherValues(): array
+    {
+        return [false, true];
+    }
+}
+```
+
+Infection won't remove items from the array in `values()` with `ArrayItemRemoval` or change its `false` to `true` with `FalseValue`. It can still change `true` to `false` with `TrueValue`. The annotation doesn't affect `otherValues()`, where all enabled mutators remain available.
+
+#### Mutator names and warnings
+
+The annotation accepts a comma-separated list of [mutator names](/guide/mutators.html) on one comment line. Names are case-sensitive, and spaces around them are optional. Ordinary comments and PHPDoc comments both work. Configured custom mutator names are supported too; profiles such as `@default` and wildcard patterns aren't.
+
+For example, `FalseValue` is a recognised name, but `falsevalue` isn't:
+
+```php
+// @infection-ignore FalseValue, falsevalue
+return [false, true];
+```
+
+Infection skips `FalseValue` here and warns about `falsevalue`. The warning identifies the source file and the annotated statement's line number, for example:
+
+```text
+[warning] Unknown mutator "falsevalue" in @infection-ignore at /app/src/Example.php:12.
+```
+
+An empty list also produces a warning and doesn't exclude any mutators:
+
+```php
+// @infection-ignore
+return false;
+```
+
+A list containing only spaces or commas is treated as empty too. In each case, Infection continues the run. Valid names in the same list still take effect. Built-in names are recognised even if you've disabled those mutators; the annotation won't enable them.
+
+The same warning behaviour applies if a future release removes or renames a mutator, so an old name won't stop CI with an annotation error. After a rename, the annotation needs the new name to keep excluding that mutator.
+
+An escaped mutation can point to a missing test or code you no longer need, so it's worth understanding it before adding an exclusion. When an exclusion makes sense, a separate comment line leaves room to explain why without Infection reading the explanation as part of a mutator name:
+
+```php
+if ($names === []) {
+    // Removing this early return only affects performance.
+    // @infection-ignore ReturnRemoval
+    return [];
+}
+
+sort($names);
+
+return $names;
+```
+
+#### Nested annotations
+
+An annotation on a class applies to all its methods. On a method, it covers the signature and body; on a statement, it covers the statement and its expressions. An annotation inside that code adds to the outer exclusions:
+
+```php
+// ArrayItemRemoval is excluded in both methods.
+// TrueValue remains available throughout the class.
+// @infection-ignore ArrayItemRemoval
+class Example
+{
+    public function values(): array
+    {
+        // FalseValue is excluded only for this assignment.
+        // This adds an exclusion; it can't re-enable ArrayItemRemoval.
+        // @infection-ignore FalseValue
+        $defaults = [false, true];
+
+        // FalseValue can still change false to true here.
+        return [false, true];
+    }
+
+    public function otherValues(): array
+    {
+        // FalseValue can still change false to true here too.
+        return [false, true];
+    }
+}
+```
+
+#### Choosing where to annotate
+
+An annotation affects the code it belongs to and everything inside it, but not the surrounding code. This matters for mutators such as `ArrayItemRemoval`, which targets an entire array. An annotation on one array item won't prevent its removal; an annotation on the containing return statement will:
+
+```php
+class Example
+{
+    public function itemAnnotation(): array
+    {
+        return [
+            // @infection-ignore ArrayItemRemoval
+            false,
+        ]; // ArrayItemRemoval can still produce [].
+    }
+
+    public function statementAnnotation(): array
+    {
+        // @infection-ignore ArrayItemRemoval
+        return [false]; // ArrayItemRemoval is excluded here.
+    }
+}
+```
+
+Comment placement matters too. An annotation above a statement applies to that statement, while an annotation at the end of a statement can attach to the next one instead:
+
+```php
+class Example
+{
+    public function values(): array
+    {
+        // FalseValue is excluded for $first.
+        // @infection-ignore FalseValue
+        $first = false;
+
+        $second = false; // @infection-ignore FalseValue
+        $third = false; // The trailing annotation applies here, not to $second.
+
+        return [$first, $second, $third]; // @infection-ignore ArrayItemRemoval
+    }
+}
+```
+
+The annotation after the final `return` doesn't exclude `ArrayItemRemoval`: there's no following statement for it to affect. An annotation on its own line above the `return` would apply to the returned array.
+
+As with [`@infection-ignore-all`](#infection-ignore-all-support), Infection doesn't generate the mutations you exclude. They don't count towards MSI or appear in the `Ignored` count, which is used for mutations excluded by source-code regular expressions.
+
 ### `@infection-ignore-all` support
 
-Infection supports `@infection-ignore-all` annotation on class, method, and statement level.
+Use `@infection-ignore-all` to exclude all mutations from a class, method, or statement and everything inside it.
 
-The following class will not be mutated even though it might have few covered lines.
+To exclude only named mutators, use [`@infection-ignore`](#infection-ignore-support).
+
+Infection will not mutate the following class, even if tests cover some of its lines.
 
 ```php
 /**
@@ -237,7 +378,7 @@ class Calculator
 }
 ```
  
-In this example, method `generate()` will be skipped from mutation logic, but `getDependencies()` will be mutated as usual method.
+In this example, Infection skips `generate()` and mutates `getDependencies()` as usual.
  
 ```php
 class ProductFixture
@@ -257,10 +398,10 @@ class ProductFixture
 }
 ```
 
-Likewise, given this annotation Infection won't consider anything in this loop:
+Similarly, this annotation excludes all mutations within the loop:
 
 ```php
-/** @infection-ignore-all */
+// @infection-ignore-all
 foreach ($foo as $bar) {
     // 
 }

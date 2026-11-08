@@ -280,9 +280,28 @@ with the following config:
 
 <p class="tip">Do not add any delimiters (like `/`) to the regular expression: we are adding and escaping them for you.</p>
 
-### Disable by `@infection-ignore-all` annotation
+### Ignore specific mutators by `@infection-ignore` annotation
 
-It's possible to disable all mutations by adding `@infection-ignore-all` annotation on class, method, and statement level.
+An `@infection-ignore` annotation lets you skip specific mutators for a class, method, or statement. For example, this skips `Plus` for one return statement:
+
+```php
+class Calculator
+{
+    public function add(float $a, float $b): float
+    {
+        // @infection-ignore Plus
+        return $a + $b;
+    }
+}
+```
+
+Other enabled mutators can still apply. The annotation accepts several names separated by commas, such as `@infection-ignore ArrayItemRemoval, FalseValue`. Names are case-sensitive, and an annotation above a statement applies to that statement.
+
+The [usage guide](/guide/usage.html#infection-ignore-support) explains how nested annotations work, where to put them, and what the warnings mean.
+
+### Ignore by `@infection-ignore-all` annotation {#Disable-by-infection-ignore-all-annotation}
+
+Use `@infection-ignore-all` before a class, method, or statement to exclude all mutations within that scope.
 
 ```php
 /**
@@ -297,7 +316,7 @@ class Calculator
 }
 ```
 
-See other examples [here](/guide/usage.html#infection-ignore-all-support).
+See the [usage guide](/guide/usage.html#infection-ignore-all-support) for more examples.
 
 ## How to debug Infection
 
