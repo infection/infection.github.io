@@ -568,7 +568,7 @@ Also, this option will add test framework's output to log file so you can analyz
 
 <span class="version-since">Deprecated since Infection 0.34.0</span>
 
-This option is deprecated. Use positional arguments instead:
+This option is deprecated in favour of [positional arguments](/guide/arguments.html):
 
 ```shell
 infection src/Service/Mailer.php
