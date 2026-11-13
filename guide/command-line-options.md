@@ -136,7 +136,15 @@ git values used by using the infection git commands. They can be listed with `in
 
 Sets the branch reference or commit SHA used with [`--git-diff-filter`](#git-diff-filter) or [`--git-diff-lines`](#git-diff-lines).
 
-Without this option, Infection resolves the local symbolic reference `refs/remotes/origin/HEAD`, which normally identifies `origin`'s default branch. If it cannot resolve that reference, it falls back to `origin/master`. Infection does not automatically select the target of a CI pull request or merge request. Pass that target explicitly, including when it is a non-default branch or the immediate parent in a stack.
+An explicit `--git-diff-base` takes precedence. Without it, Infection selects the base from the current CI environment:
+
+| CI context | Automatically selected base |
+| --- | --- |
+| GitHub Actions, pull request | `pull_request.base.sha` from the event payload at `GITHUB_EVENT_PATH`, including the immediate target of a stacked PR |
+| GitHub Actions, merge queue | `merge_group.base_sha` from the event payload at `GITHUB_EVENT_PATH` |
+| GitLab CI, merge request | `CI_MERGE_REQUEST_DIFF_BASE_SHA`, including detached, merged results, and merge train pipelines |
+
+When CI metadata does not provide a base, Infection resolves the local symbolic reference `refs/remotes/origin/HEAD`, which normally identifies `origin`'s default branch. If it cannot resolve that reference, it falls back to `origin/master`. A missing or unreadable GitHub event file, or invalid JSON, also causes Infection to use this fallback.
 
 Infection finds the merge base of the supplied reference and `HEAD`, then compares the checked-out files with that ancestor. This excludes changes made only on the target branch since the branches diverged. Both commits and enough history to find their common ancestor must be available locally. If Git cannot find a merge base, Infection falls back to a direct diff against the supplied reference, which can include changes outside the pull request.
 
@@ -147,7 +155,7 @@ infection.phar --git-diff-filter=AM --git-diff-base=origin/main
 infection.phar --git-diff-lines --git-diff-base=origin/main
 ```
 
-These examples assume `origin/main` has been fetched. For CI, use the [GitHub Actions](/guide/using-with-ci.html#GitHub-Actions) or [GitLab](/guide/using-with-ci.html#GitLab) instructions to select the source commit and comparison base. Fetching a target branch alone does not make Infection use it; `--git-diff-base` selects it explicitly.
+These examples assume `origin/main` has been fetched and override automatic base selection. For CI, use the [GitHub Actions](/guide/using-with-ci.html#GitHub-Actions) or [GitLab](/guide/using-with-ci.html#GitLab) instructions to prepare the checkout and comparison history. Automatic base selection does not fetch commits or change the checkout.
 
 <p class="tip">Use Infection's Git commands to inspect the default base, the resolved comparison reference, and the changed files or line ranges before running mutation testing:</p>
 
@@ -164,7 +172,7 @@ infection git:changed-files --base=origin/main
 infection git:changed-lines --base=origin/main
 ```
 
-`git:default-base` prints the selected default reference, including the `origin/master` fallback; it does not verify that the reference exists locally or identify the CI request's target. `git:base-reference` prints the merge-base SHA, or leaves the base reference unchanged if Git cannot find a merge base. To select an explicit target, the diagnostic option is `--base`, whereas the mutation-testing command uses `--git-diff-base`.
+`git:default-base` prints the selected default reference or SHA from CI metadata, the repository default branch, or the `origin/master` fallback; it does not verify that the commit exists locally. `git:base-reference` prints the merge-base SHA, or leaves the base reference unchanged if Git cannot find a merge base. To override automatic selection, the diagnostic option is `--base`, whereas the mutation-testing command uses `--git-diff-base`.
 
 Use `git branch --remotes` to list the remote-tracking branches available locally, and `infection list git` to list Infection's Git diagnostic commands.
 
@@ -172,7 +180,7 @@ Use `git branch --remotes` to list the remote-tracking branches available locall
 
 Mutates only added and modified **lines** of source code in added and modified files.
 
-The default base and merge-base comparison are described under [`--git-diff-base`](#git-diff-base). To select another base, pass it explicitly, for example `--git-diff-lines --git-diff-base=origin/main`. Infection does not infer the current pull request or merge request's target from the CI environment.
+The default base and merge-base comparison are described under [`--git-diff-base`](#git-diff-base). On GitHub Actions and GitLab CI, Infection uses the request's base from CI metadata when available. To select another base, pass it explicitly, for example `--git-diff-lines --git-diff-base=origin/main`.
 
 Useful to check how your changes impacts MSI in a feature branch. Useful for those who do not want / can't write tests for the whole touched legacy file, but wants to cover their own changes (only modified lines).
 
@@ -249,10 +257,10 @@ Use `--logger-github=true` to force-enable or `--logger-github=false` to force-d
 
 ![GitHub Annotation Escaped Mutant](/images/github-logger.png)
 
-After preparing the checkout and `PR_BASE_SHA` as shown in the [GitHub Actions example](/guide/using-with-ci.html#GitHub-Actions), annotate escaped mutants in added files with:
+After preparing the checkout and fetching the comparison history as shown in the [GitHub Actions example](/guide/using-with-ci.html#GitHub-Actions), annotate escaped mutants in added files with:
 
 ```shell
-infection.phar --logger-github=true --git-diff-filter=A --git-diff-base="$PR_BASE_SHA"
+infection.phar --logger-github=true --git-diff-filter=A
 ```
 
 Use `--git-diff-lines` instead of `--git-diff-filter=A` to mutate added and modified lines in both added and modified files.
