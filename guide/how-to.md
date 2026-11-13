@@ -12,9 +12,9 @@ If you have thousands of files and too many tests, running Mutation Testing can 
 
 The examples below assume you are on a feature branch and compare it with Infection's [default base](/guide/command-line-options.html#git-diff-base). To compare with another target, pass it explicitly, for example `--git-diff-base=origin/main`.
 
-For pull request and merge request builds, use the [CI instructions](/guide/using-with-ci.html#Mutate-only-the-changes-in-a-pull-request-or-merge-request). They cover selecting the source commit and comparison base on GitHub Actions and GitLab, including native GitHub stacks and GitLab merge trains.
+For pull request and merge request builds, Infection automatically selects the comparison base from GitHub Actions or GitLab CI metadata. Use the [CI instructions](/guide/using-with-ci.html#Mutate-only-the-changes-in-a-pull-request-or-merge-request) to prepare the source checkout and fetch the comparison history, including for native GitHub stacks and GitLab merge trains.
 
-<p class="tip">You can check the default branch used by using `infection git:default-base`.</p>
+<p class="tip">You can check the automatically selected base with `infection git:default-base`.</p>
 
 ### By using `--git-diff-filter` option
 
