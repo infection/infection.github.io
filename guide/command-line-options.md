@@ -312,6 +312,22 @@ Takes precedence over `logger.text` setting inside `infection.json5` file. If yo
 
 > The option supports `php://stdout`, `php://stderr`, and `php://output` values. `php://stdout` and `php://stderr` can be useful in CI environments, while `php://output` can be useful for same-process PHP wrappers that capture output with output buffering.
 
+### `--logger-json`
+
+This option is used to provide a path to the generated JSON report:
+
+<span class="version-since">Available in Infection 0.35.11</span>
+
+```shell
+infection.phar --logger-json='infection-log.json'
+```
+
+After Infection completes its job, the `infection.json` file will be generated with machine-readable JSON containing all mutants, the original and mutated source code, and the test framework output. This can be programmatically analyzed, for example on CI. If you only need the general stats, see [`--logger-summary-json`](#logger-summary-json).
+
+Since it takes precedence over [`logger.json` setting](/guide/usage.html) inside `infection.json5` file, tools built on top of Infection can use this option to get the full report without a custom `infection.json5` file.
+
+> The option supports `php://stdout`, `php://stderr`, and `php://output` values. `php://stdout` and `php://stderr` can be useful in CI environments, while `php://output` can be useful for same-process PHP wrappers that capture output with output buffering.
+
 ### `--logger-summary-json`
 
 This option is used to provide a path to the generated summary JSON report:
