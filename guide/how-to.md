@@ -10,9 +10,16 @@ order: 90
 
 If you have thousands of files and too many tests, running Mutation Testing can take hours for your project. In this case, it's very convenient to run it only for the modified files.
 
-Assuming you are on a feature branch, and the main branch is `main`, we can do it as the following:
+The examples below assume you are on a feature branch and compare it with Infection's [default base](/guide/command-line-options.html#git-diff-base). To compare with another target, pass it explicitly, for example `--git-diff-base=origin/main`.
 
-<p class="tip">You can check the default branch used by using `infection git:default-base`.</p>
+<span class="version-since">Automatic CI base selection: unreleased (after Infection 0.35.10)</span>
+
+<!-- Preserve links to the removed Travis example. -->
+<span id="Example-for-Travis-CI"></span>
+
+For pull request and merge request builds, Infection automatically selects the comparison base from GitHub Actions or GitLab CI metadata. Use the [CI instructions](/guide/using-with-ci.html#Mutate-only-the-changes-in-a-pull-request-or-merge-request) to prepare the source checkout and fetch the comparison history, including for native GitHub stacks and GitLab merge trains.
+
+<p class="tip">You can check the automatically selected base with `infection git:default-base`.</p>
 
 ### By using `--git-diff-filter` option
 
@@ -56,40 +63,6 @@ The `--diff-filter=AM` returns only added and modified files, because we are not
 The [`--ignore-msi-with-no-mutations` option](/guide/command-line-options.html#ignore-msi-with-no-mutations) tells Infection to not error on min MSI when we have `0` mutations.
 
 <p class="tip">You can check the list of changed files by using `infection git:changed-files`.</p>
-
-#### Example for Travis CI:
-
-```shell
-jobs:
-  include:
-    - stage: Mutation Testing
-    script:
-      - |
-        if [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
-            INFECTION_FILTER="";
-        else
-            git remote set-branches --add origin $TRAVIS_BRANCH;
-            git fetch;
-            CHANGED_FILES=$(git diff origin/$TRAVIS_BRANCH --diff-filter=AM --name-only | grep src/ | paste -sd "," -);
-            INFECTION_FILTER="--filter=${CHANGED_FILES} --ignore-msi-with-no-mutations";
-            
-            echo "CHANGED_FILES=$CHANGED_FILES";
-        fi
-        
-        infection --threads=4 --log-verbosity=none $INFECTION_FILTER
-```
-
-For each job, Travis CI fetches only tested branch: 
-
-```shell
-git clone --depth=50 --branch=feature/branch
-```
- 
-That's why we need to fetch `$TRAVIS_BRANCH` as well to make a `git diff` possible. Otherwise, you will get an error:
-
-```shell
-fatal: ambiguous argument 'origin/master': unknown revision or path not in the working tree.
-```
 
 ## How to run Infection for functional tests
 

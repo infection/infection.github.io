@@ -62,16 +62,16 @@ for (const path of MANIFEST.paths) {
 
 // -------------------------------------------------------------- 2. anchors
 
-const HEADING_ID = /<h[1-6][^>]*\sid="([^"]+)"/gi
+const ELEMENT_ID = /<[a-z][^>]*\sid="([^"]+)"/gi
 
-/** page path -> Set of heading ids, for the freshly built site. */
+/** page path -> Set of element ids, including anchors for removed headings. */
 const anchorsByPage = new Map()
 
 function anchorsOf(path) {
   if (!anchorsByPage.has(path)) {
     const file = join(DIST, path)
     const ids = existsSync(file)
-      ? [...readFileSync(file, 'utf8').matchAll(HEADING_ID)].map((m) => m[1])
+      ? [...readFileSync(file, 'utf8').matchAll(ELEMENT_ID)].map((m) => m[1])
       : []
     anchorsByPage.set(path, new Set(ids))
   }
