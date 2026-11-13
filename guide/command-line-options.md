@@ -136,6 +136,8 @@ git values used by using the infection git commands. They can be listed with `in
 
 Sets the branch reference or commit SHA used with [`--git-diff-filter`](#git-diff-filter) or [`--git-diff-lines`](#git-diff-lines).
 
+<span class="version-since">Automatic CI base selection: unreleased (after Infection 0.35.10)</span>
+
 An explicit `--git-diff-base` takes precedence. Without it, Infection selects the base from the current CI environment:
 
 | CI context | Automatically selected base |
@@ -144,7 +146,7 @@ An explicit `--git-diff-base` takes precedence. Without it, Infection selects th
 | GitHub Actions, merge queue | `merge_group.base_sha` from the event payload at `GITHUB_EVENT_PATH` |
 | GitLab CI, merge request | `CI_MERGE_REQUEST_DIFF_BASE_SHA`, including detached, merged results, and merge train pipelines |
 
-When CI metadata does not provide a base, Infection resolves the local symbolic reference `refs/remotes/origin/HEAD`, which normally identifies `origin`'s default branch. If it cannot resolve that reference, it falls back to `origin/master`. A missing or unreadable GitHub event file, or invalid JSON, also causes Infection to use this fallback.
+When CI metadata does not provide a base, Infection resolves the local symbolic reference `refs/remotes/origin/HEAD`, which normally identifies `origin`'s default branch. If it cannot resolve that reference, it falls back to `origin/master`. A missing or unreadable GitHub event file, or invalid JSON, also causes Infection to use the repository default lookup.
 
 Infection finds the merge base of the supplied reference and `HEAD`, then compares the checked-out files with that ancestor. This excludes changes made only on the target branch since the branches diverged. Both commits and enough history to find their common ancestor must be available locally. If Git cannot find a merge base, Infection falls back to a direct diff against the supplied reference, which can include changes outside the pull request.
 

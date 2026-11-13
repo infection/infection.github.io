@@ -52,86 +52,54 @@ Example:
 ./infection.phar --min-msi=48 --min-covered-msi=70 --threads=4
 ```
 
+<!-- Preserve links to the removed Travis example. -->
+<span id="Using-with-Travis"></span>
+
 ## Mutate only the changes in a pull request or merge request
 
-Use [`--git-diff-lines`](./command-line-options.html#git-diff-lines) to mutate added and modified lines, or [`--git-diff-filter=AM`](./command-line-options.html#git-diff-filter) to mutate whole added and modified files. On GitHub Actions and GitLab CI, Infection automatically selects the request's comparison base from CI metadata. An explicit [`--git-diff-base`](./command-line-options.html#git-diff-base) overrides it. When CI metadata does not provide a base, Infection uses the repository's remote default branch, with an `origin/master` fallback.
+[`--git-diff-lines`](./command-line-options.html#git-diff-lines) limits mutation testing to the lines changed by a PR or MR. With [`--git-diff-filter=AM`](./command-line-options.html#git-diff-filter), Infection mutates whole changed files.
 
-Two choices determine the scope: the source commit checked out for the job, and the selected comparison base. Automatic base selection does not fetch commits or change the checkout. Fetch both commits and enough history to find their merge base. A shallow checkout containing only their tips may hide that ancestor and cause Infection to fall back to a direct diff.
+Infection picks the comparison base automatically on GitHub Actions and GitLab CI. The examples below prepare the source checkout and fetch the history needed for the comparison. The [`--git-diff-base` reference](./command-line-options.html#git-diff-base) explains overrides, fallback behaviour, and Git diagnostic commands.
 
-To inspect the automatically selected base, run `infection git:default-base` in the CI job. After preparing the checkout and fetching the comparison history, run `infection git:base-reference` to check its merge base with `HEAD`. Use the same executable as your job, such as `vendor/bin/infection`. See the [Git diagnostic commands](./command-line-options.html#git-diff-base) for inspecting changed files and line ranges too.
+::: info Version availability
+Automatic base selection is unreleased, added after Infection 0.35.10 in [#3747](https://github.com/infection/infection/pull/3747). On 0.35.10 and earlier, the examples need an explicit base: `--git-diff-base="$PR_BASE_SHA"` for GitHub or `--git-diff-base="$CI_MERGE_REQUEST_DIFF_BASE_SHA"` for GitLab.
+:::
 
-Older Infection versions without CI-aware base selection need `--git-diff-base="$PR_BASE_SHA"` in the GitHub example below, or `--git-diff-base="$MR_BASE_SHA"` in the GitLab example.
-
-The examples below test the request's own source commit. Keep your normal tests against merged results or merge train commits in separate jobs to check that the combined changes work together. Install dependencies and generate any reused coverage after selecting the source commit; coverage from a synthetic merge checkout may describe different code.
+The examples assume Infection is a Composer development dependency. Dependencies and any reused coverage need to come from the same source checkout. Tests against the combined merge result can run in a separate job.
 
 ### GitHub Actions
 
-For a `pull_request` event, [`actions/checkout` checks out a synthetic merge commit by default](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request). To restrict mutation testing to the PR's own changes, check out `github.event.pull_request.head.sha`. Infection reads `pull_request.base.sha` from the event payload at `GITHUB_EVENT_PATH` as the comparison base. This works for default and non-default targets, including the immediate target of a stacked PR.
-
-For [native GitHub stacks](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/optimizing-ci-for-stacked-pull-requests), Actions evaluates each PR against the stack's final base. `GITHUB_BASE_REF` therefore identifies that final base, so using it can include changes from earlier PRs. Infection uses the event payload's `pull_request.base.sha` to select the current PR's immediate target instead.
-
-This example assumes Infection is installed as a Composer development dependency and the project's tests are configured. Adjust the PHP version to one supported by your project.
+These steps run Infection against the PR's own source commit in a `pull_request` job. Infection uses the PR's target as its base, including the immediate parent in a [stacked PR](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/optimizing-ci-for-stacked-pull-requests).
 
 ```yaml
-name: Mutation testing
+steps:
+  - uses: actions/checkout@...
+    with:
+      # This checkout contains the PR's own code rather than a synthetic merge.
+      ref: ${{ github.event.pull_request.head.sha }}
+      persist-credentials: false
 
-on:
-  pull_request:
+  - name: Fetch comparison history
+    env:
+      PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+    run: |
+      # Both histories are needed to find where the PR diverged from its target.
+      git fetch --no-tags --unshallow origin "$PR_HEAD_SHA" "$PR_BASE_SHA"
 
-permissions:
-  contents: read
+  # ...
 
-jobs:
-  mutation-testing:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 1
-          persist-credentials: false
-
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          coverage: pcov
-          tools: composer
-
-      - run: composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Run Infection for the PR's changed lines
-        env:
-          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-        run: |
-          git fetch --no-tags --unshallow origin \
-            "$PR_HEAD_SHA" \
-            "$PR_BASE_SHA"
-          vendor/bin/infection \
-            --git-diff-lines \
-            --min-msi=100 \
-            --ignore-msi-with-no-mutations
+  - name: Run Infection
+    run: vendor/bin/infection --git-diff-lines # ...
 ```
 
-Checkout initially fetches just the PR head. The explicit fetch obtains the histories of the two comparison commits without tags. `--unshallow` is used because this example sets `fetch-depth: 1`; omit it if the checkout already contains full history. Alternatively, `fetch-depth: 0` fetches all history for all branches and tags, so a separate fetch is normally unnecessary. Fetch depth controls the available history, not which commit is checked out.
+If your checkout already uses `fetch-depth: 0`, the fetch step is usually unnecessary. The [`actions/checkout` documentation](https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches) covers the available fetch options.
 
-For a GitHub merge queue's [`merge_group` event](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#merge_group), Infection uses `merge_group.base_sha` from the event payload. The merge-group checkout contains the queued PRs' combined changes; comparing it with that base tests the group together. Use a separate `pull_request` job like the one above to mutate only one PR's changes. The merge-group job still needs the base commit and enough history to find the merge base.
+For a [merge queue](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#merge_group), Infection automatically selects the group's base. That job tests the queued changes together, while the `pull_request` job above tests each PR separately.
 
 ### GitLab
 
-GitLab has three kinds of merge request pipeline. Their checkouts have different scopes:
-
-| `CI_MERGE_REQUEST_EVENT_TYPE` | Default checkout | Source commit to use for this job |
-| --- | --- | --- |
-| `detached` | The MR's source commit | `CI_COMMIT_SHA` |
-| `merged_result` | A temporary merge of the source and target branches | `CI_MERGE_REQUEST_SOURCE_BRANCH_SHA` |
-| `merge_train` | A temporary merge including the target branch and earlier MRs in the train | `CI_MERGE_REQUEST_SOURCE_BRANCH_SHA` |
-
-See GitLab's documentation for [merge request pipelines](https://docs.gitlab.com/ci/pipelines/merge_request_pipelines/), [merged results pipelines](https://docs.gitlab.com/ci/pipelines/merged_results_pipelines/), and [merge trains](https://docs.gitlab.com/ci/pipelines/merge_trains/). In a merge train, diffing the default checkout against the target branch can include changes from earlier MRs in the train.
-
-Infection automatically uses `CI_MERGE_REQUEST_DIFF_BASE_SHA`, the base of the MR's own diff, in all three cases. This also handles MRs targeting a non-default branch. `CI_MERGE_REQUEST_SOURCE_BRANCH_SHA` is empty in ordinary detached MR pipelines, so use `CI_COMMIT_SHA` there. In merged results and merge train pipelines, `CI_COMMIT_SHA` identifies the temporary combined commit; do not use it as the MR's source head. These variables are described in GitLab's [predefined variables reference](https://docs.gitlab.com/ci/variables/predefined_variables/#predefined-variables-for-merge-request-pipelines).
-
-Add the following job to a PHP pipeline whose runner already provides Git, Composer, PHP, and a coverage driver such as PCOV or Xdebug. It assumes Infection is a Composer development dependency. The job runs only for merge request events, including merged results and merge trains:
+This example assumes the pipeline already provides PHP, Composer, Git, and a [coverage driver](./installation.html#Compatibility-Note). It checks out the MR's own source commit, including in [merged results](https://docs.gitlab.com/ci/pipelines/merged_results_pipelines/) and [merge train](https://docs.gitlab.com/ci/pipelines/merge_trains/) pipelines.
 
 ```yaml
 mutation-testing:
@@ -139,49 +107,18 @@ mutation-testing:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
     - |
-      if [ "$CI_MERGE_REQUEST_EVENT_TYPE" = "detached" ]; then
-        MR_HEAD_SHA="$CI_COMMIT_SHA"
-      else
-        MR_HEAD_SHA="${CI_MERGE_REQUEST_SOURCE_BRANCH_SHA:?MR source SHA is required}"
-      fi
-      MR_BASE_SHA="${CI_MERGE_REQUEST_DIFF_BASE_SHA:?MR diff base SHA is required}"
-
+      # Ordinary MR pipelines already use the source commit as CI_COMMIT_SHA.
+      MR_HEAD_SHA="${CI_MERGE_REQUEST_SOURCE_BRANCH_SHA:-$CI_COMMIT_SHA}"
+    - |
+      # Fetching both commits also restores history missing from shallow clones.
       if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then
-        git fetch --no-tags --unshallow origin "$MR_HEAD_SHA" "$MR_BASE_SHA"
+        git fetch --no-tags --unshallow origin "$MR_HEAD_SHA" "$CI_MERGE_REQUEST_DIFF_BASE_SHA"
       else
-        git fetch --no-tags origin "$MR_HEAD_SHA" "$MR_BASE_SHA"
+        git fetch --no-tags origin "$MR_HEAD_SHA" "$CI_MERGE_REQUEST_DIFF_BASE_SHA"
       fi
-      git checkout --detach "$MR_HEAD_SHA"
-
-      composer install --no-interaction --prefer-dist --no-progress
-      vendor/bin/infection \
-        --git-diff-lines \
-        --min-msi=100 \
-        --ignore-msi-with-no-mutations
+    - git checkout --detach "$MR_HEAD_SHA"
+    #...
+    - vendor/bin/infection --git-diff-lines #...
 ```
 
-The fetch handles shallow and full-history working copies, including working copies reused by a runner. Checking out the recorded source SHA before installing dependencies or collecting coverage keeps this job on the MR's own code, even when the pipeline initially checked out a merged result or merge train commit. The example uses the MR's recorded commits and diff base, so it does not depend on the checkout being attached to a branch or on `origin`'s default branch matching the MR target.
-
-To publish escaped mutants as a GitLab Code Quality report, add [`--logger-gitlab`](./command-line-options.html#logger-gitlab) and configure the report artifact in your pipeline.
-
-## Using with Travis
-
-The simplest `.travis.yml` config to integrate Infection with Travis is:
-
-``` yml
-before_script:
-    - wget https://github.com/infection/infection/releases/download/0.32.0/infection.phar
-    - wget https://github.com/infection/infection/releases/download/0.32.0/infection.phar.asc
-    - gpg --recv-keys C6D76C329EBADE2FB9C458CFC5095986493B4AA0
-    - gpg --with-fingerprint --verify infection.phar.asc infection.phar
-    - chmod +x infection.phar
-
-script:
-    - ./infection.phar --min-msi=48 --threads=4
-```
-
-This example mutates the full codebase and does not need a comparison base. For a PR-only job, Travis identifies the target branch with `TRAVIS_BRANCH` and the source head with `TRAVIS_PULL_REQUEST_SHA`. Fetch the target branch and enough history to find its merge base with the source head, check out the source head, and pass the fetched target explicitly as `--git-diff-base`. Restrict that setup to PR builds; a branch build does not have the same PR metadata. See Travis's [environment variable reference](https://docs.travis-ci.com/user/environment-variables/).
-
-> [Read more](./mutation-badge.html) about how to add a Mutation Badge to your Github Project
-
-[![Infection MSI](https://badge.stryker-mutator.io/github.com/infection/infection/master)](https://infection.github.io)
+GitLab's [MR pipeline variables](https://docs.gitlab.com/ci/variables/predefined_variables/#predefined-variables-for-merge-request-pipelines) describe the source and base commit values. The [`--logger-gitlab` option](./command-line-options.html#logger-gitlab) can publish escaped mutants as a Code Quality report.
