@@ -332,7 +332,7 @@ This option is used to provide a path to the generated JSON report:
 infection.phar --logger-json='infection-log.json'
 ```
 
-After Infection completes its job, the `infection.json` file will be generated with machine-readable JSON containing all mutants, the original and mutated source code, and the test framework output. This can be programmatically analyzed, for example on CI. If you only need the general stats, see [`--logger-summary-json`](#logger-summary-json).
+After Infection completes its job, the `infection-log.json` file will be generated with machine-readable JSON containing all mutants, the original and mutated source code, and the test framework output. This can be programmatically analyzed, for example on CI. If you only need the general stats, see [`--logger-summary-json`](#logger-summary-json).
 
 Since it takes precedence over [`logger.json` setting](/guide/usage.html) inside `infection.json5` file, tools built on top of Infection can use this option to get the full report without a custom `infection.json5` file.
 
