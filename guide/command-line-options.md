@@ -220,6 +220,16 @@ infection --git-diff-lines --id=6fa7eadad5b9fd1a72e4d80c83a61cc3
 
 With this, Infection will only produce one mutant, and you can update your tests and re-run this command to check if it's killed or still not.
 
+<span class="version-since">Available in Infection 0.35.11+</span>
+
+The option can be repeated to run several Mutants in one go, e.g. to re-check all the Mutants you were working on:
+
+```shell
+infection --git-diff-lines --id=6fa7eadad5b9fd1a72e4d80c83a61cc3 --id=b2f1c9a0e4d34c57a8d1f3e6c7b90a12
+```
+
+Infection will then only run the Mutants matching any of the given IDs. Surrounding whitespace, empty values and duplicates are ignored.
+
 ### `--logger-github`
 
 Supposed to be used only with GitHub Actions. This logger prints GitHub Annotation warnings for escaped Mutants right in the Pull Request.
