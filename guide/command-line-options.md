@@ -228,7 +228,7 @@ The option can be repeated to run several Mutants in one go, e.g. to re-check al
 infection --git-diff-lines --id=6fa7eadad5b9fd1a72e4d80c83a61cc3 --id=b2f1c9a0e4d34c57a8d1f3e6c7b90a12
 ```
 
-Infection will then only run the Mutants matching any of the given IDs. Surrounding whitespace, empty values and duplicates are ignored.
+Infection will then only run the Mutants matching any of the given IDs.
 
 ### `--logger-github`
 
