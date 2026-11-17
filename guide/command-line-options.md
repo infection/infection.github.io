@@ -594,39 +594,26 @@ Also, this option will add test framework's output to log file so you can analyz
 
 <span class="version-since">Deprecated since Infection 0.34.0</span>
 
-This option is deprecated. Use positional arguments instead:
+Since Infection 0.34.0, [positional arguments](/guide/arguments.html) select source paths without this option. For example, when `src/` is a configured source directory, these commands select one source file and then two source files:
 
 ```shell
 infection src/Service/Mailer.php
 infection src/Service/Mailer.php src/Entity/Foobar.php
 ```
 
-If you're only interested in mutating a subset of your files, you can pass a `--filter` option containing:
+The deprecated option remains available for existing commands. It selects source files whose paths contain any of its comma-separated values:
 
-- a relative file path:
-```shell
-infection --filter=src/Service/Mailer.php
-```
+| Existing option | Files selected |
+| --- | --- |
+| `--filter=src/Service/Mailer.php` | Source files with `src/Service/Mailer.php` in their paths |
+| `--filter=Mailer.php` | Source files with `Mailer.php` in their paths, across configured source directories |
+| `--filter=src/Service/` | Source files under a matching `src/Service/` directory |
+| `--filter=Mailer.php,Foobar.php` | Source files matching either filename fragment |
 
-- a filename:
-```shell
-infection --filter=Mailer.php
-```
+Since Infection 0.35.12, Infection trims whitespace around each value, discards blank entries and removes duplicates. For an existing command containing `--filter=' Mailer.php, , Foobar.php '`, the spaces and blank entry no longer affect selection: it matches the same source files as `--filter=Mailer.php,Foobar.php`.
 
-- a relative directory path:
-```shell
-infection --filter=src/Service/
-```
+An entirely blank filter applies no file restriction and selects all configured sources, subject to their exclusions. The value `0` is retained: `--filter=0` selects paths containing `0`, such as `src/Version0/Parser.php`, rather than selecting all source files.
 
-- a comma separated list of relative paths:
-```shell
-infection --filter=src/Service/Mailer.php,src/Entity/Foobar.php
-```
-- a comma separated list of filenames:
-```shell
-infection --filter=Mailer.php,Foobar.php
-```
+This option only filters file paths. [Positional source symbol selectors](/guide/arguments.html#Source-symbol-selectors) can narrow mutation generation to a class or method within the selected files.
 
-This in no way restricts the initial Infection check on the overall test suite, which is still executed in full to ensure all tests are passing correctly before proceeding.
-
-<p class="tip">You can check the result of the filter applied by using `infection config:list-sources --filter=<filter>`.</p>
+Source filtering leaves the initial test selection unchanged. Infection still runs the configured test suite unless test paths or test-framework options narrow it. For existing commands, `infection config:list-sources --filter=Mailer.php` lists the source files matching that filter.
