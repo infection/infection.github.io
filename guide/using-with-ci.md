@@ -27,7 +27,7 @@ The first option `--min-msi` allows to control your [Mutation Score Indicator](.
 Example of usage in CI server:
 
 ```shell
-./infection.phar --min-msi=48 --threads=4
+infection --min-msi=48 --threads=4
 ```
 
 This example means that if you get MSI `47%`, the build will be failed. **This forces you to write more tests with each commit.**
@@ -39,7 +39,7 @@ As soon as the actual Covered Code MSI value is below than the value you provide
 Example of usage in CI server:
 
 ```shell
-./infection.phar --min-covered-msi=70 --threads=4
+infection --min-covered-msi=70 --threads=4
 ```
 
 **This forces you to write more effective tests.**
@@ -49,7 +49,7 @@ Both these options can be used together. As soon as one of them is failed - the 
 Example:
 
 ```shell
-./infection.phar --min-msi=48 --min-covered-msi=70 --threads=4
+infection --min-msi=48 --min-covered-msi=70 --threads=4
 ```
 
 <!-- Preserve links to the removed Travis example. -->
@@ -67,7 +67,7 @@ Infection selects the comparison base from GitHub Actions or GitLab CI metadata,
 Automatic CI base selection is available in Infection 0.35.11 and later. On 0.35.10 and earlier, the Infection command in these examples needs an explicit base: `--git-diff-base="$PR_BASE_SHA"` for GitHub or `--git-diff-base="$CI_MERGE_REQUEST_DIFF_BASE_SHA"` for GitLab.
 :::
 
-These configuration excerpts assume your job already provides PHP, Composer, Git and a [coverage driver](./installation.html#Compatibility-Note). Infection is a Composer development dependency, its configuration is in the project root, and `origin` must allow fetching both the request's source and base commits.
+These configuration excerpts assume your job already provides PHP, Composer, Git and a [coverage driver](./installation.html#Compatibility-Note). Infection is a Composer development dependency, its executable is available as `infection` on `PATH`, and its configuration is in the project root. The `origin` remote must allow fetching both the request's source and base commits.
 
 Composer installs dependencies after the source checkout so it reads that commit's `composer.lock`. Any reused coverage must also come from that source commit. A separate job can test the combined merge result without changing what this mutation-testing job selects.
 
@@ -100,7 +100,7 @@ steps:
     run: composer install --no-interaction --prefer-dist
 
   - name: Run Infection
-    run: vendor/bin/infection --git-diff-lines
+    run: infection --git-diff-lines
 ```
 
 `PR_HEAD_SHA` identifies the code to mutate. `PR_BASE_SHA` identifies the PR's target at the time of the event, from which Infection finds the common ancestor with the source commit. The fetch step removes a shallow checkout's history limit; fetching only the two commit snapshots at depth 1 would not necessarily make their common ancestor available.
@@ -132,7 +132,7 @@ mutation-testing:
       fi
     - git checkout --detach "$MR_HEAD_SHA"
     - composer install --no-interaction --prefer-dist
-    - vendor/bin/infection --git-diff-lines
+    - infection --git-diff-lines
 ```
 
 In an ordinary MR pipeline, `CI_MERGE_REQUEST_SOURCE_BRANCH_SHA` is empty and `CI_COMMIT_SHA` already identifies the source commit. In a merged results or merge train pipeline, `CI_COMMIT_SHA` identifies the generated merge commit, so the script uses `CI_MERGE_REQUEST_SOURCE_BRANCH_SHA` instead. After the detached checkout, dependencies and coverage come from the MR's source code.

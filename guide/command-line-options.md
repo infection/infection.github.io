@@ -106,7 +106,7 @@ Example:
 vendor/bin/phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/junit.xml
 
 # use coverage
-infection.phar --coverage=build/coverage
+infection --coverage=build/coverage
 ```
 
 ### `--git-diff-filter`
@@ -115,10 +115,10 @@ Selects source files by their Git change status. `AM` includes added and modifie
 
 The value is passed to Git's `--diff-filter` option. The [Git diff documentation](https://git-scm.com/docs/git-diff) describes all supported status letters and how to combine or exclude them.
 
-For example, suppose you're on a feature branch targeting `main`, `origin/main` has been fetched, and `infection.phar` is available in the project root. From that directory:
+For example, suppose you're on a feature branch targeting `main`, `origin/main` has been fetched, and the installed `infection` command is available on `PATH`. From the project root:
 
 ```shell
-./infection.phar --git-diff-filter=A --git-diff-base=origin/main
+infection --git-diff-filter=A --git-diff-base=origin/main
 ```
 
 This command selects source files added since the common ancestor of `HEAD` and `origin/main`. Existing files that were only modified are outside the selection. With `--git-diff-filter=AM`, both added and modified source files are included, and Infection can mutate eligible code anywhere in those files.
@@ -162,13 +162,13 @@ The selected target commit and enough history to find the common ancestor must b
 With `origin/main` fetched and the feature branch checked out, either file or line filtering can use that target explicitly:
 
 ```shell
-./infection.phar --git-diff-filter=AM --git-diff-base=origin/main
-./infection.phar --git-diff-lines --git-diff-base=origin/main
+infection --git-diff-filter=AM --git-diff-base=origin/main
+infection --git-diff-lines --git-diff-base=origin/main
 ```
 
 These commands override automatic base selection. Automatic selection only chooses a comparison base; the job still needs to fetch its history and check out the intended source commit. The [GitHub Actions](/guide/using-with-ci.html#GitHub-Actions) and [GitLab](/guide/using-with-ci.html#GitLab) examples show how those steps fit together.
 
-Infection's Git commands expose each part of the selection without running tests. The following commands assume an installed `infection` executable; for a Composer installation, its path is `vendor/bin/infection`:
+Infection's Git commands expose each part of the selection without running tests:
 
 ```shell
 # Print the default reference used when --git-diff-base is omitted.
@@ -278,7 +278,7 @@ Use `--logger-github=true` to force-enable or `--logger-github=false` to force-d
 With the source checkout and comparison history prepared as in the [GitHub Actions example](/guide/using-with-ci.html#GitHub-Actions), this command generates escaped-mutant annotations for added source files:
 
 ```shell
-./infection.phar --logger-github=true --git-diff-filter=A
+infection --logger-github=true --git-diff-filter=A
 ```
 
 With `--git-diff-lines` in place of `--git-diff-filter=A`, mutation testing covers added and modified lines in both added and modified files. The logger reports escaped mutants from that selection.
@@ -290,7 +290,7 @@ With `--git-diff-lines` in place of `--git-diff-filter=A`, mutation testing cove
 This option is used to provide a path to the generated GitLab (Code Climate) Code Quality Report:
 
 ```shell
-infection.phar --logger-gitlab='gitlab-coverage.json'
+infection --logger-gitlab='gitlab-coverage.json'
 ```
 After Infection completes its job, the `gitlab-coverage.json` file will be generated. This file can than be included as a `codequality` report artifact.
 
@@ -322,7 +322,7 @@ If this auto-detection does not fit your needs (for instance, while using custom
 GitLab CI), you can customize the path to replace using `--logger-project-root-directory` option:
 
 ```shell
-infection.phar --logger-project-root-directory='/custom/project/root/directory/path'
+infection --logger-project-root-directory='/custom/project/root/directory/path'
 ```
 
 > Note: if `GITHUB_WORKSPACE` and `CI_PROJECT_DIR` cannot be detected, and `--logger-project-root-directory` option is
@@ -333,7 +333,7 @@ infection.phar --logger-project-root-directory='/custom/project/root/directory/p
 This option is used to provide a path to the generated HTML Report:
 
 ```shell
-infection.phar --logger-html='mutation-report.html'
+infection --logger-html='mutation-report.html'
 ```
 
 After Infection completes its job, the `mutation-report.html` file will be generated with HTML report ([example](/static/html-report-example.html)).
@@ -347,7 +347,7 @@ Takes precedence over `logger.html` setting inside `infection.json5` file. If yo
 This option is used to provide a path to the generated text report:
 
 ```shell
-infection.phar --logger-text='mutation-report.log'
+infection --logger-text='mutation-report.log'
 ```
 
 After Infection completes its job, the `mutation-report.log` file will be generated with human-readable text report.
@@ -363,7 +363,7 @@ This option is used to provide a path to the generated JSON report:
 <span class="version-since">Available in Infection 0.35.11</span>
 
 ```shell
-infection.phar --logger-json='infection-log.json'
+infection --logger-json='infection-log.json'
 ```
 
 After Infection completes its job, the `infection-log.json` file will be generated with machine-readable JSON containing all mutants, the original and mutated source code, and the test framework output. This can be programmatically analyzed, for example on CI. If you only need the general stats, see [`--logger-summary-json`](#logger-summary-json).
@@ -377,7 +377,7 @@ Since it takes precedence over [`logger.json` setting](/guide/usage.html) inside
 This option is used to provide a path to the generated summary JSON report:
 
 ```shell
-infection.phar --logger-summary-json='summary.json'
+infection --logger-summary-json='summary.json'
 ```
 
 After Infection completes its job, the `summary.json` file will be generated with machine-readable JSON containing only general stats (similar to `json` logger but without individual mutant details). This can be programmatically analyzed, for example on CI.
