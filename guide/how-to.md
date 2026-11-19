@@ -8,39 +8,42 @@ order: 90
 
 ## How to run Infection only for changed files
 
-If you have thousands of files and too many tests, running Mutation Testing can take hours for your project. In this case, it's very convenient to run it only for the modified files.
+When you're working on a feature branch, mutation testing can focus on the code changed by that feature. File filtering includes whole added or modified source files; line filtering narrows the selection to code spanning their changed lines.
 
-Assuming you are on a feature branch, and the main branch is `main`, we can do it as the following:
+The examples below assume the `infection` executable is [installed](/guide/installation.html), your configuration is in the project root, and you're running commands there with the feature branch checked out. The target commit and enough history to find its common ancestor with the feature branch must also be available locally.
 
-<p class="tip">You can check the default branch used by using `infection git:default-base`.</p>
+<span class="version-since">Automatic CI base selection: available in Infection 0.35.11+</span>
+
+<!-- Preserve links to the removed Travis example. -->
+<span id="Example-for-Travis-CI"></span>
+
+Without an explicit target, Infection uses its [default base](/guide/command-line-options.html#git-diff-base). Since 0.35.11, that comes from GitHub Actions or GitLab CI request metadata when available, including the immediate target of a stacked GitHub PR. Outside those contexts, Infection looks up the repository's default branch locally, with `origin/master` as its final fallback. An explicit option such as `--git-diff-base=origin/main` selects a different target.
+
+`infection git:default-base` prints the default target, while `infection git:base-reference` resolves its common ancestor with `HEAD`. The [CI examples](/guide/using-with-ci.html#Mutate-only-the-changes-in-a-pull-request-or-merge-request) show how to fetch the required history and select the source commit for PR and MR jobs.
 
 ### By using `--git-diff-filter` option
 
-This option allows filtering files for mutation by using `git diff` under the hood.
-
-If we want to mutate only `A`dded and `M`odified files, use:
+Suppose the feature adds `src/Service/Mailer.php` and changes one method in `src/Service/Logger.php`, both inside your configured source directories. The `AM` filter selects both added (`A`) and modified (`M`) files:
 
 ```shell
 infection --git-diff-filter=AM
 ```
 
-> [Read more](/guide/command-line-options.html#git-diff-filter) about [`--git-diff-filter`](/guide/command-line-options.html#git-diff-filter)
+Infection can generate mutations anywhere in those two files, subject to coverage, exclusions and the enabled mutators. Unchanged source files are outside the selection. The [`--git-diff-filter` reference](/guide/command-line-options.html#git-diff-filter) describes the other file statuses.
 
-<p class="tip">You can check the list of changed files by using `infection git:changed-files`.</p>
+`infection git:changed-files` lists the source files matching the default target and the added-or-modified filter.
 
 ### By using `--git-diff-lines` option
 
-This allows mutating only touched **lines** of code.
-
-Useful to check how your changes impact MSI in a feature branch. Useful for those who do not want / can’t write tests for the whole touched legacy file but want to cover their own changes (only modified lines).
+In the same example, line filtering includes the new mailer code and code spanning the changed lines in `Logger.php`. Unchanged methods in `Logger.php` are outside this selection:
 
 ```shell
 infection --git-diff-lines
 ```
 
-> [Read more](/guide/command-line-options.html#git-diff-lines) about [`--git-diff-lines`](/guide/command-line-options.html#git-diff-lines)
+This can reduce the number of mutants to evaluate while you write tests for a change in a large existing file. The [`--git-diff-lines` reference](/guide/command-line-options.html#git-diff-lines) explains the comparison base.
 
-<p class="tip">You can check the list of changed files by using `infection git:changed-files`.</p>
+`infection git:changed-lines` lists the source line ranges in the selection; `git:changed-files` only lists their filenames.
 
 ### By using `--filter` option (for the old Infection versions)
 
@@ -56,40 +59,6 @@ The `--diff-filter=AM` returns only added and modified files, because we are not
 The [`--ignore-msi-with-no-mutations` option](/guide/command-line-options.html#ignore-msi-with-no-mutations) tells Infection to not error on min MSI when we have `0` mutations.
 
 <p class="tip">You can check the list of changed files by using `infection git:changed-files`.</p>
-
-#### Example for Travis CI:
-
-```shell
-jobs:
-  include:
-    - stage: Mutation Testing
-    script:
-      - |
-        if [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
-            INFECTION_FILTER="";
-        else
-            git remote set-branches --add origin $TRAVIS_BRANCH;
-            git fetch;
-            CHANGED_FILES=$(git diff origin/$TRAVIS_BRANCH --diff-filter=AM --name-only | grep src/ | paste -sd "," -);
-            INFECTION_FILTER="--filter=${CHANGED_FILES} --ignore-msi-with-no-mutations";
-            
-            echo "CHANGED_FILES=$CHANGED_FILES";
-        fi
-        
-        infection --threads=4 --log-verbosity=none $INFECTION_FILTER
-```
-
-For each job, Travis CI fetches only tested branch: 
-
-```shell
-git clone --depth=50 --branch=feature/branch
-```
- 
-That's why we need to fetch `$TRAVIS_BRANCH` as well to make a `git diff` possible. Otherwise, you will get an error:
-
-```shell
-fatal: ambiguous argument 'origin/master': unknown revision or path not in the working tree.
-```
 
 ## How to run Infection for functional tests
 
