@@ -270,7 +270,7 @@ The command inspects eligibility without running tests; it doesn't tell you whic
 
 ### Nested classes
 
-Code inside anonymous classes is included when you select the surrounding class or method. In this separate class excerpt, `Mailer::send` also selects the addition inside the anonymous class's `nested()` method:
+Code inside anonymous classes is included when you select the surrounding class or method. In this separate class example, `Mailer::send` also selects the addition inside the anonymous class's `nested()` method:
 
 ```php
 class Mailer

@@ -148,7 +148,7 @@ project/
         phpunit.xml
 ```
 
-In this layout, `infection.json` contains the following source and PHPUnit configuration (excerpt), and `build/phpunit.xml` defines the tests without a source include filter:
+In this layout, `infection.json` contains the following source and PHPUnit configuration (other settings omitted), and `build/phpunit.xml` defines the tests without a source include filter:
 
 ```json
 {

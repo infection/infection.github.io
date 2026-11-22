@@ -67,13 +67,13 @@ Infection selects the comparison base from GitHub Actions or GitLab CI metadata,
 Automatic CI base selection is available in Infection 0.35.11 and later. On 0.35.10 and earlier, the Infection command in these examples needs an explicit base: `--git-diff-base="$PR_BASE_SHA"` for GitHub or `--git-diff-base="$CI_MERGE_REQUEST_DIFF_BASE_SHA"` for GitLab.
 :::
 
-These configuration excerpts assume your job already provides PHP, Composer, Git and a [coverage driver](./installation.html#Compatibility-Note). Infection is a Composer development dependency, its executable is available as `infection` on `PATH`, and its configuration is in the project root. The `origin` remote must allow fetching both the request's source and base commits.
+These configuration examples assume your job already provides PHP, Composer, Git and a [coverage driver](./installation.html#Compatibility-Note). Infection is a Composer development dependency, its executable is available as `infection` on `PATH`, and its configuration is in the project root. The `origin` remote must allow fetching both the request's source and base commits.
 
 Composer installs dependencies after the source checkout so it reads that commit's `composer.lock`. Any reused coverage must also come from that source commit. A separate job can test the combined merge result without changing what this mutation-testing job selects.
 
 ### GitHub Actions
 
-The following job excerpt belongs in a workflow triggered by `pull_request`. It checks out the source commit recorded in the event, then fetches that commit and the PR's target commit with their histories. The checkout action keeps its read-only credentials available for the fetch step, including for private repositories.
+The following job configuration belongs in a workflow triggered by `pull_request`. It checks out the source commit recorded in the event, then fetches that commit and the PR's target commit with their histories. The checkout action keeps its read-only credentials available for the fetch step, including for private repositories.
 
 ```yaml
 permissions:
@@ -94,10 +94,7 @@ steps:
         git fetch --no-tags origin "$PR_HEAD_SHA" "$PR_BASE_SHA"
       fi
 
-  # Existing PHP, Composer and coverage-driver setup steps go here.
-
-  - name: Install dependencies for the source commit
-    run: composer install --no-interaction --prefer-dist
+  # Existing PHP, Composer, dependency installation and coverage-driver setup steps go here.
 
   - name: Run Infection
     run: infection --git-diff-lines
@@ -113,7 +110,7 @@ For a [merge queue](https://docs.github.com/en/actions/reference/workflows-and-a
 
 ### GitLab
 
-This job excerpt runs only for MR pipelines. It selects the MR's own source commit in ordinary MR pipelines, [merged results pipelines](https://docs.gitlab.com/ci/pipelines/merged_results_pipelines/) and [merge trains](https://docs.gitlab.com/ci/pipelines/merge_trains/):
+This job example runs only for MR pipelines. It selects the MR's own source commit in ordinary MR pipelines, [merged results pipelines](https://docs.gitlab.com/ci/pipelines/merged_results_pipelines/) and [merge trains](https://docs.gitlab.com/ci/pipelines/merge_trains/):
 
 ```yaml
 mutation-testing:
@@ -131,7 +128,9 @@ mutation-testing:
         git fetch --no-tags origin "$MR_HEAD_SHA" "$CI_MERGE_REQUEST_DIFF_BASE_SHA"
       fi
     - git checkout --detach "$MR_HEAD_SHA"
-    - composer install --no-interaction --prefer-dist
+
+    # Existing PHP, Composer, dependency installation and coverage-driver setup steps go here.
+
     - infection --git-diff-lines
 ```
 
