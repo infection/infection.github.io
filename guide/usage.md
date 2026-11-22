@@ -208,6 +208,37 @@ In order to run Infection with `phpdbg` instead of Xdebug, you need to execute t
 phpdbg -qrr infection.phar
 ```
 
+### Running with `turbocov`
+
+[turbocov](https://github.com/shipmonk-rnd/turbocov) is a fast line coverage driver. It requires PHP 8.4+ and PHPUnit 13.3+, and cannot be loaded together with Xdebug or PCOV.
+
+Install the extension and its PHPUnit driver:
+
+```shell
+pie install shipmonk/turbocov
+composer require --dev shipmonk/turbocov-phpunit
+```
+
+and configure the driver in `phpunit.xml`:
+
+```xml
+<coverage driver="ShipMonk\Turbocov\TurbocovDriver"/>
+```
+
+Then run Infection as usual:
+
+```shell
+./infection.phar --threads=4
+```
+
+turbocov only collects coverage for the paths listed in its `turbocov.collect_paths` setting. Infection sets it to your [source directories](#configuration) for the initial test run, unless you configure it yourself, e.g. with `--initial-tests-php-options="-d turbocov.collect_paths=src"`.
+
+turbocov can also be enabled for the initial test run only:
+
+```shell
+./infection.phar --initial-tests-php-options="-d extension=turbocov"
+```
+
 ### Running without debugger
 
 It is possible to run Infection without any debugger enabled. However, in this case you should provide already generated code coverage as an option
