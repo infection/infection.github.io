@@ -17,25 +17,13 @@ The examples below assume the `infection` executable is [installed](/guide/insta
 <!-- Preserve links to the removed Travis example. -->
 <span id="Example-for-Travis-CI"></span>
 
-Without an explicit target, Infection uses its [default base](/guide/command-line-options.html#git-diff-base). Since 0.35.11, that comes from GitHub Actions or GitLab CI request metadata when available, including the immediate target of a stacked GitHub PR. Outside those contexts, Infection looks up the repository's default branch locally, with `origin/master` as its final fallback. An explicit option such as `--git-diff-base=origin/main` selects a different target.
+Without an explicit target, Infection uses its [default base](/guide/command-line-options.html#git-diff-base). Since [Infection 0.35.11](https://github.com/infection/infection/releases/tag/0.35.11), that comes from GitHub Actions or GitLab CI request metadata when available, including the immediate target of a stacked GitHub PR. Outside those contexts, Infection looks up the repository's default branch locally, with `origin/master` as its final fallback. An explicit option such as `--git-diff-base=origin/main` selects a different target.
 
-`infection git:default-base` prints the default target, while `infection git:base-reference` resolves its common ancestor with `HEAD`. The [CI examples](/guide/using-with-ci.html#Mutate-only-the-changes-in-a-pull-request-or-merge-request) show how to fetch the required history and select the source commit for PR and MR jobs.
-
-### By using `--git-diff-filter` option
-
-Suppose the feature adds `src/Service/Mailer.php` and changes one method in `src/Service/Logger.php`, both inside your configured source directories. The `AM` filter selects both added (`A`) and modified (`M`) files:
-
-```shell
-infection --git-diff-filter=AM
-```
-
-Infection can generate mutations anywhere in those two files, subject to coverage, exclusions and the enabled mutators. Unchanged source files are outside the selection. The [`--git-diff-filter` reference](/guide/command-line-options.html#git-diff-filter) describes the other file statuses.
-
-`infection git:changed-files` lists the source files matching the default target and the added-or-modified filter.
+`infection git:default-base` prints the default target, while `infection git:base-reference` resolves its common ancestor with `HEAD`. To fetch the required history and select the source commit for a PR or MR job, see the examples for [GitHub Actions](/guide/using-with-ci.html#GitHub-Actions) and [GitLab CI](/guide/using-with-ci.html#GitLab).
 
 ### By using `--git-diff-lines` option
 
-In the same example, line filtering includes the new mailer code and code spanning the changed lines in `Logger.php`. Unchanged methods in `Logger.php` are outside this selection:
+Suppose the feature adds `src/Service/Mailer.php` and changes one method in `src/Service/Logger.php`, both inside your configured source directories. Line filtering includes the new mailer code and code spanning the changed lines in `Logger.php`. Unchanged methods in `Logger.php` are outside this selection:
 
 ```shell
 infection --git-diff-lines
@@ -44,6 +32,18 @@ infection --git-diff-lines
 This can reduce the number of mutants to evaluate while you write tests for a change in a large existing file. The [`--git-diff-lines` reference](/guide/command-line-options.html#git-diff-lines) explains the comparison base.
 
 `infection git:changed-lines` lists the source line ranges in the selection; `git:changed-files` only lists their filenames.
+
+### By using `--git-diff-filter` option
+
+In the same example, the `AM` filter selects both added (`A`) and modified (`M`) files:
+
+```shell
+infection --git-diff-filter=AM
+```
+
+Infection can generate mutations anywhere in those two files, subject to coverage, exclusions and the enabled mutators. Unchanged source files are outside the selection. The [`--git-diff-filter` reference](/guide/command-line-options.html#git-diff-filter) describes the other file statuses.
+
+`infection git:changed-files` lists the source files matching the default target and the added-or-modified filter.
 
 ### By using `--filter` option (for the old Infection versions)
 
