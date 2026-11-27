@@ -8,7 +8,7 @@ order: 20
 
 ### Compatibility Note
 
-Infection requires a recent version of PHP, and `Xdebug`, `phpdbg`, or `pcov` enabled.
+Infection requires a recent version of PHP, and `Xdebug`, `phpdbg`, `pcov` or [`turbocov`](./usage.html#running-with-turbocov) enabled.
 
 You can still use an older Infection version if you're using an older PHP version. In that case, the following table must be considered:
 
