@@ -36,7 +36,8 @@ The first time you run Infection for your project, it will ask you several quest
         "stryker": {
             "badge": "/^release-.*$/"
         },
-        "summaryJson": "summary.json"
+        "summaryJson": "summary.json",
+        "svgBadge": "mutation-badge.svg"
     },
     "tmpDir": "/opt/tmp-folder",
     "phpUnit": {
@@ -110,6 +111,7 @@ If you want to override settings locally, create and commit to VCS `infection.js
   * `github` - prints GitHub Annotation warnings right in the Pull Request. Supposed to be used with GitHub Actions. See [`--logger-github`](/guide/command-line-options.html#logger-github), but usually not necessary as it is automatically detected.
   * `gitlab` - GitLab (Code Climate) code quality report. Can be processed as a `codequality` report artifact in Gitlab.
   * `summaryJson` - machine-readable file in JSON format like `json` but containing only general stats. Can be programmatically analyzed, for example on CI.
+  * `svgBadge` - SVG badge image showing the Mutation Score Indicator (MSI). Useful to display a mutation score badge without a third-party service, for example on GitLab or in private repositories. See [SVG badge](/guide/mutation-badge.html#SVG-badge).
 * `tmpDir` - Optional. It's a folder where Infection creates its configs, caches and other stuff. It may be useful for people who doesn't have access to the default system temporary folder and/or doesn't have write permissions. Either absolute `/tmp/folder` or relative `var/cache` paths can be used.
 * `phpUnit` - optional key
   * `configDir` - custom directory path with `phpunit.xml.dist` file. This is useful for example for old Symfony app, where `phpunit.xml.dist` is located at `./app`
